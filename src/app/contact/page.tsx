@@ -33,8 +33,9 @@ export default function Contact() {
 
             <div className="relative z-10">
               <p className="mb-6 text-base font-light leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
-                I&apos;m always open to discussing new opportunities, interesting projects, or just
-                having a chat about technology and development. Feel free to reach out!
+                I&apos;m always open to discussing new opportunities,
+                interesting projects, or just having a chat about technology and
+                development. Feel free to reach out!
               </p>
 
               <div className="space-y-6 text-base">
@@ -73,7 +74,7 @@ export default function Contact() {
                     <FiMapPin className="text-xl text-emerald-400" />
                   </div>
                   <span className="text-zinc-300 transition-colors duration-300 hover:text-white">
-                    Faridpur, Bangladesh (Remote Available)
+                    Dhaka, Bangladesh (Remote Available)
                   </span>
                 </button>
 
@@ -126,7 +127,10 @@ export default function Contact() {
             className="relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900 shadow-2xl"
           >
             <div className="flex items-center justify-between border-b border-zinc-800 p-6">
-              <h3 id="map-dialog-title" className="flex items-center gap-2 text-xl font-bold text-white">
+              <h3
+                id="map-dialog-title"
+                className="flex items-center gap-2 text-xl font-bold text-white"
+              >
                 <FiMapPin className="text-emerald-500" />
                 Faridpur, Bangladesh
               </h3>
