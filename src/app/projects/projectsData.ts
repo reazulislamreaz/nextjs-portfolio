@@ -90,9 +90,9 @@ export const projectsData: Project[] = [
     features: ["Node.js", "Express", "PostgreSQL", "JWT", "Stripe"],
     images: ["/havenkeys-1.png", "/havenkeys-2.png", "/havenkeys-3.png"],
     live: "https://haven-keys.web.app/",
-    code: "https://github.com/reazulislam1487",
+    code: "https://github.com/reazulislamreaz/haven-keys-client-side",
     sourceNote:
-      "Profile link — request the HavenKeys codebase if you need a deeper review.",
+      "Client repository — server API is maintained in a separate backend repo.",
     problem:
       "Listings, agents, and buyers each need different permissions; premium placements must not double-charge or leave listings in an inconsistent state when payments retry.",
     architecture:
