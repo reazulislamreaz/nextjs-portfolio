@@ -79,6 +79,7 @@ export default function ProjectCarousel({
     <figure className="w-full">
       <div
         className={`relative w-full overflow-hidden ${frameClass} ${className}`}
+        role="region"
         aria-roledescription="carousel"
         aria-label={`${title} screenshots`}
       >
