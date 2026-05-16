@@ -11,12 +11,14 @@ interface NavLink {
 }
 
 const links: NavLink[] = [
-  { href: "#", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#education", label: "Education" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/#about", label: "About" },
+  { href: "/#system-architecture", label: "Architecture" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#ai-workflow", label: "Workflow" },
+  { href: "/#education", label: "Education" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -30,7 +32,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="#" className="text-xl font-bold group">
+            <Link href="/" className="text-xl font-bold group">
               <div className="relative w-14 h-14 transition-transform duration-300 group-hover:scale-102">
                 {/* Placeholder logo with gradient border */}
                 <div className="w-full h-full rounded-full bg-gradient-to-r from-zinc-600 to-zinc-800 p-1">
@@ -45,7 +47,10 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-2">
             {links.map(({ href, label }) => {
-              const isActive = pathname === href;
+              const isActive =
+                label === "Home"
+                  ? pathname === "/"
+                  : pathname === href;
               return (
                 <Link
                   key={href}
@@ -94,7 +99,10 @@ export default function Navbar() {
         <div className="md:hidden bg-zinc-950 border-t border-zinc-900 shadow-2xl relative z-50">
           <div className="px-4 pt-4 pb-6 space-y-1">
             {links.map(({ href, label }) => {
-              const isActive = pathname === href;
+              const isActive =
+                label === "Home"
+                  ? pathname === "/"
+                  : pathname === href;
               return (
                 <Link
                   key={href}

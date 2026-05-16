@@ -5,15 +5,17 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 
 const About = dynamic(() => import("./about/page"));
+const SystemArchitecture = dynamic(() => import("./system-architecture/page"));
 const Skills = dynamic(() => import("./skills/page"));
+const AiWorkflow = dynamic(() => import("./ai-workflow/page"));
 const Education = dynamic(() => import("./education/page"));
 const Projects = dynamic(() => import("./projects/page"));
 const Contact = dynamic(() => import("./contact/page"));
 
 const texts: string[] = [
-  "Full Stack Developer Backend focused.",
-  "Backend Engineer experienced with Node.js, Express, NestJs.",
-  "Building high-performance with React and Next.js.",
+  "I build scalable backend systems, APIs, and SaaS-style architectures.",
+  "PostgreSQL · MongoDB · Redis — with Node.js, NestJS, and Go where it fits.",
+  "Full-stack delivery with Next.js when the product needs a polished client.",
 ];
 
 interface TechItem {
@@ -32,17 +34,21 @@ export default function Home() {
   }, []);
 
   const backendTechStack: TechItem[] = [
+    { name: "PostgreSQL", color: "text-blue-400" },
+    { name: "MongoDB", color: "text-emerald-500" },
+    { name: "Redis", color: "text-red-500" },
     { name: "Node.js", color: "text-green-500" },
     { name: "Express", color: "text-gray-300" },
-    { name: "MongoDB", color: "text-emerald-500" },
-    { name: "PostgreSQL", color: "text-blue-400" },
-    { name: "Redis", color: "text-red-500" },
+    { name: "Go", color: "text-sky-400" },
     { name: "REST APIs", color: "text-cyan-400" },
   ];
 
   return (
     <>
-      <main className="min-h-screen relative overflow-hidden flex flex-col justify-center">
+      <section
+        aria-label="Introduction"
+        className="min-h-screen relative overflow-hidden flex flex-col justify-center"
+      >
         <div className="relative z-10 flex items-center justify-center px-6 md:px-16 min-h-screen">
           <div className="max-w-7xl w-full flex flex-col-reverse md:grid md:grid-cols-2 gap-12 items-center py-20">
             {/* Left: Info Section */}
@@ -72,7 +78,7 @@ export default function Home() {
                 </h1>
                 
                 {/* Text Slider */}
-                <div className="h-13 relative overflow-hidden flex items-center">
+                <div className="min-h-[3.5rem] md:min-h-[4rem] relative overflow-hidden flex items-center">
                   <AnimatePresence mode="wait">
                     <motion.p
                       key={sliderIndex}
@@ -211,10 +217,10 @@ export default function Home() {
                       <Image
                         src="/reaz.png"
                         alt="Reazul Islam Reaz"
-                        width={500}
-                        height={300}
+                        width={400}
+                        height={400}
                         priority={true}
-                        className="object-cover"
+                        className="h-full w-full object-cover"
                       />
                     </div>
                   </div>
@@ -257,9 +263,11 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-      </main>
+      </section>
       <About />
+      <SystemArchitecture />
       <Skills />
+      <AiWorkflow />
       <Education />
       <Projects />
       <Contact />

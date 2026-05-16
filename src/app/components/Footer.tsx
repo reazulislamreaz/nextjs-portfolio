@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -20,9 +21,12 @@ export default function Footer() {
           </motion.p>
           
           <div className="flex items-center gap-8">
-            <a href="#about" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">About</a>
-            <a href="#projects" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Projects</a>
-            <a href="#contact" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Contact</a>
+            <Link href="/#about" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">About</Link>
+            <Link href="/#system-architecture" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Architecture</Link>
+            <Link href="/#skills" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Skills</Link>
+            <Link href="/#ai-workflow" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Workflow</Link>
+            <Link href="/#projects" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Projects</Link>
+            <Link href="/#contact" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm font-medium">Contact</Link>
           </div>
         </div>
       </div>

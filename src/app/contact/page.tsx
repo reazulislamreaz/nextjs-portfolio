@@ -39,7 +39,7 @@ export default function Contact() {
               <div className="space-y-6 text-base">
                 {/* Email Link */}
                 <a 
-                  href="mailto:reazulislam1487@gmail.com"
+                  href="mailto:reazul.dev@gmail.com"
                   className="flex items-center gap-4 p-4 bg-zinc-950/30 rounded-2xl border border-zinc-800/50 hover:border-emerald-500/40 transition-all duration-300 group/item cursor-pointer"
                 >
                   <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 group-hover/item:bg-emerald-500/20 transition-colors duration-300">

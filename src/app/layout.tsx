@@ -4,8 +4,10 @@ import Providers from "./components/Providers";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://reazul-islam-reaz.vercel.app"),
   title: "Reazul Islam Reaz | Full-Stack Backend-Focused Engineer",
-  description: "Personal portfolio website of Reazul Islam Reaz, specializing in scalable backend systems and high-performance full-stack applications.",
+  description:
+    "Backend-focused full-stack engineer — scalable APIs, SaaS architectures, PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go, and Next.js.",
   keywords: [
     "Reazul Islam Reaz",
     "Reazul Islam",
@@ -20,9 +22,41 @@ export const metadata: Metadata = {
     "NestJS developer",
     "PostgreSQL",
     "MongoDB",
-    "System Design Engineer"
+    "System Design Engineer",
+    "GraphQL",
+    "Redis",
+    "MySQL",
+    "microservices",
+    "TypeScript",
+    "SaaS architecture",
+    "API design",
+    "Go developer",
   ],
   authors: [{ name: "Reazul Islam Reaz" }],
+  openGraph: {
+    title: "Reazul Islam Reaz | Full-Stack Backend-Focused Engineer",
+    description:
+      "Scalable backend systems, APIs, and SaaS-style architectures — with disciplined data modeling and Next.js when the surface needs to shine.",
+    url: "/",
+    siteName: "Reazul Islam Reaz",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/reaz.png",
+        width: 1200,
+        height: 630,
+        alt: "Reazul Islam Reaz — portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reazul Islam Reaz | Full-Stack Backend-Focused Engineer",
+    description:
+      "Backend-focused full-stack engineer — APIs, SaaS architectures, PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go.",
+    images: ["/reaz.png"],
+  },
   verification: {
     google: "R3xCKBJomUGl_i1gminkMaXYRPhDvhGgfV90n96YFqw",
   },
