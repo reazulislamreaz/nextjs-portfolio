@@ -1,42 +1,48 @@
-# 🧑‍💻 Reazul Islam Reaz - Personal Portfolio
+# Reazul Islam Reaz — Portfolio
 
-This is my personal portfolio website built using **Next.js**, **Tailwind CSS**, and **Framer Motion**. It showcases my projects, skills, experience, and contact details in a clean, responsive, and performant layout.
+Personal portfolio built with **Next.js 16**, **React 19**, and **Tailwind CSS 4**.
 
-## 📸 Preview
+**Live:** [reazul-islam-reaz.vercel.app](https://reazul-islam-reaz.vercel.app)
 
-![Portfolio Screenshot](https://i.postimg.cc/cCkQYRhw/Screenshot-2025-08-04-214732.png)
+## Setup
 
-## 🔗 Live Site
+```bash
+npm install
+cp .env.example .env.local
+# Add EmailJS credentials (see .env.example)
+npm run dev
+```
 
-👉 [Visit My Portfolio](https://reazul-islam-reaz.vercel.app)
+### Environment variables
 
-## 🚀 Tech Stack
+Contact form uses a **server API route** (`/api/contact`). Configure in `.env.local`:
 
-- **Framework:** [Next.js](https://nextjs.org/)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Deployment:** [Vercel](https://vercel.com/)
+```env
+EMAILJS_SERVICE_ID=your_service_id
+EMAILJS_TEMPLATE_ID=your_template_id
+EMAILJS_PUBLIC_KEY=your_public_key
+```
 
-## 📂 Features
+Legacy `NEXT_PUBLIC_EMAILJS_*` names are still supported as fallbacks.
 
-- ⚡ Fast and SEO-friendly static site using Next.js
-- 🎨 Responsive and modern UI with Tailwind CSS
-- ✨ Smooth animations with Framer Motion
-- 📱 Mobile-first design
-- 🔗 Project showcase with live demo links
-- 📧 Contact form integration (optional)
+## Scripts
 
-# 🙋‍♂️ About Me
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `npm run dev`  | Start dev server         |
+| `npm run build`| Production build         |
+| `npm run start`| Start production server  |
+| `npm run lint` | Run ESLint               |
 
-I’m **Reazul Islam Reaz**, a passionate **MERN Stack developer** from **Bangladesh**.  
-I built this portfolio to represent my work, skills, and passion for web development.
+## Project structure
 
----
+- `src/app/` — App Router pages and API routes
+- `src/components/sections/` — Homepage section components
+- `src/config/site.ts` — Nav, contact, and social links (single source of truth)
+- `src/app/projects/` — Project case studies and carousel
 
-## 📬 Contact
+## Contact
 
-**Want to collaborate or hire me? Reach out!**
-
-- 📧 Email: [reazulislam1487@gmail.com](mailto:reazulislam1487@gmail.com)
-- 🔗 LinkedIn: [linkedin.com/in/reazul-islam-reaz](https://www.linkedin.com/in/reazulislam1487)
-- 💻 GitHub: [github.com/reazulislamreaz](https://github.com/reazulislam1487)
+- Email: reazul.dev@gmail.com
+- GitHub: [github.com/reazulislamreaz](https://github.com/reazulislamreaz)
+- LinkedIn: [linkedin.com/in/reazulislamreaz](https://www.linkedin.com/in/reazulislamreaz)

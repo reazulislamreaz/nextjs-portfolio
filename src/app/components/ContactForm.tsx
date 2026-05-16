@@ -1,19 +1,17 @@
 "use client";
 
-import emailjs from "@emailjs/browser";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { FiAlertCircle, FiCheck, FiLoader, FiSend } from "react-icons/fi";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
+
+const MAX_NAME = 120;
+const MAX_MESSAGE = 5000;
 
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    emailjs.init("vh3xBQbYnuH1mKR3J");
-  }, []);
 
   const resetForm = () => {
     form.current?.reset();
@@ -21,37 +19,58 @@ export default function ContactForm() {
     setErrorMessage("");
   };
 
-  const sendEmail = (e: FormEvent) => {
+  const sendEmail = async (e: FormEvent) => {
     e.preventDefault();
     if (!form.current || status === "loading") return;
 
-    const timeInput = form.current.querySelector<HTMLInputElement>('input[name="time"]');
-    if (timeInput) {
-      timeInput.value = new Date().toLocaleString();
+    const formData = new FormData(form.current);
+    const user_name = String(formData.get("user_name") ?? "").trim();
+    const user_email = String(formData.get("user_email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+    const website = String(formData.get("website") ?? "").trim();
+
+    if (!user_name || !user_email || !message) {
+      setErrorMessage("Please fill in all required fields.");
+      setStatus("error");
+      return;
+    }
+
+    if (user_name.length > MAX_NAME || message.length > MAX_MESSAGE) {
+      setErrorMessage("One or more fields exceed the allowed length.");
+      setStatus("error");
+      return;
     }
 
     setStatus("loading");
     setErrorMessage("");
 
-    emailjs
-      .sendForm(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID as string,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID as string,
-        form.current,
-      )
-      .then(
-        () => {
-          form.current?.reset();
-          setStatus("success");
-        },
-        (error) => {
-          console.error("EmailJS Error:", error);
-          setErrorMessage(
-            error?.text || "Something went wrong. Please try again in a moment.",
-          );
-          setStatus("error");
-        },
-      );
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_name,
+          user_email,
+          message,
+          website,
+          time: new Date().toLocaleString(),
+        }),
+      });
+
+      const data = (await response.json().catch(() => ({}))) as { error?: string };
+
+      if (!response.ok) {
+        setErrorMessage(data.error ?? "Something went wrong. Please try again in a moment.");
+        setStatus("error");
+        return;
+      }
+
+      form.current.reset();
+      setStatus("success");
+    } catch {
+      setErrorMessage("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -79,7 +98,6 @@ export default function ContactForm() {
               Thanks for reaching out. I&apos;ve received your message and will get back to you
               within <span className="text-zinc-300">24–48 hours</span>.
             </p>
-
             <p className="mt-2 text-xs text-zinc-500">
               I&apos;ll reply to the email address you provided.
             </p>
@@ -109,11 +127,7 @@ export default function ContactForm() {
                 className="mb-6 flex gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-left"
                 role="alert"
               >
-                <FiAlertCircle
-                  className="mt-0.5 shrink-0 text-red-400"
-                  size={18}
-                  aria-hidden
-                />
+                <FiAlertCircle className="mt-0.5 shrink-0 text-red-400" size={18} aria-hidden />
                 <div>
                   <p className="text-sm font-semibold text-red-200">Couldn&apos;t send message</p>
                   <p className="mt-1 text-sm text-red-200/80">{errorMessage}</p>
@@ -121,12 +135,24 @@ export default function ContactForm() {
               </div>
             ) : null}
 
-            <form ref={form} onSubmit={sendEmail} className="space-y-6">
+            <form ref={form} onSubmit={sendEmail} className="space-y-6" noValidate>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+              >
+                <label htmlFor="website">Website</label>
+                <input
+                  type="text"
+                  id="website"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  defaultValue=""
+                />
+              </div>
+
               <div>
-                <label
-                  htmlFor="name"
-                  className="mb-2 block pl-1 text-sm font-medium text-zinc-300"
-                >
+                <label htmlFor="name" className="mb-2 block pl-1 text-sm font-medium text-zinc-300">
                   Name
                 </label>
                 <input
@@ -134,6 +160,7 @@ export default function ContactForm() {
                   name="user_name"
                   id="name"
                   required
+                  maxLength={MAX_NAME}
                   disabled={status === "loading"}
                   className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-white placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Your full name"
@@ -141,10 +168,7 @@ export default function ContactForm() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block pl-1 text-sm font-medium text-zinc-300"
-                >
+                <label htmlFor="email" className="mb-2 block pl-1 text-sm font-medium text-zinc-300">
                   Email
                 </label>
                 <input
@@ -170,13 +194,12 @@ export default function ContactForm() {
                   id="message"
                   rows={4}
                   required
+                  maxLength={MAX_MESSAGE}
                   disabled={status === "loading"}
                   className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-white placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Discuss architecture, team opportunities, or just say hello..."
                 />
               </div>
-
-              <input type="hidden" name="time" defaultValue="" />
 
               <button
                 type="submit"

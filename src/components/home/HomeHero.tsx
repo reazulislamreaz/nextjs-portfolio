@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { resumePath, siteContact, siteSocial } from "@/config/site";
 
 const texts: string[] = [
   "I build scalable backend systems, APIs, and SaaS-style architectures.",
@@ -84,10 +85,8 @@ export default function HomeHero() {
                 View Projects
               </a>
               <a
-                href="/Reazul_Islam_Reaz_Resume.pdf"
+                href={resumePath}
                 download
-                target="_blank"
-                rel="noopener noreferrer"
                 className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-6 py-3 text-center text-sm font-medium text-zinc-300 transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-800 md:hover:text-white"
               >
                 Download Resume
@@ -96,7 +95,7 @@ export default function HomeHero() {
 
             <div className="flex flex-wrap gap-4 pt-4 sm:gap-6 sm:pt-6">
               <a
-                href="https://github.com/reazulislamreaz"
+                href={siteSocial.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-white/20 md:hover:bg-white/[0.08] md:hover:text-white md:hover:shadow-emerald-500/10"
@@ -107,7 +106,7 @@ export default function HomeHero() {
                 </svg>
               </a>
               <a
-                href="https://www.linkedin.com/in/reazulislamreaz"
+                href={siteSocial.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-white/20 md:hover:bg-blue-600/20 md:hover:text-white md:hover:shadow-blue-500/10"
@@ -118,7 +117,7 @@ export default function HomeHero() {
                 </svg>
               </a>
               <a
-                href="mailto:reazul.dev@gmail.com"
+                href={`mailto:${siteContact.email}`}
                 className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-white/20 md:hover:bg-emerald-600/20 md:hover:text-white md:hover:shadow-emerald-500/10"
                 aria-label="Email"
               >

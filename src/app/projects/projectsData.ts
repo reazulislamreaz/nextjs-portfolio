@@ -67,6 +67,7 @@ export const projectsData: Project[] = [
       "/replii-thread-ai.jpg",
       "/replii-signin.jpg",
       "/replii-dashboard.jpg",
+      "/replii-winners.jpg",
     ],
     live: "https://replii.ca/",
     code: "https://github.com/reazulislamreaz/twvinfast-server-full",
@@ -87,7 +88,7 @@ export const projectsData: Project[] = [
     title: "HavenKeys",
     description:
       "Real-estate marketplace with RBAC, relational inventory, and Stripe-backed premium listings — built like a small SaaS rather than a static brochure.",
-    features: ["Node.js", "Express", "PostgreSQL", "JWT", "Stripe"],
+    features: ["React", "Node.js", "Express", "MongoDB", "JWT", "Stripe"],
     images: ["/havenkeys-1.png", "/havenkeys-2.png", "/havenkeys-3.png"],
     live: "https://haven-keys.web.app/",
     code: "https://github.com/reazulislamreaz/haven-keys-client-side",
@@ -96,7 +97,7 @@ export const projectsData: Project[] = [
     problem:
       "Listings, agents, and buyers each need different permissions; premium placements must not double-charge or leave listings in an inconsistent state when payments retry.",
     architecture:
-      "Modular Express service with PostgreSQL as the source of truth for users, roles, and listings. JWT-based access checks on mutating routes, with Stripe used for monetized listing states and server-side validation before writes.",
+      "MERN-stack client with a modular Express API and MongoDB as the source of truth for users, roles, and listings. JWT-based access checks on mutating routes, with Stripe used for monetized listing states and server-side validation before writes.",
     keyChallenges:
       "Modeling role-aware filters without leaking cross-tenant data, and keeping listing state aligned with asynchronous payment outcomes.",
     solutions:
@@ -111,7 +112,7 @@ export const projectsData: Project[] = [
     features: ["Node.js", "Express", "MongoDB", "Firebase Auth", "React"],
     images: ["/marathon-1.png", "/marathon-2.png", "/marathon-3.png"],
     live: "https://marathonzonebyreaz.netlify.app/",
-    code: "https://github.com/reazulislam1487/marathon-zone",
+    code: "https://github.com/reazulislamreaz/marathon-zone",
     problem:
       "Marathon sign-ups spike around deadlines; organizers still need stable tools to publish events, track participants, and avoid conflicting registrations.",
     architecture:
@@ -134,7 +135,7 @@ export const projectsData: Project[] = [
       "/green-circle-3.png",
     ],
     live: "https://green-circle-by-reaz.netlify.app",
-    code: "https://github.com/reazulislam1487/green-circle",
+    code: "https://github.com/reazulislamreaz/green-circle",
     problem:
       "Customers compete for limited delivery slots; operators need a trustworthy dashboard without corrupting schedules or double-booking capacity.",
     architecture:
@@ -153,7 +154,7 @@ export const projectsData: Project[] = [
     features: ["React", "Express", "MongoDB", "Custom auth", "JWT"],
     images: ["/event-hub.png", "/event-hub1.png", "/event-hub2.png"],
     live: "https://event-hub-by-reaz.netlify.app",
-    code: "https://github.com/reazulislam1487/event-hub-client",
+    code: "https://github.com/reazulislamreaz/event-hub-client",
     problem:
       "Hosts need to create, update, and cancel events without exposing attendee data to the wrong account or leaving half-applied edits live.",
     architecture:

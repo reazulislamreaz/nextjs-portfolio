@@ -20,6 +20,7 @@ export default function ProjectCarousel({
   compact = false,
 }: ProjectCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [reduceMotion, setReduceMotion] = useState(false);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -34,18 +35,27 @@ export default function ProjectCarousel({
   }, [images]);
 
   useEffect(() => {
-    if (images.length <= 1) return;
+    const media = window.matchMedia("(prefers-reduced-div: reduce)");
+    const update = () => setReduceMotion(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (images.length <= 1 || reduceMotion) return;
 
     const interval = setInterval(() => {
+      if (document.visibilityState !== "visible") return;
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [images.length, reduceMotion]);
 
   const frameClass = compact
     ? "rounded-xl border border-zinc-800/80 bg-zinc-950/60 shadow-inner ring-1 ring-white/5"
-    : "rounded-2xl border border-zinc-800/80 bg-zinc-950 shadow-lg shadow-black/30 transition-transform duration-200 lg:hover:scale-[1.02]";
+    : "rounded-2xl border border-zinc-800/80 bg-zinc-950 shadow-lg shadow-black/30";
 
   const slideClass = compact
     ? "bg-gradient-to-b from-zinc-100 to-zinc-200/90"
@@ -63,35 +73,30 @@ export default function ProjectCarousel({
     );
   }
 
+  const currentImage = images[currentIndex];
+
   return (
     <figure className="w-full">
-      <div className={`relative w-full overflow-hidden ${frameClass} ${className}`}>
-        <div
-          className="flex h-full w-full transition-transform duration-500 ease-out"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-          aria-live="polite"
-        >
-          {images.map((img, idx) => (
-            <div
-              key={img}
-              className={`relative h-full min-w-full w-full flex-shrink-0 ${slideClass}`}
-            >
-              <Image
-                src={img}
-                alt={`${title} — screenshot ${idx + 1} of ${images.length}`}
-                fill
-                quality={90}
-                className="object-contain object-center p-3 sm:p-4"
-                sizes={
-                  compact
-                    ? "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
-                    : "(max-width: 1024px) 100vw, 50vw"
-                }
-                priority={priority && idx === 0}
-                loading={priority && idx === 0 ? undefined : "lazy"}
-              />
-            </div>
-          ))}
+      <div
+        className={`relative w-full overflow-hidden ${frameClass} ${className}`}
+        aria-roledescription="carousel"
+        aria-label={`${title} screenshots`}
+      >
+        <div className={`relative h-full w-full ${slideClass}`}>
+          <Image
+            key={currentImage}
+            src={currentImage}
+            alt={`${title} — screenshot ${currentIndex + 1} of ${images.length}`}
+            fill
+            quality={85}
+            className="object-contain object-center p-3 sm:p-4"
+            sizes={
+              compact
+                ? "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 640px"
+                : "(max-width: 1024px) 100vw, 50vw"
+            }
+            priority={priority && currentIndex === 0}
+          />
         </div>
 
         {images.length > 1 && (

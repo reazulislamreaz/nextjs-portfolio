@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import ProjectsSection from "./ProjectsSection";
+import { sectionMetadata } from "@/config/seo";
 
 export const metadata: Metadata = {
-  title: "Projects | Reazul Islam Reaz",
-  description:
-    "Selected full-stack and backend systems — Confaero, Replii, HavenKeys, and more. Case studies with architecture, challenges, and live demos.",
+  ...sectionMetadata(
+    "projects",
+    "Projects",
+    "Selected full-stack and backend systems — Confaero, Replii, HavenKeys, and more.",
+  ),
   openGraph: {
     title: "Projects | Reazul Islam Reaz",
     description:
