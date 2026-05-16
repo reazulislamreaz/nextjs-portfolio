@@ -114,16 +114,29 @@ export default function Navbar() {
               </span>
             </a>
 
-            <button
-              type="button"
-              className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
-              onClick={() => setMobileOpen((open) => !open)}
-              aria-controls="mobile-nav-menu"
-              aria-expanded={mobileOpen}
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <HiX size={22} /> : <HiMenu size={22} />}
-            </button>
+            {mobileOpen ? (
+              <button
+                type="button"
+                className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
+                onClick={() => setMobileOpen(false)}
+                aria-controls="mobile-nav-menu"
+                aria-expanded="true"
+                aria-label="Close menu"
+              >
+                <HiX size={22} aria-hidden />
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
+                onClick={() => setMobileOpen(true)}
+                aria-controls="mobile-nav-menu"
+                aria-expanded="false"
+                aria-label="Open menu"
+              >
+                <HiMenu size={22} aria-hidden />
+              </button>
+            )}
           </div>
         </div>
       </div>
