@@ -44,7 +44,7 @@ export default function ProjectCarousel({
   }, [images.length]);
 
   const frameClass = compact
-    ? "rounded-xl border border-zinc-700/50 bg-zinc-900/80 shadow-md ring-1 ring-white/5"
+    ? "rounded-xl border border-zinc-800/80 bg-zinc-950/60 shadow-inner ring-1 ring-white/5"
     : "rounded-2xl border border-zinc-800/80 bg-zinc-950 shadow-lg shadow-black/30 transition-transform duration-200 lg:hover:scale-[1.02]";
 
   const slideClass = compact
@@ -125,9 +125,7 @@ export default function ProjectCarousel({
               onClick={() => setCurrentIndex(idx)}
               className={`rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                 idx === currentIndex
-                  ? compact
-                    ? "h-2 w-6 bg-emerald-400"
-                    : "h-2 w-6 bg-emerald-400"
+                  ? "h-2 w-6 bg-emerald-500"
                   : "h-2 w-2 bg-zinc-600 hover:bg-zinc-500"
               }`}
               aria-label={`Show screenshot ${idx + 1} of ${images.length}`}
