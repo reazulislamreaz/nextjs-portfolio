@@ -240,7 +240,7 @@ const highlights: { title: string; description: string }[] = [
 
 function SkillGrid({ skills }: { skills: SkillData[] }) {
   return (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 md:gap-8">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
       {skills.map((skill, index) => (
         <SkillCard key={`${skill.name}-${index}`} skill={skill} />
       ))}
@@ -256,9 +256,9 @@ export default function Skills() {
         subtitle="Backend and platform work first — frontend stack when the product needs a polished surface."
       />
 
-      <div className="mb-14">
-        <div className="mb-8 flex items-center gap-4">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-200 sm:text-2xl">
+      <div className="mb-10 sm:mb-12 lg:mb-14">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
             Backend & APIs
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
@@ -266,9 +266,9 @@ export default function Skills() {
         <SkillGrid skills={backendSkills} />
       </div>
 
-      <div className="mb-14">
-        <div className="mb-8 flex items-center gap-4">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-200 sm:text-2xl">
+      <div className="mb-10 sm:mb-12 lg:mb-14">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
             Databases & modeling
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
@@ -276,9 +276,9 @@ export default function Skills() {
         <SkillGrid skills={databaseSkills} />
       </div>
 
-      <div className="mb-14">
-        <div className="mb-8 flex items-center gap-4">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-200 sm:text-2xl">
+      <div className="mb-10 sm:mb-12 lg:mb-14">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
             Architecture
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
@@ -286,9 +286,9 @@ export default function Skills() {
         <SkillGrid skills={architectureSkills} />
       </div>
 
-      <div className="mb-14">
-        <div className="mb-8 flex items-center gap-4">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-200 sm:text-2xl">
+      <div className="mb-10 sm:mb-12 lg:mb-14">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
             Performance & delivery
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
@@ -296,9 +296,9 @@ export default function Skills() {
         <SkillGrid skills={performanceSkills} />
       </div>
 
-      <div className="mb-14">
-        <div className="mb-8 flex items-center gap-4">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-200 sm:text-2xl">
+      <div className="mb-10 sm:mb-12 lg:mb-14">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
             AI & payments
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
@@ -310,9 +310,9 @@ export default function Skills() {
         <SkillGrid skills={aiSkills} />
       </div>
 
-      <div className="mb-16">
-        <div className="mb-8 flex items-center gap-4">
-          <h3 className="text-xl font-bold tracking-tight text-zinc-200 sm:text-2xl">
+      <div className="mb-10 sm:mb-12 lg:mb-16">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
             Frontend (when needed)
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />

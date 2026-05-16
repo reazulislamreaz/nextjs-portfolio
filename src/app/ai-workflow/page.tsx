@@ -51,19 +51,19 @@ export default function AiWorkflow() {
         subtitle="Practical tooling that speeds iteration — with reviews, tests, and ownership staying on the engineering side."
       />
 
-      <p className="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-zinc-400 md:text-lg">
+      <p className="mx-auto mb-8 max-w-3xl px-1 text-center text-sm leading-relaxed text-zinc-400 sm:mb-10 sm:text-base lg:text-lg">
         I use modern AI assistants the same way I use linters or debuggers: to shorten feedback loops,
         surface options, and catch blind spots — not to outsource judgment, security, or architecture.
       </p>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <div className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8">
-          <h3 className="mb-5 border-b border-zinc-800 pb-3 text-lg font-semibold tracking-tight text-white">
+      <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
+        <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/35 p-5 shadow-lg backdrop-blur-md sm:rounded-3xl sm:p-7 md:p-8">
+          <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-white sm:mb-5 sm:pb-3 sm:text-lg">
             AI-assisted tooling
           </h3>
-          <ul className="space-y-4">
+          <ul className="space-y-3 sm:space-y-4">
             {aiTooling.map((item) => (
-              <li key={item.name} className="text-sm leading-relaxed text-zinc-400 md:text-[0.95rem]">
+              <li key={item.name} className="text-xs leading-relaxed text-zinc-400 sm:text-sm md:text-[0.95rem]">
                 <span className="font-medium text-zinc-200">{item.name}</span>
                 <span className="text-zinc-500"> — </span>
                 {item.detail}
@@ -72,13 +72,13 @@ export default function AiWorkflow() {
           </ul>
         </div>
 
-        <div className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8">
-          <h3 className="mb-5 border-b border-zinc-800 pb-3 text-lg font-semibold tracking-tight text-white">
+        <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/35 p-5 shadow-lg backdrop-blur-md sm:rounded-3xl sm:p-7 md:p-8">
+          <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-white sm:mb-5 sm:pb-3 sm:text-lg">
             API & delivery tooling
           </h3>
-          <ul className="space-y-4">
+          <ul className="space-y-3 sm:space-y-4">
             {devTooling.map((item) => (
-              <li key={item.name} className="text-sm leading-relaxed text-zinc-400 md:text-[0.95rem]">
+              <li key={item.name} className="text-xs leading-relaxed text-zinc-400 sm:text-sm md:text-[0.95rem]">
                 <span className="font-medium text-zinc-200">{item.name}</span>
                 <span className="text-zinc-500"> — </span>
                 {item.detail}
@@ -88,7 +88,7 @@ export default function AiWorkflow() {
         </div>
       </div>
 
-      <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-zinc-600 md:text-sm">
+      <p className="mx-auto mt-6 max-w-2xl px-2 text-center text-xs leading-relaxed text-zinc-600 sm:mt-8 sm:text-sm">
         Ship-ready code still means tests, security checks, and team standards — assistants reduce
         friction; they do not replace accountability.
       </p>

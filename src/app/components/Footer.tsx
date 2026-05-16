@@ -5,7 +5,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full border-t border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-6 py-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
           <p className="text-sm font-medium text-zinc-500">
             © {currentYear} <span className="text-zinc-300">Reazul Islam Reaz</span>. All rights
@@ -36,6 +36,18 @@ export default function Footer() {
               className="text-sm font-medium text-zinc-500 transition-colors hover:text-emerald-400"
             >
               Workflow
+            </Link>
+            <Link
+              href="/#education"
+              className="text-sm font-medium text-zinc-500 transition-colors hover:text-emerald-400"
+            >
+              Education
+            </Link>
+            <Link
+              href="/#certifications"
+              className="text-sm font-medium text-zinc-500 transition-colors hover:text-emerald-400"
+            >
+              Learning
             </Link>
             <Link
               href="/#projects"

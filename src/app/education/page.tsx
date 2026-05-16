@@ -44,12 +44,12 @@ export default function Education() {
         subtitle="My academic journey and professional development in technology"
       />
 
-      <div className="grid items-start gap-12 md:grid-cols-2">
-        <div className="space-y-8">
+      <div className="grid min-w-0 items-start gap-8 sm:gap-10 md:grid-cols-2 lg:gap-12">
+        <div className="min-w-0 space-y-6 sm:space-y-8">
           {educationData.map((item, idx) => (
             <div
               key={idx}
-              className={`group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-2xl ${item.glowColor} hover:-translate-y-0.5`}
+              className={`group relative min-w-0 overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 shadow-xl backdrop-blur-md transition-all duration-500 sm:rounded-3xl sm:p-8 md:hover:-translate-y-0.5 md:hover:border-zinc-700 md:hover:shadow-2xl ${item.glowColor}`}
             >
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
@@ -65,10 +65,10 @@ export default function Education() {
                   </div>
                 </div>
 
-                <h3 className="mb-3 text-2xl font-bold text-white transition-colors duration-300 group-hover:text-emerald-50">
+                <h3 className="mb-2 text-xl font-bold text-white transition-colors duration-300 sm:mb-3 sm:text-2xl md:group-hover:text-emerald-50">
                   {item.degree}
                 </h3>
-                <p className="mb-2 text-lg font-medium text-zinc-300">{item.department}</p>
+                <p className="mb-2 text-base font-medium text-zinc-300 sm:text-lg">{item.department}</p>
                 <p className="mb-1 text-sm text-zinc-400">{item.institution}</p>
                 <p className="text-sm font-semibold text-zinc-500">{item.duration}</p>
               </div>
@@ -76,14 +76,14 @@ export default function Education() {
           ))}
         </div>
 
-        <div className="flex h-full w-full items-center justify-center">
-          <div className="relative group">
+        <div className="flex min-w-0 items-center justify-center md:justify-center">
+          <div className="relative group w-full max-w-md">
             <div
-              className="absolute inset-0 scale-110 transform rounded-3xl bg-gradient-to-t from-emerald-500/10 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+              className="absolute inset-0 scale-110 transform rounded-2xl bg-gradient-to-t from-emerald-500/10 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100 sm:rounded-3xl"
             />
 
             <div
-              className="relative rounded-3xl border border-zinc-800/50 bg-zinc-900/20 p-8 shadow-xl backdrop-blur-md transition-all duration-500 group-hover:border-zinc-700 group-hover:shadow-2xl"
+              className="relative rounded-2xl border border-zinc-800/50 bg-zinc-900/20 p-5 shadow-xl backdrop-blur-md transition-all duration-500 sm:rounded-3xl sm:p-8 md:group-hover:border-zinc-700 md:group-hover:shadow-2xl"
             >
               <Image
                 src="/image.png"

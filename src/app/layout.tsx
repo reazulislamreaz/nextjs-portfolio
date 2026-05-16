@@ -75,15 +75,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${geistSans.className} antialiased bg-black selection:bg-emerald-500/30 selection:text-emerald-200`}>
+      <body
+        className={`${geistSans.className} min-w-0 overflow-x-hidden antialiased bg-black selection:bg-emerald-500/30 selection:text-emerald-200`}
+      >
         <Providers>
           <div className="glass-gradient" />
           <div className="glass-pattern" />
           
-          <div className="relative z-10 flex flex-col min-h-screen">
-            <main className="flex-grow">
-              {children}
-            </main>
+          <div className="relative z-10 flex min-h-screen min-w-0 flex-col">
+            <main className="min-w-0 flex-grow">{children}</main>
             <Footer />
           </div>
         </Providers>

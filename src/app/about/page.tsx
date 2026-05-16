@@ -40,10 +40,10 @@ export default function About() {
     <Section id="about" className="bg-black/40">
       <SectionHeader title="About Me" />
 
-      <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="space-y-8 lg:col-span-7">
-          <div className="space-y-6">
-            <p className="text-lg leading-relaxed text-zinc-300 md:text-xl">
+      <div className="grid w-full min-w-0 grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
+        <div className="min-w-0 space-y-6 sm:space-y-8 lg:col-span-7">
+          <div className="space-y-4 sm:space-y-6">
+            <p className="text-base leading-relaxed text-zinc-300 sm:text-lg lg:text-xl">
               Hi, I&apos;m{" "}
               <span className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1 font-semibold text-white shadow-sm">
                 Reazul Islam Reaz
@@ -55,7 +55,7 @@ export default function About() {
               .
             </p>
 
-            <p className="text-[1.05rem] leading-relaxed text-zinc-400">
+            <p className="text-sm leading-relaxed text-zinc-400 sm:text-[1.05rem]">
               I ship SaaS-style products end to end: disciplined APIs, thoughtful persistence, and
               frontends that stay thin on business rules. My default is to design for scale paths,
               safe payments, and operability — not to chase novelty for its own sake.
@@ -95,14 +95,14 @@ export default function About() {
           </div>
         </div>
 
-        <div className="relative lg:col-span-5">
-          <div className="h-full w-full space-y-6 rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)]">
+        <div className="relative min-w-0 lg:col-span-5">
+          <div className="h-full w-full space-y-6 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)] sm:space-y-6 sm:rounded-3xl sm:p-8">
             <div className="mb-6 flex items-center gap-3 border-b border-zinc-800 pb-4">
               <FiServer className="text-3xl text-emerald-500" />
               <h3 className="text-2xl font-bold tracking-tight text-white">How I work</h3>
             </div>
 
-            <ul className="space-y-5 text-[1.05rem]">
+            <ul className="space-y-4 text-sm sm:space-y-5 sm:text-[1.05rem]">
               {experience.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
                   <span className="mt-1 text-emerald-500">▹</span>
@@ -114,7 +114,7 @@ export default function About() {
             <div className="pt-8">
               <a
                 href="/#contact"
-                className="flex w-full transform justify-center rounded-xl bg-zinc-100 px-8 py-3.5 font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-white active:scale-[0.98]"
+                className="flex min-h-11 w-full transform justify-center rounded-xl bg-zinc-100 px-8 py-3.5 text-center text-sm font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-white active:scale-[0.98] sm:text-base"
               >
                 Let&apos;s Build Systems
               </a>

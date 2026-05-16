@@ -26,13 +26,13 @@ export default function Contact() {
         subtitle="Let's connect and discuss how we can work together on your next project"
       />
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
-        <div className="mx-auto w-full max-w-xl space-y-8 md:mx-0">
-          <div className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)]">
+      <div className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
+        <div className="mx-auto w-full min-w-0 max-w-xl space-y-6 md:mx-0 md:space-y-8">
+          <div className="group relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 shadow-xl backdrop-blur-md transition-all duration-500 sm:rounded-3xl sm:p-8 md:hover:border-zinc-700 md:hover:shadow-[0_0_20px_rgba(16,185,129,0.03)]">
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
             <div className="relative z-10">
-              <p className="mb-8 text-lg font-light leading-relaxed text-zinc-300">
+              <p className="mb-6 text-base font-light leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
                 I&apos;m always open to discussing new opportunities, interesting projects, or just
                 having a chat about technology and development. Feel free to reach out!
               </p>
