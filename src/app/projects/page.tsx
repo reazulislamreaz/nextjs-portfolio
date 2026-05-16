@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import {
@@ -252,15 +251,10 @@ export default function Projects() {
       />
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-        {projectsData.map((project, index) => (
-          <motion.article
+        {projectsData.map((project) => (
+          <article
             key={project.title}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: Math.min(index * 0.1, 0.4) }}
-            whileHover={{ y: -8 }}
-            className="group relative flex flex-col overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]"
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-500 hover:-translate-y-2 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]"
           >
             <div className="relative aspect-video w-full">
               <ImageCarousel
@@ -302,31 +296,27 @@ export default function Projects() {
               </div>
 
               <div className="mt-auto flex flex-col gap-4 border-t border-zinc-800/50 pt-6 sm:flex-row">
-                <motion.a
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                <a
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-xl bg-zinc-100 px-6 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition-all duration-300 hover:bg-white"
+                  className="flex items-center justify-center gap-2 rounded-xl bg-zinc-100 px-6 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-white active:scale-[0.98]"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <FiExternalLink size={18} />
                   Live environment
-                </motion.a>
+                </a>
                 <div className="flex flex-col gap-2 sm:ml-auto sm:items-end">
-                  <motion.a
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                  <a
                     href={project.code}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-zinc-300 transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-800 hover:text-white sm:w-auto"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-zinc-300 transition hover:scale-[1.02] hover:border-zinc-500 hover:bg-zinc-800 hover:text-white sm:w-auto active:scale-[0.98]"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <FiGithub size={18} />
                     Source code
-                  </motion.a>
+                  </a>
                   {project.sourceNote ? (
                     <p className="max-w-md text-xs leading-snug text-zinc-500 sm:text-right">
                       {project.sourceNote}
@@ -335,7 +325,7 @@ export default function Projects() {
                 </div>
               </div>
             </div>
-          </motion.article>
+          </article>
         ))}
       </div>
     </Section>

@@ -1,7 +1,13 @@
 import { type Metadata } from "next";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import Providers from "./components/Providers";
 import Footer from "./components/Footer";
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://reazul-islam-reaz.vercel.app"),
@@ -69,7 +75,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="antialiased bg-black selection:bg-emerald-500/30 selection:text-emerald-200">
+      <body className={`${geistSans.className} antialiased bg-black selection:bg-emerald-500/30 selection:text-emerald-200`}>
         <Providers>
           <div className="glass-gradient" />
           <div className="glass-pattern" />

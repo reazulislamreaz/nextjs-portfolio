@@ -1,6 +1,3 @@
-"use client";
-import React from "react";
-import { motion } from "framer-motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import { FiCode, FiServer, FiCpu } from "react-icons/fi";
@@ -43,20 +40,12 @@ export default function About() {
     <Section id="about" className="bg-black/40">
       <SectionHeader title="About Me" />
 
-      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-        
-        {/* Left Column: Intro & Main Stack */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="lg:col-span-7 space-y-8"
-        >
+      <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="space-y-8 lg:col-span-7">
           <div className="space-y-6">
-            <p className="text-lg md:text-xl leading-relaxed text-zinc-300">
+            <p className="text-lg leading-relaxed text-zinc-300 md:text-xl">
               Hi, I&apos;m{" "}
-              <span className="font-semibold text-white bg-zinc-800 border border-zinc-700 px-3 py-1 rounded-md shadow-sm">
+              <span className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1 font-semibold text-white shadow-sm">
                 Reazul Islam Reaz
               </span>
               , a{" "}
@@ -75,69 +64,64 @@ export default function About() {
 
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <FiCode className="text-emerald-500 text-2xl" />
-              <h3 className="text-xl font-bold text-zinc-200 tracking-tight">Core Stack</h3>
+              <FiCode className="text-2xl text-emerald-500" />
+              <h3 className="text-xl font-bold tracking-tight text-zinc-200">Core Stack</h3>
             </div>
             <div className="flex flex-wrap gap-2.5">
               {coreStack.map((tech) => (
-                  <span key={tech} className="px-4 py-1.5 bg-zinc-900 border border-zinc-700/80 text-zinc-200 rounded-lg text-sm font-medium shadow-sm hover:border-emerald-500/50 hover:bg-zinc-800 transition-colors cursor-default">
-                    {tech}
-                  </span>
+                <span
+                  key={tech}
+                  className="cursor-default rounded-lg border border-zinc-700/80 bg-zinc-900 px-4 py-1.5 text-sm font-medium text-zinc-200 shadow-sm transition-colors hover:border-emerald-500/50 hover:bg-zinc-800"
+                >
+                  {tech}
+                </span>
               ))}
             </div>
           </div>
 
           <div className="space-y-4 pt-2">
             <div className="flex items-center gap-3">
-              <FiCpu className="text-emerald-500 text-2xl" />
-              <h3 className="text-xl font-bold text-zinc-200 tracking-tight">Platform focus</h3>
+              <FiCpu className="text-2xl text-emerald-500" />
+              <h3 className="text-xl font-bold tracking-tight text-zinc-200">Platform focus</h3>
             </div>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-zinc-400">
+            <ul className="grid grid-cols-1 gap-3 text-zinc-400 sm:grid-cols-2">
               {advancedTech.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>{item}</li>
+                <li key={idx} className="flex items-center gap-2">
+                  <div className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Right Column: Development Experience */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="lg:col-span-5 relative"
-        >
-          <div className="bg-zinc-900/40 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-md shadow-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.03)] transition-all duration-300 w-full h-full space-y-6">
-            <div className="flex items-center gap-3 mb-6 border-b border-zinc-800 pb-4">
-              <FiServer className="text-emerald-500 text-3xl" />
-              <h3 className="text-2xl font-bold text-white tracking-tight">How I work</h3>
+        <div className="relative lg:col-span-5">
+          <div className="h-full w-full space-y-6 rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)]">
+            <div className="mb-6 flex items-center gap-3 border-b border-zinc-800 pb-4">
+              <FiServer className="text-3xl text-emerald-500" />
+              <h3 className="text-2xl font-bold tracking-tight text-white">How I work</h3>
             </div>
-            
+
             <ul className="space-y-5 text-[1.05rem]">
               {experience.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <span className="text-emerald-500 mt-1">▹</span>
-                  <span className="text-zinc-300 font-medium leading-tight">{item}</span>
+                  <span className="mt-1 text-emerald-500">▹</span>
+                  <span className="font-medium leading-tight text-zinc-300">{item}</span>
                 </li>
               ))}
             </ul>
 
             <div className="pt-8">
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+              <a
                 href="/#contact"
-                className="w-full flex justify-center px-8 py-3.5 rounded-xl bg-zinc-100 text-zinc-950 font-semibold hover:bg-white transition-all duration-300 shadow-md"
+                className="flex w-full transform justify-center rounded-xl bg-zinc-100 px-8 py-3.5 font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-white active:scale-[0.98]"
               >
                 Let&apos;s Build Systems
-              </motion.a>
+              </a>
             </div>
           </div>
-        </motion.div>
-        
+        </div>
       </div>
-
     </Section>
   );
 }

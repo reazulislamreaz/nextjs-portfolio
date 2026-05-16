@@ -1,7 +1,3 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 
@@ -55,25 +51,13 @@ export default function AiWorkflow() {
         subtitle="Practical tooling that speeds iteration — with reviews, tests, and ownership staying on the engineering side."
       />
 
-      <motion.p
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.45 }}
-        className="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-zinc-400 md:text-lg"
-      >
+      <p className="mx-auto mb-10 max-w-3xl text-center text-base leading-relaxed text-zinc-400 md:text-lg">
         I use modern AI assistants the same way I use linters or debuggers: to shorten feedback loops,
         surface options, and catch blind spots — not to outsource judgment, security, or architecture.
-      </motion.p>
+      </p>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.45 }}
-          className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8"
-        >
+        <div className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8">
           <h3 className="mb-5 border-b border-zinc-800 pb-3 text-lg font-semibold tracking-tight text-white">
             AI-assisted tooling
           </h3>
@@ -86,15 +70,9 @@ export default function AiWorkflow() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.45, delay: 0.05 }}
-          className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8"
-        >
+        <div className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8">
           <h3 className="mb-5 border-b border-zinc-800 pb-3 text-lg font-semibold tracking-tight text-white">
             API & delivery tooling
           </h3>
@@ -107,19 +85,13 @@ export default function AiWorkflow() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
       </div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-zinc-600 md:text-sm"
-      >
+      <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-zinc-600 md:text-sm">
         Ship-ready code still means tests, security checks, and team standards — assistants reduce
         friction; they do not replace accountability.
-      </motion.p>
+      </p>
     </Section>
   );
 }

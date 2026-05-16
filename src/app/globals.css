@@ -35,79 +35,26 @@ body {
   z-index: 0;
 }
 
-.project-swiper .swiper-button-next,
-.project-swiper .swiper-button-prev {
-  color: #a1a1aa; /* text-zinc-400 */
-  width: 35px;
-  height: 35px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.2s;
-}
-
-.project-swiper .swiper-button-next:hover,
-.project-swiper .swiper-button-prev:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-
-.project-swiper .swiper-pagination-bullet {
-  background: #71717a; /* text-zinc-500 */
-  opacity: 0.5;
-  transition: all 0.2s;
-}
-
-.project-swiper .swiper-pagination-bullet-active {
-  opacity: 1;
-  background: #e4e4e7; /* text-zinc-200 */
-  transform: scale(1.2);
-}
-
-.modal-swiper .swiper-button-next,
-.modal-swiper .swiper-button-prev {
-  color: #f4f4f5;
-  width: 45px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.modal-swiper .swiper-pagination-bullet {
-  background: #a1a1aa;
-  width: 12px;
-  height: 12px;
-}
-
-.modal-swiper .swiper-pagination-bullet-active {
-  background: #f4f4f5;
-}
-
-/* :root {
-  --background: #000000;
-  --foreground: #ffffff;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes hero-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
+.hero-line-in {
+  animation: hero-line-in 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-line-in {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

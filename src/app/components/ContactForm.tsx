@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useEffect, type FormEvent } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 
@@ -47,13 +46,7 @@ export default function ContactForm() {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full max-w-xl mx-auto md:mx-0 bg-zinc-900/40 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-md shadow-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] transition-all duration-500 hover:border-zinc-700 relative overflow-hidden group"
-    >
+    <div className="group relative mx-auto w-full max-w-xl overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] md:mx-0">
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex pointer-events-none"></div>
 
       <div className="relative z-10">
@@ -124,24 +117,17 @@ export default function ContactForm() {
             value={new Date().toLocaleString()}
           />
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+          <button
             type="submit"
-            className="w-full cursor-pointer px-8 py-4 bg-zinc-100 text-zinc-950 font-semibold rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:bg-white transition-all duration-300 relative overflow-hidden group/btn"
+            className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:scale-[1.02] active:scale-[0.98]"
           >
             <span className="relative z-10 flex items-center justify-center gap-3">
               Send Message
-              <motion.span
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              >
-                →
-              </motion.span>
+              <span className="inline-block transition-transform group-hover/btn:translate-x-1">→</span>
             </span>
-          </motion.button>
+          </button>
         </form>
       </div>
-    </motion.div>
+    </div>
   );
 }

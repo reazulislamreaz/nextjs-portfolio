@@ -1,7 +1,4 @@
-"use client";
-import React from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 
@@ -25,7 +22,7 @@ const educationData: EducationItem[] = [
     status: "IN PROGRESS",
     icon: "🎓",
     accentColor: "bg-blue-500/10 border-blue-500/20",
-    glowColor: "group-hover:shadow-blue-500/10"
+    glowColor: "group-hover:shadow-blue-500/10",
   },
   {
     degree: "MERN Stack Web Development",
@@ -35,114 +32,73 @@ const educationData: EducationItem[] = [
     status: "ACTIVE",
     icon: "💻",
     accentColor: "bg-emerald-500/10 border-emerald-500/20",
-    glowColor: "group-hover:shadow-emerald-500/10"
-  }
+    glowColor: "group-hover:shadow-emerald-500/10",
+  },
 ];
 
 export default function Education() {
   return (
-    <Section id="education" className="bg-black/60 relative">
-      <SectionHeader 
-        title="Education" 
-        subtitle="My academic journey and professional development in technology" 
+    <Section id="education" className="relative bg-black/60">
+      <SectionHeader
+        title="Education"
+        subtitle="My academic journey and professional development in technology"
       />
 
-      <div className="grid md:grid-cols-2 gap-12 items-start">
-        {/* Left: Enhanced Education Info */}
+      <div className="grid items-start gap-12 md:grid-cols-2">
         <div className="space-y-8">
           {educationData.map((item, idx) => (
-            <motion.div
+            <div
               key={idx}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className={`group relative bg-zinc-900/40 
-                        border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-md 
-                        hover:border-zinc-700 transition-all duration-500 
-                        shadow-xl hover:shadow-2xl ${item.glowColor} overflow-hidden`}
+              className={`group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-2xl ${item.glowColor} hover:-translate-y-0.5`}
             >
-              {/* Background glow */}
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent 
-                             opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              ></div>
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="relative z-10">
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 rounded-xl border ${item.accentColor}`}>
+                <div className="mb-4 flex items-start justify-between">
+                  <div className={`rounded-xl border p-3 ${item.accentColor}`}>
                     <div className="text-2xl">{item.icon}</div>
                   </div>
                   <div
-                    className={`text-xs font-bold px-3 py-1 rounded-full border ${item.accentColor}`}
+                    className={`rounded-full border px-3 py-1 text-xs font-bold ${item.accentColor}`}
                   >
                     {item.status}
                   </div>
                 </div>
 
-                <h3
-                  className="text-2xl font-bold text-white mb-3 group-hover:text-emerald-50 transition-colors duration-300"
-                >
+                <h3 className="mb-3 text-2xl font-bold text-white transition-colors duration-300 group-hover:text-emerald-50">
                   {item.degree}
                 </h3>
-                <p className="text-zinc-300 text-lg mb-2 font-medium">
-                  {item.department}
-                </p>
-                <p className="text-zinc-400 text-sm mb-1">
-                  {item.institution}
-                </p>
-                <p className="text-zinc-500 text-sm font-semibold">
-                  {item.duration}
-                </p>
+                <p className="mb-2 text-lg font-medium text-zinc-300">{item.department}</p>
+                <p className="mb-1 text-sm text-zinc-400">{item.institution}</p>
+                <p className="text-sm font-semibold text-zinc-500">{item.duration}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Right: Enhanced Image */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full flex justify-center items-center relative h-full"
-        >
+        <div className="flex h-full w-full items-center justify-center">
           <div className="relative group">
             <div
-              className="absolute inset-0 bg-gradient-to-t from-emerald-500/10 to-transparent 
-                           rounded-3xl blur-2xl transform scale-110 opacity-0 group-hover:opacity-100 
-                           transition-opacity duration-500"
-            ></div>
+              className="absolute inset-0 scale-110 transform rounded-3xl bg-gradient-to-t from-emerald-500/10 to-transparent opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+            />
 
             <div
-              className="relative bg-zinc-900/20 
-                           border border-zinc-800/50 rounded-3xl p-8 backdrop-blur-md
-                           shadow-xl group-hover:shadow-2xl transition-all duration-500
-                           group-hover:border-zinc-700"
+              className="relative rounded-3xl border border-zinc-800/50 bg-zinc-900/20 p-8 shadow-xl backdrop-blur-md transition-all duration-500 group-hover:border-zinc-700 group-hover:shadow-2xl"
             >
               <Image
                 src="/image.png"
-                alt="Education Illustration"
+                alt="Education illustration"
                 width={500}
                 height={500}
-                className="max-w-xs md:max-w-md w-full h-auto object-contain 
-                         filter group-hover:brightness-110 transition-all duration-300
-                         drop-shadow-xl"
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="h-auto w-full max-w-xs object-contain drop-shadow-xl filter transition-all duration-300 group-hover:brightness-110 md:max-w-md"
               />
 
-              {/* Decorative elements */}
-              <div
-                className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-r from-emerald-400 to-emerald-600 
-                             rounded-full animate-pulse shadow-lg shadow-emerald-500/50"
-              ></div>
-              <div
-                className="absolute bottom-4 left-4 w-2 h-2 bg-gradient-to-r from-zinc-400 to-zinc-600 
-                             rounded-full animate-pulse shadow-lg shadow-zinc-500/50 delay-75"
-              ></div>
+              <div className="absolute right-4 top-4 h-3 w-3 animate-pulse rounded-full bg-gradient-to-r from-emerald-400 to-emerald-600 shadow-lg shadow-emerald-500/50" />
+              <div className="delay-75 absolute bottom-4 left-4 h-2 w-2 animate-pulse rounded-full bg-gradient-to-r from-zinc-400 to-zinc-600 shadow-lg shadow-zinc-500/50" />
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

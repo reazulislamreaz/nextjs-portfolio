@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { type ReactNode } from "react";
 
 interface SectionProps {
@@ -9,16 +8,11 @@ interface SectionProps {
 
 export default function Section({ id, children, className = "" }: SectionProps) {
   return (
-    <section id={id} className={`py-24 px-6 sm:px-8 md:px-20 relative z-10 ${className}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.6 }}
-        className="max-w-7xl mx-auto"
-      >
-        {children}
-      </motion.div>
+    <section
+      id={id}
+      className={`relative z-10 py-24 px-6 sm:px-8 md:px-20 ${className}`}
+    >
+      <div className="mx-auto max-w-7xl">{children}</div>
     </section>
   );
 }

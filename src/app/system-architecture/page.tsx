@@ -1,7 +1,3 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 
@@ -46,24 +42,14 @@ export default function SystemArchitecture() {
         subtitle="How I think about growth paths, boundaries, and safe integrations before the first production deploy."
       />
 
-      <motion.p
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5 }}
-        className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-zinc-300 md:text-xl"
-      >
+      <p className="mx-auto mb-12 max-w-3xl text-center text-lg leading-relaxed text-zinc-300 md:text-xl">
         I design backend systems with scalability, performance, and maintainability in mind.
-      </motion.p>
+      </p>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {pillars.map((pillar, index) => (
-          <motion.div
+        {pillars.map((pillar) => (
+          <div
             key={pillar.title}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45, delay: index * 0.05 }}
             className="rounded-3xl border border-zinc-800/80 bg-zinc-900/35 p-7 shadow-lg backdrop-blur-md md:p-8"
           >
             <h3 className="mb-5 border-b border-zinc-800 pb-3 text-lg font-semibold tracking-tight text-white">
@@ -80,7 +66,7 @@ export default function SystemArchitecture() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         ))}
       </div>
     </Section>

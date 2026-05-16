@@ -1,5 +1,4 @@
-"use client";
-import React from "react";
+import type { ReactNode } from "react";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import SkillCard from "../components/ui/SkillCard";
@@ -27,7 +26,7 @@ import { HiOutlineQueueList } from "react-icons/hi2";
 
 interface SkillData {
   name: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   color: string;
   iconColor: string;
 }

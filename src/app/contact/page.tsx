@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import React, { useState, useEffect } from "react";
 import { FiMail, FiMapPin, FiX } from "react-icons/fi";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import Section from "../components/ui/Section";
@@ -10,86 +10,82 @@ import ContactForm from "../components/ContactForm";
 export default function Contact() {
   const [showMap, setShowMap] = useState(false);
 
+  useEffect(() => {
+    if (!showMap) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowMap(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showMap]);
+
   return (
     <Section id="contact" className="bg-black/40">
-      <SectionHeader 
-        title="Contact Me" 
+      <SectionHeader
+        title="Contact Me"
         subtitle="Let's connect and discuss how we can work together on your next project"
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-        {/* Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-          className="space-y-8 w-full max-w-xl mx-auto md:mx-0"
-        >
-          <div className="bg-zinc-900/40 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-md shadow-xl hover:shadow-[0_0_20px_rgba(16,185,129,0.03)] transition-all duration-500 hover:border-zinc-700 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+        <div className="mx-auto w-full max-w-xl space-y-8 md:mx-0">
+          <div className="group relative overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)]">
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
             <div className="relative z-10">
-              <p className="text-lg text-zinc-300 leading-relaxed mb-8 font-light">
-                I&apos;m always open to discussing new opportunities, interesting
-                projects, or just having a chat about technology and
-                development. Feel free to reach out!
+              <p className="mb-8 text-lg font-light leading-relaxed text-zinc-300">
+                I&apos;m always open to discussing new opportunities, interesting projects, or just
+                having a chat about technology and development. Feel free to reach out!
               </p>
 
               <div className="space-y-6 text-base">
-                {/* Email Link */}
-                <a 
+                <a
                   href="mailto:reazul.dev@gmail.com"
-                  className="flex items-center gap-4 p-4 bg-zinc-950/30 rounded-2xl border border-zinc-800/50 hover:border-emerald-500/40 transition-all duration-300 group/item cursor-pointer"
+                  className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-800/50 bg-zinc-950/30 p-4 transition-all duration-300 hover:border-emerald-500/40"
                 >
-                  <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 group-hover/item:bg-emerald-500/20 transition-colors duration-300">
-                    <FiMail className="text-xl text-emerald-400 group-hover/item:text-emerald-300" />
+                  <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 transition-colors duration-300 group-hover/item:bg-emerald-500/20">
+                    <FiMail className="text-xl text-emerald-400" />
                   </div>
-                  <div className="flex items-center overflow-hidden">
-                    <span className="text-zinc-300 group-hover/item:text-white transition-colors duration-300 whitespace-nowrap sm:text-base">
-                      reazul.dev@gmail.com
-                    </span>
-                  </div>
+                  <span className="whitespace-nowrap text-zinc-300 transition-colors duration-300 hover:text-white sm:text-base">
+                    reazul.dev@gmail.com
+                  </span>
                 </a>
 
-                {/* WhatsApp Link */}
-                <a 
+                <a
                   href="https://wa.me/8801770807782"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-zinc-950/30 rounded-2xl border border-zinc-800/50 hover:border-emerald-500/40 transition-all duration-300 group/item cursor-pointer"
+                  className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-800/50 bg-zinc-950/30 p-4 transition-all duration-300 hover:border-emerald-500/40"
                 >
-                  <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 group-hover/item:bg-emerald-500/20 transition-colors duration-300">
-                    <FaWhatsapp className="text-xl text-emerald-400 group-hover/item:text-emerald-300" />
+                  <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 transition-colors duration-300">
+                    <FaWhatsapp className="text-xl text-emerald-400" />
                   </div>
-                  <span className="text-zinc-300 group-hover/item:text-white transition-colors duration-300">
+                  <span className="text-zinc-300 transition-colors duration-300 hover:text-white">
                     +8801770807782
                   </span>
                 </a>
 
-                {/* Map Link */}
-                <div
+                <button
+                  type="button"
                   onClick={() => setShowMap(true)}
-                  className="flex items-center gap-4 p-4 bg-zinc-950/30 rounded-2xl border border-zinc-800/50 hover:border-emerald-500/40 transition-all duration-300 group/item cursor-pointer"
+                  className="flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-zinc-800/50 bg-zinc-950/30 p-4 text-left transition-all duration-300 hover:border-emerald-500/40"
                 >
-                  <div className="p-3 bg-emerald-500/10 rounded-xl border border-emerald-500/20 group-hover/item:bg-emerald-500/20 transition-colors duration-300">
-                    <FiMapPin className="text-xl text-emerald-400 group-hover/item:text-emerald-300" />
+                  <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 transition-colors duration-300">
+                    <FiMapPin className="text-xl text-emerald-400" />
                   </div>
-                  <span className="text-zinc-300 group-hover/item:text-white transition-colors duration-300">
+                  <span className="text-zinc-300 transition-colors duration-300 hover:text-white">
                     Faridpur, Bangladesh (Remote Available)
                   </span>
-                </div>
+                </button>
 
                 <div className="flex items-center gap-6 pt-6">
-                  <span className="text-zinc-400 font-medium">
-                    Follow me:
-                  </span>
+                  <span className="font-medium text-zinc-400">Follow me:</span>
                   <div className="flex items-center gap-4">
                     <a
                       href="https://github.com/reazulislamreaz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-zinc-950/50 rounded-xl border border-zinc-800/50 hover:border-zinc-500 transition-all duration-300 text-zinc-400 hover:text-white shadow-lg hover:shadow-emerald-500/5"
+                      className="rounded-xl border border-zinc-800/50 bg-zinc-950/50 p-3 text-zinc-400 shadow-lg transition-all duration-300 hover:border-zinc-500 hover:text-white hover:shadow-emerald-500/5"
+                      aria-label="GitHub"
                     >
                       <FaGithub className="text-xl" />
                     </a>
@@ -97,7 +93,8 @@ export default function Contact() {
                       href="https://www.linkedin.com/in/reazulislamreaz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 bg-blue-600/10 rounded-xl border border-blue-500/20 hover:border-blue-400/50 hover:bg-blue-600/20 transition-all duration-300 text-blue-400 hover:text-blue-300 shadow-lg hover:shadow-blue-500/10"
+                      className="rounded-xl border border-blue-500/20 bg-blue-600/10 p-3 text-blue-400 shadow-lg transition-all duration-300 hover:border-blue-400/50 hover:bg-blue-600/20 hover:text-blue-300 hover:shadow-blue-500/10"
+                      aria-label="LinkedIn"
                     >
                       <FaLinkedin className="text-xl" />
                     </a>
@@ -106,57 +103,57 @@ export default function Contact() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Contact Form */}
         <ContactForm />
       </div>
 
-      {/* Map Modal */}
-      <AnimatePresence>
-        {showMap && (
-          <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowMap(false)}
-              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-4xl bg-zinc-900 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl z-10"
-            >
-              <div className="flex items-center justify-between p-6 border-b border-zinc-800">
-                <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                  <FiMapPin className="text-emerald-500" />
-                  Faridpur, Bangladesh
-                </h3>
-                <button 
-                  onClick={() => setShowMap(false)}
-                  className="p-2 hover:bg-zinc-800 rounded-full transition-colors text-zinc-400 hover:text-white"
-                >
-                  <FiX size={24} />
-                </button>
-              </div>
-              <div className="aspect-video w-full bg-zinc-950">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116962.77526000047!2d89.75336181180237!3d23.601007785461247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe2f9b2d2f7fbd%3A0x6a0c0e7d5a5a1f0a!2sFaridpur!5e0!3m2!1sen!2sbd!4v1714850000000!5m2!1sen!2sbd"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Google Maps Faridpur, Bangladesh"
-                ></iframe>
-              </div>
-            </motion.div>
+      {showMap ? (
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+          role="presentation"
+        >
+          <button
+            type="button"
+            aria-label="Close map"
+            onClick={() => setShowMap(false)}
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="map-dialog-title"
+            className="relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900 shadow-2xl"
+          >
+            <div className="flex items-center justify-between border-b border-zinc-800 p-6">
+              <h3 id="map-dialog-title" className="flex items-center gap-2 text-xl font-bold text-white">
+                <FiMapPin className="text-emerald-500" />
+                Faridpur, Bangladesh
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowMap(false)}
+                className="rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+                aria-label="Close"
+              >
+                <FiX size={24} />
+              </button>
+            </div>
+            <div className="aspect-video w-full bg-zinc-950">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116962.77526000047!2d89.75336181180237!3d23.601007785461247!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe2f9b2d2f7fbd%3A0x6a0c0e7d5a5a1f0a!2sFaridpur!5e0!3m2!1sen!2sbd!4v1714850000000!5m2!1sen!2sbd"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Maps Faridpur, Bangladesh"
+              />
+            </div>
           </div>
-        )}
-      </AnimatePresence>
+        </div>
+      ) : null}
     </Section>
   );
 }
