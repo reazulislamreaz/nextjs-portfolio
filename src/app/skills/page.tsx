@@ -225,7 +225,7 @@ const frontendSkills: SkillData[] = [
 
 const highlights: { title: string; description: string }[] = [
   {
-    title: "4",
+    title: "6",
     description: "Portfolio systems with live APIs and data layers",
   },
   {
