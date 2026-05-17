@@ -91,7 +91,7 @@ export default function ContactSection() {
                     <FiMapPin className="text-xl text-emerald-400" />
                   </div>
                   <span className="text-zinc-300 transition-colors duration-300 hover:text-white">
-                    Dhaka, Bangladesh (Remote Available)
+                    Dhaka, Bangladesh 
                   </span>
                 </button>
 
