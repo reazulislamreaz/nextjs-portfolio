@@ -67,7 +67,6 @@ export const projectsData: Project[] = [
       "/replii-thread-ai.jpg",
       "/replii-signin.jpg",
       "/replii-dashboard.jpg",
-      "/replii-winners.jpg",
     ],
     live: "https://replii.ca/",
     code: "https://github.com/reazulislamreaz/twvinfast-server-full",
