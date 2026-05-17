@@ -12,7 +12,7 @@ interface Message {
 
 const starterPrompts = [
   "Summarize Reaz's backend skills",
-  "Which project shows AI experience?",
+  "Reaz er AI project konta?",
   "How can I contact Reaz?",
 ];
 
@@ -44,7 +44,10 @@ export default function AiPortfolioAssistant() {
 
   useEffect(() => {
     if (!open) return;
-    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+    listRef.current?.scrollTo({
+      top: listRef.current.scrollHeight,
+      behavior: "smooth",
+    });
     inputRef.current?.focus();
   }, [messages, open]);
 
@@ -69,20 +72,33 @@ export default function AiPortfolioAssistant() {
         }),
       });
 
-      const data = (await response.json()) as { answer?: string; error?: string };
+      const data = (await response.json()) as {
+        answer?: string;
+        error?: string;
+      };
 
       if (!response.ok || !data.answer) {
-        throw new Error(data.error ?? "The assistant could not answer right now.");
+        throw new Error(
+          data.error ?? "The assistant could not answer right now.",
+        );
       }
 
-      setMessages((current) => [...current, createMessage("assistant", data.answer ?? "")]);
+      setMessages((current) => [
+        ...current,
+        createMessage("assistant", data.answer ?? ""),
+      ]);
     } catch (err) {
       const message =
-        err instanceof Error ? err.message : "The assistant could not answer right now.";
+        err instanceof Error
+          ? err.message
+          : "The assistant could not answer right now.";
       setError(message);
       setMessages((current) => [
         ...current,
-        createMessage("assistant", "Sorry, I could not answer that. Please try again in a moment."),
+        createMessage(
+          "assistant",
+          "Sorry, I could not answer that. Please try again in a moment.",
+        ),
       ]);
     } finally {
       setLoading(false);
@@ -110,7 +126,9 @@ export default function AiPortfolioAssistant() {
                 <h2 className="truncate text-sm font-semibold text-white">
                   AI Portfolio Assistant
                 </h2>
-                <p className="truncate text-xs text-zinc-500">Powered by Groq</p>
+                <p className="truncate text-xs text-zinc-500">
+                  Powered by Groq
+                </p>
               </div>
             </div>
             <button
@@ -170,7 +188,9 @@ export default function AiPortfolioAssistant() {
               </div>
             ) : null}
 
-            {error ? <p className="mb-2 text-xs text-red-300">{error}</p> : null}
+            {error ? (
+              <p className="mb-2 text-xs text-red-300">{error}</p>
+            ) : null}
 
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
               <input
@@ -199,10 +219,16 @@ export default function AiPortfolioAssistant() {
         type="button"
         onClick={() => setOpen((value) => !value)}
         className="group inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
-        aria-label={open ? "Hide AI portfolio assistant" : "Open AI portfolio assistant"}
+        aria-label={
+          open ? "Hide AI portfolio assistant" : "Open AI portfolio assistant"
+        }
         aria-expanded={open}
       >
-        <TbMessageChatbot size={28} aria-hidden className="transition group-hover:scale-105" />
+        <TbMessageChatbot
+          size={28}
+          aria-hidden
+          className="transition group-hover:scale-105"
+        />
       </button>
     </div>
   );
