@@ -216,21 +216,35 @@ export default function AiPortfolioAssistant() {
         </section>
       ) : null}
 
-      <button
-        type="button"
-        onClick={() => setOpen((value) => !value)}
-        className="group inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
-        aria-label={
-          open ? "Hide AI portfolio assistant" : "Open AI portfolio assistant"
-        }
-        aria-expanded={open ? "true" : "false"}
-      >
-        <TbMessageChatbot
-          size={28}
-          aria-hidden
-          className="transition group-hover:scale-105"
-        />
-      </button>
+      {open ? (
+        <button
+          type="button"
+          onClick={() => setOpen(false)}
+          className="group inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+          aria-label="Hide AI portfolio assistant"
+          aria-expanded="true"
+        >
+          <TbMessageChatbot
+            size={28}
+            aria-hidden
+            className="transition group-hover:scale-105"
+          />
+        </button>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="group inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+          aria-label="Open AI portfolio assistant"
+          aria-expanded="false"
+        >
+          <TbMessageChatbot
+            size={28}
+            aria-hidden
+            className="transition group-hover:scale-105"
+          />
+        </button>
+      )}
     </div>
   );
 }
