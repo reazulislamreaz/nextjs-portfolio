@@ -12,7 +12,8 @@ interface Message {
 
 const starterPrompts = [
   "Summarize Reaz's backend skills",
-  "Reaz er AI project konta?",
+  "Which project uses AI?",
+  "Explain the Confaero project.",
   "How can I contact Reaz?",
 ];
 
