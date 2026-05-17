@@ -222,7 +222,7 @@ export default function AiPortfolioAssistant() {
         aria-label={
           open ? "Hide AI portfolio assistant" : "Open AI portfolio assistant"
         }
-        aria-expanded={open}
+        aria-expanded={open ? "true" : "false"}
       >
         <TbMessageChatbot
           size={28}
