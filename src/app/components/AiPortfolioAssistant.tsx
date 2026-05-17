@@ -206,7 +206,7 @@ export default function AiPortfolioAssistant() {
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 transition hover:bg-white disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
+                className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 transition hover:bg-white disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
                 aria-label="Send message"
               >
                 <FiSend size={18} aria-hidden />
@@ -220,7 +220,7 @@ export default function AiPortfolioAssistant() {
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="group inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
           aria-label="Hide AI portfolio assistant"
           aria-expanded="true"
         >
@@ -234,7 +234,7 @@ export default function AiPortfolioAssistant() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="group inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
           aria-label="Open AI portfolio assistant"
           aria-expanded="false"
         >
