@@ -2,6 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { FiAlertCircle, FiCheck, FiLoader, FiSend } from "react-icons/fi";
+import { sendEmailJsFromBrowser } from "@/lib/emailjs-browser";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -45,24 +46,32 @@ export default function ContactForm() {
     setErrorMessage("");
 
     try {
+      const payload = {
+        user_name,
+        user_email,
+        message,
+        time: new Date().toLocaleString(),
+      };
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_name,
-          user_email,
-          message,
+          ...payload,
           website,
-          time: new Date().toLocaleString(),
         }),
       });
 
       const data = (await response.json().catch(() => ({}))) as { error?: string };
 
       if (!response.ok) {
-        setErrorMessage(data.error ?? "Something went wrong. Please try again in a moment.");
-        setStatus("error");
-        return;
+        try {
+          await sendEmailJsFromBrowser(payload);
+        } catch {
+          setErrorMessage(data.error ?? "Something went wrong. Please try again in a moment.");
+          setStatus("error");
+          return;
+        }
       }
 
       form.current.reset();
