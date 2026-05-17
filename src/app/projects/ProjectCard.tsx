@@ -26,10 +26,26 @@ function CaseBlock({
       >
         {label}
       </h4>
-      <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
+      <div className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
         {children}
-      </p>
+      </div>
     </div>
+  );
+}
+
+function MetricList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {items.map((item) => (
+        <li key={item} className="flex gap-2.5">
+          <span
+            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500/90"
+            aria-hidden
+          />
+          <span>{item}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -85,6 +101,20 @@ export default function ProjectCard({
           <CaseBlock label="Architecture">{project.architecture}</CaseBlock>
           <CaseBlock label="Key challenges">{project.keyChallenges}</CaseBlock>
           <CaseBlock label="Solutions">{project.solutions}</CaseBlock>
+          <CaseBlock label="Impact & metrics">
+            <MetricList items={project.metrics} />
+          </CaseBlock>
+          <CaseBlock label="Deployment & DevOps">
+            <ul className="flex flex-wrap gap-2">
+              {project.devOps.map((item) => (
+                <li key={item}>
+                  <span className="rounded-md border border-zinc-700/60 bg-zinc-950/80 px-2.5 py-1 text-xs font-medium text-zinc-300">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </CaseBlock>
           <CaseBlock label="Iteration roadmap" muted>
             {project.futureEnhancements}
           </CaseBlock>

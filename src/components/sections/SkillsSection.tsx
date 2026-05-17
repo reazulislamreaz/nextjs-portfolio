@@ -4,14 +4,21 @@ import SectionHeader from "@/app/components/ui/SectionHeader";
 import SkillCard from "@/app/components/ui/SkillCard";
 import { FaNodeJs, FaReact, FaRobot } from "react-icons/fa";
 import {
+  SiAmazonwebservices,
+  SiDigitalocean,
+  SiDocker,
+  SiHostinger,
   SiExpress,
+  SiGithubactions,
   SiGo,
   SiGraphql,
   SiJavascript,
+  SiLinux,
   SiMongodb,
   SiMysql,
   SiNestjs,
   SiNextdotjs,
+  SiNginx,
   SiPostgresql,
   SiRedis,
   SiSocketdotio,
@@ -19,8 +26,16 @@ import {
   SiTailwindcss,
   SiTypescript,
 } from "react-icons/si";
-import { TbApi, TbLock, TbSchema, TbShieldLock, TbSparkles, TbTopologyStar3, TbCurrencyDollar } from "react-icons/tb";
-import { FiRefreshCw } from "react-icons/fi";
+import {
+  TbApi,
+  TbCloud,
+  TbLock,
+  TbSchema,
+  TbShieldLock,
+  TbSparkles,
+  TbTopologyStar3,
+  TbCurrencyDollar,
+} from "react-icons/tb";
 import { LuBoxes } from "react-icons/lu";
 import { HiOutlineQueueList } from "react-icons/hi2";
 
@@ -150,6 +165,12 @@ const performanceSkills: SkillData[] = [
     iconColor: "text-red-400",
   },
   {
+    name: "Caching",
+    icon: <TbCloud />,
+    color: "from-orange-500/20 to-amber-600/20",
+    iconColor: "text-orange-300",
+  },
+  {
     name: "Rate limiting",
     icon: <TbShieldLock />,
     color: "from-slate-500/20 to-slate-700/20",
@@ -161,11 +182,80 @@ const performanceSkills: SkillData[] = [
     color: "from-cyan-600/20 to-blue-800/20",
     iconColor: "text-cyan-300",
   },
+];
+
+const devOpsSkills: SkillData[] = [
+  {
+    name: "Docker",
+    icon: <SiDocker />,
+    color: "from-blue-500/20 to-sky-700/20",
+    iconColor: "text-blue-400",
+  },
+  {
+    name: "Docker Compose",
+    icon: <SiDocker />,
+    color: "from-sky-500/20 to-blue-800/20",
+    iconColor: "text-sky-400",
+  },
+  {
+    name: "Nginx",
+    icon: <SiNginx />,
+    color: "from-green-600/20 to-emerald-800/20",
+    iconColor: "text-green-500",
+  },
+  {
+    name: "AWS · EC2 · S3",
+    icon: <SiAmazonwebservices />,
+    color: "from-amber-500/20 to-orange-700/20",
+    iconColor: "text-amber-400",
+  },
+  {
+    name: "AWS IAM & VPC",
+    icon: <SiAmazonwebservices />,
+    color: "from-yellow-500/20 to-amber-700/20",
+    iconColor: "text-yellow-400",
+  },
+  {
+    name: "DigitalOcean",
+    icon: <SiDigitalocean />,
+    color: "from-blue-600/20 to-indigo-800/20",
+    iconColor: "text-blue-400",
+  },
+  {
+    name: "Hostinger",
+    icon: <SiHostinger />,
+    color: "from-violet-600/20 to-purple-800/20",
+    iconColor: "text-violet-400",
+  },
   {
     name: "CI/CD",
-    icon: <FiRefreshCw />,
-    color: "from-emerald-400/20 to-cyan-500/20",
-    iconColor: "text-emerald-400",
+    icon: <SiGithubactions />,
+    color: "from-zinc-400/20 to-zinc-700/20",
+    iconColor: "text-zinc-200",
+  },
+  {
+    name: "GitHub Actions",
+    icon: <SiGithubactions />,
+    color: "from-indigo-500/20 to-violet-700/20",
+    iconColor: "text-indigo-300",
+  },
+  {
+    name: "Linux",
+    icon: <SiLinux />,
+    color: "from-zinc-300/20 to-zinc-600/20",
+    iconColor: "text-zinc-300",
+  },
+  {
+    name: "CloudWatch",
+    icon: <TbCloud />,
+    color: "from-rose-500/20 to-pink-700/20",
+    iconColor: "text-rose-300",
+  },
+  {
+    name: "Serverless · Lambda",
+    icon: <SiAmazonwebservices />,
+    color: "from-violet-500/20 to-purple-800/20",
+    iconColor: "text-violet-300",
   },
 ];
 
@@ -289,11 +379,25 @@ export default function Skills() {
       <div className="mb-10 sm:mb-12 lg:mb-14">
         <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
           <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            Performance & delivery
+            Performance & reliability
           </h3>
           <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
         </div>
         <SkillGrid skills={performanceSkills} />
+      </div>
+
+      <div className="mb-10 sm:mb-12 lg:mb-14">
+        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
+          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
+            DevOps & cloud
+          </h3>
+          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
+        </div>
+        <p className="mb-6 max-w-3xl text-sm text-zinc-500">
+          From Programming Hero Next Level and Udemy AWS training — containerized apps, reverse
+          proxies, cloud deploys, and automated pipelines for production-ready releases.
+        </p>
+        <SkillGrid skills={devOpsSkills} />
       </div>
 
       <div className="mb-10 sm:mb-12 lg:mb-14">
