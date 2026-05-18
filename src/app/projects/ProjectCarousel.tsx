@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight, FiLoader } from "react-icons/fi";
 
 interface ProjectCarouselProps {
   images: string[];
@@ -21,6 +21,7 @@ export default function ProjectCarousel({
 }: ProjectCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -32,7 +33,45 @@ export default function ProjectCarousel({
 
   useEffect(() => {
     setCurrentIndex(0);
+    setImageLoaded(false);
   }, [images]);
+
+  const currentImage = images[currentIndex] ?? "";
+
+  useEffect(() => {
+    if (!currentImage) return;
+
+    setImageLoaded(false);
+
+    const img = new window.Image();
+    img.src = currentImage;
+
+    if (img.complete) {
+      setImageLoaded(true);
+      return;
+    }
+
+    const markLoaded = () => setImageLoaded(true);
+    img.addEventListener("load", markLoaded);
+    img.addEventListener("error", markLoaded);
+
+    return () => {
+      img.removeEventListener("load", markLoaded);
+      img.removeEventListener("error", markLoaded);
+    };
+  }, [currentImage]);
+
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const preload = (src: string) => {
+      const img = new window.Image();
+      img.src = src;
+    };
+
+    preload(images[(currentIndex + 1) % images.length]);
+    preload(images[(currentIndex - 1 + images.length) % images.length]);
+  }, [currentIndex, images]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -78,8 +117,6 @@ export default function ProjectCarousel({
     );
   }
 
-  const currentImage = images[currentIndex];
-
   return (
     <figure className="w-full">
       <div
@@ -87,7 +124,10 @@ export default function ProjectCarousel({
         role="region"
         aria-roledescription="carousel"
         aria-label={`${title} screenshots`}
+        aria-busy={!imageLoaded}
       >
+        <CarouselImageLoader show={!imageLoaded} compact={compact} />
+
         <div
           className={`absolute inset-0 flex items-center justify-center ${slideClass}`}
         >
@@ -97,9 +137,12 @@ export default function ProjectCarousel({
             alt={`${title} — screenshot ${currentIndex + 1} of ${images.length}`}
             fill
             quality={imageQuality}
-            className="object-contain object-center p-2 sm:p-3"
+            className={`object-contain object-center p-2 sm:p-3 transition-opacity duration-300 ease-out ${
+              imageLoaded ? "opacity-100" : "opacity-0"
+            }`}
             sizes={imageSizes}
             priority={priority && currentIndex === 0}
+            onLoad={() => setImageLoaded(true)}
           />
         </div>
 
@@ -146,5 +189,44 @@ export default function ProjectCarousel({
         </figcaption>
       )}
     </figure>
+  );
+}
+
+function CarouselImageLoader({
+  show,
+  compact,
+}: {
+  show: boolean;
+  compact: boolean;
+}) {
+  if (!show) return null;
+
+  return (
+    <div
+      className="absolute inset-0 z-[1] flex flex-col items-center justify-center gap-3"
+      aria-hidden
+    >
+      <div
+        className={`absolute inset-0 animate-pulse ${
+          compact
+            ? "bg-gradient-to-b from-zinc-200/90 to-zinc-300/70"
+            : "bg-zinc-900/90"
+        }`}
+      />
+      <div className="relative flex flex-col items-center gap-2">
+        <FiLoader
+          size={28}
+          className="animate-spin text-emerald-500/90"
+          aria-hidden
+        />
+        <span
+          className={`text-xs font-medium tracking-wide ${
+            compact ? "text-zinc-600" : "text-zinc-500"
+          }`}
+        >
+          Loading image…
+        </span>
+      </div>
+    </div>
   );
 }
