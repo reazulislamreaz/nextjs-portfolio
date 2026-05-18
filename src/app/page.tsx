@@ -18,6 +18,10 @@ const AiWorkflowSection = dynamic(() => import("@/components/sections/AiWorkflow
 const EducationSection = dynamic(() => import("@/components/sections/EducationSection"), {
   loading: () => <SectionSkeleton />,
 });
+const ExperienceSection = dynamic(
+  () => import("@/components/sections/ExperienceSection"),
+  { loading: () => <SectionSkeleton /> },
+);
 const CertificationsSection = dynamic(
   () => import("@/components/sections/CertificationsSection"),
   { loading: () => <SectionSkeleton /> },
@@ -38,6 +42,7 @@ export default function HomePage() {
       <SkillsSection />
       <AiWorkflowSection />
       <EducationSection />
+      <ExperienceSection />
       <CertificationsSection />
       <ProjectsSection />
       <ContactSection />

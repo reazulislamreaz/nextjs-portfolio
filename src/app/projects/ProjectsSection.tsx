@@ -24,7 +24,7 @@ export default function ProjectsSection() {
     <Section id="projects" className="bg-black/20">
       <SectionHeader
         title="Selected systems"
-        subtitle="Each build pairs a documented backend with a client you can run — case studies with live demos and source."
+        subtitle="Scan the highlights first — open a case study for architecture, challenges, and metrics."
       />
 
       <div

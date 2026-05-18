@@ -1,5 +1,6 @@
 import { siteContact, siteSocial, resumePath } from "@/config/site";
 import { projectsData } from "@/app/projects/projectsData";
+import { experienceData } from "@/components/sections/experienceData";
 
 const skills = [
   "TypeScript",
@@ -68,12 +69,13 @@ ${skills.map((skill) => `- ${skill}`).join("\n")}
 Projects:
 ${projectsData
   .map(
-    (project) => `- ${project.title}: ${project.description}
-  Tech/features: ${project.features.join(", ")}.
+    (project) => `- ${project.title}: ${project.tagline}
+  Overview: ${project.description}
+  Tech: ${project.features.join(", ")}.
   Problem: ${project.problem}
   Architecture: ${project.architecture}
-  Challenges: ${project.keyChallenges}
-  Solutions: ${project.solutions}
+  Challenges & solutions: ${project.challengeSolutions.map((item) => `${item.challenge} → ${item.solution}`).join(" | ")}
+  Metrics: ${project.metrics.join("; ")}
   Future enhancements: ${project.futureEnhancements}
   Live: ${project.live}
   Code: ${project.code}${project.sourceNote ? `\n  Note: ${project.sourceNote}` : ""}`,
@@ -82,6 +84,17 @@ ${projectsData
 
 Education:
 ${education.map((item) => `- ${item}`).join("\n")}
+
+Work experience:
+${experienceData
+  .map(
+    (role) => `- ${role.role} at ${role.company} (${role.employmentType}, ${role.period}): ${role.tagline}
+  Summary: ${role.summary}
+  ${role.architecture ? `Architecture: ${role.architecture}` : ""}
+  Highlights: ${role.highlights.join("; ")}
+  Tech: ${role.techStack.join(", ")}.`,
+  )
+  .join("\n\n")}
 
 Certifications and learning:
 ${certifications.map((item) => `- ${item}`).join("\n")}

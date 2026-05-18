@@ -1,148 +1,115 @@
-import type { ReactNode } from "react";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+"use client";
+
+import { useState } from "react";
+import { FiExternalLink, FiGithub, FiLayers } from "react-icons/fi";
 import type { Project } from "./projectsData";
 import ProjectCarousel from "./ProjectCarousel";
+import ProjectDetailModal from "./ProjectDetailModal";
+
+const MAX_VISIBLE_STACK = 6;
 
 interface ProjectCardProps {
   project: Project;
   priorityImage?: boolean;
 }
 
-function CaseBlock({
-  label,
-  children,
-  muted = false,
-}: {
-  label: string;
-  children: ReactNode;
-  muted?: boolean;
-}) {
-  return (
-    <div className="border-t border-zinc-800/80 pt-5">
-      <h4
-        className={`mb-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] ${
-          muted ? "text-zinc-500" : "text-emerald-500/90"
-        }`}
-      >
-        {label}
-      </h4>
-      <div className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function MetricList({ items }: { items: string[] }) {
-  return (
-    <ul className="space-y-2.5">
-      {items.map((item) => (
-        <li key={item} className="flex gap-2.5">
-          <span
-            className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500/90"
-            aria-hidden
-          />
-          <span>{item}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export default function ProjectCard({
   project,
   priorityImage = false,
 }: ProjectCardProps) {
+  const [detailsOpen, setDetailsOpen] = useState(false);
   const slug = project.title.toLowerCase().replace(/\s+/g, "-");
 
+  const visibleStack = project.features.slice(0, MAX_VISIBLE_STACK);
+  const hiddenStackCount = project.features.length - visibleStack.length;
+
   return (
-    <article
-      id={`project-${slug}`}
-      className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:border-zinc-700 md:hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]"
-      aria-labelledby={`${slug}-title`}
-    >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
-
-      <div className="relative z-10 p-4 pb-0 sm:p-5 sm:pb-0">
-        <ProjectCarousel
-          images={project.images}
-          title={project.title}
-          priority={priorityImage}
-          className="h-60 sm:h-64 md:h-72 lg:h-[300px]"
-          compact
-        />
-      </div>
-
-      <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6 lg:p-7">
-        <header className="space-y-3">
-          <h3
-            id={`${slug}-title`}
-            className="text-2xl font-bold tracking-tight text-zinc-200 transition-colors duration-300 group-hover/card:text-white sm:text-[1.65rem]"
-          >
-            {project.title}
-          </h3>
-          <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
-            {project.description}
-          </p>
-        </header>
-
-        <ul className="mt-4 flex flex-wrap gap-2.5" aria-label="Tech stack">
-          {project.features.map((feature) => (
-            <li key={feature}>
-              <span className="rounded-lg border border-zinc-700/80 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-200 shadow-sm transition-colors hover:border-emerald-500/40 hover:bg-zinc-800 sm:text-sm">
-                {feature}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-6 flex-1 space-y-0">
-          <CaseBlock label="Problem">{project.problem}</CaseBlock>
-          <CaseBlock label="Architecture">{project.architecture}</CaseBlock>
-          <CaseBlock label="Key challenges">{project.keyChallenges}</CaseBlock>
-          <CaseBlock label="Solutions">{project.solutions}</CaseBlock>
-          <CaseBlock label="Impact & metrics">
-            <MetricList items={project.metrics} />
-          </CaseBlock>
-          <CaseBlock label="Deployment & DevOps">
-            <ul className="flex flex-wrap gap-2">
-              {project.devOps.map((item) => (
-                <li key={item}>
-                  <span className="rounded-md border border-zinc-700/60 bg-zinc-950/80 px-2.5 py-1 text-xs font-medium text-zinc-300">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </CaseBlock>
-          <CaseBlock label="Iteration roadmap" muted>
-            {project.futureEnhancements}
-          </CaseBlock>
+    <>
+      <article
+        id={`project-${slug}`}
+        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:border-zinc-700 md:hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]"
+        aria-labelledby={`${slug}-title`}
+      >
+        <div className="relative z-10 p-4 pb-0 sm:p-5 sm:pb-0">
+          <ProjectCarousel
+            images={project.images}
+            title={project.title}
+            priority={priorityImage}
+            compact
+          />
         </div>
 
-        <footer className="mt-6 border-t border-zinc-800/80 pt-6">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+        <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6">
+          <header className="space-y-2">
+            <h3
+              id={`${slug}-title`}
+              className="text-xl font-bold tracking-tight text-zinc-200 transition-colors duration-300 group-hover/card:text-white sm:text-2xl"
             >
-              <FiExternalLink size={17} aria-hidden />
-              Live environment
-            </a>
-            <a
-              href={project.code}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 sm:shrink-0"
-            >
-              <FiGithub size={17} aria-hidden />
-              Source code
-            </a>
-          </div>
-        </footer>
-      </div>
-    </article>
+              {project.title}
+            </h3>
+            <p className="line-clamp-2 text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
+              {project.tagline}
+            </p>
+          </header>
+
+          <ul className="mt-4 flex flex-wrap gap-2" aria-label="Tech stack">
+            {visibleStack.map((feature) => (
+              <li key={feature}>
+                <span className="rounded-lg border border-zinc-700/80 bg-zinc-900 px-2.5 py-1 text-xs font-medium text-zinc-200">
+                  {feature}
+                </span>
+              </li>
+            ))}
+            {hiddenStackCount > 0 && (
+              <li>
+                <span className="rounded-lg border border-zinc-800 bg-zinc-950/80 px-2.5 py-1 text-xs font-medium text-zinc-500">
+                  +{hiddenStackCount}
+                </span>
+              </li>
+            )}
+          </ul>
+
+          <footer className="mt-auto pt-6">
+            <div className="flex flex-col gap-2.5">
+              <a
+                href={project.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              >
+                <FiExternalLink size={17} aria-hidden />
+                See live demo
+              </a>
+              <div className="grid grid-cols-2 gap-2.5">
+                <a
+                  href={project.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                >
+                  <FiGithub size={17} aria-hidden />
+                  GitHub
+                </a>
+                <button
+                  type="button"
+                  onClick={() => setDetailsOpen(true)}
+                  className="inline-flex min-h-11 items-center cursor-pointer justify-center gap-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-3 py-2.5 text-sm font-semibold text-emerald-400 transition hover:border-emerald-500/50 hover:bg-emerald-500/15 hover:text-emerald-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                >
+                  <FiLayers size={17} aria-hidden />
+                  Case study
+                </button>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </article>
+
+      {detailsOpen && (
+        <ProjectDetailModal
+          project={project}
+          onClose={() => setDetailsOpen(false)}
+        />
+      )}
+    </>
   );
 }
