@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiLoader } from "react-icons/fi";
 
 interface ProjectCarouselProps {
@@ -10,6 +10,13 @@ interface ProjectCarouselProps {
   priority?: boolean;
   className?: string;
   compact?: boolean;
+}
+
+function markSrcInCache(prev: Set<string>, src: string): Set<string> {
+  if (prev.has(src)) return prev;
+  const next = new Set(prev);
+  next.add(src);
+  return next;
 }
 
 export default function ProjectCarousel({
@@ -21,7 +28,14 @@ export default function ProjectCarousel({
 }: ProjectCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(() => new Set());
+
+  const currentImage = images[currentIndex] ?? "";
+  const isCurrentLoaded = currentImage ? loadedImages.has(currentImage) : false;
+
+  const markLoaded = useCallback((src: string) => {
+    setLoadedImages((prev) => markSrcInCache(prev, src));
+  }, []);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -33,45 +47,35 @@ export default function ProjectCarousel({
 
   useEffect(() => {
     setCurrentIndex(0);
-    setImageLoaded(false);
+    setLoadedImages(new Set());
   }, [images]);
 
-  const currentImage = images[currentIndex] ?? "";
-
   useEffect(() => {
-    if (!currentImage) return;
+    if (!images.length) return;
 
-    setImageLoaded(false);
+    let cancelled = false;
 
-    const img = new window.Image();
-    img.src = currentImage;
+    for (const src of images) {
+      const img = new window.Image();
 
-    if (img.complete) {
-      setImageLoaded(true);
-      return;
+      const handleReady = () => {
+        if (cancelled) return;
+        setLoadedImages((prev) => markSrcInCache(prev, src));
+      };
+
+      img.addEventListener("load", handleReady);
+      img.addEventListener("error", handleReady);
+      img.src = src;
+
+      if (img.complete) {
+        handleReady();
+      }
     }
 
-    const markLoaded = () => setImageLoaded(true);
-    img.addEventListener("load", markLoaded);
-    img.addEventListener("error", markLoaded);
-
     return () => {
-      img.removeEventListener("load", markLoaded);
-      img.removeEventListener("error", markLoaded);
+      cancelled = true;
     };
-  }, [currentImage]);
-
-  useEffect(() => {
-    if (images.length <= 1) return;
-
-    const preload = (src: string) => {
-      const img = new window.Image();
-      img.src = src;
-    };
-
-    preload(images[(currentIndex + 1) % images.length]);
-    preload(images[(currentIndex - 1 + images.length) % images.length]);
-  }, [currentIndex, images]);
+  }, [images]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -124,9 +128,9 @@ export default function ProjectCarousel({
         role="region"
         aria-roledescription="carousel"
         aria-label={`${title} screenshots`}
-        aria-busy={!imageLoaded}
+        aria-busy={!isCurrentLoaded}
       >
-        <CarouselImageLoader show={!imageLoaded} compact={compact} />
+        <CarouselImageLoader show={!isCurrentLoaded} compact={compact} />
 
         <div
           className={`absolute inset-0 flex items-center justify-center ${slideClass}`}
@@ -138,11 +142,11 @@ export default function ProjectCarousel({
             fill
             quality={imageQuality}
             className={`object-contain object-center p-2 sm:p-3 transition-opacity duration-300 ease-out ${
-              imageLoaded ? "opacity-100" : "opacity-0"
+              isCurrentLoaded ? "opacity-100" : "opacity-0"
             }`}
             sizes={imageSizes}
             priority={priority && currentIndex === 0}
-            onLoad={() => setImageLoaded(true)}
+            onLoad={() => markLoaded(currentImage)}
           />
         </div>
 
@@ -151,7 +155,7 @@ export default function ProjectCarousel({
             <button
               type="button"
               onClick={prevSlide}
-              className="absolute left-2 cursor-pointer top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-black/70 p-1.5 text-white backdrop-blur-sm transition hover:bg-black/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:left-3 sm:p-2"
+              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-white/10 bg-black/70 p-1.5 text-white backdrop-blur-sm transition hover:bg-black/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:left-3 sm:p-2"
               aria-label={`Previous screenshot of ${title}`}
             >
               <FiChevronLeft size={16} aria-hidden />
@@ -159,7 +163,7 @@ export default function ProjectCarousel({
             <button
               type="button"
               onClick={nextSlide}
-              className="absolute right-2 cursor-pointer top-1/2 z-10 -translate-y-1/2 rounded-full border border-white/10 bg-black/70 p-1.5 text-white backdrop-blur-sm transition hover:bg-black/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:right-3 sm:p-2"
+              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full border border-white/10 bg-black/70 p-1.5 text-white backdrop-blur-sm transition hover:bg-black/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:right-3 sm:p-2"
               aria-label={`Next screenshot of ${title}`}
             >
               <FiChevronRight size={16} aria-hidden />
