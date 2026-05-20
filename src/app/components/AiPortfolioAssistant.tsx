@@ -360,7 +360,7 @@ export default function AiPortfolioAssistant() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-white"
+              className="inline-flex h-9 w-9 cursor-pointer shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-white"
               aria-label="Close AI assistant"
             >
               <FiX size={18} aria-hidden />
@@ -406,7 +406,7 @@ export default function AiPortfolioAssistant() {
                     key={prompt}
                     type="button"
                     onClick={() => void sendMessage(prompt)}
-                    className="rounded-lg border border-zinc-800 bg-zinc-900/70 px-3 py-2 text-left text-xs text-zinc-400 transition hover:border-emerald-500/40 hover:text-emerald-300"
+                    className="rounded-lg border border-zinc-800 cursor-pointer bg-zinc-900/70 px-3 py-2 text-left text-xs text-zinc-400 transition hover:border-emerald-500/40 hover:text-emerald-300"
                   >
                     {prompt}
                   </button>

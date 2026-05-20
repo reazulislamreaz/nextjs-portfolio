@@ -109,6 +109,10 @@ export default function ProjectCarousel({
     ? "(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 720px"
     : "(max-width: 768px) 100vw, (max-width: 1280px) min(92vw, 896px), 896px";
 
+  const slideTransition = reduceMotion
+    ? "transition-none"
+    : "transition-opacity duration-500 ease-in-out";
+
   if (!images.length) {
     return (
       <div
@@ -130,24 +134,42 @@ export default function ProjectCarousel({
         aria-label={`${title} screenshots`}
         aria-busy={!isCurrentLoaded}
       >
-        <CarouselImageLoader show={!isCurrentLoaded} compact={compact} />
+        <CarouselImageLoader
+          show={!isCurrentLoaded}
+          compact={compact}
+          animate={!reduceMotion}
+        />
 
         <div
           className={`absolute inset-0 flex items-center justify-center ${slideClass}`}
         >
-          <Image
-            key={currentImage}
-            src={currentImage}
-            alt={`${title} — screenshot ${currentIndex + 1} of ${images.length}`}
-            fill
-            quality={imageQuality}
-            className={`object-contain object-center p-2 sm:p-3 transition-opacity duration-300 ease-out ${
-              isCurrentLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            sizes={imageSizes}
-            priority={priority && currentIndex === 0}
-            onLoad={() => markLoaded(currentImage)}
-          />
+          {images.map((src, idx) => {
+            const isActive = idx === currentIndex;
+            const isLoaded = loadedImages.has(src);
+
+            return (
+              <Image
+                key={src}
+                src={src}
+                alt={
+                  isActive
+                    ? `${title} — screenshot ${idx + 1} of ${images.length}`
+                    : ""
+                }
+                fill
+                quality={imageQuality}
+                sizes={imageSizes}
+                priority={priority && idx === 0}
+                aria-hidden={!isActive}
+                onLoad={() => markLoaded(src)}
+                className={`object-contain object-center p-2 sm:p-3 ${slideTransition} ${
+                  isActive && isLoaded
+                    ? "z-[2] opacity-100"
+                    : "z-[1] opacity-0"
+                }`}
+              />
+            );
+          })}
         </div>
 
         {images.length > 1 && (
@@ -199,16 +221,18 @@ export default function ProjectCarousel({
 function CarouselImageLoader({
   show,
   compact,
+  animate = true,
 }: {
   show: boolean;
   compact: boolean;
+  animate?: boolean;
 }) {
-  if (!show) return null;
-
   return (
     <div
-      className="absolute inset-0 z-[1] flex flex-col items-center justify-center gap-3"
-      aria-hidden
+      className={`absolute inset-0 z-[3] flex flex-col items-center justify-center gap-3 ${
+        animate ? "transition-opacity duration-300 ease-out" : ""
+      } ${show ? "opacity-100" : "pointer-events-none opacity-0"}`}
+      aria-hidden={!show}
     >
       <div
         className={`absolute inset-0 animate-pulse ${
