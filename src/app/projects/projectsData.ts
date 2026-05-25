@@ -23,6 +23,88 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    title: "Connectify",
+    tagline:
+      "WhatsApp-style social platform — real-time chat, news feed, friends, and voice/video calls on a production full-stack build.",
+    description:
+      "Full-featured messaging and social app pairing a Next.js 15 frontend with a TypeScript Express API. Users get 1:1 chat (text, images, voice), a social feed with likes and comments, friend discovery and requests, online presence, typing indicators, and ZEGOCLOUD-powered audio/video calls — deployed on Vercel (frontend) and a VPS with nginx + PM2 (backend).",
+    features: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "TanStack Query",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.IO",
+      "Redis",
+      "AWS S3",
+      "ZEGOCLOUD",
+      "JWT",
+      "Zod",
+    ],
+    metrics: [
+      "Real-time messaging with Socket.IO — typing, read receipts, and friend-scoped presence",
+      "Social feed with posts, threaded comments, likes, and S3-backed media uploads",
+      "Friend graph with send/accept/reject flows and paginated user discovery search",
+      "Voice/video calls via server-minted ZEGOCLOUD RTC tokens and WebSocket call signaling",
+      "Redis cache layer + optional Socket.IO Redis adapter for horizontal scale",
+    ],
+    devOps: [
+      "Vercel (frontend)",
+      "VPS + nginx + PM2",
+      "MongoDB",
+      "Redis",
+      "AWS S3",
+      "DuckDNS API host",
+      "WebSocket (wss)",
+    ],
+    images: [
+      "/connectify-feed.png",
+      "/connectify-profile.png",
+      "/connectify-discover.png",
+      "/connectify-friends.png",
+      "/connectify-chat.png",
+    ],
+    live: "https://easy-connectify.vercel.app/",
+    code: "https://github.com/reazulislamreaz/connectify-frontend",
+    sourceNote:
+      "Backend API & Socket.IO: https://github.com/reazulislamreaz/connectify-backend · API host: https://easyconnectify.duckdns.org",
+    problem:
+      "Users expect a modern messenger with instant delivery, social feed, friend management, and calls — without juggling separate apps or dealing with unreliable realtime sync, unsecured sessions, or media uploads that break under load.",
+    architecture:
+      "Next.js App Router client with React Query and Socket.IO for realtime; Express + TypeScript REST API with Zod validation and JWT auth (Bearer + HTTP-only cookies). MongoDB via Mongoose for users, messages, posts, and friends; AWS S3 for avatars and media; optional Redis for caching and multi-instance Socket.IO fan-out; ZEGOCLOUD for RTC tokens and call state over WebSockets.",
+    challengeSolutions: [
+      {
+        challenge:
+          "HTTPS frontend on Vercel had to reach a secure WebSocket backend without mixed-content or path mismatches.",
+        solution:
+          "Configured wss:// on DuckDNS with `/socket.io` at the root, JWT in socket auth, and CORS `CLIENT_URL` allowlists including the Vercel domain.",
+      },
+      {
+        challenge:
+          "1:1 messaging needed live delivery, typing, read receipts, and voice notes without losing messages across reconnects.",
+        solution:
+          "Socket.IO per-user rooms with JWT handshake, persisted message CRUD, and event handlers for typing, read state, and ≤60s voice uploads to S3.",
+      },
+      {
+        challenge:
+          "Friend-only presence and call signaling had to stay consistent when scaling beyond a single Node process.",
+        solution:
+          "Presence service with friend-scoped visibility, optional Redis cache invalidation, and Socket.IO Redis adapter for multi-instance broadcast.",
+      },
+      {
+        challenge:
+          "Feed, profiles, and chat surfaces required validated APIs and consistent error contracts for the React client.",
+        solution:
+          "Modular Express modules (auth, user, friend, message, chat, post, call) with Zod middleware and standardized `{ success, data | message }` responses.",
+      },
+    ],
+    futureEnhancements:
+      "Group chats, push notifications, message search, admin moderation tools, and deeper observability (metrics/tracing) across API and socket tiers.",
+  },
+  {
     title: "Confaero",
     tagline:
       "Real-time conference ops for organizers — QR check-ins and exhibitor leads without duplicate records under load.",
