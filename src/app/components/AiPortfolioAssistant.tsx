@@ -349,7 +349,7 @@ export default function AiPortfolioAssistant() {
                 <TbSparkles size={22} aria-hidden />
               </span>
               <div className="min-w-0">
-                <h2 className="truncate text-sm font-semibold text-white">
+                <h2 className="truncate text-sm font-semibold text-zinc-50">
                   AI Portfolio Assistant
                 </h2>
                 <p className="truncate text-xs text-zinc-500">
@@ -360,7 +360,7 @@ export default function AiPortfolioAssistant() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="inline-flex h-9 w-9 cursor-pointer shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-white"
+              className="inline-flex h-9 w-9 cursor-pointer shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-50"
               aria-label="Close AI assistant"
             >
               <FiX size={18} aria-hidden />
@@ -380,7 +380,7 @@ export default function AiPortfolioAssistant() {
                 <div
                   className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     message.role === "user"
-                      ? "bg-emerald-500 text-zinc-950"
+                      ? "bg-emerald-500 text-white"
                       : "border border-zinc-800 bg-zinc-900/80 text-zinc-300"
                   }`}
                 >
@@ -425,13 +425,13 @@ export default function AiPortfolioAssistant() {
                 onChange={(event) => setInput(event.target.value)}
                 maxLength={1000}
                 placeholder={inputPlaceholder}
-                className="min-h-11 min-w-0 flex-1 rounded-xl border border-zinc-800 bg-black/40 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-emerald-500/50"
+                className="min-h-11 min-w-0 flex-1 rounded-xl border border-zinc-800 bg-zinc-900/60 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-emerald-500/50"
                 disabled={loading}
               />
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
-                className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 transition hover:bg-white disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
+                className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 transition hover:bg-zinc-50 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
                 aria-label="Send message"
               >
                 <FiSend size={18} aria-hidden />
@@ -445,7 +445,7 @@ export default function AiPortfolioAssistant() {
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
           aria-label="Hide AI portfolio assistant"
           aria-expanded="true"
         >
@@ -459,7 +459,7 @@ export default function AiPortfolioAssistant() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-zinc-950 shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
           aria-label="Open AI portfolio assistant"
           aria-expanded="false"
         >

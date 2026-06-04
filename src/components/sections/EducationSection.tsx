@@ -67,7 +67,7 @@ const academicStrengths = [
 
 export default function Education() {
   return (
-    <Section id="education" className="bg-black/40">
+    <Section id="education" className="bg-zinc-950/40">
       <SectionHeader
         title="Education"
         subtitle="Formal academic background that complements hands-on engineering — technical programs and certifications are listed separately."

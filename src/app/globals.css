@@ -1,22 +1,116 @@
 @import "tailwindcss";
 
+/* Class-based dark mode (next-themes sets class="dark" / "light" on <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Theme tokens — adapted from the TaskForge (elite-alumni-pool) palette.
+  The zinc scale is remapped so a single set of utility classes works in both
+  themes: in light mode the ramp is inverted (high shade = dark), in dark mode
+  it follows the green-tinted TaskForge surfaces. The emerald scale is remapped
+  to TaskForge teal (#00897b) and stays consistent across themes.
+*/
+
+/* Light theme (default) */
+:root {
+  --zinc-50: #0b1210;
+  --zinc-100: #111827;
+  --zinc-200: #1f2937;
+  --zinc-300: #374151;
+  --zinc-400: #6b7280; /* muted text */
+  --zinc-500: #9ca3af; /* soft text */
+  --zinc-600: #aab4b0;
+  --zinc-700: #d1d5db; /* strong border */
+  --zinc-800: #e5e7eb; /* border */
+  --zinc-900: #ffffff; /* card / elevated surface */
+  --zinc-950: #f4f7f6; /* page background */
+
+  --teal-200: #80cbc4;
+  --teal-300: #4db6ac;
+  --teal-400: #26a69a;
+  --teal-500: #00897b; /* primary */
+  --teal-600: #00796b; /* primary hover */
+  --teal-700: #006d5b;
+  --teal-800: #005a4a;
+  --teal-900: #10302b;
+  --teal-950: #0c2722;
+
+  --grid-line: rgba(15, 23, 42, 0.04);
+  --glow-primary: rgba(0, 137, 123, 0.06);
+  --glow-secondary: rgba(56, 189, 248, 0.04);
+  --glow-tertiary: rgba(148, 163, 184, 0.05);
+}
+
+/* Dark theme */
+.dark {
+  --zinc-50: #f4f8f7;
+  --zinc-100: #e6edeb; /* primary text */
+  --zinc-200: #d3dedb;
+  --zinc-300: #bcc7c3;
+  --zinc-400: #9fb0ab; /* muted text */
+  --zinc-500: #6f817c; /* soft text */
+  --zinc-600: #54635f;
+  --zinc-700: #3a4844; /* strong border */
+  --zinc-800: #2a3633; /* border */
+  --zinc-900: #16201d; /* card / elevated surface */
+  --zinc-950: #0f1715; /* page background */
+
+  --grid-line: rgba(255, 255, 255, 0.02);
+  --glow-primary: rgba(0, 137, 123, 0.1);
+  --glow-secondary: rgba(56, 189, 248, 0.05);
+  --glow-tertiary: rgba(148, 163, 184, 0.05);
+}
+
+/* Expose the tokens to Tailwind utilities. `inline` keeps the var reference in
+   the generated CSS so utilities respond to the .dark override at runtime. */
+@theme inline {
+  --color-zinc-50: var(--zinc-50);
+  --color-zinc-100: var(--zinc-100);
+  --color-zinc-200: var(--zinc-200);
+  --color-zinc-300: var(--zinc-300);
+  --color-zinc-400: var(--zinc-400);
+  --color-zinc-500: var(--zinc-500);
+  --color-zinc-600: var(--zinc-600);
+  --color-zinc-700: var(--zinc-700);
+  --color-zinc-800: var(--zinc-800);
+  --color-zinc-900: var(--zinc-900);
+  --color-zinc-950: var(--zinc-950);
+
+  /* alias the few gray/slate usages onto the zinc ramp */
+  --color-gray-300: var(--zinc-300);
+  --color-gray-400: var(--zinc-400);
+  --color-slate-300: var(--zinc-300);
+  --color-slate-500: var(--zinc-500);
+  --color-slate-700: var(--zinc-700);
+
+  --color-emerald-200: var(--teal-200);
+  --color-emerald-300: var(--teal-300);
+  --color-emerald-400: var(--teal-400);
+  --color-emerald-500: var(--teal-500);
+  --color-emerald-600: var(--teal-600);
+  --color-emerald-700: var(--teal-700);
+  --color-emerald-800: var(--teal-800);
+  --color-emerald-900: var(--teal-900);
+  --color-emerald-950: var(--teal-950);
+}
+
 html {
   transition: background-color 0.3s, color 0.3s;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  @apply bg-zinc-950 text-gray-200;
+  @apply bg-zinc-950 text-zinc-300;
 }
 
 body {
-  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden selection:bg-emerald-500/30 selection:text-white;
+  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden selection:bg-emerald-500/30 selection:text-zinc-50;
 }
 
 /* Global Glassmorphic Pattern overlay - Minimal Tech Grid */
 .glass-pattern {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 60px 60px;
   pointer-events: none;
   z-index: 0;
@@ -26,9 +120,9 @@ body {
 .glass-gradient {
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 50% -20%, rgba(16, 185, 129, 0.08) 0%, transparent 60%),
-              radial-gradient(circle at 100% 50%, rgba(56, 189, 248, 0.05) 0%, transparent 60%),
-              radial-gradient(circle at 0% 100%, rgba(148, 163, 184, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle at 50% -20%, var(--glow-primary) 0%, transparent 60%),
+              radial-gradient(circle at 100% 50%, var(--glow-secondary) 0%, transparent 60%),
+              radial-gradient(circle at 0% 100%, var(--glow-tertiary) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -68,5 +162,3 @@ body {
   white-space: nowrap;
   border-width: 0;
 }
-
-

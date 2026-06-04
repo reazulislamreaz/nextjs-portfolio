@@ -12,7 +12,7 @@ export default function ExperienceSection() {
   );
 
   return (
-    <Section id="experience" className="bg-black/30">
+    <Section id="experience" className="bg-zinc-950/30">
       <SectionHeader
         title="Experience"
         subtitle="Professional roles focused on production backends — scan the highlights, then expand for architecture and contributions."

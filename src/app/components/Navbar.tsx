@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { HiMenu, HiX } from "react-icons/hi";
 import { hashFromHref, isNavLinkActive } from "@/lib/nav-utils";
 import { navLinks, resumePath, sectionIds } from "@/config/site";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -63,8 +64,8 @@ export default function Navbar() {
             <Link href="/" className="group text-xl font-bold" aria-label="Home">
               <div className="relative h-11 w-11 transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14">
                 <div className="flex h-full w-full items-center justify-center rounded-full bg-gradient-to-r from-zinc-600 to-zinc-800 p-1">
-                  <div className="flex h-full w-full items-center justify-center rounded-full bg-black">
-                    <span className="text-lg font-bold text-white">R</span>
+                  <div className="flex h-full w-full items-center justify-center rounded-full bg-zinc-950">
+                    <span className="text-lg font-bold text-zinc-100">R</span>
                   </div>
                 </div>
               </div>
@@ -97,7 +98,7 @@ export default function Navbar() {
                     className={`whitespace-nowrap rounded-lg px-2 py-2 text-xs font-medium transition-all duration-300 lg:px-3 lg:text-sm ${
                       isActive
                         ? "bg-emerald-500/10 text-emerald-400"
-                        : "text-zinc-400 hover:bg-zinc-800/50 hover:text-white"
+                        : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-50"
                     }`}
                   >
                     {label}
@@ -108,8 +109,10 @@ export default function Navbar() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <ThemeToggle />
+
             <a href={resumePath} download className="hidden lg:block">
-              <span className="inline-flex min-h-10 cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-white">
+              <span className="inline-flex min-h-10 cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-900 transition hover:bg-zinc-50">
                 Resume
               </span>
             </a>
@@ -166,7 +169,7 @@ export default function Navbar() {
                   className={`block min-h-11 rounded-lg px-4 py-3 text-base font-medium ${
                     isActive
                       ? "border border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
-                      : "text-zinc-400 hover:bg-zinc-900 hover:text-white"
+                      : "text-zinc-400 hover:bg-zinc-900 hover:text-zinc-50"
                   }`}
                 >
                   {label}

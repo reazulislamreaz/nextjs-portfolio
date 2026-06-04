@@ -75,14 +75,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.className} min-w-0 overflow-x-hidden antialiased bg-black selection:bg-emerald-500/30 selection:text-emerald-200`}
+        className={`${geistSans.className} min-w-0 overflow-x-hidden antialiased bg-zinc-950 selection:bg-emerald-500/30 selection:text-emerald-200`}
       >
         <JsonLd />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-emerald-500 focus:px-4 focus:py-2 focus:text-zinc-950"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-emerald-500 focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to main content
         </a>

@@ -94,7 +94,7 @@ const items: Certification[] = [
 
 export default function Certifications() {
   return (
-    <Section id="certifications" className="bg-black/45">
+    <Section id="certifications" className="bg-zinc-950/45">
       <SectionHeader
         title="Certifications & Learning"
         subtitle="Formal programs and structured learning that align with production backend and full-stack work."
@@ -107,7 +107,7 @@ export default function Certifications() {
             className="flex min-w-0 flex-col rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 shadow-xl backdrop-blur-md transition-colors sm:rounded-3xl sm:p-8 hover:border-zinc-700"
           >
             <div className="mb-4 flex flex-col gap-3 border-b border-zinc-800 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <h3 className="text-lg font-bold tracking-tight text-white sm:text-xl md:text-2xl">
+              <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
                 {item.title}
               </h3>
               <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">

@@ -37,7 +37,7 @@ const experience: string[] = [
 
 export default function About() {
   return (
-    <Section id="about" className="bg-black/40">
+    <Section id="about" className="bg-zinc-950/40">
       <SectionHeader title="About Me" />
 
       <div className="grid w-full min-w-0 grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-12 lg:gap-14">
@@ -45,7 +45,7 @@ export default function About() {
           <div className="space-y-4 sm:space-y-6">
             <p className="text-base leading-relaxed text-zinc-300 sm:text-lg lg:text-xl">
               Hi, I&apos;m{" "}
-              <span className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1 font-semibold text-white shadow-sm">
+              <span className="rounded-md border border-zinc-700 bg-zinc-800 px-3 py-1 font-semibold text-zinc-50 shadow-sm">
                 Reazul Islam Reaz
               </span>
               , a{" "}
@@ -99,7 +99,7 @@ export default function About() {
           <div className="h-full w-full space-y-6 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)] sm:space-y-6 sm:rounded-3xl sm:p-8">
             <div className="mb-6 flex items-center gap-3 border-b border-zinc-800 pb-4">
               <FiServer className="text-3xl text-emerald-500" />
-              <h3 className="text-2xl font-bold tracking-tight text-white">How I work</h3>
+              <h3 className="text-2xl font-bold tracking-tight text-zinc-50">How I work</h3>
             </div>
 
             <ul className="space-y-4 text-sm sm:space-y-5 sm:text-[1.05rem]">
@@ -114,7 +114,7 @@ export default function About() {
             <div className="pt-8">
               <a
                 href="/#contact"
-                className="flex min-h-11 w-full transform justify-center rounded-xl bg-zinc-100 px-8 py-3.5 text-center text-sm font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-white active:scale-[0.98] sm:text-base"
+                className="flex min-h-11 w-full transform justify-center rounded-xl bg-zinc-100 px-8 py-3.5 text-center text-sm font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-zinc-50 active:scale-[0.98] sm:text-base"
               >
                 Let&apos;s Build Systems
               </a>

@@ -52,7 +52,7 @@ export default function HomeHero() {
                 <span className="leading-snug">Available for New Opportunities</span>
               </div>
 
-              <h1 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="text-balance text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Reazul Islam Reaz
               </h1>
 
@@ -80,14 +80,14 @@ export default function HomeHero() {
             <div className="flex w-full min-w-0 flex-col gap-3 pt-4 sm:flex-row sm:gap-4 sm:pt-6">
               <a
                 href="/#projects"
-                className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-6 py-3 text-center text-sm font-semibold text-zinc-900 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-white md:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
+                className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-6 py-3 text-center text-sm font-semibold text-zinc-900 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-50 md:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
               >
                 View Projects
               </a>
               <a
                 href={resumePath}
                 download
-                className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-6 py-3 text-center text-sm font-medium text-zinc-300 transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-800 md:hover:text-white"
+                className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-6 py-3 text-center text-sm font-medium text-zinc-300 transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-800 md:hover:text-zinc-50"
               >
                 Download Resume
               </a>
@@ -98,7 +98,7 @@ export default function HomeHero() {
                 href={siteSocial.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-white/20 md:hover:bg-white/[0.08] md:hover:text-white md:hover:shadow-emerald-500/10"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-zinc-50/10 bg-zinc-50/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-zinc-50/20 md:hover:bg-zinc-50/[0.08] md:hover:text-zinc-50 md:hover:shadow-emerald-500/10"
                 aria-label="GitHub"
               >
                 <svg className="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
@@ -109,7 +109,7 @@ export default function HomeHero() {
                 href={siteSocial.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-white/20 md:hover:bg-blue-600/20 md:hover:text-white md:hover:shadow-blue-500/10"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-zinc-50/10 bg-zinc-50/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-zinc-50/20 md:hover:bg-blue-600/20 md:hover:text-zinc-50 md:hover:shadow-blue-500/10"
                 aria-label="LinkedIn"
               >
                 <svg className="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
@@ -118,7 +118,7 @@ export default function HomeHero() {
               </a>
               <a
                 href={`mailto:${siteContact.email}`}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-white/20 md:hover:bg-emerald-600/20 md:hover:text-white md:hover:shadow-emerald-500/10"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-zinc-50/10 bg-zinc-50/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-zinc-50/20 md:hover:bg-emerald-600/20 md:hover:text-zinc-50 md:hover:shadow-emerald-500/10"
                 aria-label="Email"
               >
                 <svg
@@ -160,13 +160,13 @@ export default function HomeHero() {
               </div>
 
               <div
-                className="absolute -right-1 -top-1 hidden h-10 w-10 items-center justify-center rounded-full border border-zinc-600 bg-gradient-to-r from-zinc-700 to-zinc-900 text-base font-bold text-white shadow-lg sm:-right-2 sm:-top-2 sm:flex sm:h-11 sm:w-11 md:-right-4 md:-top-4 md:h-12 md:w-12 md:text-lg"
+                className="absolute -right-1 -top-1 hidden h-10 w-10 items-center justify-center rounded-full border border-zinc-600 bg-gradient-to-r from-zinc-700 to-zinc-900 text-base font-bold text-zinc-50 shadow-lg sm:-right-2 sm:-top-2 sm:flex sm:h-11 sm:w-11 md:-right-4 md:-top-4 md:h-12 md:w-12 md:text-lg"
                 aria-hidden
               >
                 ⚡
               </div>
               <div
-                className="absolute -bottom-1 -left-1 hidden h-9 w-9 items-center justify-center rounded-full border border-zinc-600 bg-gradient-to-r from-zinc-800 to-black text-base text-white shadow-lg sm:-bottom-2 sm:-left-4 sm:flex sm:h-10 sm:w-10 md:-bottom-2 md:-left-6"
+                className="absolute -bottom-1 -left-1 hidden h-9 w-9 items-center justify-center rounded-full border border-zinc-600 bg-gradient-to-r from-zinc-800 to-black text-base text-zinc-50 shadow-lg sm:-bottom-2 sm:-left-4 sm:flex sm:h-10 sm:w-10 md:-bottom-2 md:-left-6"
                 aria-hidden
               >
                 💻

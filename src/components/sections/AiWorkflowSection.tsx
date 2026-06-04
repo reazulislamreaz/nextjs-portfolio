@@ -45,7 +45,7 @@ const devTooling: { name: string; detail: string }[] = [
 
 export default function AiWorkflow() {
   return (
-    <Section id="ai-workflow" className="bg-black/35">
+    <Section id="ai-workflow" className="bg-zinc-950/35">
       <SectionHeader
         title="AI-assisted development workflow"
         subtitle="Practical tooling that speeds iteration — with reviews, tests, and ownership staying on the engineering side."
@@ -58,7 +58,7 @@ export default function AiWorkflow() {
 
       <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
         <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/35 p-5 shadow-lg backdrop-blur-md sm:rounded-3xl sm:p-7 md:p-8">
-          <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-white sm:mb-5 sm:pb-3 sm:text-lg">
+          <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-zinc-50 sm:mb-5 sm:pb-3 sm:text-lg">
             AI-assisted tooling
           </h3>
           <ul className="space-y-3 sm:space-y-4">
@@ -73,7 +73,7 @@ export default function AiWorkflow() {
         </div>
 
         <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/35 p-5 shadow-lg backdrop-blur-md sm:rounded-3xl sm:p-7 md:p-8">
-          <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-white sm:mb-5 sm:pb-3 sm:text-lg">
+          <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-zinc-50 sm:mb-5 sm:pb-3 sm:text-lg">
             API & delivery tooling
           </h3>
           <ul className="space-y-3 sm:space-y-4">

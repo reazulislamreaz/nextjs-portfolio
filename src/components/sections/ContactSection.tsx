@@ -36,7 +36,7 @@ export default function ContactSection() {
   }, [showMap, closeMap]);
 
   return (
-    <Section id="contact" className="bg-black/40">
+    <Section id="contact" className="bg-zinc-950/40">
       <SectionHeader
         title="Contact Me"
         subtitle="Let's connect and discuss how we can work together on your next project"
@@ -62,7 +62,7 @@ export default function ContactSection() {
                   <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3">
                     <FiMail className="text-xl text-emerald-400" />
                   </div>
-                  <span className="break-all text-zinc-300 transition-colors duration-300 hover:text-white sm:text-base">
+                  <span className="break-all text-zinc-300 transition-colors duration-300 hover:text-zinc-50 sm:text-base">
                     {siteContact.email}
                   </span>
                 </a>
@@ -76,7 +76,7 @@ export default function ContactSection() {
                   <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3">
                     <FaWhatsapp className="text-xl text-emerald-400" />
                   </div>
-                  <span className="text-zinc-300 transition-colors duration-300 hover:text-white">
+                  <span className="text-zinc-300 transition-colors duration-300 hover:text-zinc-50">
                     {siteContact.phone}
                   </span>
                 </a>
@@ -90,7 +90,7 @@ export default function ContactSection() {
                   <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3">
                     <FiMapPin className="text-xl text-emerald-400" />
                   </div>
-                  <span className="text-zinc-300 transition-colors duration-300 hover:text-white">
+                  <span className="text-zinc-300 transition-colors duration-300 hover:text-zinc-50">
                     Dhaka, Bangladesh 
                   </span>
                 </button>
@@ -102,7 +102,7 @@ export default function ContactSection() {
                       href={siteSocial.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-xl border border-zinc-800/50 bg-zinc-950/50 p-3 text-zinc-400 shadow-lg transition-all duration-300 hover:border-zinc-500 hover:text-white"
+                      className="rounded-xl border border-zinc-800/50 bg-zinc-950/50 p-3 text-zinc-400 shadow-lg transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
                       aria-label="GitHub"
                     >
                       <FaGithub className="text-xl" />
@@ -147,7 +147,7 @@ export default function ContactSection() {
             <div className="flex items-center justify-between border-b border-zinc-800 p-6">
               <h3
                 id="map-dialog-title"
-                className="flex items-center gap-2 text-xl font-bold text-white"
+                className="flex items-center gap-2 text-xl font-bold text-zinc-50"
               >
                 <FiMapPin className="text-emerald-500" />
                 {siteContact.location}
@@ -156,7 +156,7 @@ export default function ContactSection() {
                 ref={closeButtonRef}
                 type="button"
                 onClick={closeMap}
-                className="rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+                className="rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-50"
                 aria-label="Close map dialog"
               >
                 <FiX size={24} />

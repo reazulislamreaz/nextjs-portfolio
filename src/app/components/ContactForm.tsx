@@ -100,7 +100,7 @@ export default function ContactForm() {
               </span>
             </div>
 
-            <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h3 className="text-2xl font-bold tracking-tight text-zinc-50 sm:text-3xl">
               Message sent
             </h3>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-zinc-400 sm:text-base">
@@ -114,7 +114,7 @@ export default function ContactForm() {
             <button
               type="button"
               onClick={resetForm}
-              className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/80 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/80 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
               Send another message
             </button>
@@ -122,7 +122,7 @@ export default function ContactForm() {
         ) : (
           <>
             <div className="mb-8">
-              <h3 className="mb-2 text-3xl font-bold tracking-tight text-white">
+              <h3 className="mb-2 text-3xl font-bold tracking-tight text-zinc-50">
                 Initiate Contact
               </h3>
               <p className="text-sm font-light text-zinc-400 md:text-base">
@@ -171,7 +171,7 @@ export default function ContactForm() {
                   required
                   maxLength={MAX_NAME}
                   disabled={status === "loading"}
-                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-white placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Your full name"
                 />
               </div>
@@ -186,7 +186,7 @@ export default function ContactForm() {
                   id="email"
                   required
                   disabled={status === "loading"}
-                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-white placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -205,7 +205,7 @@ export default function ContactForm() {
                   required
                   maxLength={MAX_MESSAGE}
                   disabled={status === "loading"}
-                  className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-white placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
                   placeholder="Discuss architecture, team opportunities, or just say hello..."
                 />
               </div>
@@ -213,7 +213,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.02] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
+                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-zinc-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.02] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2.5">
                   {status === "loading" ? (

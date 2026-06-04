@@ -21,7 +21,7 @@ export default function ProjectsSection() {
   const hasMore = projectsData.length > INITIAL_VISIBLE;
 
   return (
-    <Section id="projects" className="bg-black/20">
+    <Section id="projects" className="bg-zinc-950/20">
       <SectionHeader
         title="Selected systems"
         subtitle="Scan the highlights first — open a case study for architecture, challenges, and metrics."

@@ -70,7 +70,7 @@ export default function ProjectDetailModal({
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="inline-flex cursor-pointer min-h-10 min-w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-600 hover:bg-zinc-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+            className="inline-flex cursor-pointer min-h-10 min-w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-600 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
             aria-label={`Close ${project.title} case study`}
           >
             <FiX size={20} aria-hidden />
@@ -101,7 +101,7 @@ function ModalFooter({ project }: { project: Project }) {
         href={project.live}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
       >
         <FiExternalLink size={17} aria-hidden />
         See live demo
@@ -110,7 +110,7 @@ function ModalFooter({ project }: { project: Project }) {
         href={project.code}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:flex-initial"
+        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:flex-initial"
       >
         <FiGithub size={17} aria-hidden />
         View on GitHub

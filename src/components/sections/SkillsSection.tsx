@@ -340,7 +340,7 @@ function SkillGrid({ skills }: { skills: SkillData[] }) {
 
 export default function Skills() {
   return (
-    <Section id="skills" className="bg-black/80">
+    <Section id="skills" className="bg-zinc-950/80">
       <SectionHeader
         title="Engineering toolkit"
         subtitle="Backend and platform work first — frontend stack when the product needs a polished surface."
@@ -434,7 +434,7 @@ export default function Skills() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
               <div className="relative z-10">
                 <div
-                  className={`mb-2 font-black text-white md:mb-3 ${
+                  className={`mb-2 font-black text-zinc-50 md:mb-3 ${
                     item.title.length <= 2
                       ? "text-3xl md:text-4xl"
                       : "text-xl md:text-2xl"

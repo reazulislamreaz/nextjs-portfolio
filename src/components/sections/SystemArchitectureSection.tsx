@@ -36,7 +36,7 @@ const pillars: { title: string; items: string[] }[] = [
 
 export default function SystemArchitecture() {
   return (
-    <Section id="system-architecture" className="bg-black/50">
+    <Section id="system-architecture" className="bg-zinc-950/50">
       <SectionHeader
         title="System Architecture & Scalability"
         subtitle="How I think about growth paths, boundaries, and safe integrations before the first production deploy."
@@ -52,7 +52,7 @@ export default function SystemArchitecture() {
             key={pillar.title}
             className="rounded-2xl border border-zinc-800/80 bg-zinc-900/35 p-5 shadow-lg backdrop-blur-md sm:rounded-3xl sm:p-7 md:p-8"
           >
-            <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-white sm:mb-5 sm:pb-3 sm:text-lg">
+            <h3 className="mb-4 border-b border-zinc-800 pb-2 text-base font-semibold tracking-tight text-zinc-50 sm:mb-5 sm:pb-3 sm:text-lg">
               {pillar.title}
             </h3>
             <ul className="space-y-3 text-sm leading-relaxed text-zinc-400 sm:text-[0.95rem]">

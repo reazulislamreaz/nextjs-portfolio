@@ -43,7 +43,7 @@ export default function ProjectCard({
           <header className="space-y-2">
             <h3
               id={`${slug}-title`}
-              className="text-xl font-bold tracking-tight text-zinc-200 transition-colors duration-300 group-hover/card:text-white sm:text-2xl"
+              className="text-xl font-bold tracking-tight text-zinc-200 transition-colors duration-300 group-hover/card:text-zinc-50 sm:text-2xl"
             >
               {project.title}
             </h3>
@@ -75,7 +75,7 @@ export default function ProjectCard({
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               >
                 <FiExternalLink size={17} aria-hidden />
                 See live demo
@@ -85,7 +85,7 @@ export default function ProjectCard({
                   href={project.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
                 >
                   <FiGithub size={17} aria-hidden />
                   GitHub
