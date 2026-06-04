@@ -7,7 +7,7 @@ export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
   return (
     <div className="mb-10 px-1 text-center sm:mb-12 lg:mb-16">
       <h2 className="relative mb-3 inline-block max-w-full text-2xl font-black tracking-tight sm:mb-4 sm:text-3xl lg:text-5xl">
-        <span className="bg-gradient-to-r from-zinc-50 via-zinc-200 to-zinc-400 bg-clip-text text-transparent drop-shadow-sm">
+        <span className="heading-gradient drop-shadow-sm">
           {title}
         </span>
         {/* Unified Emerald underline */}

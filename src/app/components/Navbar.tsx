@@ -10,20 +10,8 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [hash, setHash] = useState("");
   const [activeSectionId, setActiveSectionId] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const syncHash = () => setHash(window.location.hash);
-    syncHash();
-    window.addEventListener("hashchange", syncHash);
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, []);
-
-  useEffect(() => {
-    setHash(window.location.hash);
-  }, [pathname]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -31,26 +19,63 @@ export default function Navbar() {
       return;
     }
 
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => el !== null);
+    let ticking = false;
 
-    if (!elements.length) return;
+    const computeActive = () => {
+      ticking = false;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      const scrollY = window.scrollY;
+      const viewportH = window.innerHeight;
 
-        const top = visible[0]?.target.id;
-        if (top) setActiveSectionId(top);
-      },
-      { rootMargin: "-35% 0px -55% 0px", threshold: [0.1, 0.35, 0.6] },
-    );
+      // At the very top the hero owns the screen — highlight "Home".
+      if (scrollY < 120) {
+        setActiveSectionId("");
+        return;
+      }
 
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+      // At the very bottom the last section may never cross the line, so pin it.
+      const docH = document.documentElement.scrollHeight;
+      if (scrollY + viewportH >= docH - 2) {
+        const last = [...sectionIds]
+          .reverse()
+          .find((id) => document.getElementById(id));
+        if (last) setActiveSectionId(last);
+        return;
+      }
+
+      // Active = the last section whose top has scrolled above the reference
+      // line (~32% down the viewport). Reading the DOM live means lazily
+      // mounted sections are picked up automatically, no observer needed.
+      const line = viewportH * 0.32;
+      let current = "";
+      let bestTop = -Infinity;
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        const top = el.getBoundingClientRect().top;
+        if (top <= line && top > bestTop) {
+          bestTop = top;
+          current = id;
+        }
+      }
+      if (current) setActiveSectionId(current);
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(computeActive);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    computeActive();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, [pathname]);
 
   return (
@@ -79,7 +104,6 @@ export default function Navbar() {
                   href,
                   label,
                   pathname,
-                  hash,
                   activeSectionId,
                 );
                 return (
@@ -87,13 +111,8 @@ export default function Navbar() {
                     key={href}
                     href={href}
                     onClick={() => {
-                      setHash(label === "Home" ? "" : hashFromHref(href));
-                      if (label !== "Home") {
-                        const id = hashFromHref(href).slice(1);
-                        if (id) setActiveSectionId(id);
-                      } else {
-                        setActiveSectionId("");
-                      }
+                      const id = hashFromHref(href).slice(1);
+                      setActiveSectionId(label === "Home" ? "" : id);
                     }}
                     className={`whitespace-nowrap rounded-lg px-2 py-2 text-xs font-medium transition-all duration-300 lg:px-3 lg:text-sm ${
                       isActive
@@ -155,7 +174,6 @@ export default function Navbar() {
                 href,
                 label,
                 pathname,
-                hash,
                 activeSectionId,
               );
               return (
@@ -163,7 +181,8 @@ export default function Navbar() {
                   key={href}
                   href={href}
                   onClick={() => {
-                    setHash(label === "Home" ? "" : hashFromHref(href));
+                    const id = hashFromHref(href).slice(1);
+                    setActiveSectionId(label === "Home" ? "" : id);
                     setMobileOpen(false);
                   }}
                   className={`block min-h-11 rounded-lg px-4 py-3 text-base font-medium ${

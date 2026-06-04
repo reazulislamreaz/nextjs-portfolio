@@ -7,16 +7,15 @@ export function isNavLinkActive(
   href: string,
   label: string,
   pathname: string,
-  hash: string,
   activeSectionId: string,
 ): boolean {
   if (label === "Home") {
-    return pathname === "/" && !hash && !activeSectionId;
+    // Home is active at the top of the landing page (no section in view).
+    return pathname === "/" && !activeSectionId;
   }
 
   const linkHash = hashFromHref(href);
   if (linkHash) {
-    if (hash === linkHash) return true;
     const sectionId = linkHash.slice(1);
     return pathname === "/" && activeSectionId === sectionId;
   }
