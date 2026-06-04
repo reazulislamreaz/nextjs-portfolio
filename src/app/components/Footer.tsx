@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { navLinks } from "@/config/site";
+import SectionLink from "./SectionLink";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,13 +19,13 @@ export default function Footer() {
             aria-label="Footer"
           >
             {footerLinks.map(({ href, label }) => (
-              <Link
+              <SectionLink
                 key={href}
                 href={href}
                 className="text-sm font-medium text-zinc-500 transition-colors hover:text-emerald-400"
               >
                 {label}
-              </Link>
+              </SectionLink>
             ))}
           </nav>
         </div>

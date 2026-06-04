@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiMenu, HiX } from "react-icons/hi";
-import { hashFromHref, isNavLinkActive } from "@/lib/nav-utils";
+import {
+  hashFromHref,
+  isNavLinkActive,
+  scrollToInPageTarget,
+  shouldHandleInPageNav,
+} from "@/lib/nav-utils";
 import { navLinks, resumePath, sectionIds } from "@/config/site";
 import ThemeToggle from "./ThemeToggle";
 
@@ -78,6 +83,21 @@ export default function Navbar() {
     };
   }, [pathname]);
 
+  // In-page section navigation — instant for long jumps (a smooth crawl across
+  // the whole page janks on mobile), smooth for short hops. Closes the mobile
+  // menu and updates the highlight immediately. Shared logic lives in nav-utils.
+  const handleNavClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    label: string,
+  ) => {
+    if (!shouldHandleInPageNav(event, href, label, pathname)) return;
+    event.preventDefault();
+    setMobileOpen(false);
+    setActiveSectionId(label === "Home" ? "" : hashFromHref(href).slice(1));
+    scrollToInPageTarget(href, label);
+  };
+
   return (
     <nav
       className="fixed top-0 z-50 w-full min-w-0 border-b border-zinc-800/50 bg-zinc-950/70 backdrop-blur-xl"
@@ -110,10 +130,7 @@ export default function Navbar() {
                   <Link
                     key={href}
                     href={href}
-                    onClick={() => {
-                      const id = hashFromHref(href).slice(1);
-                      setActiveSectionId(label === "Home" ? "" : id);
-                    }}
+                    onClick={(e) => handleNavClick(e, href, label)}
                     className={`whitespace-nowrap rounded-lg px-2 py-2 text-xs font-medium transition-all duration-300 lg:px-3 lg:text-sm ${
                       isActive
                         ? "bg-emerald-500/10 text-emerald-400"
@@ -180,11 +197,7 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  onClick={() => {
-                    const id = hashFromHref(href).slice(1);
-                    setActiveSectionId(label === "Home" ? "" : id);
-                    setMobileOpen(false);
-                  }}
+                  onClick={(e) => handleNavClick(e, href, label)}
                   className={`block min-h-11 rounded-lg px-4 py-3 text-base font-medium ${
                     isActive
                       ? "border border-emerald-500/20 bg-emerald-500/10 text-emerald-400"

@@ -1,5 +1,6 @@
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
+import SectionLink from "@/app/components/SectionLink";
 import { FiCode, FiServer, FiCpu } from "react-icons/fi";
 
 const coreStack: string[] = [
@@ -112,12 +113,12 @@ export default function About() {
             </ul>
 
             <div className="pt-8">
-              <a
+              <SectionLink
                 href="/#contact"
                 className="flex min-h-11 w-full transform justify-center rounded-xl bg-zinc-100 px-8 py-3.5 text-center text-sm font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-zinc-50 active:scale-[0.98] sm:text-base"
               >
                 Let&apos;s Build Systems
-              </a>
+              </SectionLink>
             </div>
           </div>
         </div>

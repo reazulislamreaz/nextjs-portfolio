@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { resumePath, siteContact, siteSocial } from "@/config/site";
+import SectionLink from "@/app/components/SectionLink";
 
 const texts: string[] = [
   "I build scalable backend systems, APIs, and SaaS-style architectures.",
@@ -78,12 +79,12 @@ export default function HomeHero() {
             </div>
 
             <div className="flex w-full min-w-0 flex-col gap-3 pt-4 sm:flex-row sm:gap-4 sm:pt-6">
-              <a
+              <SectionLink
                 href="/#projects"
                 className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-6 py-3 text-center text-sm font-semibold text-zinc-900 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-50 md:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
               >
                 View Projects
-              </a>
+              </SectionLink>
               <a
                 href={resumePath}
                 download

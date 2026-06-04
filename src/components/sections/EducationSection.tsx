@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import SectionLink from "@/app/components/SectionLink";
 import {
   FiArrowRight,
   FiAward,
@@ -176,13 +176,13 @@ export default function Education() {
               Full-stack, cloud, and AI-focused programs — including Programming Hero and Udemy
               coursework — are documented under certifications rather than formal education.
             </p>
-            <Link
+            <SectionLink
               href="/#certifications"
               className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition-colors hover:text-emerald-300"
             >
               View certifications & learning
               <FiArrowRight size={16} aria-hidden />
-            </Link>
+            </SectionLink>
           </div>
         </div>
 
