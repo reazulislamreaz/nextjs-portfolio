@@ -285,6 +285,80 @@ export const projectsData: Project[] = [
       "Redis-backed search caching, a queue for outbound email, and clearer audit trails for administrative actions.",
   },
   {
+    title: "TaskForge",
+    tagline:
+      "Team project & task collaboration — role-based CRUD, analytics, and business-rule guardrails on a typed MERN stack.",
+    description:
+      "Full-stack collaborative project management app for teams to organize work across projects, tasks, and members. Pairs a React 19 + Vite frontend with a TypeScript Express API: JWT auth with three roles (Admin, Project Manager, Team Member), full project/task lifecycle, workload summaries, comments and attachments, and a charts-driven analytics dashboard — deployed serverless on Vercel.",
+    features: [
+      "React 19",
+      "Vite",
+      "TypeScript",
+      "TanStack Query",
+      "Zustand",
+      "Recharts",
+      "Node.js",
+      "Express 5",
+      "MongoDB",
+      "Mongoose",
+      "Zod",
+      "JWT",
+      "bcrypt",
+    ],
+    metrics: [
+      "Role-based access across Admin, Project Manager, and Team Member with server-enforced permissions",
+      "Business-rule validation blocks duplicate task titles, completed-task reassignment, and past-deadline scheduling",
+      "Analytics dashboard with KPI cards and Recharts views for priority, status, progress, and team productivity",
+      "Workload summaries, comments, file attachments, and activity logs for team collaboration",
+      "Search, filter, sort, and pagination across projects and tasks with dark/light mode and skeleton loaders",
+    ],
+    devOps: [
+      "Vercel (frontend)",
+      "Vercel serverless (Express handler)",
+      "MongoDB Atlas",
+      "JWT auth middleware",
+      "Env-based config + CORS",
+      "Auto-seeded demo accounts",
+    ],
+    images: [
+      "/taskforge-dashboard.png",
+      "/taskforge-projects.png",
+      "/taskforge-tasks.png",
+      "/taskforge-team.png",
+      "/taskforge-dashboard-dark.png",
+    ],
+    live: "https://elite-alumni-pool-frontend.vercel.app",
+    code: "https://github.com/reazulislamreaz/elite-alumni-pool-frontend",
+    sourceNote:
+      "Backend API (Node / Express 5 / TypeScript): https://github.com/reazulislamreaz/elite-alumni-pool-backend · Try the demo with the Admin / Project Manager / Team Member accounts (password Demo@123456).",
+    problem:
+      "Teams managing many projects and tasks need clear ownership, trustworthy status, and guardrails against bad data — without an over-built tool that lets anyone edit anything, double-book titles, or reassign work that's already done.",
+    architecture:
+      "React 19 + Vite SPA with TanStack Query for server state, Zustand for local state, and Recharts for analytics. TypeScript Express 5 REST API with Mongoose models, Zod request validation, JWT + bcrypt auth, and three-role RBAC. MongoDB Atlas for persistence; deployed serverless on Vercel via an Express handler with env-based config and CORS coordination.",
+    challengeSolutions: [
+      {
+        challenge:
+          "Three roles needed distinct capabilities without letting the client decide authorization.",
+        solution:
+          "Server-side RBAC middleware on every mutating route — public signup creates Team Members only, while Admin/Manager roles are assigned internally.",
+      },
+      {
+        challenge:
+          "Bad operations (duplicate titles, reassigning completed tasks, past deadlines) had to be blocked before reaching the database.",
+        solution:
+          "Zod validation plus domain business rules in the service layer, with consistent error contracts the UI surfaces directly.",
+      },
+      {
+        challenge:
+          "Running a stateful Express API on Vercel's serverless platform without a long-lived server process.",
+        solution:
+          "Wrapped the Express app in a serverless handler, auto-seeded demo accounts at startup, and coordinated CORS via a CLIENT_URL allowlist.",
+      },
+    ],
+    futureEnhancements:
+      "Real-time notifications over WebSockets, S3/Cloudinary-backed attachments in place of placeholder URLs, richer audit trails, and saved filter/board views.",
+  },
+  {
     title: "Marathon Zone",
     tagline:
       "Marathon registration that survives deadline spikes — organizer console plus a fast public signup flow.",
