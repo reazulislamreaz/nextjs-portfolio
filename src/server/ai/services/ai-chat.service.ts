@@ -1,5 +1,6 @@
 import { AiProviderError, AiProvidersUnavailableError } from "../errors";
 import { aiLogger } from "../logger";
+import { ClaudeProvider } from "../providers/claude.provider";
 import { GroqProvider } from "../providers/groq.provider";
 import { TogetherProvider } from "../providers/together.provider";
 import type {
@@ -9,11 +10,12 @@ import type {
   AiProviderResponse,
 } from "../types";
 
-const DEFAULT_TIMEOUT_MS = 8000;
+const DEFAULT_TIMEOUT_MS = 15000;
 
 export class AiChatService {
   constructor(
     private readonly providers: AiProvider[] = [
+      new ClaudeProvider(),
       new GroqProvider(),
       new TogetherProvider(),
     ],

@@ -1,29 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { portfolioAssistantContext } from "@/lib/portfolio-assistant-context";
+import { buildPortfolioAssistantSystemPrompt } from "@/lib/portfolio-assistant-prompt";
 import { checkRateLimit } from "@/lib/rate-limit";
+import { AiProvidersUnavailableError } from "@/server/ai/errors";
+import { aiChatService } from "@/server/ai/services/ai-chat.service";
+import type { AiChatMessage } from "@/server/ai/types";
 
 const MAX_MESSAGES = 8;
 const MAX_CONTENT_LENGTH = 1000;
-const DEFAULT_MODEL = "llama-3.3-70b-versatile";
-const DEFAULT_BASE_URL = "https://api.groq.com/openai/v1";
 const DEFAULT_TIMEOUT_MS = 15000;
 
 interface ChatMessage {
   role: "user" | "assistant";
   content: string;
-}
-
-interface GroqChatChoice {
-  message?: {
-    content?: string;
-  };
-}
-
-interface GroqChatResponse {
-  choices?: GroqChatChoice[];
-  error?: {
-    message?: string;
-  };
 }
 
 function getClientIp(request: NextRequest): string {
@@ -50,28 +38,20 @@ function normalizeMessages(value: unknown): ChatMessage[] {
     .filter((message): message is ChatMessage => message !== null);
 }
 
-function getLanguageInstruction(message: string): string {
-  if (/[\u0980-\u09FF]/.test(message)) {
-    return "The visitor latest message uses Bangla script. Answer in Bangla script.";
-  }
-
-  const banglishPattern =
-    /\b(ami|amake|amar|apni|apnar|tumi|tomar|ki|kivabe|kemne|kemon|konta|kon|kono|ase|ache|nai|parbe|pari|korbo|korte|koro|kaj|gula|gulo|bolo|dao|chai|hire|resume|koi)\b/i;
-
-  if (banglishPattern.test(message)) {
-    return "The visitor latest message is Banglish or Romanized Bengali. Answer in natural Banglish, not full English.";
-  }
-
-  return "The visitor latest message is English. Answer in English, not Banglish.";
+function hasAnyAiProviderKey(): boolean {
+  return Boolean(
+    process.env.CLAUDE_API_KEY ||
+      process.env.ANTHROPIC_API_KEY ||
+      process.env.GROQ_API_KEY ||
+      process.env.TOGETHER_API_KEY,
+  );
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const apiKey = process.env.GROQ_API_KEY;
-
-    if (!apiKey) {
+    if (!hasAnyAiProviderKey()) {
       return NextResponse.json(
-        { error: "Groq API key is not configured." },
+        { error: "AI assistant is not configured. Add CLAUDE_API_KEY, GROQ_API_KEY, or TOGETHER_API_KEY." },
         { status: 500 },
       );
     }
@@ -101,73 +81,35 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const controller = new AbortController();
-    const timeoutMs = Number(process.env.GROQ_TIMEOUT_MS ?? DEFAULT_TIMEOUT_MS);
-    const timeout = setTimeout(() => controller.abort(), timeoutMs);
-
-    const baseUrl = process.env.GROQ_BASE_URL ?? DEFAULT_BASE_URL;
-    const model = process.env.GROQ_MODEL ?? DEFAULT_MODEL;
-    const languageInstruction = getLanguageInstruction(messages[messages.length - 1].content);
-
-    const response = await fetch(`${baseUrl}/chat/completions`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
+    const latestUserMessage = messages[messages.length - 1].content;
+    const completionMessages: AiChatMessage[] = [
+      {
+        role: "system",
+        content: buildPortfolioAssistantSystemPrompt(latestUserMessage),
       },
-      body: JSON.stringify({
-        model,
-        temperature: 0.35,
-        max_tokens: 550,
-        messages: [
-          {
-            role: "system",
-            content: `You are Reazul Islam Reaz's portfolio assistant. Answer visitors using only the portfolio context below.
+      ...messages,
+    ];
 
-Rules:
-- Be concise, friendly, and specific.
-- ${languageInstruction}
-- Match the visitor's language style. If they write English, answer in English. If they write Bangla script, answer in Bangla. If they write Banglish or Romanized Bengali, answer in natural Banglish.
-- For Banglish, keep common technical terms in English and use simple conversational wording. Examples: "Reaz er backend skill strong", "uni Node.js, NestJS, PostgreSQL niye kaj kore", "contact korte chaile email ba WhatsApp use korte paren".
-- Understand common Banglish words and phrases such as "ki", "kono", "ase/ache", "parbe", "kaj", "project gula", "experience kemon", "hire korte chai", "contact korbo kivabe", "resume koi".
-- Prefer bullets for project or skill comparisons.
-- If the visitor asks for the best, strongest, or most relevant project, choose 1 primary project and mention 1 runner-up only if useful. Do not list every project unless they ask for all projects.
-- Treat Banglish phrases like "short e bolo", "brief e bolo", and "olpo kore bolo" as requests for a short answer.
-- If the answer is not in the portfolio context, say you do not have that detail and suggest contacting Reaz.
-- Do not invent years of experience, employers, degrees, pricing, private availability, or technologies not listed.
-- For hiring/contact questions, share the email, WhatsApp link, LinkedIn, GitHub, or resume path when useful.
+    const timeoutMs = Number(process.env.AI_ASSISTANT_TIMEOUT_MS ?? DEFAULT_TIMEOUT_MS);
 
-Portfolio context:
-${portfolioAssistantContext}`,
-          },
-          ...messages,
-        ],
-      }),
-      signal: controller.signal,
+    const response = await aiChatService.chat({
+      messages: completionMessages,
+      temperature: 0.35,
+      maxTokens: 550,
+      timeoutMs,
     });
 
-    clearTimeout(timeout);
-
-    const data = (await response.json()) as GroqChatResponse;
-
-    if (!response.ok) {
-      const message = data.error?.message ?? "Groq could not answer right now.";
-      return NextResponse.json({ error: message }, { status: response.status });
-    }
-
-    const answer = data.choices?.[0]?.message?.content?.trim();
-
-    if (!answer) {
-      return NextResponse.json(
-        { error: "The assistant returned an empty response." },
-        { status: 502 },
-      );
-    }
-
-    return NextResponse.json({ answer });
+    return NextResponse.json({ answer: response.content });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
       console.error("AI assistant API error:", error);
+    }
+
+    if (error instanceof AiProvidersUnavailableError) {
+      return NextResponse.json(
+        { error: "All AI providers are unavailable right now. Please try again later." },
+        { status: 502 },
+      );
     }
 
     const message =
