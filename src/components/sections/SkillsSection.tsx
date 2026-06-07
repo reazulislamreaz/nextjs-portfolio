@@ -46,6 +46,12 @@ interface SkillData {
   iconColor: string;
 }
 
+interface SkillCategory {
+  title: string;
+  hint?: string;
+  skills: SkillData[];
+}
+
 const backendSkills: SkillData[] = [
   {
     name: "Node.js",
@@ -313,142 +319,103 @@ const frontendSkills: SkillData[] = [
   },
 ];
 
+const skillCategories: SkillCategory[] = [
+  { title: "Backend & APIs", skills: backendSkills },
+  { title: "Databases & modeling", skills: databaseSkills },
+  { title: "Architecture", skills: architectureSkills },
+  { title: "Performance & reliability", skills: performanceSkills },
+  {
+    title: "DevOps & cloud",
+    hint: "Containers, reverse proxies, cloud deploys, and CI/CD for production releases.",
+    skills: devOpsSkills,
+  },
+  {
+    title: "AI & payments",
+    hint: "RAG, AI integrations, and payment webhooks with idempotency and provider edge cases.",
+    skills: aiSkills,
+  },
+  { title: "Frontend (when needed)", skills: frontendSkills },
+];
+
 const highlights: { title: string; description: string }[] = [
   {
-    title: "6",
-    description: "Portfolio systems with live APIs and data layers",
+    title: "6+",
+    description: "Live systems with APIs & data layers",
   },
   {
     title: "API-first",
-    description: "Contracts, validation, and auth boundaries by default",
+    description: "Validation, auth, and clear contracts",
   },
   {
-    title: "Safe releases",
-    description: "Idempotency, limits, and observability-minded structure",
+    title: "Production-minded",
+    description: "Limits, caching, and safe releases",
   },
 ];
 
-function SkillGrid({ skills }: { skills: SkillData[] }) {
+function SkillCategoryPanel({ title, hint, skills }: SkillCategory) {
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
-      {skills.map((skill, index) => (
-        <SkillCard key={`${skill.name}-${index}`} skill={skill} />
-      ))}
-    </div>
+    <article className="rounded-xl border border-zinc-800/70 bg-zinc-900/35 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <h3 className="text-sm font-semibold tracking-tight text-zinc-200 sm:text-base">
+          {title}
+        </h3>
+        <span className="shrink-0 rounded-md bg-zinc-800/80 px-2 py-0.5 text-[0.6875rem] font-medium text-zinc-500">
+          {skills.length}
+        </span>
+      </div>
+      {hint ? (
+        <p className="mb-3 text-xs leading-relaxed text-zinc-500">{hint}</p>
+      ) : null}
+      <ul
+        className="flex flex-wrap gap-2"
+        role="list"
+        aria-label={`${title} skills`}
+      >
+        {skills.map((skill, index) => (
+          <SkillCard key={`${skill.name}-${index}`} skill={skill} />
+        ))}
+      </ul>
+    </article>
   );
 }
 
 export default function Skills() {
+  const totalSkills = skillCategories.reduce(
+    (count, category) => count + category.skills.length,
+    0,
+  );
+
   return (
     <Section id="skills" className="bg-zinc-950/80">
       <SectionHeader
         title="Engineering toolkit"
-        subtitle="Backend and platform work first — frontend stack when the product needs a polished surface."
+        subtitle="Backend-first stack — scan by category. Every technology below is in active project use."
       />
 
-      <div className="mb-10 sm:mb-12 lg:mb-14">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            Backend & APIs
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <SkillGrid skills={backendSkills} />
+      <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
+        {highlights.map((item) => (
+          <div
+            key={item.title}
+            className="flex items-center gap-3 rounded-xl border border-zinc-800/70 bg-zinc-900/35 px-4 py-3 sm:px-5"
+          >
+            <span className="text-lg font-bold text-emerald-400 sm:text-xl">
+              {item.title}
+            </span>
+            <span className="text-xs leading-snug text-zinc-400 sm:text-sm">
+              {item.description}
+            </span>
+          </div>
+        ))}
       </div>
 
-      <div className="mb-10 sm:mb-12 lg:mb-14">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            Databases & modeling
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <SkillGrid skills={databaseSkills} />
-      </div>
+      <p className="mb-6 text-xs text-zinc-600 sm:text-sm">
+        {totalSkills} technologies across {skillCategories.length} areas
+      </p>
 
-      <div className="mb-10 sm:mb-12 lg:mb-14">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            Architecture
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <SkillGrid skills={architectureSkills} />
-      </div>
-
-      <div className="mb-10 sm:mb-12 lg:mb-14">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            Performance & reliability
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <SkillGrid skills={performanceSkills} />
-      </div>
-
-      <div className="mb-10 sm:mb-12 lg:mb-14">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            DevOps & cloud
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <p className="mb-6 max-w-3xl text-sm text-zinc-500">
-          From Programming Hero Next Level and Udemy AWS training — containerized apps, reverse
-          proxies, cloud deploys, and automated pipelines for production-ready releases.
-        </p>
-        <SkillGrid skills={devOpsSkills} />
-      </div>
-
-      <div className="mb-10 sm:mb-12 lg:mb-14">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            AI & payments
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <p className="mb-6 max-w-3xl text-sm text-zinc-500">
-          Payment and AI items reflect integrations I design for carefully: idempotent webhooks,
-          scoped retrieval for RAG, and provider-specific edge cases.
-        </p>
-        <SkillGrid skills={aiSkills} />
-      </div>
-
-      <div className="mb-10 sm:mb-12 lg:mb-16">
-        <div className="mb-6 flex flex-col gap-2 sm:mb-8 sm:flex-row sm:items-center sm:gap-4">
-          <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl md:text-2xl">
-            Frontend (when needed)
-          </h3>
-          <div className="h-px flex-1 bg-gradient-to-r from-zinc-800 to-transparent" />
-        </div>
-        <SkillGrid skills={frontendSkills} />
-      </div>
-
-      <div className="mx-auto mt-12 max-w-4xl md:mt-20">
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-          {highlights.map((item) => (
-            <div
-              key={item.title}
-              className="group relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-6 text-center shadow-lg backdrop-blur-xl transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-900/80 md:rounded-3xl md:p-8"
-            >
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <div className="relative z-10">
-                <div
-                  className={`mb-2 font-black text-zinc-50 md:mb-3 ${
-                    item.title.length <= 2
-                      ? "text-3xl md:text-4xl"
-                      : "text-xl md:text-2xl"
-                  }`}
-                >
-                  {item.title}
-                </div>
-                <div className="text-sm font-medium tracking-wide text-zinc-400 md:text-base">
-                  {item.description}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
+        {skillCategories.map((category) => (
+          <SkillCategoryPanel key={category.title} {...category} />
+        ))}
       </div>
     </Section>
   );

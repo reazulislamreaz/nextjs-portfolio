@@ -140,7 +140,7 @@ export const projectsData: Project[] = [
       "/confaero-reviewer.jpg",
       "/confaero-mobile.jpg",
     ],
-    live: "https://confaero.com/",
+    live: "http://confaero.com/",
     code: "https://github.com/reazulislamreaz/confaero-backend",
     sourceNote:
       "Organizer dashboard (React / Vite): https://github.com/reazulislamreaz/confaero-dashboard",
@@ -228,8 +228,7 @@ export const projectsData: Project[] = [
           "Defensive outbound handling, Prisma-backed thread modeling, and APIs that isolate mailbox mutations from AI generation.",
       },
       {
-        challenge:
-          "AI timeouts could not take down core mail sync.",
+        challenge: "AI timeouts could not take down core mail sync.",
         solution:
           "Bounded failure domains — model errors stay isolated while IMAP/SMTP transport keeps running.",
       },
