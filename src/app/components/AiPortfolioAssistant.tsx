@@ -3,7 +3,6 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { FiSend, FiX } from "react-icons/fi";
 import { TbMessageChatbot, TbSparkles } from "react-icons/tb";
-import { sendEmailJsFromBrowser } from "@/lib/emailjs-browser";
 
 interface Message {
   id: string;
@@ -301,7 +300,7 @@ export default function AiPortfolioAssistant() {
       const data = (await response.json()) as { ok?: boolean; error?: string };
 
       if (!response.ok || !data.ok) {
-        await sendEmailJsFromBrowser(payload);
+        throw new Error(data.error ?? "Unable to send the inquiry right now.");
       }
 
       setContactStep("done");

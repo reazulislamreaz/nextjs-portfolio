@@ -172,13 +172,21 @@ npm install
 cp .env.example .env.local
 ```
 
-Add EmailJS credentials to `.env.local`:
+Add contact email credentials to `.env.local` (server-only — never use `NEXT_PUBLIC_` for keys):
 
 ```env
+# Optional: Resend (recommended)
+RESEND_API_KEY=re_xxxxx
+CONTACT_TO_EMAIL=reazul.dev@gmail.com
+
+# EmailJS fallback
 EMAILJS_SERVICE_ID=your_service_id
 EMAILJS_TEMPLATE_ID=your_template_id
 EMAILJS_PUBLIC_KEY=your_public_key
+EMAILJS_PRIVATE_KEY=your_private_key
 ```
+
+In EmailJS: **Account → Security** → enable non-browser API + Use Private Key. **Email Services** → reconnect Gmail.
 
 ```bash
 npm run dev    # http://localhost:3000

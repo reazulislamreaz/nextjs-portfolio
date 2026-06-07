@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { sendContactEmail } from "@/lib/emailjs-server";
+import { sanitizeContactError, sendContactEmail } from "@/lib/contact-email";
 import { checkRateLimit } from "@/lib/rate-limit";
 
 const MAX_NAME = 120;
@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       console.error("Contact API error:", error);
     }
     return NextResponse.json(
-      { error: "Unable to send your message right now. Please try again later." },
+      { error: sanitizeContactError(error) },
       { status: 500 },
     );
   }
