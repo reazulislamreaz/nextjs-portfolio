@@ -172,21 +172,17 @@ npm install
 cp .env.example .env.local
 ```
 
-Add contact email credentials to `.env.local` (server-only — never use `NEXT_PUBLIC_` for keys):
+Add contact email credentials to `.env.local`:
 
 ```env
-# Optional: Resend (recommended)
-RESEND_API_KEY=re_xxxxx
+GMAIL_USER=reazul.dev@gmail.com
+GMAIL_APP_PASSWORD=your_16_char_google_app_password
 CONTACT_TO_EMAIL=reazul.dev@gmail.com
-
-# EmailJS fallback
-EMAILJS_SERVICE_ID=your_service_id
-EMAILJS_TEMPLATE_ID=your_template_id
-EMAILJS_PUBLIC_KEY=your_public_key
-EMAILJS_PRIVATE_KEY=your_private_key
 ```
 
-In EmailJS: **Account → Security** → enable non-browser API + Use Private Key. **Email Services** → reconnect Gmail.
+Create the app password: Google Account → **Security** → **2-Step Verification** (on) → **App passwords** → create one named “Portfolio”.
+
+Add the same variables on **Vercel** and redeploy.
 
 ```bash
 npm run dev    # http://localhost:3000

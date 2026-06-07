@@ -1,3 +1,4 @@
+import nodemailer from "nodemailer";
 import { siteContact } from "@/config/site";
 
 export interface ContactPayload {
@@ -5,6 +6,13 @@ export interface ContactPayload {
   user_email: string;
   message: string;
   time: string;
+}
+
+function getGmailSmtpConfig() {
+  const user = process.env.GMAIL_USER?.trim();
+  const pass = process.env.GMAIL_APP_PASSWORD?.trim().replace(/\s/g, "");
+  if (!user || !pass) return null;
+  return { user, pass };
 }
 
 function getEmailJsConfig() {
@@ -33,6 +41,29 @@ function buildTemplateParams(payload: ContactPayload) {
     email: payload.user_email,
     from_name: payload.user_name,
   };
+}
+
+async function sendViaGmailSmtp(payload: ContactPayload): Promise<void> {
+  const config = getGmailSmtpConfig();
+  if (!config) return;
+
+  const to = process.env.CONTACT_TO_EMAIL?.trim() || siteContact.email;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: config.user,
+      pass: config.pass,
+    },
+  });
+
+  await transporter.sendMail({
+    from: `"Portfolio Contact" <${config.user}>`,
+    to,
+    replyTo: payload.user_email,
+    subject: `Portfolio inquiry from ${payload.user_name}`,
+    text: payload.message,
+  });
 }
 
 async function sendViaResend(payload: ContactPayload): Promise<void> {
@@ -90,15 +121,23 @@ async function sendViaEmailJs(payload: ContactPayload): Promise<void> {
 }
 
 export function isContactEmailConfigured(): boolean {
-  return Boolean(process.env.RESEND_API_KEY?.trim() || getEmailJsConfig());
+  return Boolean(
+    getGmailSmtpConfig() ||
+      process.env.RESEND_API_KEY?.trim() ||
+      getEmailJsConfig(),
+  );
 }
 
 export function sanitizeContactError(error: unknown): string {
   const raw =
     error instanceof Error ? error.message : "Unable to send your message right now.";
 
+  if (/gmail_app_password is missing|google app password/i.test(raw)) {
+    return "Email delivery is not configured yet. Please use the contact links on this page.";
+  }
+
   if (
-    /invalid grant|gmail_api|oauth|token expired|reconnect your gmail|non-browser environments|dashboard\.emailjs\.com\/admin\/account\/security/i.test(
+    /invalid grant|gmail_api|oauth|token expired|reconnect your gmail|non-browser environments|dashboard\.emailjs\.com\/admin\/account\/security|no private key was provided|emailjs_private_key is missing|strict mode/i.test(
       raw,
     )
   ) {
@@ -113,15 +152,20 @@ export function sanitizeContactError(error: unknown): string {
 }
 
 export async function sendContactEmail(payload: ContactPayload): Promise<void> {
+  if (process.env.GMAIL_USER?.trim() && !process.env.GMAIL_APP_PASSWORD?.trim()) {
+    throw new Error(
+      "GMAIL_APP_PASSWORD is missing. Create a Google App Password and add it to .env.local / Vercel.",
+    );
+  }
+
+  if (getGmailSmtpConfig()) {
+    await sendViaGmailSmtp(payload);
+    return;
+  }
+
   if (process.env.RESEND_API_KEY?.trim()) {
-    try {
-      await sendViaResend(payload);
-      return;
-    } catch (error) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("Resend failed, falling back to EmailJS:", error);
-      }
-    }
+    await sendViaResend(payload);
+    return;
   }
 
   await sendViaEmailJs(payload);
