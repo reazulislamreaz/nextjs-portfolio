@@ -12,7 +12,6 @@ import {
   SiGithubactions,
   SiGo,
   SiGraphql,
-  SiJavascript,
   SiLinux,
   SiMongodb,
   SiMysql,
@@ -20,11 +19,14 @@ import {
   SiNextdotjs,
   SiNginx,
   SiPostgresql,
+  SiReactquery,
+  SiRedux,
   SiRedis,
   SiSocketdotio,
   SiStripe,
   SiTailwindcss,
   SiTypescript,
+  SiVite,
 } from "react-icons/si";
 import {
   TbApi,
@@ -306,16 +308,40 @@ const frontendSkills: SkillData[] = [
     iconColor: "text-zinc-300",
   },
   {
+    name: "TypeScript",
+    icon: <SiTypescript />,
+    color: "from-blue-500/20 to-blue-700/20",
+    iconColor: "text-blue-400",
+  },
+  {
     name: "Tailwind CSS",
     icon: <SiTailwindcss />,
     color: "from-teal-400/20 to-cyan-500/20",
     iconColor: "text-teal-400",
   },
   {
-    name: "JavaScript",
-    icon: <SiJavascript />,
-    color: "from-yellow-400/20 to-yellow-600/20",
-    iconColor: "text-yellow-400",
+    name: "TanStack Query",
+    icon: <SiReactquery />,
+    color: "from-red-500/20 to-orange-600/20",
+    iconColor: "text-red-400",
+  },
+  {
+    name: "Redux Toolkit",
+    icon: <SiRedux />,
+    color: "from-purple-500/20 to-violet-600/20",
+    iconColor: "text-purple-400",
+  },
+  {
+    name: "Zustand",
+    icon: <LuBoxes />,
+    color: "from-amber-500/20 to-orange-600/20",
+    iconColor: "text-amber-400",
+  },
+  {
+    name: "Vite",
+    icon: <SiVite />,
+    color: "from-violet-500/20 to-fuchsia-600/20",
+    iconColor: "text-violet-400",
   },
 ];
 
