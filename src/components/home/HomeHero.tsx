@@ -6,9 +6,9 @@ import { resumePath, siteContact, siteSocial } from "@/config/site";
 import SectionLink from "@/app/components/SectionLink";
 
 const texts: string[] = [
-  "Scalable backends, APIs, and SaaS architecture.",
-  "PostgreSQL · MongoDB · Redis — Node.js, NestJS, Go.",
-  "Full-stack with Next.js when the client matters.",
+  "I build backends and APIs meant to run in production.",
+  "Day to day: Node.js, PostgreSQL, MongoDB, and Redis.",
+  "Full-stack too — when the product needs a solid frontend.",
 ];
 
 interface TechItem {
@@ -50,17 +50,21 @@ export default function HomeHero() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                <span className="leading-snug">Open to opportunities</span>
+                <span className="leading-snug">Available for new roles</span>
               </div>
 
               <h1 className="text-balance text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
                 Reazul Islam Reaz
               </h1>
 
-              <div className="min-h-[4.5rem] w-full max-w-xl sm:min-h-[4rem] md:min-h-[3.75rem]">
+              <p className="text-base font-medium text-emerald-400/90 sm:text-lg">
+                Backend-focused full-stack engineer
+              </p>
+
+              <div className="min-h-[3.25rem] w-full max-w-xl sm:min-h-[3rem]">
                 <p
                   key={sliderIndex}
-                  className="hero-line-in text-pretty text-base font-medium leading-snug text-zinc-400 sm:text-lg md:text-xl lg:text-2xl"
+                  className="hero-line-in text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg md:text-xl"
                 >
                   {texts[sliderIndex]}
                 </p>
@@ -90,7 +94,7 @@ export default function HomeHero() {
                 download
                 className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-6 py-3 text-center text-sm font-medium text-zinc-300 transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-800 md:hover:text-zinc-50"
               >
-                Download Resume
+                Resume
               </a>
             </div>
 
@@ -160,18 +164,6 @@ export default function HomeHero() {
                 </div>
               </div>
 
-              <div
-                className="absolute -right-1 -top-1 hidden h-10 w-10 items-center justify-center rounded-full border border-zinc-600 bg-gradient-to-r from-zinc-700 to-zinc-900 text-base font-bold text-zinc-50 shadow-lg sm:-right-2 sm:-top-2 sm:flex sm:h-11 sm:w-11 md:-right-4 md:-top-4 md:h-12 md:w-12 md:text-lg"
-                aria-hidden
-              >
-                ⚡
-              </div>
-              <div
-                className="absolute -bottom-1 -left-1 hidden h-9 w-9 items-center justify-center rounded-full border border-zinc-600 bg-gradient-to-r from-zinc-800 to-zinc-950 text-base text-zinc-50 shadow-lg sm:-bottom-2 sm:-left-4 sm:flex sm:h-10 sm:w-10 md:-bottom-2 md:-left-6"
-                aria-hidden
-              >
-                💻
-              </div>
             </div>
           </div>
         </div>
