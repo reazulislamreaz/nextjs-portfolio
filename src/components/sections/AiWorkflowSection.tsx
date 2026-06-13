@@ -4,7 +4,8 @@ import SectionHeader from "@/app/components/ui/SectionHeader";
 const aiTooling: { name: string; detail: string }[] = [
   {
     name: "Cursor",
-    detail: "IDE workflow — navigation, refactors, and tests with human review.",
+    detail:
+      "IDE workflow — navigation, refactors, and tests with human review.",
   },
   {
     name: "Claude",
@@ -20,7 +21,8 @@ const aiTooling: { name: string; detail: string }[] = [
   },
   {
     name: "ChatGPT & Gemini",
-    detail: "Research and debugging — not a substitute for production validation.",
+    detail:
+      "Research and debugging — not a substitute for production validation.",
   },
 ];
 
@@ -62,7 +64,10 @@ export default function AiWorkflow() {
           </h3>
           <ul className="space-y-3 sm:space-y-4">
             {aiTooling.map((item) => (
-              <li key={item.name} className="text-xs leading-relaxed text-zinc-400 sm:text-sm md:text-[0.95rem]">
+              <li
+                key={item.name}
+                className="text-xs leading-relaxed text-zinc-400 sm:text-sm md:text-[0.95rem]"
+              >
                 <span className="font-medium text-zinc-200">{item.name}</span>
                 <span className="text-zinc-500"> — </span>
                 {item.detail}
@@ -77,7 +82,10 @@ export default function AiWorkflow() {
           </h3>
           <ul className="space-y-3 sm:space-y-4">
             {devTooling.map((item) => (
-              <li key={item.name} className="text-xs leading-relaxed text-zinc-400 sm:text-sm md:text-[0.95rem]">
+              <li
+                key={item.name}
+                className="text-xs leading-relaxed text-zinc-400 sm:text-sm md:text-[0.95rem]"
+              >
                 <span className="font-medium text-zinc-200">{item.name}</span>
                 <span className="text-zinc-500"> — </span>
                 {item.detail}
@@ -88,8 +96,8 @@ export default function AiWorkflow() {
       </div>
 
       <p className="mx-auto mt-6 max-w-2xl px-2 text-center text-xs leading-relaxed text-zinc-600 sm:mt-8 sm:text-sm">
-        Ship-ready code still needs tests and security checks — assistants reduce friction, not
-        accountability.
+        Ship-ready code still needs tests and security checks — assistants
+        reduce friction, not accountability.
       </p>
     </Section>
   );

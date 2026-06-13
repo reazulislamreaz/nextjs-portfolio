@@ -13,24 +13,15 @@ const pillars: { title: string; items: string[] }[] = [
   },
   {
     title: "Data & async",
-    items: [
-      "Redis caching",
-      "Background job queues",
-    ],
+    items: ["Redis caching", "Background job queues"],
   },
   {
     title: "API safety & payments",
-    items: [
-      "Rate limiting and API protection",
-      "Idempotent payment APIs",
-    ],
+    items: ["Rate limiting and API protection", "Idempotent payment APIs"],
   },
   {
     title: "AI & integrations",
-    items: [
-      "RAG-based AI integration",
-      "Stripe, SSLCommerz, M-Pesa",
-    ],
+    items: ["RAG-based AI integration", "Stripe, SSLCommerz, M-Pesa"],
   },
 ];
 

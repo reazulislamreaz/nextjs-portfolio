@@ -57,15 +57,18 @@ export default function About() {
             </p>
 
             <p className="text-sm leading-relaxed text-zinc-400 sm:text-[1.05rem]">
-              I ship SaaS products end to end — clean APIs, solid data layers, and thin frontends.
-              I design for scale, safe payments, and operability.
+              I ship SaaS products end to end — clean APIs, solid data layers,
+              and thin frontends. I design for scale, safe payments, and
+              operability.
             </p>
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <FiCode className="text-2xl text-emerald-500" />
-              <h3 className="text-xl font-bold tracking-tight text-zinc-200">Core Stack</h3>
+              <h3 className="text-xl font-bold tracking-tight text-zinc-200">
+                Core Stack
+              </h3>
             </div>
             <div className="flex flex-wrap gap-2.5">
               {coreStack.map((tech) => (
@@ -82,7 +85,9 @@ export default function About() {
           <div className="space-y-4 pt-2">
             <div className="flex items-center gap-3">
               <FiCpu className="text-2xl text-emerald-500" />
-              <h3 className="text-xl font-bold tracking-tight text-zinc-200">Platform focus</h3>
+              <h3 className="text-xl font-bold tracking-tight text-zinc-200">
+                Platform focus
+              </h3>
             </div>
             <ul className="grid grid-cols-1 gap-3 text-zinc-400 sm:grid-cols-2">
               {advancedTech.map((item, idx) => (
@@ -99,14 +104,18 @@ export default function About() {
           <div className="h-full w-full space-y-6 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)] sm:space-y-6 sm:rounded-3xl sm:p-8">
             <div className="mb-6 flex items-center gap-3 border-b border-zinc-800 pb-4">
               <FiServer className="text-3xl text-emerald-500" />
-              <h3 className="text-2xl font-bold tracking-tight text-zinc-50">How I work</h3>
+              <h3 className="text-2xl font-bold tracking-tight text-zinc-50">
+                How I work
+              </h3>
             </div>
 
             <ul className="space-y-4 text-sm sm:space-y-5 sm:text-[1.05rem]">
               {experience.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
                   <span className="mt-1 text-emerald-500">▹</span>
-                  <span className="font-medium leading-tight text-zinc-300">{item}</span>
+                  <span className="font-medium leading-tight text-zinc-300">
+                    {item}
+                  </span>
                 </li>
               ))}
             </ul>

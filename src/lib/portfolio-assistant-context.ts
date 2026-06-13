@@ -88,7 +88,9 @@ ${education.map((item) => `- ${item}`).join("\n")}
 Work experience:
 ${experienceData
   .map(
-    (role) => `- ${role.role} at ${role.company} (${role.employmentType}, ${role.period}): ${role.tagline}
+    (
+      role,
+    ) => `- ${role.role} at ${role.company} (${role.employmentType}, ${role.period}): ${role.tagline}
   Summary: ${role.summary}
   ${role.architecture ? `Architecture: ${role.architecture}` : ""}
   Highlights: ${role.highlights.join("; ")}

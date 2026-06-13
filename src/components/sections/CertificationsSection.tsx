@@ -74,9 +74,11 @@ const items: Certification[] = [
       "SDLC, Agile, TDD & API testing",
       "AI-integrated full-stack capstone",
     ],
-    platform: "Programming Hero — Next Level AI-Driven Software Engineering Bootcamp",
+    platform:
+      "Programming Hero — Next Level AI-Driven Software Engineering Bootcamp",
     status: "Completed",
-    focus: "AI-driven engineering — scalable backends, TypeScript, and deployable infrastructure.",
+    focus:
+      "AI-driven engineering — scalable backends, TypeScript, and deployable infrastructure.",
     credentialUrl: "https://next.programming-hero.com/",
     credentialLabel: "View bootcamp overview",
   },
@@ -119,7 +121,9 @@ export default function Certifications() {
               </span>
             </div>
 
-            <p className="mb-5 text-sm leading-relaxed text-zinc-400 sm:mb-6 sm:text-base">{item.summary}</p>
+            <p className="mb-5 text-sm leading-relaxed text-zinc-400 sm:mb-6 sm:text-base">
+              {item.summary}
+            </p>
 
             <div className="mb-5 sm:mb-6">
               <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 sm:mb-3">
@@ -138,7 +142,9 @@ export default function Certifications() {
             <dl className="mt-auto space-y-3 border-t border-zinc-800/80 pt-5 text-xs sm:pt-6 sm:text-sm">
               <div>
                 <dt className="font-semibold text-zinc-500">Platform</dt>
-                <dd className="mt-1 break-words text-zinc-300">{item.platform}</dd>
+                <dd className="mt-1 break-words text-zinc-300">
+                  {item.platform}
+                </dd>
               </div>
               <div>
                 <dt className="font-semibold text-zinc-500">Focus</dt>

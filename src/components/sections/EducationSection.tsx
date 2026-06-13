@@ -50,15 +50,18 @@ const educationEntries: EducationEntry[] = [
 const academicStrengths = [
   {
     title: "Analytical rigor",
-    description: "Break ambiguous problems into testable claims — same discipline as API design.",
+    description:
+      "Break ambiguous problems into testable claims — same discipline as API design.",
   },
   {
     title: "Clear communication",
-    description: "Strong synthesis for specs, docs, and cross-functional alignment.",
+    description:
+      "Strong synthesis for specs, docs, and cross-functional alignment.",
   },
   {
     title: "Systems thinking",
-    description: "Policy and institutions map to multi-service architecture and ownership.",
+    description:
+      "Policy and institutions map to multi-service architecture and ownership.",
   },
 ];
 
@@ -73,8 +76,8 @@ export default function Education() {
       <div className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 space-y-8 lg:col-span-7">
           <p className="text-sm leading-relaxed text-zinc-400 sm:text-base">
-            Social science, not CS — by design. It sharpens how I research requirements, document
-            decisions, and communicate trade-offs.
+            Social science, not CS — by design. It sharpens how I research
+            requirements, document decisions, and communicate trade-offs.
           </p>
 
           <ol className="relative space-y-8 border-l border-zinc-800/80 pl-6 sm:pl-8">
@@ -169,7 +172,8 @@ export default function Education() {
               Technical training
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem]">
-              Full-stack, cloud, and AI programs are listed under certifications.
+              Full-stack, cloud, and AI programs are listed under
+              certifications.
             </p>
             <SectionLink
               href="/#certifications"
@@ -192,7 +196,9 @@ export default function Education() {
                   key={item.title}
                   className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md transition-colors hover:border-zinc-700"
                 >
-                  <h4 className="text-sm font-semibold text-zinc-200">{item.title}</h4>
+                  <h4 className="text-sm font-semibold text-zinc-200">
+                    {item.title}
+                  </h4>
                   <p className="mt-2 text-sm leading-relaxed text-zinc-400">
                     {item.description}
                   </p>

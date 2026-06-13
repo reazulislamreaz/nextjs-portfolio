@@ -1,6 +1,11 @@
 "use client";
 
-import { FiBriefcase, FiCalendar, FiChevronDown, FiMapPin } from "react-icons/fi";
+import {
+  FiBriefcase,
+  FiCalendar,
+  FiChevronDown,
+  FiMapPin,
+} from "react-icons/fi";
 import type { Experience } from "./experienceData";
 
 const MAX_VISIBLE_STACK = 6;
@@ -82,7 +87,11 @@ export default function ExperienceCard({
           )}
         </ul>
 
-        <ExperienceDetails entry={entry} expanded={expanded} panelId={panelId} />
+        <ExperienceDetails
+          entry={entry}
+          expanded={expanded}
+          panelId={panelId}
+        />
 
         <footer className="mt-6">
           <button

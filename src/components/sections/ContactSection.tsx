@@ -49,7 +49,8 @@ export default function ContactSection() {
 
             <div className="relative z-10">
               <p className="mb-6 text-base font-light leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
-                Open to new opportunities and interesting projects. Reach out anytime.
+                Open to new opportunities and interesting projects. Reach out
+                anytime.
               </p>
 
               <div className="space-y-6 text-base">
@@ -89,7 +90,7 @@ export default function ContactSection() {
                     <FiMapPin className="text-xl text-emerald-400" />
                   </div>
                   <span className="text-zinc-300 transition-colors duration-300 hover:text-zinc-50">
-                    Dhaka, Bangladesh 
+                    Dhaka, Bangladesh
                   </span>
                 </button>
 
