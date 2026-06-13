@@ -12,6 +12,23 @@ interface NavClickModifiers {
   button: number;
 }
 
+function getNavBarHeight(): number {
+  const bar = document.querySelector("[data-nav-bar]");
+  if (bar instanceof HTMLElement) {
+    return bar.getBoundingClientRect().height;
+  }
+
+  const navHeight = getComputedStyle(document.documentElement)
+    .getPropertyValue("--nav-height")
+    .trim();
+  if (navHeight.endsWith("rem")) {
+    const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    return parseFloat(navHeight) * rootSize;
+  }
+
+  return 64;
+}
+
 /**
  * Scrolls to an in-page section, offsetting for the fixed navbar. Long jumps
  * are instant (smooth scrolling the full page height janks on mobile because
@@ -23,10 +40,9 @@ export function scrollToInPageTarget(href: string, label?: string): void {
   const id = isHome ? "" : hashFromHref(href).slice(1);
   const target = id ? document.getElementById(id) : null;
 
-  const nav = document.querySelector("nav");
-  const navHeight = nav ? nav.getBoundingClientRect().height : 72;
+  const navHeight = getNavBarHeight();
   const targetY = target
-    ? target.getBoundingClientRect().top + window.scrollY - navHeight - 8
+    ? target.getBoundingClientRect().top + window.scrollY - navHeight
     : 0;
 
   const reduceMotion = window.matchMedia(

@@ -17,11 +17,36 @@ export default function Navbar() {
   const pathname = usePathname();
   const [activeSectionId, setActiveSectionId] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [pendingScroll, setPendingScroll] = useState<{
+    href: string;
+    label: string;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!pendingScroll || mobileOpen) return;
+    scrollToInPageTarget(pendingScroll.href, pendingScroll.label);
+    setPendingScroll(null);
+  }, [mobileOpen, pendingScroll]);
 
   useEffect(() => {
     if (pathname !== "/") {
       setActiveSectionId("");
       return;
+    }
+
+    const hash = window.location.hash;
+    if (hash) {
+      let attempts = 0;
+      const tryScroll = () => {
+        const id = hash.slice(1);
+        if (document.getElementById(id)) {
+          scrollToInPageTarget(`/${hash}`);
+          setActiveSectionId(id);
+          return;
+        }
+        if (attempts++ < 90) requestAnimationFrame(tryScroll);
+      };
+      tryScroll();
     }
 
     let ticking = false;
@@ -93,8 +118,15 @@ export default function Navbar() {
   ) => {
     if (!shouldHandleInPageNav(event, href, label, pathname)) return;
     event.preventDefault();
-    setMobileOpen(false);
-    setActiveSectionId(label === "Home" ? "" : hashFromHref(href).slice(1));
+    const sectionId = label === "Home" ? "" : hashFromHref(href).slice(1);
+    setActiveSectionId(sectionId);
+
+    if (mobileOpen) {
+      setMobileOpen(false);
+      setPendingScroll({ href, label });
+      return;
+    }
+
     scrollToInPageTarget(href, label);
   };
 
@@ -104,7 +136,10 @@ export default function Navbar() {
       aria-label="Main navigation"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 min-w-0 items-center justify-between gap-3 sm:h-20">
+        <div
+          data-nav-bar
+          className="flex h-16 min-w-0 items-center justify-between gap-3 sm:h-20"
+        >
           <div className="shrink-0">
             <Link href="/" className="group text-xl font-bold" aria-label="Home">
               <div className="relative h-11 w-11 transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14">

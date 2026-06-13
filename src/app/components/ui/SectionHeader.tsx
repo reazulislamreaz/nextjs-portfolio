@@ -5,7 +5,7 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
   return (
-    <div className="mb-10 px-1 text-center sm:mb-12 lg:mb-16">
+    <div className="mb-6 px-1 text-center sm:mb-8 lg:mb-10">
       <h2 className="relative mb-3 inline-block max-w-full text-2xl font-black tracking-tight sm:mb-4 sm:text-3xl lg:text-5xl">
         <span className="heading-gradient drop-shadow-sm">
           {title}
