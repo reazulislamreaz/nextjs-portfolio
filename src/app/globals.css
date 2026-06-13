@@ -123,6 +123,16 @@ body {
   @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden selection:bg-emerald-500/30 selection:text-zinc-50;
 }
 
+@layer base {
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
 /* #3 — Theme-aware section heading gradient (clipped to text). */
 .heading-gradient {
   background-image: linear-gradient(
