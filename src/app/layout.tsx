@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://reazul-islam-reaz.vercel.app"),
   title: "Reazul Islam Reaz | Full-Stack Backend-Focused Engineer",
   description:
-    "Backend-focused full-stack engineer — scalable APIs, SaaS architectures, PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go, and Next.js.",
+    "Backend-focused full-stack engineer — APIs, SaaS architecture, PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go, Next.js.",
   keywords: [
     "Reazul Islam Reaz",
     "Reazul Islam",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Reazul Islam Reaz | Full-Stack Backend-Focused Engineer",
     description:
-      "Scalable backend systems, APIs, and SaaS-style architectures — with disciplined data modeling and Next.js when the surface needs to shine.",
+      "Scalable backends, APIs, and SaaS architecture — PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go, Next.js.",
     url: "/",
     siteName: "Reazul Islam Reaz",
     locale: "en_US",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reazul Islam Reaz | Full-Stack Backend-Focused Engineer",
     description:
-      "Backend-focused full-stack engineer — APIs, SaaS architectures, PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go.",
+      "Backend-focused engineer — APIs, SaaS, PostgreSQL, MongoDB, Redis, Node.js, NestJS, Go.",
     images: ["/reaz.png"],
   },
   verification: {

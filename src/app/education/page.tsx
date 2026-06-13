@@ -5,7 +5,7 @@ import { sectionMetadata } from "@/config/seo";
 export const metadata: Metadata = sectionMetadata(
   "education",
   "Education",
-  "Formal academic background in political science and how it supports engineering work.",
+  "Political science background and how it supports engineering.",
 );
 
 export default function EducationPage() {

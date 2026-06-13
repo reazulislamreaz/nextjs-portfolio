@@ -105,20 +105,6 @@ Organizer console and public registration with Firebase Auth and MongoDB.
 - **Stack:** Node.js, Express, MongoDB, Firebase Auth, React  
 - **Code:** [GitHub](https://github.com/reazulislamreaz/marathon-zone)
 
-### [Green Circle](https://green-circle-by-reaz.netlify.app) — Subscription gardening service
-
-Slot booking, admin metrics, and delivery integrity under concurrent bookings.
-
-- **Stack:** Express, MongoDB, Mongoose, React, JWT  
-- **Code:** [GitHub](https://github.com/reazulislamreaz/green-circle)
-
-### [Event Hub](https://event-hub-by-reaz.netlify.app) — Event lifecycle tool
-
-Host-managed events with custom JWT auth and server-enforced ownership checks.
-
-- **Stack:** React, Express, MongoDB, JWT  
-- **Code:** [GitHub](https://github.com/reazulislamreaz/event-hub-client)
-
 ---
 
 ## Education & learning

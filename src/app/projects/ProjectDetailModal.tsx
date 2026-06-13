@@ -134,14 +134,14 @@ function ModalBody({ project }: { project: Project }) {
       </section>
 
       <section>
-        <SectionLabel>Architecture highlight</SectionLabel>
+        <SectionLabel>Architecture</SectionLabel>
         <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
           {project.architecture}
         </p>
       </section>
 
       <section>
-        <SectionLabel>Challenges &amp; solutions</SectionLabel>
+        <SectionLabel>Challenges</SectionLabel>
         <ul className="space-y-4">
           {project.challengeSolutions.map((item) => (
             <li
@@ -161,7 +161,7 @@ function ModalBody({ project }: { project: Project }) {
       </section>
 
       <section>
-        <SectionLabel>Impact &amp; metrics</SectionLabel>
+        <SectionLabel>Impact</SectionLabel>
         <ul className="space-y-2.5">
           {project.metrics.map((metric) => (
             <li key={metric} className="flex gap-2.5 text-sm text-zinc-400">
@@ -189,7 +189,7 @@ function ModalBody({ project }: { project: Project }) {
       </section>
 
       <section>
-        <SectionLabel>Deployment &amp; DevOps</SectionLabel>
+        <SectionLabel>Deploy</SectionLabel>
         <ul className="flex flex-wrap gap-2">
           {project.devOps.map((item) => (
             <li key={item}>
@@ -202,7 +202,7 @@ function ModalBody({ project }: { project: Project }) {
       </section>
 
       <section>
-        <SectionLabel>Iteration roadmap</SectionLabel>
+        <SectionLabel>Roadmap</SectionLabel>
         <p className="text-sm leading-relaxed text-zinc-500 sm:text-[0.9375rem] sm:leading-7">
           {project.futureEnhancements}
         </p>

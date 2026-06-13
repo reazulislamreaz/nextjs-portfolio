@@ -5,7 +5,7 @@ import { sectionMetadata } from "@/config/seo";
 export const metadata: Metadata = sectionMetadata(
   "contact",
   "Contact",
-  "Get in touch about backend engineering roles, contracts, and interesting projects.",
+  "Backend roles, contracts, and project inquiries.",
 );
 
 export default function ContactPage() {

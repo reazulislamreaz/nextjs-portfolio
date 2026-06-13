@@ -15,7 +15,7 @@ export default function ExperienceSection() {
     <Section id="experience" className="bg-zinc-950/30">
       <SectionHeader
         title="Experience"
-        subtitle="Professional roles focused on production backends — scan the highlights, then expand for architecture and contributions."
+        subtitle="Production backend roles — expand for architecture and contributions."
       />
 
       <ol className="relative space-y-8 border-l border-zinc-800/80 pl-6 sm:pl-8">

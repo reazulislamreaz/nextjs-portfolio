@@ -5,7 +5,7 @@ import { sectionMetadata } from "@/config/seo";
 export const metadata: Metadata = sectionMetadata(
   "about",
   "About",
-  "Backend-focused full-stack engineer — core stack, experience, and how I ship production systems.",
+  "Backend-focused full-stack engineer — stack and how I ship production systems.",
 );
 
 export default function AboutPage() {

@@ -6,9 +6,9 @@ import { resumePath, siteContact, siteSocial } from "@/config/site";
 import SectionLink from "@/app/components/SectionLink";
 
 const texts: string[] = [
-  "I build scalable backend systems, APIs, and SaaS-style architectures.",
-  "PostgreSQL · MongoDB · Redis — with Node.js, NestJS, and Go where it fits.",
-  "Full-stack delivery with Next.js when the product needs a polished client.",
+  "Scalable backends, APIs, and SaaS architecture.",
+  "PostgreSQL · MongoDB · Redis — Node.js, NestJS, Go.",
+  "Full-stack with Next.js when the client matters.",
 ];
 
 interface TechItem {
@@ -50,7 +50,7 @@ export default function HomeHero() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                <span className="leading-snug">Available for New Opportunities</span>
+                <span className="leading-snug">Open to opportunities</span>
               </div>
 
               <h1 className="text-balance text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">

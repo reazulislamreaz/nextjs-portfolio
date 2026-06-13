@@ -39,7 +39,7 @@ const initialMessages: Message[] = [
     id: "welcome",
     role: "assistant",
     content:
-      "Hi, I can answer questions about Reaz's projects, skills, education, resume, and contact details.",
+      "Ask about Reaz's projects, skills, education, resume, or contact details.",
   },
 ];
 

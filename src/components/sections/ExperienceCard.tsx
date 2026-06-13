@@ -147,7 +147,7 @@ function ExperienceDetails({
           {entry.architecture && (
             <section>
               <h4 className="mb-2 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-emerald-500/90">
-                Architecture highlight
+                Architecture
               </h4>
               <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
                 {entry.architecture}
@@ -157,7 +157,7 @@ function ExperienceDetails({
 
           <section>
             <h4 className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-emerald-500/90">
-              Key contributions
+              Contributions
             </h4>
             <ul className="space-y-2.5">
               {entry.highlights.map((item) => (
@@ -177,7 +177,7 @@ function ExperienceDetails({
 
           <section>
             <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-              Full tech stack
+              Tech stack
             </h4>
             <ul className="flex flex-wrap gap-x-2 gap-y-2 sm:gap-2.5">
               {entry.techStack.map((tech) => (

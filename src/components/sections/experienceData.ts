@@ -27,20 +27,20 @@ export const experienceData: Experience[] = [
     workMode: "On-site",
     isCurrent: true,
     tagline:
-      "Production backend systems for event and conference platforms — REST APIs, RBAC, and real-time features at scale.",
+      "Backend systems for event platforms — REST APIs, RBAC, and real-time features.",
     summary:
-      "Designing and developing scalable, secure, and production-ready backend systems for real-world web and event-based applications. Work spans API design, data modeling, access control, real-time collaboration, and close coordination with frontend and mobile teams.",
+      "Build scalable, secure backends for web and event apps — API design, data modeling, access control, and real-time features with frontend and mobile teams.",
     highlights: [
-      "Developed and maintained RESTful APIs with Node.js, Express.js, and TypeScript.",
-      "Designed and optimized MongoDB/Mongoose schemas for complex, event-driven workloads.",
-      "Implemented RBAC across Admin, Organizer, Volunteer, Attendee, and Exhibitor roles with JWT-based auth flows.",
-      "Built event and conference modules: registration, check-in, volunteer task assignment, and exhibitor/sponsor workflows.",
-      "Integrated Socket.IO for live chat, polling, and session interactions; QR-based workflows for attendance and lead capture.",
-      "Followed layered architecture (Router → Controller → Service → Model) with Zod validation, centralized errors, and standardized API responses.",
-      "Tested APIs with Postman; focused on performance, data integrity, and scalable system design.",
+      "REST APIs with Node.js, Express, and TypeScript.",
+      "MongoDB/Mongoose schemas for event-driven workloads.",
+      "RBAC across Admin, Organizer, Volunteer, Attendee, and Exhibitor roles with JWT auth.",
+      "Event modules: registration, check-in, volunteer tasks, exhibitor workflows.",
+      "Socket.IO for chat, polling, and sessions; QR workflows for attendance and leads.",
+      "Layered architecture with Zod validation, centralized errors, and standard responses.",
+      "API testing with Postman; focus on performance and data integrity.",
     ],
     architecture:
-      "Layered Express + TypeScript services with MongoDB as the source of truth, JWT-guarded routes per persona, and Socket.IO for event-scoped realtime — keeping transport, validation, and domain logic clearly separated.",
+      "Express + TypeScript with MongoDB, JWT-guarded routes per persona, and Socket.IO for event-scoped realtime — transport, validation, and domain logic separated.",
     techStack: [
       "Node.js",
       "Express.js",
@@ -82,14 +82,14 @@ export const experienceData: Experience[] = [
     location: "Dhaka, Bangladesh",
     workMode: "On-site",
     tagline:
-      "Full-stack internship with a backend focus — React frontends, Node.js APIs, and PostgreSQL under mentorship.",
+      "Backend-focused internship — React frontends, Node.js APIs, and PostgreSQL.",
     summary:
-      "Contributed to innovative projects in a collaborative team environment — building reliable server-side logic, integrating React-based UIs with REST APIs, and working with relational data across the full delivery stack.",
+      "Built server-side features and integrated React UIs with REST APIs and PostgreSQL in a collaborative team.",
     highlights: [
-      "Built and maintained backend features with Node.js and Express.js in a team-based delivery workflow.",
-      "Worked with PostgreSQL for relational modeling, queries, and data integrity.",
-      "Developed and integrated React UI components against REST API contracts.",
-      "Used TypeScript and Git-based workflows for code review and iterative shipping in an on-site team setting.",
+      "Backend features with Node.js and Express in team delivery.",
+      "PostgreSQL modeling, queries, and data integrity.",
+      "React UI integration against REST contracts.",
+      "TypeScript and Git workflows for review and shipping.",
     ],
     techStack: [
       "Node.js",

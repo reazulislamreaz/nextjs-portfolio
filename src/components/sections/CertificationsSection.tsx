@@ -10,85 +10,89 @@ interface Certification {
   focus: string;
   credentialUrl?: string;
   credentialLabel?: string;
+  secondaryCredentialUrl?: string;
+  secondaryCredentialLabel?: string;
 }
 
 const items: Certification[] = [
   {
+    title: "Full Stack Web Development",
+    summary: "Modern web stack and full-stack application development.",
+    topics: [
+      "React & Next.js",
+      "Node.js & Express APIs",
+      "MongoDB",
+      "JWT auth",
+      "REST APIs",
+      "Full-stack architecture",
+    ],
+    platform: "Udemy — Full Stack Development (React, Next.js, Node.js)",
+    status: "Completed",
+    focus: "End-to-end apps with backend integration.",
+    credentialUrl:
+      "https://www.udemy.com/certificate/UC-6e1f340a-b9ee-4cda-8cd8-74de0b57ba5a/",
+    credentialLabel: "View verified certificate",
+    secondaryCredentialUrl:
+      "https://www.udemy.com/course/full-stack-development-for-beginner-react-nextjs-nodejs/",
+    secondaryCredentialLabel: "View course on Udemy",
+  },
+  {
+    title: "AWS Cloud Computing",
+    summary: "Hands-on AWS infrastructure and backend deployment.",
+    topics: [
+      "IAM & security",
+      "EC2, S3, VPC",
+      "Load balancing & auto scaling",
+      "Lambda & serverless",
+      "CloudWatch",
+      "CI/CD",
+      "Docker & cloud basics",
+    ],
+    platform: "Udemy — Hands-On Introduction to Cloud Computing with AWS",
+    status: "Completed",
+    focus: "Scalable backends, cloud deploys, and infrastructure.",
+    credentialUrl:
+      "https://www.udemy.com/certificate/UC-737af03a-d89d-4d2f-98e3-5c48dc7d0e8f/",
+    credentialLabel: "View verified certificate",
+    secondaryCredentialUrl:
+      "https://www.udemy.com/course/hands-on-introduction-to-cloud-computing-with-aws/",
+    secondaryCredentialLabel: "View course on Udemy",
+  },
+  {
     title: "Next Level Web Development",
     summary:
-      "AI-driven software engineering bootcamp — TypeScript full-stack fundamentals plus production patterns, cloud deployment, and AI feature integration on industry-grade projects.",
+      "AI-driven bootcamp — TypeScript full-stack, production patterns, cloud, and AI features.",
     topics: [
-      "TypeScript (advanced types, OOP, generics & modular architecture)",
-      "Node.js & Express (REST APIs, routing & server-side patterns)",
-      "Next.js App Router, authentication & production-ready frontends",
-      "PostgreSQL, SQL, normalization & Prisma ORM",
-      "AI engineering: RAG, vector DBs, embeddings & semantic search",
-      "LangChain, AI agents, automation & AI-assisted product features",
-      "Docker, Nginx, reverse proxy & multi-container orchestration",
-      "AWS essentials (EC2, S3, IAM), Linux & CI/CD with GitHub Actions",
-      "Software engineering mindset, SDLC, Agile, TDD & API testing (Vitest, Supertest)",
-      "End-to-end AI-integrated full-stack capstone project",
+      "TypeScript, OOP & modular architecture",
+      "Node.js & Express REST APIs",
+      "Next.js App Router & auth",
+      "PostgreSQL, SQL & Prisma",
+      "RAG, vector DBs & embeddings",
+      "LangChain & AI agents",
+      "Docker, Nginx & orchestration",
+      "AWS, Linux & GitHub Actions CI/CD",
+      "SDLC, Agile, TDD & API testing",
+      "AI-integrated full-stack capstone",
     ],
     platform: "Programming Hero — Next Level AI-Driven Software Engineering Bootcamp",
     status: "Completed",
-    focus:
-      "Transforming from web development to AI-driven software engineering — scalable backends, modern TypeScript stacks, deployable infrastructure, and real-world AI integration.",
+    focus: "AI-driven engineering — scalable backends, TypeScript, and deployable infrastructure.",
     credentialUrl: "https://next.programming-hero.com/",
     credentialLabel: "View bootcamp overview",
   },
   {
-    title: "AWS Cloud Computing",
-    summary:
-      "Hands-on cloud training focused on real-world infrastructure and backend deployment on AWS.",
-    topics: [
-      "AWS IAM & security",
-      "EC2, S3, VPC",
-      "Load balancing & auto scaling",
-      "AWS Lambda & serverless basics",
-      "CloudWatch monitoring",
-      "CI/CD & deployment concepts",
-      "Docker & cloud infrastructure fundamentals",
-    ],
-    platform: "Udemy — Hands-On Introduction to Cloud Computing with AWS",
-    status: "Completed",
-    focus: "Scalable backend systems, cloud deployment, and infrastructure design.",
-    credentialUrl:
-      "https://www.udemy.com/course/hands-on-introduction-to-cloud-computing-with-aws/",
-    credentialLabel: "View course on Udemy",
-  },
-  {
-    title: "Full Stack Web Development",
-    summary:
-      "Full-stack training covering modern web technologies and real-world application development.",
-    topics: [
-      "React & Next.js (frontend)",
-      "Node.js & Express.js (backend APIs)",
-      "MongoDB (database design)",
-      "Authentication & authorization (JWT)",
-      "REST API development",
-      "Full-stack application architecture",
-    ],
-    platform: "Udemy — Full Stack Development (React, Next.js, Node.js)",
-    status: "Completed",
-    focus: "End-to-end application development with backend integration.",
-    credentialUrl:
-      "https://www.udemy.com/course/full-stack-development-for-beginner-react-nextjs-nodejs/",
-    credentialLabel: "View course on Udemy",
-  },
-  {
     title: "AI & Intelligent Systems",
-    summary:
-      "Modern AI-assisted backend patterns and intelligent application workflows.",
+    summary: "AI-assisted backend patterns and intelligent workflows.",
     topics: [
-      "RAG (retrieval-augmented generation)",
-      "Prompt engineering fundamentals",
+      "RAG",
+      "Prompt engineering",
       "AI API integrations",
-      "Context-aware backend systems",
-      "Vector-based retrieval concepts",
+      "Context-aware backends",
+      "Vector retrieval",
     ],
     platform: "OpenAI, Claude, Cursor, ChatGPT, Gemini",
     status: "Completed",
-    focus: "Building intelligent backend systems with AI integration.",
+    focus: "Intelligent backends with AI integration.",
   },
 ];
 
@@ -96,8 +100,8 @@ export default function Certifications() {
   return (
     <Section id="certifications" className="bg-zinc-950/45">
       <SectionHeader
-        title="Certifications & Learning"
-        subtitle="Formal programs and structured learning that align with production backend and full-stack work."
+        title="Certifications"
+        subtitle="Programs aligned with production backend work."
       />
 
       <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
@@ -119,7 +123,7 @@ export default function Certifications() {
 
             <div className="mb-5 sm:mb-6">
               <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 sm:mb-3">
-                Topics covered
+                Topics
               </h4>
               <ul className="space-y-2 text-xs leading-relaxed text-zinc-400 sm:text-sm">
                 {item.topics.map((topic) => (
@@ -143,7 +147,7 @@ export default function Certifications() {
               {item.credentialUrl ? (
                 <div>
                   <dt className="font-semibold text-zinc-500">Credential</dt>
-                  <dd className="mt-1">
+                  <dd className="mt-1 flex flex-col gap-1.5">
                     <a
                       href={item.credentialUrl}
                       target="_blank"
@@ -152,6 +156,16 @@ export default function Certifications() {
                     >
                       {item.credentialLabel ?? "Open credential"}
                     </a>
+                    {item.secondaryCredentialUrl ? (
+                      <a
+                        href={item.secondaryCredentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-300 hover:underline"
+                      >
+                        {item.secondaryCredentialLabel ?? "Related link"}
+                      </a>
+                    ) : null}
                   </dd>
                 </div>
               ) : null}

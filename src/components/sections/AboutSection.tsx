@@ -19,21 +19,21 @@ const coreStack: string[] = [
 ];
 
 const advancedTech: string[] = [
-  "GraphQL where contract clarity beats ad-hoc REST",
-  "Socket-driven and event-style interfaces",
+  "GraphQL for clear API contracts",
+  "Socket and event-driven interfaces",
   "RBAC and multi-tenant guardrails",
-  "Payments and webhook-hardening patterns",
+  "Payments and hardened webhooks",
 ];
 
 const experience: string[] = [
-  "Designing modular services and clear API boundaries",
-  "Modeling relational and document schemas for real workloads",
-  "Hardening authentication, authorization, and rate-sensitive flows",
-  "Shipping Stripe-aware and idempotent payment paths",
-  "Deploying to cloud targets with pragmatic CI/CD hygiene",
-  "Pairing structured logging with actionable error contracts",
-  "Using AI development tooling responsibly — never as a substitute for tests or API review",
-  "Owning delivery across API, data, and client layers",
+  "Modular services with clear API boundaries",
+  "Relational and document schema design",
+  "Auth, authorization, and rate limiting",
+  "Idempotent Stripe payment flows",
+  "Cloud deploys with CI/CD",
+  "Structured logging and error contracts",
+  "AI tooling with human review and tests",
+  "End-to-end delivery across the stack",
 ];
 
 export default function About() {
@@ -57,9 +57,8 @@ export default function About() {
             </p>
 
             <p className="text-sm leading-relaxed text-zinc-400 sm:text-[1.05rem]">
-              I ship SaaS-style products end to end: disciplined APIs, thoughtful persistence, and
-              frontends that stay thin on business rules. My default is to design for scale paths,
-              safe payments, and operability — not to chase novelty for its own sake.
+              I ship SaaS products end to end — clean APIs, solid data layers, and thin frontends.
+              I design for scale, safe payments, and operability.
             </p>
           </div>
 

@@ -352,30 +352,15 @@ const skillCategories: SkillCategory[] = [
   { title: "Performance & reliability", skills: performanceSkills },
   {
     title: "DevOps & cloud",
-    hint: "Containers, reverse proxies, cloud deploys, and CI/CD for production releases.",
+    hint: "Containers, proxies, cloud deploys, and CI/CD.",
     skills: devOpsSkills,
   },
   {
     title: "AI & payments",
-    hint: "RAG, AI integrations, and payment webhooks with idempotency and provider edge cases.",
+    hint: "RAG, AI integrations, and idempotent payment webhooks.",
     skills: aiSkills,
   },
   { title: "Frontend (when needed)", skills: frontendSkills },
-];
-
-const highlights: { title: string; description: string }[] = [
-  {
-    title: "6+",
-    description: "Live systems with APIs & data layers",
-  },
-  {
-    title: "API-first",
-    description: "Validation, auth, and clear contracts",
-  },
-  {
-    title: "Production-minded",
-    description: "Limits, caching, and safe releases",
-  },
 ];
 
 function SkillCategoryPanel({ title, hint, skills }: SkillCategory) {
@@ -414,25 +399,9 @@ export default function Skills() {
   return (
     <Section id="skills" className="bg-zinc-950/80">
       <SectionHeader
-        title="Engineering toolkit"
-        subtitle="Backend-first stack — scan by category. Every technology below is in active project use."
+        title="Toolkit"
+        subtitle="Backend-first stack — all in active use."
       />
-
-      <div className="mb-8 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
-        {highlights.map((item) => (
-          <div
-            key={item.title}
-            className="flex items-center gap-3 rounded-xl border border-zinc-800/70 bg-zinc-900/35 px-4 py-3 sm:px-5"
-          >
-            <span className="text-lg font-bold text-emerald-400 sm:text-xl">
-              {item.title}
-            </span>
-            <span className="text-xs leading-snug text-zinc-400 sm:text-sm">
-              {item.description}
-            </span>
-          </div>
-        ))}
-      </div>
 
       <p className="mb-6 text-xs text-zinc-600 sm:text-sm">
         {totalSkills} technologies across {skillCategories.length} areas

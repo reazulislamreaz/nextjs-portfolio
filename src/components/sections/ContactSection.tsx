@@ -38,8 +38,8 @@ export default function ContactSection() {
   return (
     <Section id="contact" className="bg-zinc-950/40">
       <SectionHeader
-        title="Contact Me"
-        subtitle="Let's connect and discuss how we can work together on your next project"
+        title="Contact"
+        subtitle="Open to roles and project conversations."
       />
 
       <div className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
@@ -49,9 +49,7 @@ export default function ContactSection() {
 
             <div className="relative z-10">
               <p className="mb-6 text-base font-light leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
-                I&apos;m always open to discussing new opportunities,
-                interesting projects, or just having a chat about technology and
-                development. Feel free to reach out!
+                Open to new opportunities and interesting projects. Reach out anytime.
               </p>
 
               <div className="space-y-6 text-base">

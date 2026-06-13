@@ -25,9 +25,9 @@ export const projectsData: Project[] = [
   {
     title: "Connectify",
     tagline:
-      "WhatsApp-style social platform — real-time chat, news feed, friends, and voice/video calls on a production full-stack build.",
+      "WhatsApp-style social app — chat, feed, friends, and voice/video calls.",
     description:
-      "Full-featured messaging and social app pairing a Next.js 15 frontend with a TypeScript Express API. Users get 1:1 chat (text, images, voice), a social feed with likes and comments, friend discovery and requests, online presence, typing indicators, and ZEGOCLOUD-powered audio/video calls — deployed on Vercel (frontend) and a VPS with nginx + PM2 (backend).",
+      "Messaging and social app with Next.js 15 frontend and TypeScript Express API. Real-time chat, feed, friends, presence, and ZEGOCLOUD calls — deployed on Vercel and a VPS.",
     features: [
       "Next.js 15",
       "React 19",
@@ -45,11 +45,11 @@ export const projectsData: Project[] = [
       "Zod",
     ],
     metrics: [
-      "Real-time messaging with Socket.IO — typing, read receipts, and friend-scoped presence",
-      "Social feed with posts, threaded comments, likes, and S3-backed media uploads",
-      "Friend graph with send/accept/reject flows and paginated user discovery search",
-      "Voice/video calls via server-minted ZEGOCLOUD RTC tokens and WebSocket call signaling",
-      "Redis cache layer + optional Socket.IO Redis adapter for horizontal scale",
+      "Real-time messaging with typing, read receipts, and presence",
+      "Feed with posts, comments, likes, and S3 media",
+      "Friend graph with discovery and paginated search",
+      "Voice/video via ZEGOCLOUD tokens and WebSocket signaling",
+      "Redis cache and optional Socket.IO adapter for scale",
     ],
     devOps: [
       "Vercel (frontend)",
@@ -70,46 +70,42 @@ export const projectsData: Project[] = [
     live: "https://easy-connectify.vercel.app/",
     code: "https://github.com/reazulislamreaz/connectify-frontend",
     sourceNote:
-      "Backend API & Socket.IO: https://github.com/reazulislamreaz/connectify-backend · API host: https://easyconnectify.duckdns.org",
+      "Backend: https://github.com/reazulislamreaz/connectify-backend · API: https://easyconnectify.duckdns.org",
     problem:
-      "Users expect a modern messenger with instant delivery, social feed, friend management, and calls — without juggling separate apps or dealing with unreliable realtime sync, unsecured sessions, or media uploads that break under load.",
+      "Users want one app for messaging, social feed, friends, and calls — with reliable realtime sync and secure sessions.",
     architecture:
-      "Next.js App Router client with React Query and Socket.IO for realtime; Express + TypeScript REST API with Zod validation and JWT auth (Bearer + HTTP-only cookies). MongoDB via Mongoose for users, messages, posts, and friends; AWS S3 for avatars and media; optional Redis for caching and multi-instance Socket.IO fan-out; ZEGOCLOUD for RTC tokens and call state over WebSockets.",
+      "Next.js client with React Query and Socket.IO; Express + TypeScript API with Zod and JWT. MongoDB for users, messages, posts, friends; S3 for media; Redis for cache and multi-instance sockets.",
     challengeSolutions: [
       {
-        challenge:
-          "HTTPS frontend on Vercel had to reach a secure WebSocket backend without mixed-content or path mismatches.",
+        challenge: "Vercel frontend needed secure WebSocket backend without mixed content.",
         solution:
-          "Configured wss:// on DuckDNS with `/socket.io` at the root, JWT in socket auth, and CORS `CLIENT_URL` allowlists including the Vercel domain.",
+          "wss:// on DuckDNS with `/socket.io`, JWT socket auth, and CORS allowlists.",
       },
       {
-        challenge:
-          "1:1 messaging needed live delivery, typing, read receipts, and voice notes without losing messages across reconnects.",
+        challenge: "1:1 chat needed live delivery, typing, and read receipts across reconnects.",
         solution:
-          "Socket.IO per-user rooms with JWT handshake, persisted message CRUD, and event handlers for typing, read state, and ≤60s voice uploads to S3.",
+          "Per-user Socket.IO rooms, persisted CRUD, and S3 voice uploads up to 60s.",
       },
       {
-        challenge:
-          "Friend-only presence and call signaling had to stay consistent when scaling beyond a single Node process.",
+        challenge: "Presence and call signaling had to scale beyond one Node process.",
         solution:
-          "Presence service with friend-scoped visibility, optional Redis cache invalidation, and Socket.IO Redis adapter for multi-instance broadcast.",
+          "Friend-scoped presence, Redis cache invalidation, and Socket.IO Redis adapter.",
       },
       {
-        challenge:
-          "Feed, profiles, and chat surfaces required validated APIs and consistent error contracts for the React client.",
+        challenge: "Feed and chat needed validated APIs with consistent errors.",
         solution:
-          "Modular Express modules (auth, user, friend, message, chat, post, call) with Zod middleware and standardized `{ success, data | message }` responses.",
+          "Modular Express modules with Zod middleware and standard `{ success, data | message }` responses.",
       },
     ],
     futureEnhancements:
-      "Group chats, push notifications, message search, admin moderation tools, and deeper observability (metrics/tracing) across API and socket tiers.",
+      "Group chats, push notifications, message search, moderation, and API/socket observability.",
   },
   {
     title: "Confaero",
     tagline:
-      "Real-time conference ops for organizers — QR check-ins and exhibitor leads without duplicate records under load.",
+      "Conference ops — QR check-ins and exhibitor leads without duplicates under load.",
     description:
-      "Scalable conference platform for real-world events — QR check-ins, exhibitor lead capture, organizer tooling, and low-latency attendee interactions backed by a typed API and real-time layers.",
+      "Conference platform with QR check-ins, exhibitor lead capture, organizer tooling, and real-time attendee interactions.",
     features: [
       "Node.js",
       "Express",
@@ -121,10 +117,10 @@ export const projectsData: Project[] = [
       "WebRTC",
     ],
     metrics: [
-      "~40% lower p95 latency on check-in & roster APIs after compound MongoDB indexes",
-      "Zero duplicate check-ins under concurrent QR scan bursts via unique constraints",
-      "Real-time roster sync across organizer dashboards with Socket.IO scoped broadcasts",
-      "Lazy-loaded dashboard modules and optimized image delivery for faster first paint",
+      "~40% lower p95 latency on check-in APIs after compound indexes",
+      "Zero duplicate check-ins under concurrent QR bursts",
+      "Real-time roster sync via scoped Socket.IO broadcasts",
+      "Lazy-loaded dashboards and optimized images for faster paint",
     ],
     devOps: [
       "Production deploy",
@@ -143,40 +139,34 @@ export const projectsData: Project[] = [
     live: "http://confaero.com/",
     code: "https://github.com/reazulislamreaz/confaero-backend",
     sourceNote:
-      "Organizer dashboard (React / Vite): https://github.com/reazulislamreaz/confaero-dashboard",
+      "Dashboard (React / Vite): https://github.com/reazulislamreaz/confaero-dashboard",
     problem:
-      "Large conferences need dependable participant management, live check-in throughput, and direct interactions between attendees — without traditional systems breaking down on concurrent writes or leaving duplicate check-ins, leads, and connection records.",
+      "Large events need reliable check-ins, lead capture, and live dashboards without duplicate records under concurrent writes.",
     architecture:
-      "Modular Node.js + Express + TypeScript API. MongoDB with compound indexes on hot paths. JWT RBAC across organizer, volunteer, and exhibitor roles. Socket.IO for event-scoped sync; WebRTC for low-latency P2P where it matters.",
+      "Node.js + Express + TypeScript API. MongoDB with compound indexes. JWT RBAC. Socket.IO for event sync; WebRTC for low-latency P2P.",
     challengeSolutions: [
       {
-        challenge:
-          "Concurrent QR scan bursts threatened duplicate check-ins and inconsistent rosters.",
-        solution:
-          "Unique constraints, server-side validation, and compound MongoDB indexes aligned to check-in and roster query patterns.",
+        challenge: "Concurrent QR scans threatened duplicate check-ins.",
+        solution: "Unique constraints, server validation, and compound indexes on hot paths.",
       },
       {
-        challenge:
-          "Exhibitor leads and live dashboards had to stay consistent under write-heavy load.",
-        solution:
-          "Role-aware service layer scoping mutations by persona, plus Socket.IO scoped broadcasts for real-time roster sync.",
+        challenge: "Exhibitor leads and dashboards had to stay consistent under load.",
+        solution: "Role-aware services and scoped Socket.IO broadcasts.",
       },
       {
-        challenge:
-          "WebRTC signaling and realtime UI had to avoid double-booked connections.",
-        solution:
-          "Separated P2P channels from domain writes with guarded API contracts and event-scoped realtime updates.",
+        challenge: "WebRTC signaling had to avoid double-booked connections.",
+        solution: "Separated P2P channels from domain writes with guarded API contracts.",
       },
     ],
     futureEnhancements:
-      "Splitting into focused microservices (auth, events, communications), Redis-backed caching for hot reads, rate limits on scan and signaling APIs, AI-assisted attendee insights via RAG, and hardened scaling for the WebRTC signaling tier.",
+      "Microservices split, Redis caching, rate limits, RAG attendee insights, and WebRTC scaling.",
   },
   {
     title: "Replii",
     tagline:
-      "AI email SaaS for teams — reliable multi-mailbox sync and smart replies on a NestJS + PostgreSQL backend.",
+      "AI email SaaS — multi-mailbox sync and smart replies on NestJS + PostgreSQL.",
     description:
-      "AI-powered email SaaS for intelligent inbox management, automated replies, and multi-mailbox handling — with a NestJS backend focused on protocol integration, reliability, and clean APIs. Led and implemented the backend architecture: email handling, mailbox management, and API design.",
+      "AI email SaaS for inbox management, automated replies, and multi-mailbox handling. NestJS backend for protocol integration and clean APIs.",
     features: [
       "NestJS",
       "TypeScript",
@@ -187,10 +177,10 @@ export const projectsData: Project[] = [
       "AI integration",
     ],
     metrics: [
-      "~50% faster thread list queries after PostgreSQL indexing & Prisma select tuning",
-      "Isolated AI failures from mail transport — sync uptime unaffected by model timeouts",
-      "Multi-mailbox sync with bounded retry logic across IMAP/SMTP provider edge cases",
-      "Structured logging on API errors for faster production debugging",
+      "~50% faster thread queries after PostgreSQL indexing and Prisma tuning",
+      "AI failures isolated from mail transport — sync stays up",
+      "Multi-mailbox sync with bounded retry on provider edge cases",
+      "Structured logging for faster production debugging",
     ],
     devOps: [
       "Production SaaS deploy",
@@ -209,45 +199,40 @@ export const projectsData: Project[] = [
     live: "https://replii.ca/",
     code: "https://github.com/reazulislamreaz/twvinfast-server-full",
     sourceNote:
-      "Backend source uses the twvinfast-server-full repository name; it powers the Replii mail, sync, and AI reply APIs.",
+      "Backend repo: twvinfast-server-full — powers Replii mail, sync, and AI reply APIs.",
     problem:
-      "Teams juggle multiple inboxes and providers while expecting AI-assisted replies — without a unified system, sync drifts, sends fail silently across SMTP quirks, and automated responses become unsafe or inconsistent.",
+      "Teams juggle multiple inboxes and expect AI replies — without sync drift, silent send failures, or unsafe automation.",
     architecture:
-      "NestJS modules with PostgreSQL + Prisma for type-safe relational modeling. Per-user multi-mailbox records, IMAP sync, SMTP outbound, and an AI layer behind guarded APIs — transport isolated from generation.",
+      "NestJS + PostgreSQL + Prisma. Per-user mailboxes, IMAP sync, SMTP outbound, and AI behind guarded APIs — transport isolated from generation.",
     challengeSolutions: [
       {
-        challenge:
-          "IMAP state had to stay consistent across several mailboxes per user.",
-        solution:
-          "Mailbox-oriented NestJS services with controlled sync strategies and bounded retry logic for provider edge cases.",
+        challenge: "IMAP state had to stay consistent across multiple mailboxes.",
+        solution: "Mailbox services with bounded retry for provider edge cases.",
       },
       {
-        challenge:
-          "SMTP delivery varied by provider and could corrupt thread history or double-send.",
-        solution:
-          "Defensive outbound handling, Prisma-backed thread modeling, and APIs that isolate mailbox mutations from AI generation.",
+        challenge: "SMTP quirks could corrupt threads or double-send.",
+        solution: "Defensive outbound handling and APIs that isolate mail from AI.",
       },
       {
-        challenge: "AI timeouts could not take down core mail sync.",
-        solution:
-          "Bounded failure domains — model errors stay isolated while IMAP/SMTP transport keeps running.",
+        challenge: "AI timeouts could not break core mail sync.",
+        solution: "Bounded failure domains — model errors stay isolated from IMAP/SMTP.",
       },
     ],
     futureEnhancements:
-      "Queue-based processing with BullMQ and Redis, rate limits on mail operations, RAG-style contextual reply workflows, analytics and delivery tracking, and clearer separation between email transport and AI microservices.",
+      "BullMQ queues, rate limits, RAG reply workflows, delivery analytics, and transport/AI service split.",
   },
   {
     title: "HavenKeys",
     tagline:
-      "Real-estate marketplace with RBAC and Stripe-backed premium listings — built like a small SaaS, not a brochure site.",
+      "Real-estate marketplace with RBAC and Stripe premium listings.",
     description:
-      "Real-estate marketplace with RBAC, relational inventory, and Stripe-backed premium listings — built like a small SaaS rather than a static brochure.",
+      "Real-estate marketplace with RBAC, relational inventory, and Stripe-backed premium listings.",
     features: ["React", "Node.js", "Express", "MongoDB", "JWT", "Stripe"],
     metrics: [
-      "~35% faster filtered listing searches after indexed role-aware query paths",
-      "Idempotent Stripe webhooks — no double-charged premium placements on retries",
-      "RBAC-enforced API layer with zero cross-tenant data leaks in testing",
-      "Code-split React routes to reduce initial bundle size for mobile agents",
+      "~35% faster listing searches after indexed role-aware queries",
+      "Idempotent Stripe webhooks — no double-charged placements",
+      "RBAC API layer with zero cross-tenant leaks in testing",
+      "Code-split routes for smaller mobile bundles",
     ],
     devOps: [
       "Firebase Hosting",
@@ -260,35 +245,30 @@ export const projectsData: Project[] = [
     images: ["/havenkeys-1.png", "/havenkeys-2.png", "/havenkeys-3.png"],
     live: "https://haven-keys.web.app/",
     code: "https://github.com/reazulislamreaz/haven-keys-client-side",
-    sourceNote:
-      "Client repository — server API is maintained in a separate backend repo.",
+    sourceNote: "Client repo — server API in a separate backend repo.",
     problem:
-      "Listings, agents, and buyers each need different permissions; premium placements must not double-charge or leave listings in an inconsistent state when payments retry.",
+      "Listings need role-based permissions; premium placements must not double-charge on payment retries.",
     architecture:
-      "MERN client with modular Express API. MongoDB for users, roles, and listings. JWT RBAC on mutating routes; Stripe webhooks verified server-side before premium state transitions.",
+      "MERN stack with modular Express API. MongoDB for users, roles, listings. JWT RBAC; Stripe webhooks verified before state changes.",
     challengeSolutions: [
       {
-        challenge:
-          "Role-aware filters risked cross-tenant data leaks on listing queries.",
-        solution:
-          "Explicit RBAC checks on protected REST handlers and scoped query paths per persona.",
+        challenge: "Role-aware filters risked cross-tenant data leaks.",
+        solution: "RBAC on protected routes and scoped query paths per persona.",
       },
       {
-        challenge:
-          "Async Stripe retries could double-charge or leave listings in limbo.",
-        solution:
-          "Idempotent webhook handling and guarded updates — premium transitions only after verified payment signals.",
+        challenge: "Stripe retries could double-charge or leave listings in limbo.",
+        solution: "Idempotent webhooks — premium transitions only after verified payment.",
       },
     ],
     futureEnhancements:
-      "Redis-backed search caching, a queue for outbound email, and clearer audit trails for administrative actions.",
+      "Redis search caching, outbound email queue, and admin audit trails.",
   },
   {
     title: "TaskForge",
     tagline:
-      "Team project & task collaboration — role-based CRUD, analytics, and business-rule guardrails on a typed MERN stack.",
+      "Team project management — role-based CRUD, analytics, and business-rule guardrails.",
     description:
-      "Full-stack collaborative project management app for teams to organize work across projects, tasks, and members. Pairs a React 19 + Vite frontend with a TypeScript Express API: JWT auth with three roles (Admin, Project Manager, Team Member), full project/task lifecycle, workload summaries, comments and attachments, and a charts-driven analytics dashboard — deployed serverless on Vercel.",
+      "Collaborative project management for teams. React 19 + Vite frontend with TypeScript Express API — JWT auth, three roles, task lifecycle, and analytics dashboard on Vercel.",
     features: [
       "React 19",
       "Vite",
@@ -305,11 +285,11 @@ export const projectsData: Project[] = [
       "bcrypt",
     ],
     metrics: [
-      "Role-based access across Admin, Project Manager, and Team Member with server-enforced permissions",
-      "Business-rule validation blocks duplicate task titles, completed-task reassignment, and past-deadline scheduling",
-      "Analytics dashboard with KPI cards and Recharts views for priority, status, progress, and team productivity",
-      "Workload summaries, comments, file attachments, and activity logs for team collaboration",
-      "Search, filter, sort, and pagination across projects and tasks with dark/light mode and skeleton loaders",
+      "Three roles with server-enforced permissions",
+      "Business rules block duplicate titles and invalid reassignment",
+      "Analytics dashboard with KPI cards and Recharts views",
+      "Comments, attachments, activity logs, and workload summaries",
+      "Search, filter, sort, and pagination with dark/light mode",
     ],
     devOps: [
       "Vercel (frontend)",
@@ -329,46 +309,40 @@ export const projectsData: Project[] = [
     live: "https://elite-alumni-pool-frontend.vercel.app",
     code: "https://github.com/reazulislamreaz/elite-alumni-pool-frontend",
     sourceNote:
-      "Backend API (Node / Express 5 / TypeScript): https://github.com/reazulislamreaz/elite-alumni-pool-backend · Try the demo with the Admin / Project Manager / Team Member accounts (password Demo@123456).",
+      "Backend: https://github.com/reazulislamreaz/elite-alumni-pool-backend · Demo: Admin / PM / Member (Demo@123456).",
     problem:
-      "Teams managing many projects and tasks need clear ownership, trustworthy status, and guardrails against bad data — without an over-built tool that lets anyone edit anything, double-book titles, or reassign work that's already done.",
+      "Teams need clear ownership and guardrails — without anyone editing anything or reassigning completed work.",
     architecture:
-      "React 19 + Vite SPA with TanStack Query for server state, Zustand for local state, and Recharts for analytics. TypeScript Express 5 REST API with Mongoose models, Zod request validation, JWT + bcrypt auth, and three-role RBAC. MongoDB Atlas for persistence; deployed serverless on Vercel via an Express handler with env-based config and CORS coordination.",
+      "React 19 + Vite with TanStack Query and Recharts. Express 5 API with Mongoose, Zod, JWT + bcrypt, and three-role RBAC. MongoDB Atlas; serverless on Vercel.",
     challengeSolutions: [
       {
-        challenge:
-          "Three roles needed distinct capabilities without letting the client decide authorization.",
-        solution:
-          "Server-side RBAC middleware on every mutating route — public signup creates Team Members only, while Admin/Manager roles are assigned internally.",
+        challenge: "Three roles needed distinct capabilities — not client-side auth.",
+        solution: "Server RBAC on every mutating route; signup creates Team Members only.",
       },
       {
-        challenge:
-          "Bad operations (duplicate titles, reassigning completed tasks, past deadlines) had to be blocked before reaching the database.",
-        solution:
-          "Zod validation plus domain business rules in the service layer, with consistent error contracts the UI surfaces directly.",
+        challenge: "Bad operations had to be blocked before the database.",
+        solution: "Zod validation plus domain rules with consistent error contracts.",
       },
       {
-        challenge:
-          "Running a stateful Express API on Vercel's serverless platform without a long-lived server process.",
-        solution:
-          "Wrapped the Express app in a serverless handler, auto-seeded demo accounts at startup, and coordinated CORS via a CLIENT_URL allowlist.",
+        challenge: "Express on Vercel without a long-lived server.",
+        solution: "Serverless handler, auto-seeded demos, and CLIENT_URL CORS allowlist.",
       },
     ],
     futureEnhancements:
-      "Real-time notifications over WebSockets, S3/Cloudinary-backed attachments in place of placeholder URLs, richer audit trails, and saved filter/board views.",
+      "WebSocket notifications, S3/Cloudinary attachments, audit trails, and saved views.",
   },
   {
     title: "Marathon Zone",
     tagline:
-      "Marathon registration that survives deadline spikes — organizer console plus a fast public signup flow.",
+      "Marathon registration that survives deadline spikes — organizer console and public signup.",
     description:
-      "Event operations console for organizers plus a participant-facing experience — focused on registration throughput, auth, and trustworthy event data.",
+      "Event ops console for organizers and participant signup — registration throughput, auth, and reliable event data.",
     features: ["Node.js", "Express", "MongoDB", "Firebase Auth", "React"],
     metrics: [
-      "Stable registration throughput during deadline spikes with indexed write paths",
-      "~30% faster participant roster loads after MongoDB aggregation tuning",
-      "Server-side validation blocked conflicting registrations before DB writes",
-      "Lazy-loaded public registration flow for improved mobile performance",
+      "Stable registration throughput during deadline spikes",
+      "~30% faster roster loads after aggregation tuning",
+      "Server validation blocked conflicting registrations",
+      "Lazy-loaded public flow for mobile performance",
     ],
     devOps: [
       "Netlify (frontend)",
@@ -382,118 +356,20 @@ export const projectsData: Project[] = [
     live: "https://marathonzonebyreaz.netlify.app/",
     code: "https://github.com/reazulislamreaz/marathon-zone",
     problem:
-      "Marathon sign-ups spike around deadlines; organizers still need stable tools to publish events, track participants, and avoid conflicting registrations.",
+      "Sign-ups spike near deadlines; organizers need stable tools without conflicting registrations.",
     architecture:
-      "Express API with flexible MongoDB event documents. Firebase Auth for identity. React client with separate organizer mutations vs. public registration reads.",
+      "Express API with MongoDB event documents. Firebase Auth. React client with separate organizer vs. public endpoints.",
     challengeSolutions: [
       {
-        challenge:
-          "Bursty writes during open registration threatened roster accuracy.",
-        solution:
-          "Server-side validation before DB writes, indexing on high-read paths, and clear separation of organizer vs. participant endpoints.",
+        challenge: "Bursty writes threatened roster accuracy.",
+        solution: "Server validation, indexing on hot paths, and separate organizer/participant endpoints.",
       },
       {
-        challenge:
-          "Participant rosters needed to load quickly for organizers mid-event.",
-        solution:
-          "MongoDB aggregation tuning on roster queries — ~30% faster loads in practice.",
+        challenge: "Rosters needed to load quickly mid-event.",
+        solution: "MongoDB aggregation tuning — ~30% faster loads.",
       },
     ],
     futureEnhancements:
-      "WebSocket or SSE-based leaderboards, structured analytics exports, and hardened rate limits on registration endpoints.",
-  },
-  {
-    title: "Green Circle",
-    tagline:
-      "Gardening subscription SaaS — slot booking with zero double-booked delivery windows under concurrent demand.",
-    description:
-      "Subscription-style gardening service with slot booking, admin tooling, and integrity constraints around recurring deliveries.",
-    features: ["Express", "MongoDB", "Mongoose", "React", "JWT"],
-    metrics: [
-      "Eliminated double-booked delivery slots with transactional slot acquisition",
-      "~45% faster admin dashboard metrics via indexed aggregation pipelines",
-      "Consistent slot inventory under concurrent booking attempts",
-      "Optimized React admin tables with pagination to cut render load",
-    ],
-    devOps: [
-      "Netlify deploy",
-      "Express + MongoDB",
-      "JWT-secured admin API",
-      "Docker (planned containerization)",
-      "CI/CD",
-      "Caching on hot dashboard queries",
-    ],
-    images: [
-      "/green-circle-1.png",
-      "/green-circle-2.png",
-      "/green-circle-3.png",
-    ],
-    live: "https://green-circle-by-reaz.netlify.app",
-    code: "https://github.com/reazulislamreaz/green-circle",
-    problem:
-      "Customers compete for limited delivery slots; operators need a trustworthy dashboard without corrupting schedules or double-booking capacity.",
-    architecture:
-      "Express + Mongoose with JWT-protected admin routes. MongoDB aggregations for operational metrics. Layered authorization across customer, staff, and admin personas.",
-    challengeSolutions: [
-      {
-        challenge:
-          "Multiple clients booking the same delivery window caused slot corruption.",
-        solution:
-          "Transactional updates around slot acquisition and consistent inventory under concurrent attempts.",
-      },
-      {
-        challenge:
-          "Admin metrics required expensive ad-hoc scans on growing data.",
-        solution:
-          "Indexed aggregation pipelines — ~45% faster dashboard metrics in practice.",
-      },
-    ],
-    futureEnhancements:
-      "Worker-based fulfillment notifications, containerized deployment, and clearer service boundaries if the workload splits.",
-  },
-  {
-    title: "Event Hub",
-    tagline:
-      "Event lifecycle tool for hosts — custom JWT auth with server-side ownership on every sensitive mutation.",
-    description:
-      "MERN-stack event lifecycle tool with custom authentication and guarded mutations for hosts managing attendees and schedules.",
-    features: ["React", "Express", "MongoDB", "Custom auth", "JWT"],
-    metrics: [
-      "~35% faster authenticated event listings after compound indexes",
-      "100% server-side ownership checks on destructive mutations (cancel/edit)",
-      "Predictable JWT session refresh flow across SPA reloads",
-      "Route-level code splitting improved first-load time on the public app",
-    ],
-    devOps: [
-      "Netlify (SPA)",
-      "Express REST API",
-      "MongoDB",
-      "JWT auth middleware",
-      "CI/CD",
-      "Environment secrets management",
-    ],
-    images: ["/event-hub.png", "/event-hub1.png", "/event-hub2.png"],
-    live: "https://event-hub-by-reaz.netlify.app",
-    code: "https://github.com/reazulislamreaz/event-hub-client",
-    problem:
-      "Hosts need to create, update, and cancel events without exposing attendee data to the wrong account or leaving half-applied edits live.",
-    architecture:
-      "Express REST + MongoDB with custom JWT sessions. React SPA routes sensitive actions through authenticated APIs — the client never owns authorization decisions.",
-    challengeSolutions: [
-      {
-        challenge:
-          "Auth sessions had to survive SPA reloads without surprising logouts.",
-        solution:
-          "Predictable JWT refresh flow with centralized auth middleware on protected routes.",
-      },
-      {
-        challenge:
-          "Destructive actions (cancel/edit) could expose or corrupt the wrong attendee data.",
-        solution:
-          "Explicit ownership checks on event records and consistent error contracts the UI cannot mask.",
-      },
-    ],
-    futureEnhancements:
-      "Dedicated admin reporting, notification hooks, and background reminders for upcoming events.",
+      "Live leaderboards, analytics exports, and rate limits on registration.",
   },
 ];

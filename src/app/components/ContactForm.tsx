@@ -101,12 +101,10 @@ export default function ContactForm() {
               Message sent
             </h3>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-zinc-400 sm:text-base">
-              Thanks for reaching out. I&apos;ve received your message and will get back to you
-              within <span className="text-zinc-300">24–48 hours</span>.
+              Thanks — I&apos;ll reply within{" "}
+              <span className="text-zinc-300">24–48 hours</span>.
             </p>
-            <p className="mt-2 text-xs text-zinc-500">
-              I&apos;ll reply to the email address you provided.
-            </p>
+            <p className="mt-2 text-xs text-zinc-500">Reply goes to your email.</p>
 
             <button
               type="button"
@@ -120,11 +118,10 @@ export default function ContactForm() {
           <>
             <div className="mb-8">
               <h3 className="mb-2 text-3xl font-bold tracking-tight text-zinc-50">
-                Initiate Contact
+                Get in touch
               </h3>
               <p className="text-sm font-light text-zinc-400 md:text-base">
-                I&apos;m currently available for backend engineering roles and interesting
-                projects.
+                Available for backend roles and interesting projects.
               </p>
             </div>
 
@@ -203,7 +200,7 @@ export default function ContactForm() {
                   maxLength={MAX_MESSAGE}
                   disabled={status === "loading"}
                   className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
-                  placeholder="Discuss architecture, team opportunities, or just say hello..."
+                  placeholder="Your message..."
                 />
               </div>
 

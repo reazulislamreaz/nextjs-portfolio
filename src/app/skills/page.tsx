@@ -5,7 +5,7 @@ import { sectionMetadata } from "@/config/seo";
 export const metadata: Metadata = sectionMetadata(
   "skills",
   "Skills",
-  "Backend, frontend, databases, DevOps, and AI-assisted development skills.",
+  "Backend, databases, DevOps, and AI-assisted development.",
 );
 
 export default function SkillsPage() {

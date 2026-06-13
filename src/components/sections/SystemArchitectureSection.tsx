@@ -3,33 +3,33 @@ import SectionHeader from "@/app/components/ui/SectionHeader";
 
 const pillars: { title: string; items: string[] }[] = [
   {
-    title: "Service architecture",
+    title: "Services",
     items: [
-      "Monolith → microservice transition strategy",
+      "Monolith → microservice strategy",
       "API gateway pattern",
-      "Service-to-service communication (REST / event-driven)",
+      "REST and event-driven communication",
       "Database-per-service design",
     ],
   },
   {
-    title: "Data, cache & async work",
+    title: "Data & async",
     items: [
-      "Caching layer using Redis",
-      "Background job processing (queues)",
+      "Redis caching",
+      "Background job queues",
     ],
   },
   {
     title: "API safety & payments",
     items: [
-      "Rate limiting and API protection strategies",
-      "Idempotent APIs for payment flows",
+      "Rate limiting and API protection",
+      "Idempotent payment APIs",
     ],
   },
   {
-    title: "AI & provider integrations",
+    title: "AI & integrations",
     items: [
-      "Scalable AI integration using RAG (retrieval-augmented generation)",
-      "Payment methods (Stripe, SSLCommerz, M-Pesa)",
+      "RAG-based AI integration",
+      "Stripe, SSLCommerz, M-Pesa",
     ],
   },
 ];
@@ -38,12 +38,12 @@ export default function SystemArchitecture() {
   return (
     <Section id="system-architecture" className="bg-zinc-950/50">
       <SectionHeader
-        title="System Architecture & Scalability"
-        subtitle="How I think about growth paths, boundaries, and safe integrations before the first production deploy."
+        title="Architecture & scale"
+        subtitle="Growth paths, boundaries, and safe integrations before production."
       />
 
       <p className="mx-auto mb-8 max-w-3xl px-1 text-center text-base leading-relaxed text-zinc-300 sm:mb-10 sm:text-lg lg:mb-12 lg:text-xl">
-        I design backend systems with scalability, performance, and maintainability in mind.
+        Backends built for scale, performance, and maintainability.
       </p>
 
       <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">

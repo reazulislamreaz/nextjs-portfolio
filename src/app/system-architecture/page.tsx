@@ -5,7 +5,7 @@ import { sectionMetadata } from "@/config/seo";
 export const metadata: Metadata = sectionMetadata(
   "system-architecture",
   "Architecture",
-  "How I design scalable backend systems, APIs, and SaaS-style architectures.",
+  "Scalable backends, APIs, and SaaS architecture.",
 );
 
 export default function SystemArchitecturePage() {

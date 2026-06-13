@@ -23,8 +23,8 @@ export default function ProjectsSection() {
   return (
     <Section id="projects" className="bg-zinc-950/20">
       <SectionHeader
-        title="Selected systems"
-        subtitle="Scan the highlights first — open a case study for architecture, challenges, and metrics."
+        title="Projects"
+        subtitle="Highlights first — open a case study for architecture and metrics."
       />
 
       <div

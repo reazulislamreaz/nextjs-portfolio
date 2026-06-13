@@ -43,9 +43,9 @@ const education = [
 ];
 
 const certifications = [
+  "Full Stack Web Development, Udemy: React, Next.js, Node.js, Express.js, MongoDB, JWT auth, REST APIs, and full-stack architecture. Verified certificate: https://www.udemy.com/certificate/UC-6e1f340a-b9ee-4cda-8cd8-74de0b57ba5a/",
+  "AWS Cloud Computing, Udemy (Hands-On Introduction to Cloud Computing with AWS): IAM, EC2, S3, VPC, load balancing, auto scaling, Lambda, CloudWatch, CI/CD, Docker, and cloud infrastructure basics. Verified certificate: https://www.udemy.com/certificate/UC-737af03a-d89d-4d2f-98e3-5c48dc7d0e8f/",
   "Next Level Web Development, Programming Hero: TypeScript full-stack, Next.js, PostgreSQL, Prisma, RAG, vector DBs, LangChain, Docker, AWS, CI/CD, testing, and AI-integrated capstone work.",
-  "AWS Cloud Computing, Udemy: IAM, EC2, S3, VPC, load balancing, auto scaling, Lambda, CloudWatch, CI/CD, Docker, and cloud infrastructure basics.",
-  "Full Stack Web Development, Udemy: React, Next.js, Node.js, Express.js, MongoDB, JWT auth, REST APIs, and full-stack architecture.",
   "AI & Intelligent Systems: RAG, prompt engineering, AI API integrations, context-aware backends, and vector retrieval concepts.",
 ];
 

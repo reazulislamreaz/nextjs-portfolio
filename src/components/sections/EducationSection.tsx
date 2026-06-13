@@ -31,12 +31,12 @@ const educationEntries: EducationEntry[] = [
     period: "In progress · Expected graduation 2026",
     status: "In progress",
     summary:
-      "Undergraduate honors program centered on governance, policy, and rigorous social-science research — strengthening analytical thinking, structured writing, and evidence-based reasoning applied in software delivery.",
+      "Honors program in governance, policy, and research — builds analytical thinking and clear writing for software delivery.",
     highlights: [
-      "Research design, literature review, and academic writing standards",
-      "Governance, institutions, and comparative political analysis",
-      "Policy framing, stakeholder context, and structured argumentation",
-      "Data interpretation and critical evaluation of complex systems",
+      "Research design and academic writing",
+      "Governance and political analysis",
+      "Policy framing and stakeholder context",
+      "Data interpretation and systems evaluation",
     ],
     focusAreas: [
       "Political theory",
@@ -50,18 +50,15 @@ const educationEntries: EducationEntry[] = [
 const academicStrengths = [
   {
     title: "Analytical rigor",
-    description:
-      "Comfort breaking ambiguous problems into testable claims — the same discipline used in API design and incident review.",
+    description: "Break ambiguous problems into testable claims — same discipline as API design.",
   },
   {
     title: "Clear communication",
-    description:
-      "Strong written and verbal synthesis for specs, documentation, and cross-functional alignment.",
+    description: "Strong synthesis for specs, docs, and cross-functional alignment.",
   },
   {
     title: "Systems thinking",
-    description:
-      "Training in institutions and policy maps well to multi-service architectures and boundary ownership.",
+    description: "Policy and institutions map to multi-service architecture and ownership.",
   },
 ];
 
@@ -70,15 +67,14 @@ export default function Education() {
     <Section id="education" className="bg-zinc-950/40">
       <SectionHeader
         title="Education"
-        subtitle="Formal academic background that complements hands-on engineering — technical programs and certifications are listed separately."
+        subtitle="Academic background. Technical training lives under Certifications."
       />
 
       <div className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 space-y-8 lg:col-span-7">
           <p className="text-sm leading-relaxed text-zinc-400 sm:text-base">
-            My degree is in the social sciences, not computer science — and that is intentional.
-            It sharpens how I research requirements, document decisions, and communicate trade-offs
-            when building production systems.
+            Social science, not CS — by design. It sharpens how I research requirements, document
+            decisions, and communicate trade-offs.
           </p>
 
           <ol className="relative space-y-8 border-l border-zinc-800/80 pl-6 sm:pl-8">
@@ -136,7 +132,7 @@ export default function Education() {
 
                     <div className="mt-6">
                       <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
-                        Program highlights
+                        Highlights
                       </h4>
                       <ul className="space-y-2.5 text-sm leading-relaxed text-zinc-400">
                         {entry.highlights.map((item) => (
@@ -173,8 +169,7 @@ export default function Education() {
               Technical training
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem]">
-              Full-stack, cloud, and AI-focused programs — including Programming Hero and Udemy
-              coursework — are documented under certifications rather than formal education.
+              Full-stack, cloud, and AI programs are listed under certifications.
             </p>
             <SectionLink
               href="/#certifications"
@@ -189,7 +184,7 @@ export default function Education() {
         <aside className="min-w-0 space-y-6 lg:col-span-5 lg:pt-12">
           <div className="space-y-4">
             <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl">
-              How academics support engineering
+              Academics → engineering
             </h3>
             <ul className="space-y-4">
               {academicStrengths.map((item) => (

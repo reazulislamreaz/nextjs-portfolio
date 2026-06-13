@@ -4,8 +4,8 @@ import { sectionMetadata } from "@/config/seo";
 
 export const metadata: Metadata = sectionMetadata(
   "certifications",
-  "Certifications & Learning",
-  "Structured full-stack, cloud, and AI learning aligned with production engineering.",
+  "Certifications",
+  "Full-stack, cloud, and AI learning for production engineering.",
 );
 
 export default function CertificationsPage() {

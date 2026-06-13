@@ -5,7 +5,7 @@ import { sectionMetadata } from "@/config/seo";
 export const metadata: Metadata = sectionMetadata(
   "ai-workflow",
   "AI Workflow",
-  "How I use AI tools responsibly in backend and full-stack delivery.",
+  "AI tools in backend and full-stack delivery.",
 );
 
 export default function AiWorkflowPage() {
