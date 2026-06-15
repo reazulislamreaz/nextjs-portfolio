@@ -134,7 +134,7 @@ export default function ContactSection() {
             type="button"
             aria-label="Close map"
             onClick={closeMap}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 cursor-pointer bg-black/80 backdrop-blur-sm"
           />
           <div
             ref={dialogRef}
@@ -155,7 +155,7 @@ export default function ContactSection() {
                 ref={closeButtonRef}
                 type="button"
                 onClick={closeMap}
-                className="rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-50"
+                className="cursor-pointer rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-50"
                 aria-label="Close map dialog"
               >
                 <FiX size={24} />

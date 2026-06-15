@@ -97,7 +97,7 @@ export default function ExperienceCard({
           <button
             type="button"
             onClick={onToggle}
-            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 sm:w-auto"
+            className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 sm:w-auto"
             aria-expanded={expanded}
             aria-controls={panelId}
           >

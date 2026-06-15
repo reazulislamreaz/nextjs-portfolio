@@ -203,7 +203,7 @@ export default function ProjectCarousel({
               type="button"
               key={idx}
               onClick={() => setCurrentIndex(idx)}
-              className={`rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
+              className={`cursor-pointer rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                 idx === currentIndex
                   ? "h-2 w-6 bg-emerald-500"
                   : "h-2 w-2 bg-zinc-600 hover:bg-zinc-500"

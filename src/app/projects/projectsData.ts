@@ -23,6 +23,92 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    title: "J&K Cabinetry CT",
+    tagline:
+      "Wholesale cabinetry platform — customer portal, admin dashboard, and REST API in production.",
+    description:
+      "Full-stack wholesale cabinetry platform for dealers, contractors, and showrooms. Next.js customer site with catalog and checkout, React admin dashboard for users and inventory, and a TypeScript Express API with MongoDB, S3 uploads, Stripe, and Socket.IO messaging — all live on jkcabinetryct.com.",
+    features: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux Toolkit",
+      "RTK Query",
+      "React 18",
+      "Vite",
+      "Ant Design",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Mongoose",
+      "JWT",
+      "Socket.IO",
+      "AWS S3",
+      "Stripe",
+      "Zod",
+    ],
+    metrics: [
+      "Three production apps — customer site, admin dashboard, and REST API",
+      "Wholesale registration with document upload and admin verification workflow",
+      "Real-time inbox messaging between customers and admins via Socket.IO",
+      "Role-based access — customer, admin, and super_admin with guarded routes",
+      "Catalog, collections, cabinetry, stock parts, orders, and checkout flow",
+    ],
+    devOps: [
+      "Production deploy (jkcabinetryct.com)",
+      "Admin dashboard (dashboard.jkcabinetryct.com)",
+      "API host (api.jkcabinetryct.com)",
+      "MongoDB",
+      "AWS S3",
+      "Nginx reverse proxy",
+      "PM2 / VPS",
+    ],
+    images: [
+      "/jk-cabinetry-home.png",
+      "/jk-cabinetry-registration.png",
+      "/jk-cabinetry-dashboard-users.png",
+      "/jk-cabinetry-dashboard-collections.png",
+      "/jk-cabinetry-dashboard-cabinets.png",
+    ],
+    live: "https://jkcabinetryct.com/",
+    code: "https://github.com/reazulislamreaz/jk-cabinetryct-frontend",
+    sourceNote:
+      "Frontend: https://github.com/reazulislamreaz/jk-cabinetryct-frontend · Dashboard: https://github.com/reazulislamreaz/jk-cabinetryct-dashboard · Backend: https://github.com/reazulislamreaz/jk-cabinetryct-backend · Admin: https://dashboard.jkcabinetryct.com · API: https://api.jkcabinetryct.com/api/v1/docs",
+    problem:
+      "A wholesale cabinetry supplier needed a public marketing and ordering site, an admin console to verify dealers and manage inventory, and a secure API tying catalog, orders, uploads, and messaging together.",
+    architecture:
+      "Next.js 16 customer frontend with RTK Query and Redux Persist cart. React + Vite admin dashboard with Ant Design and role guards. Express + TypeScript API on MongoDB with JWT auth, S3 media, Stripe payments, and Socket.IO for inbox sync.",
+    challengeSolutions: [
+      {
+        challenge:
+          "Three separate apps had to share auth, catalog data, and real-time messaging without drift.",
+        solution:
+          "Single Express API with versioned REST routes, JWT refresh, and Socket.IO rooms scoped per user and role.",
+      },
+      {
+        challenge:
+          "New wholesale accounts needed document review before catalog and pricing access.",
+        solution:
+          "Registration flow with file uploads to S3 and an admin verification queue in the dashboard.",
+      },
+      {
+        challenge:
+          "Admins and customers needed live inbox chat alongside order and profile management.",
+        solution:
+          "Socket.IO client on both frontends with token-authenticated connections and persisted message history.",
+      },
+      {
+        challenge:
+          "Large product catalogs with collections, cabinetry lines, and stock parts required structured CRUD.",
+        solution:
+          "Modular admin modules for collections, categories, cabinetry, and parts with image upload pipelines.",
+      },
+    ],
+    futureEnhancements:
+      "Order analytics, inventory alerts, bulk import/export, push notifications, and API observability dashboards.",
+  },
+  {
     title: "Connectify",
     tagline:
       "WhatsApp-style social app — chat, feed, friends, and voice/video calls.",

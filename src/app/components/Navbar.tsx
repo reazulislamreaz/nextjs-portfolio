@@ -191,7 +191,7 @@ export default function Navbar() {
             {mobileOpen ? (
               <button
                 type="button"
-                className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
+                className="inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
                 onClick={() => setMobileOpen(false)}
                 aria-controls="mobile-nav-menu"
                 aria-expanded="true"
@@ -202,7 +202,7 @@ export default function Navbar() {
             ) : (
               <button
                 type="button"
-                className="inline-flex min-h-10 min-w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
+                className="inline-flex min-h-10 min-w-10 cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 md:hidden"
                 onClick={() => setMobileOpen(true)}
                 aria-controls="mobile-nav-menu"
                 aria-expanded="false"
