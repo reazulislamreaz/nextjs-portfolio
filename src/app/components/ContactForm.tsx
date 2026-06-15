@@ -109,7 +109,7 @@ export default function ContactForm() {
             <button
               type="button"
               onClick={resetForm}
-              className="mt-8 inline-flex min-h-11 items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/80 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="mt-8 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/80 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
             >
               Send another message
             </button>
