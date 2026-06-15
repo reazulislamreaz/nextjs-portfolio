@@ -28,7 +28,6 @@ export const navLinks: NavLink[] = [
   { href: "/#about", label: "About", sectionId: "about" },
   { href: "/#system-architecture", label: "Architecture", sectionId: "system-architecture" },
   { href: "/#skills", label: "Skills", sectionId: "skills" },
-  { href: "/#ai-workflow", label: "Workflow", sectionId: "ai-workflow" },
   { href: "/#education", label: "Education", sectionId: "education" },
   { href: "/#experience", label: "Experience", sectionId: "experience" },
   { href: "/#certifications", label: "Learning", sectionId: "certifications" },

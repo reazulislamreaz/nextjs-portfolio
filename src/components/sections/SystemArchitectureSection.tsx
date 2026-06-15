@@ -6,6 +6,7 @@ const pillars: { title: string; items: string[] }[] = [
     title: "Services",
     items: [
       "Monolith → microservice strategy",
+      "Load balancer traffic distribution",
       "API gateway pattern",
       "REST and event-driven communication",
       "Database-per-service design",
@@ -30,7 +31,7 @@ export default function SystemArchitecture() {
     <Section id="system-architecture" className="bg-zinc-950/50">
       <SectionHeader
         title="Architecture & scale"
-        subtitle="Backends built for scale — growth paths, boundaries, and safe integrations."
+        subtitle="Backends built for scale — growth paths, traffic routing, boundaries, and safe integrations."
       />
 
       <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
