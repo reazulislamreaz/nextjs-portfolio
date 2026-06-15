@@ -22,8 +22,10 @@ const backendTechStack: TechItem[] = [
   { name: "Redis", color: "text-red-500" },
   { name: "Node.js", color: "text-green-500" },
   { name: "Express", color: "text-gray-300" },
+  { name: "NestJS", color: "text-red-500" },
   { name: "Go", color: "text-sky-400" },
   { name: "REST APIs", color: "text-cyan-400" },
+  { name: "GraphQL", color: "text-pink-400" },
 ];
 
 export default function HomeHero() {
