@@ -15,7 +15,7 @@ export const siteSocial = {
   linkedin: "https://www.linkedin.com/in/reazulislamreaz",
 } as const;
 
-export const resumePath = "/Reazul_Islam_Reaz_Resume.pdf";
+export const resumePath = "/Reazul_Islam_Reaz_Backend_Engineer_Resume.pdf";
 
 export interface NavLink {
   href: string;
@@ -26,7 +26,11 @@ export interface NavLink {
 export const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About", sectionId: "about" },
-  { href: "/#system-architecture", label: "Architecture", sectionId: "system-architecture" },
+  {
+    href: "/#system-architecture",
+    label: "Architecture",
+    sectionId: "system-architecture",
+  },
   { href: "/#skills", label: "Skills", sectionId: "skills" },
   { href: "/#education", label: "Education", sectionId: "education" },
   { href: "/#experience", label: "Experience", sectionId: "experience" },
