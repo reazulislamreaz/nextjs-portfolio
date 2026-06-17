@@ -15,7 +15,7 @@ export const siteSocial = {
   linkedin: "https://www.linkedin.com/in/reazulislamreaz",
 } as const;
 
-export const resumePath = "/Reazul_Islam_Reaz_Backend_Engineer_Resume.pdf";
+export const resumePath = "/Reazul_Islam_Reaz_Backend_Focused_Full_Stack_Engineer.pdf";
 
 export interface NavLink {
   href: string;
