@@ -26,11 +26,6 @@ export interface NavLink {
 export const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/#about", label: "About", sectionId: "about" },
-  {
-    href: "/#system-architecture",
-    label: "Architecture",
-    sectionId: "system-architecture",
-  },
   { href: "/#skills", label: "Skills", sectionId: "skills" },
   { href: "/#education", label: "Education", sectionId: "education" },
   { href: "/#experience", label: "Experience", sectionId: "experience" },
