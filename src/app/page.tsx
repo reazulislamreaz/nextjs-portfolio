@@ -5,10 +5,6 @@ import SectionSkeleton from "@/app/components/ui/SectionSkeleton";
 const AboutSection = dynamic(() => import("@/components/sections/AboutSection"), {
   loading: () => <SectionSkeleton />,
 });
-const SystemArchitectureSection = dynamic(
-  () => import("@/components/sections/SystemArchitectureSection"),
-  { loading: () => <SectionSkeleton /> },
-);
 const SkillsSection = dynamic(() => import("@/components/sections/SkillsSection"), {
   loading: () => <SectionSkeleton />,
 });
@@ -35,7 +31,6 @@ export default function HomePage() {
     <>
       <HomeHero />
       <AboutSection />
-      <SystemArchitectureSection />
       <SkillsSection />
       <EducationSection />
       <ExperienceSection />
