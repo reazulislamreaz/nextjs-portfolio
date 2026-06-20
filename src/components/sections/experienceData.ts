@@ -19,7 +19,7 @@ export const experienceData: Experience[] = [
   {
     id: "sparktech-agency",
     company: "Sparktech Agency",
-    role: "Full Stack Developer (Backend focused)",
+    role: "Full Stack Developer (Backend-Focused)",
     employmentType: "Full-time",
     period: "Jan 2026 – Present",
     duration: "5 mos",
