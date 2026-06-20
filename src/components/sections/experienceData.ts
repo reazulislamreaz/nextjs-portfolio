@@ -19,7 +19,7 @@ export const experienceData: Experience[] = [
   {
     id: "sparktech-agency",
     company: "Sparktech Agency",
-    role: "Back End Developer",
+    role: "Full Stack Developer (Backend focused)",
     employmentType: "Full-time",
     period: "Jan 2026 – Present",
     duration: "5 mos",
@@ -27,25 +27,28 @@ export const experienceData: Experience[] = [
     workMode: "On-site",
     isCurrent: true,
     tagline:
-      "Backend systems for event platforms — REST APIs, RBAC, and real-time features.",
+      "Full-stack event platforms — React/Next.js UIs, Node.js APIs, RBAC, and real-time features.",
     summary:
-      "Build scalable, secure backends for web and event apps — API design, data modeling, access control, and real-time features with frontend and mobile teams.",
+      "Deliver end-to-end web and event app features — React/Next.js frontends integrated with scalable Node.js backends, API design, data modeling, access control, and real-time capabilities alongside frontend and mobile teams.",
     highlights: [
-      "REST APIs with Node.js, Express, and TypeScript.",
+      "Full-stack features across React/Next.js frontends and Node.js/Express APIs in TypeScript.",
       "MongoDB/Mongoose schemas for event-driven workloads.",
       "RBAC across Admin, Organizer, Volunteer, Attendee, and Exhibitor roles with JWT auth.",
       "Event modules: registration, check-in, volunteer tasks, exhibitor workflows.",
       "Socket.IO for chat, polling, and sessions; QR workflows for attendance and leads.",
-      "Layered architecture with Zod validation, centralized errors, and standard responses.",
-      "API testing with Postman; focus on performance and data integrity.",
+      "Layered architecture with Zod validation, centralized errors, and consistent API contracts for UI integration.",
+      "Postman and manual QA for API behavior; focus on performance, UX alignment, and data integrity.",
     ],
     architecture:
-      "Express + TypeScript with MongoDB, JWT-guarded routes per persona, and Socket.IO for event-scoped realtime — transport, validation, and domain logic separated.",
+      "React/Next.js clients over Express + TypeScript with MongoDB, JWT-guarded routes per persona, and Socket.IO for event-scoped realtime — presentation, transport, validation, and domain logic separated.",
     techStack: [
       "Node.js",
       "Express.js",
       "NestJS",
       "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
       "Go",
       "FastAPI",
       "MongoDB",
