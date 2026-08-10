@@ -23,6 +23,84 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    title: "Elevate Apparel — E-Commerce Platform",
+    tagline:
+      "Production-grade apparel e-commerce platform — Next.js 16 storefront, role-gated admin console, and NestJS 11 REST API with BullMQ & PostgreSQL.",
+    description:
+      "Full-stack e-commerce platform built for a premium apparel brand. Features a high-performance Next.js 16 storefront with server-side faceted search, live stock selection, and optimistic Redux cart management, paired with a role-gated NestJS 11 backend, PostgreSQL (Prisma 7), and BullMQ worker queues for background job relay and analytics.",
+    features: [
+      "Next.js 16",
+      "React 19",
+      "NestJS 11",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "PostgreSQL 17",
+      "Prisma 7",
+      "Redis 7",
+      "BullMQ",
+      "Redux Toolkit",
+      "TanStack Query",
+      "JWT",
+      "RBAC",
+      "Class Validator",
+      "Pino Logger",
+      "Swagger",
+    ],
+    metrics: [
+      "Production deployment for live merchant (elevateapparel.com.bd)",
+      "Single npm workspace monorepo for Next.js 16 storefront and NestJS 11 backend",
+      "Faceted server-side search, product variants, real-time stock & COD checkout flow",
+      "Role-gated /admin console (ADMIN/SUPER_ADMIN) with analytics & CSV/XLSX exports",
+      "BullMQ background jobs for outbox relay, CRM backfills, and cart recovery",
+    ],
+    devOps: [
+      "Production deploy (elevateapparel.com.bd)",
+      "Next.js 16 (App Router)",
+      "NestJS 11 REST API (/api/v1)",
+      "PostgreSQL 17 (Prisma 7)",
+      "Redis 7 & BullMQ workers",
+      "Docker multi-stage builds",
+      "GitHub Actions CI / CD",
+    ],
+    images: [
+      "/ecommerce-platform-home.png",
+      "/ecommerce-platform-catalog.png",
+      "/ecommerce-platform-product-detail.png",
+      "/ecommerce-platform-admin-dashboard.png",
+      "/ecommerce-platform-admin-orders.png",
+    ],
+    live: "https://elevateapparel.com.bd/",
+    code: "https://github.com/reazulislamreaz/private-projects",
+    sourceNote:
+      "Workspace: ecommerce-platform · Frontend (Next.js 16): https://elevateapparel.com.bd · Backend (NestJS 11): http://localhost:4000/api/v1 · Swagger: http://localhost:4000/docs",
+    problem:
+      "A premium apparel brand needed a high-performance storefront with fast faceted search and variant selection, alongside a secure, role-gated admin console for managing orders, stock alerts, CRM, and analytics without cross-component drift.",
+    architecture:
+      "Monorepo npm workspace with Next.js 16 App Router on frontend using Redux Toolkit and TanStack Query. NestJS 11 versioned REST API on backend with PostgreSQL 17 (Prisma 7 ORM), rotating HTTP-only refresh JWT cookies, and Redis 7 + BullMQ for background queues.",
+    challengeSolutions: [
+      {
+        challenge:
+          "Handling high-concurrency cart updates and stock reservation expiry during peak traffic without double-booking items.",
+        solution:
+          "Implemented server-side inventory reservations with automated BullMQ expiry cancellation jobs and optimistic Redux projection on the frontend.",
+      },
+      {
+        challenge:
+          "Ensuring role-based security across customer operations and admin dashboard reporting without exposing sensitive metrics.",
+        solution:
+          "Designed JWT access authentication with rotating HTTP-only refresh cookies and strict NestJS RBAC guards for ADMIN and SUPER_ADMIN roles.",
+      },
+      {
+        challenge:
+          "Preventing API latency bottlenecks during complex analytics rendering and multi-criteria order filters.",
+        solution:
+          "Optimized PostgreSQL database queries using Prisma compound indexes, selective projection, and offloaded CSV/XLSX export generation to background BullMQ workers.",
+      },
+    ],
+    futureEnhancements:
+      "Multi-tenant store support, payment gateway integrations (SSLCommerz/Stripe), automated push notifications, and real-time inventory sync webhooks.",
+  },
+  {
     title: "J&K Cabinetry CT",
     tagline:
       "Wholesale cabinetry platform — customer portal, admin dashboard, and REST API in production.",
