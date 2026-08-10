@@ -118,6 +118,17 @@ export default function AiPortfolioAssistant() {
     inputRef.current?.focus();
   }, [messages, open]);
 
+  useEffect(() => {
+    if (open && typeof window !== "undefined" && window.innerWidth < 640) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   async function sendMessage(content: string) {
     const trimmed = content.trim();
     if (!trimmed || loading) return;
@@ -336,139 +347,139 @@ export default function AiPortfolioAssistant() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-[80] sm:bottom-6 sm:right-6">
+    <>
+      {/* Mobile dark backdrop overlay when chatbot is open */}
       {open ? (
-        <section
-          className="mb-3 flex h-[min(620px,calc(100dvh-6.5rem))] w-[calc(100vw-2rem)] max-w-[400px] flex-col overflow-hidden rounded-2xl border border-zinc-800/90 bg-zinc-950/95 shadow-2xl shadow-black/50 backdrop-blur-xl sm:w-[400px]"
-          aria-label="AI portfolio assistant"
-        >
-          <header className="flex items-center justify-between gap-3 border-b border-zinc-800/80 px-4 py-3">
-            <div className="flex min-w-0 items-center gap-3">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-300">
-                <TbSparkles size={22} aria-hidden />
-              </span>
-              <div className="min-w-0">
-                <h2 className="truncate text-sm font-semibold text-zinc-50">
-                  AI Portfolio Assistant
-                </h2>
-                <p className="truncate text-xs text-zinc-500">
-                  Answers questions and sends project inquiries
-                </p>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="inline-flex h-9 w-9 cursor-pointer shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-50"
-              aria-label="Close AI assistant"
-            >
-              <FiX size={18} aria-hidden />
-            </button>
-          </header>
-
-          <div
-            ref={listRef}
-            className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
-            aria-live="polite"
-          >
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[88%] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
-                    message.role === "user"
-                      ? "bg-emerald-500 text-white"
-                      : "border border-zinc-800 bg-zinc-900/80 text-zinc-300"
-                  }`}
-                >
-                  {message.content}
-                </div>
-              </div>
-            ))}
-
-            {loading ? (
-              <div className="flex justify-start">
-                <div className="rounded-2xl border border-zinc-800 bg-zinc-900/80 px-4 py-3 text-sm text-zinc-400">
-                  Thinking...
-                </div>
-              </div>
-            ) : null}
-          </div>
-
-          <div className="border-t border-zinc-800/80 p-3">
-            {messages.length === 1 ? (
-              <div className="mb-3 flex flex-wrap gap-2">
-                {starterPrompts.map((prompt) => (
-                  <button
-                    key={prompt}
-                    type="button"
-                    onClick={() => void sendMessage(prompt)}
-                    className="rounded-lg border border-zinc-800 cursor-pointer bg-zinc-900/70 px-3 py-2 text-left text-xs text-zinc-400 transition hover:border-emerald-500/40 hover:text-emerald-300"
-                  >
-                    {prompt}
-                  </button>
-                ))}
-              </div>
-            ) : null}
-
-            {error ? (
-              <p className="mb-2 text-xs text-red-300">{error}</p>
-            ) : null}
-
-            <form onSubmit={handleSubmit} className="flex items-center gap-2">
-              <input
-                ref={inputRef}
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                maxLength={1000}
-                placeholder={inputPlaceholder}
-                className="min-h-11 min-w-0 flex-1 rounded-xl border border-zinc-800 bg-zinc-900/60 px-4 text-sm text-zinc-100 outline-none transition placeholder:text-zinc-600 focus:border-emerald-500/50"
-                disabled={loading}
-              />
-              <button
-                type="submit"
-                disabled={loading || !input.trim()}
-                className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 transition hover:bg-zinc-50 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
-                aria-label="Send message"
-              >
-                <FiSend size={18} aria-hidden />
-              </button>
-            </form>
-          </div>
-        </section>
+        <div
+          className="fixed inset-0 z-[85] bg-black/75 backdrop-blur-xs transition-opacity sm:hidden"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
       ) : null}
 
-      {open ? (
-        <button
-          type="button"
-          onClick={() => setOpen(false)}
-          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
-          aria-label="Hide AI portfolio assistant"
-          aria-expanded="true"
-        >
-          <TbMessageChatbot
-            size={28}
-            aria-hidden
-            className="transition group-hover:scale-105"
-          />
-        </button>
-      ) : (
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
-          aria-label="Open AI portfolio assistant"
-          aria-expanded="false"
-        >
-          <TbMessageChatbot
-            size={28}
-            aria-hidden
-            className="transition group-hover:scale-105"
-          />
-        </button>
-      )}
-    </div>
+      <div className="fixed bottom-4 right-4 z-[90] sm:bottom-6 sm:right-6">
+        {open ? (
+          <section
+            className="fixed inset-x-0 bottom-0 top-10 z-[90] flex flex-col overflow-hidden rounded-t-3xl border-t border-zinc-800/90 bg-zinc-950/98 shadow-2xl backdrop-blur-2xl sm:absolute sm:bottom-16 sm:right-0 sm:top-auto sm:inset-x-auto sm:h-[min(620px,calc(100dvh-6.5rem))] sm:w-[400px] sm:rounded-2xl sm:border sm:border-zinc-800/90"
+            aria-label="AI portfolio assistant"
+          >
+            {/* Mobile grab bar indicator */}
+            <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
+              <div className="h-1 w-10 rounded-full bg-zinc-700/60" />
+            </div>
+
+            <header className="flex items-center justify-between gap-3 border-b border-zinc-800/80 px-4 py-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-300">
+                  <TbSparkles size={22} aria-hidden />
+                </span>
+                <div className="min-w-0">
+                  <h2 className="truncate text-sm font-semibold text-zinc-50">
+                    AI Portfolio Assistant
+                  </h2>
+                  <p className="truncate text-xs text-zinc-400 sm:text-zinc-500">
+                    Answers questions and sends project inquiries
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="inline-flex h-9 w-9 cursor-pointer shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-50 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                aria-label="Close AI assistant"
+              >
+                <FiX size={18} aria-hidden />
+              </button>
+            </header>
+
+            <div
+              ref={listRef}
+              className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
+              aria-live="polite"
+            >
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  <div
+                    className={`max-w-[88%] sm:max-w-[85%] break-words [overflow-wrap:anywhere] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                      message.role === "user"
+                        ? "bg-emerald-600 font-medium text-white shadow-md"
+                        : "border border-zinc-800/90 bg-zinc-900/90 text-zinc-200"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                </div>
+              ))}
+
+              {loading ? (
+                <div className="flex justify-start">
+                  <div className="rounded-2xl border border-zinc-800 bg-zinc-900/90 px-4 py-3 text-sm text-zinc-400">
+                    Thinking...
+                  </div>
+                </div>
+              ) : null}
+            </div>
+
+            <div className="border-t border-zinc-800/80 p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))] bg-zinc-950/98">
+              {messages.length === 1 ? (
+                <div className="mb-3 flex flex-nowrap overflow-x-auto gap-2 pb-1.5 scrollbar-none sm:flex-wrap sm:overflow-x-visible">
+                  {starterPrompts.map((prompt) => (
+                    <button
+                      key={prompt}
+                      type="button"
+                      onClick={() => void sendMessage(prompt)}
+                      className="shrink-0 whitespace-nowrap rounded-lg border border-zinc-800 cursor-pointer bg-zinc-900/80 px-3 py-2 text-left text-xs text-zinc-300 transition hover:border-emerald-500/40 hover:text-emerald-300 sm:shrink sm:whitespace-normal"
+                    >
+                      {prompt}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+
+              {error ? (
+                <p className="mb-2 text-xs font-medium text-red-400">{error}</p>
+              ) : null}
+
+              <form onSubmit={handleSubmit} className="flex items-center gap-2">
+                <input
+                  ref={inputRef}
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  maxLength={1000}
+                  placeholder={inputPlaceholder}
+                  className="min-h-11 min-w-0 flex-1 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 text-base sm:text-sm text-zinc-100 outline-none transition placeholder:text-zinc-500 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50"
+                  disabled={loading}
+                />
+                <button
+                  type="submit"
+                  disabled={loading || !input.trim()}
+                  className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-emerald-500 text-zinc-950 font-bold transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
+                  aria-label="Send message"
+                >
+                  <FiSend size={18} aria-hidden />
+                </button>
+              </form>
+            </div>
+          </section>
+        ) : (
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
+            className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+            aria-label="Open AI portfolio assistant"
+            aria-expanded="false"
+          >
+            <TbMessageChatbot
+              size={28}
+              aria-hidden
+              className="transition group-hover:scale-105"
+            />
+          </button>
+        )}
+      </div>
+    </>
   );
 }
