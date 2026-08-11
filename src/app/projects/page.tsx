@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   ...sectionMetadata(
     "projects",
     "Projects",
-    "Full-stack and backend systems — Confaero, Replii, HavenKeys, and more.",
+    "Full-stack and backend systems — Confaero, HavenKeys, and more.",
   ),
   openGraph: {
     title: "Projects | Reazul Islam Reaz",

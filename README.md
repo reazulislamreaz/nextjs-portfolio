@@ -82,14 +82,6 @@ Scalable event platform: QR check-ins, exhibitor lead capture, organizer tooling
 - **Highlights:** RBAC, burst check-in throughput, duplicate prevention, P2P + broadcast sync  
 - **Code:** [Backend](https://github.com/reazulislamreaz/confaero-backend) · [Dashboard](https://github.com/reazulislamreaz/confaero-dashboard)
 
-### [Replii](https://replii.ca/) — AI email SaaS
-
-AI-powered inbox management, multi-mailbox sync, and guarded reply generation.
-
-- **Stack:** NestJS, TypeScript, PostgreSQL, Prisma, IMAP/SMTP, AI integration  
-- **Highlights:** Per-user mailbox isolation, provider-safe SMTP, bounded AI vs transport failures  
-- **Code:** [Backend API](https://github.com/reazulislamreaz/twvinfast-server-full)
-
 ### [HavenKeys](https://haven-keys.web.app/) — Real-estate marketplace
 
 MERN marketplace with role-based dashboards, listings, and Stripe premium placements.

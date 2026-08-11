@@ -15,7 +15,6 @@ TypeScript · Node.js · Express.js · NestJS · Go · PostgreSQL · MySQL · Mo
 SELECTED PROJECTS (portfolio: reazul-islam-reaz.vercel.app)
 • Connectify — Real-time messaging & social platform (Next.js 15, Express, MongoDB, Socket.IO, Redis, AWS S3, ZEGOCLOUD). Live: https://easy-connectify.vercel.app/
 • Confaero — Conference ops with QR check-ins & exhibitor leads (Node, TypeScript, MongoDB, Socket.IO). Live: https://confaero.com/
-• Replii — AI email SaaS with multi-mailbox IMAP/SMTP sync (NestJS, PostgreSQL, Prisma). Live: https://replii.ca/
 • TaskForge — Team project/task collaboration with RBAC & analytics (React 19, Express 5, MongoDB). Live: https://elite-alumni-pool-frontend.vercel.app
 • Also: HavenKeys, Marathon Zone, and portfolio RAG chatbot (Next.js + OpenAI).
 
@@ -77,17 +76,6 @@ export const PROJECTS = [
     description:
       "Scalable conference platform for real-world events — QR check-ins, exhibitor lead capture, organizer tooling, and low-latency attendee interactions.\n\nTech: Node.js, Express, TypeScript, MongoDB, JWT, React, Socket.IO, WebRTC.\n\n~40% lower p95 latency on check-in APIs after compound MongoDB indexes. Zero duplicate check-ins under concurrent QR scan bursts.",
     skills: ["Node.js", "TypeScript", "MongoDB", "Socket.IO"],
-  },
-  {
-    name: "Replii",
-    start: { month: "Aug", year: "2025" },
-    end: null,
-    ongoing: true,
-    url: "https://replii.ca/",
-    github: "https://github.com/reazulislamreaz/twvinfast-server-full",
-    description:
-      "AI-powered email SaaS for teams — multi-mailbox IMAP/SMTP sync, thread management, and guarded AI reply APIs with transport isolated from AI generation.\n\nTech: NestJS, TypeScript, PostgreSQL, Prisma ORM, IMAP, SMTP, AI integration.\n\n~50% faster thread list queries after PostgreSQL indexing. Sync uptime unaffected by AI model timeouts.",
-    skills: ["NestJS", "PostgreSQL", "Prisma ORM", "TypeScript"],
   },
   {
     name: "TaskForge",
