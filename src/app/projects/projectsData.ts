@@ -327,66 +327,6 @@ export const projectsData: Project[] = [
       "Microservices split, Redis caching, rate limits, RAG attendee insights, and WebRTC scaling.",
   },
   {
-    title: "Replii",
-    tagline:
-      "AI email SaaS — multi-mailbox sync and smart replies on NestJS + PostgreSQL.",
-    description:
-      "AI email SaaS for inbox management, automated replies, and multi-mailbox handling. NestJS backend for protocol integration and clean APIs.",
-    features: [
-      "NestJS",
-      "TypeScript",
-      "PostgreSQL",
-      "Prisma ORM",
-      "IMAP",
-      "SMTP",
-      "AI integration",
-    ],
-    metrics: [
-      "~50% faster thread queries after PostgreSQL indexing and Prisma tuning",
-      "AI failures isolated from mail transport — sync stays up",
-      "Multi-mailbox sync with bounded retry on provider edge cases",
-      "Structured logging for faster production debugging",
-    ],
-    devOps: [
-      "Production SaaS deploy",
-      "PostgreSQL",
-      "Docker",
-      "CI/CD pipeline",
-      "AWS S3 (asset storage)",
-      "BullMQ · Redis (queued mail jobs)",
-    ],
-    images: [
-      "/replii-inbox.jpg",
-      "/replii-thread-ai.jpg",
-      "/replii-signin.jpg",
-      "/replii-dashboard.jpg",
-    ],
-    live: "https://replii.ca/",
-    code: "https://github.com/reazulislamreaz/twvinfast-server-full",
-    sourceNote:
-      "Backend repo: twvinfast-server-full — powers Replii mail, sync, and AI reply APIs.",
-    problem:
-      "Teams juggle multiple inboxes and expect AI replies — without sync drift, silent send failures, or unsafe automation.",
-    architecture:
-      "NestJS + PostgreSQL + Prisma. Per-user mailboxes, IMAP sync, SMTP outbound, and AI behind guarded APIs — transport isolated from generation.",
-    challengeSolutions: [
-      {
-        challenge: "IMAP state had to stay consistent across multiple mailboxes.",
-        solution: "Mailbox services with bounded retry for provider edge cases.",
-      },
-      {
-        challenge: "SMTP quirks could corrupt threads or double-send.",
-        solution: "Defensive outbound handling and APIs that isolate mail from AI.",
-      },
-      {
-        challenge: "AI timeouts could not break core mail sync.",
-        solution: "Bounded failure domains — model errors stay isolated from IMAP/SMTP.",
-      },
-    ],
-    futureEnhancements:
-      "BullMQ queues, rate limits, RAG reply workflows, delivery analytics, and transport/AI service split.",
-  },
-  {
     title: "HavenKeys",
     tagline:
       "Real-estate marketplace with RBAC and Stripe premium listings.",
