@@ -1,17 +1,13 @@
 "use client";
 
-import { useReveal } from "@/hooks/useReveal";
-
 interface SectionHeaderProps {
   title: string;
   subtitle?: string;
 }
 
 export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
-  const revealRef = useReveal<HTMLDivElement>(60);
-
   return (
-    <div ref={revealRef} data-revealed="" className="mb-6 px-1 text-center sm:mb-8 lg:mb-10">
+    <div className="mb-6 px-1 text-center sm:mb-8 lg:mb-10">
       <h2 className="relative mb-3 inline-block max-w-full text-2xl font-black tracking-tight sm:mb-4 sm:text-3xl lg:text-5xl">
         <span className="heading-gradient drop-shadow-sm">
           {title}

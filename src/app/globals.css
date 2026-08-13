@@ -231,10 +231,10 @@ html:not(.dark) :is(
 @media (prefers-reduced-motion: no-preference) {
   [data-revealed] {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
     transition:
-      opacity 0.4s ease-out var(--reveal-delay, 0ms),
-      transform 0.4s ease-out var(--reveal-delay, 0ms);
+      opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
     will-change: opacity, transform;
   }
 
@@ -246,7 +246,7 @@ html:not(.dark) :is(
   /* Mobile: reduce translateY distance */
   @media (max-width: 639px) {
     [data-revealed] {
-      transform: translateY(5px);
+      transform: translateY(6px);
     }
   }
 }

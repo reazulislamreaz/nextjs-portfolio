@@ -80,7 +80,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="group relative mx-auto w-full max-w-xl overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-8 shadow-xl backdrop-blur-md transition-all duration-500 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)] md:mx-0">
+    <div className="group relative h-full w-full overflow-hidden rounded-3xl border border-zinc-800/80 bg-zinc-900/40 p-6 shadow-xl backdrop-blur-md transition-all duration-500 sm:p-8 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]">
       <div className="pointer-events-none absolute inset-0 flex bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="relative z-10">
