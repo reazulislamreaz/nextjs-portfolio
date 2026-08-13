@@ -225,3 +225,85 @@ html:not(.dark) :is(
   white-space: nowrap;
   border-width: 0;
 }
+
+/* ─── Scroll-reveal transition ───────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-revealed] {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+      opacity 0.4s ease-out var(--reveal-delay, 0ms),
+      transform 0.4s ease-out var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  [data-revealed="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Mobile: reduce translateY distance */
+  @media (max-width: 639px) {
+    [data-revealed] {
+      transform: translateY(5px);
+    }
+  }
+}
+
+/* Reduced motion: reveal immediately, no animation */
+@media (prefers-reduced-motion: reduce) {
+  [data-revealed] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── Mobile nav menu slide ──────────────────────────────────────────────── */
+
+@keyframes nav-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nav-slide-down {
+  animation: nav-slide-down 0.25s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-slide-down {
+    animation: none;
+  }
+}
+
+/* ─── Active nav indicator underline ─────────────────────────────────────── */
+
+.nav-link-indicator {
+  position: relative;
+}
+
+.nav-link-indicator::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--teal-500);
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.nav-link-indicator[data-active="true"]::after {
+  opacity: 1;
+  transform: scaleX(1);
+}

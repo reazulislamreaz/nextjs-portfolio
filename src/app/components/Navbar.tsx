@@ -166,7 +166,8 @@ export default function Navbar() {
                     key={href}
                     href={href}
                     onClick={(e) => handleNavClick(e, href, label)}
-                    className={`whitespace-nowrap rounded-lg px-2 py-2 text-xs font-medium transition-all duration-300 lg:px-3 lg:text-sm ${
+                    data-active={isActive ? "true" : undefined}
+                  className={`nav-link-indicator whitespace-nowrap rounded-lg px-2 py-2 text-xs font-medium transition-all duration-300 lg:px-3 lg:text-sm ${
                       isActive
                         ? "bg-emerald-500/10 text-emerald-400"
                         : "text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-50"
@@ -218,7 +219,7 @@ export default function Navbar() {
       {mobileOpen ? (
         <div
           id="mobile-nav-menu"
-          className="max-h-[min(70vh,calc(100dvh-4rem))] overflow-y-auto overscroll-contain border-t border-zinc-900 bg-zinc-950 shadow-2xl md:hidden"
+          className="nav-slide-down max-h-[min(70vh,calc(100dvh-4rem))] overflow-y-auto overscroll-contain border-t border-zinc-900 bg-zinc-950 shadow-2xl md:hidden"
         >
           <div className="space-y-1 px-4 pb-6 pt-3">
             {navLinks.map(({ href, label }) => {

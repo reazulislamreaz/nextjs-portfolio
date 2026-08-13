@@ -47,7 +47,7 @@ export default function HomeHero() {
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
           <div className="order-2 min-w-0 space-y-6 md:order-1 md:space-y-8">
             <div className="space-y-3 sm:space-y-4">
-              <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium tracking-wide text-emerald-400 sm:px-3 sm:text-sm">
+              <div className="hero-line-in inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium tracking-wide text-emerald-400 sm:px-3 sm:text-sm" style={{ animationDelay: '0ms' }}>
                 <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -55,11 +55,11 @@ export default function HomeHero() {
                 <span className="leading-snug">Available for new roles</span>
               </div>
 
-              <h1 className="text-balance text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl">
+              <h1 className="hero-line-in text-balance text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" style={{ animationDelay: '80ms' }}>
                 Reazul Islam Reaz
               </h1>
 
-              <p className="text-base font-medium text-emerald-400/90 sm:text-lg">
+              <p className="hero-line-in text-base font-medium text-emerald-400/90 sm:text-lg" style={{ animationDelay: '160ms' }}>
                 Backend-focused full-stack engineer
               </p>
 
@@ -73,7 +73,7 @@ export default function HomeHero() {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-1 sm:gap-3 sm:pt-2">
+            <div className="hero-line-in flex flex-wrap gap-2 pt-1 sm:gap-3 sm:pt-2" style={{ animationDelay: '300ms' }}>
               {backendTechStack.map((tech) => (
                 <div
                   key={tech.name}
@@ -84,7 +84,7 @@ export default function HomeHero() {
               ))}
             </div>
 
-            <div className="flex w-full min-w-0 flex-col gap-3 pt-4 sm:flex-row sm:gap-4 sm:pt-6">
+            <div className="hero-line-in flex w-full min-w-0 flex-col gap-3 pt-4 sm:flex-row sm:gap-4 sm:pt-6" style={{ animationDelay: '380ms' }}>
               <SectionLink
                 href="/#projects"
                 className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-6 py-3 text-center text-sm font-semibold text-zinc-900 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-50 md:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
@@ -100,7 +100,7 @@ export default function HomeHero() {
               </a>
             </div>
 
-            <div className="flex flex-wrap gap-4 pt-4 sm:gap-6 sm:pt-6">
+            <div className="hero-line-in flex flex-wrap gap-4 pt-4 sm:gap-6 sm:pt-6" style={{ animationDelay: '460ms' }}>
               <a
                 href={siteSocial.github}
                 target="_blank"
@@ -146,7 +146,7 @@ export default function HomeHero() {
             </div>
           </div>
 
-          <div className="order-1 flex justify-center md:order-2 md:justify-end">
+          <div className="hero-line-in order-1 flex justify-center md:order-2 md:justify-end" style={{ animationDelay: '200ms' }}>
             <div className="relative mx-auto w-full max-w-[min(100%,18rem)] sm:max-w-[min(100%,20rem)] md:max-w-none">
               <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-zinc-600 via-emerald-500/10 to-zinc-700 opacity-20 blur-2xl" />
 

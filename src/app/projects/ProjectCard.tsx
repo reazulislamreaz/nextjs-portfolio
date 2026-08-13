@@ -31,7 +31,7 @@ export default function ProjectCard({
       <>
         <article
           id={`project-${slug}`}
-          className="group/card relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:flex-row md:hover:border-zinc-700 md:hover:shadow-[0_0_24px_rgba(16,185,129,0.07)]"
+          className="group/card relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:flex-row md:hover:-translate-y-0.5 md:hover:border-zinc-700 md:hover:shadow-[0_0_24px_rgba(16,185,129,0.07)]"
           aria-labelledby={`${slug}-title`}
         >
           {/* Image side */}
@@ -128,7 +128,7 @@ export default function ProjectCard({
     <>
       <article
         id={`project-${slug}`}
-        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:border-zinc-700 md:hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]"
+        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:-translate-y-0.5 md:hover:border-zinc-700 md:hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]"
         aria-labelledby={`${slug}-title`}
       >
         <div className="relative z-10 p-4 pb-0 sm:p-5 sm:pb-0">
