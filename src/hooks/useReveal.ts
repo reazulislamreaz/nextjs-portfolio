@@ -7,8 +7,9 @@ import { useEffect, useRef } from "react";
  *
  * Attaches an IntersectionObserver to the returned ref. When the element
  * enters the viewport it receives `data-revealed="true"`, which CSS uses
- * to transition from hidden → visible. When the element leaves the viewport,
- * `data-revealed` is reset so the animation replays on re-entry.
+ * to transition from hidden → visible. When the element leaves the viewport
+ * **and is well out of view**, `data-revealed` is reset so the animation
+ * replays on re-entry.
  *
  * An optional `delay` (in ms) sets `--reveal-delay` on the element so
  * staggered children can pick it up in CSS.
@@ -38,10 +39,20 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
         if (entry.isIntersecting) {
           el.setAttribute("data-revealed", "true");
         } else {
-          el.setAttribute("data-revealed", "");
+          // Only reset when the element is well outside the viewport.
+          // This prevents the feedback loop where the CSS translateY
+          // displacement (8px) causes the element to oscillate across
+          // the observer boundary near the bottom of the page.
+          const rect = entry.boundingClientRect;
+          const isWellAbove = rect.bottom < -50;
+          const isWellBelow = rect.top > window.innerHeight + 50;
+
+          if (isWellAbove || isWellBelow) {
+            el.setAttribute("data-revealed", "");
+          }
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0, rootMargin: "0px" },
     );
 
     observer.observe(el);
