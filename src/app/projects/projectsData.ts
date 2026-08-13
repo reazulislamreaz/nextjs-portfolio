@@ -188,6 +188,67 @@ export const projectsData: Project[] = [
       "Order analytics, inventory alerts, bulk import/export, push notifications, and API observability dashboards.",
   },
   {
+    title: "Confaero",
+    tagline:
+      "Conference ops — QR check-ins and exhibitor leads without duplicates under load.",
+    description:
+      "Conference platform with QR check-ins, exhibitor lead capture, organizer tooling, and real-time attendee interactions.",
+    features: [
+      "Node.js",
+      "Express",
+      "TypeScript",
+      "MongoDB",
+      "JWT",
+      "React",
+      "Socket.IO",
+      "WebRTC",
+    ],
+    metrics: [
+      "~40% lower p95 latency on check-in APIs after compound indexes",
+      "Zero duplicate check-ins under concurrent QR bursts",
+      "Real-time roster sync via scoped Socket.IO broadcasts",
+      "Lazy-loaded dashboards and optimized images for faster paint",
+    ],
+    devOps: [
+      "Production deploy",
+      "MongoDB Atlas",
+      "Docker",
+      "CI/CD · GitHub Actions",
+      "Redis (caching layer)",
+      "Nginx reverse proxy",
+    ],
+    images: [
+      "/confaero-dashboard.jpg",
+      "/confaero-invitations.jpg",
+      "/confaero-reviewer.jpg",
+      "/confaero-mobile.jpg",
+    ],
+    live: "https://play.google.com/store/apps/details?id=confaero.com.app",
+    code: "https://github.com/reazulislamreaz/confaero-backend",
+    sourceNote:
+      "Dashboard (React / Vite): https://github.com/reazulislamreaz/confaero-dashboard",
+    problem:
+      "Large events need reliable check-ins, lead capture, and live dashboards without duplicate records under concurrent writes.",
+    architecture:
+      "Node.js + Express + TypeScript API. MongoDB with compound indexes. JWT RBAC. Socket.IO for event sync; WebRTC for low-latency P2P.",
+    challengeSolutions: [
+      {
+        challenge: "Concurrent QR scans threatened duplicate check-ins.",
+        solution: "Unique constraints, server validation, and compound indexes on hot paths.",
+      },
+      {
+        challenge: "Exhibitor leads and dashboards had to stay consistent under load.",
+        solution: "Role-aware services and scoped Socket.IO broadcasts.",
+      },
+      {
+        challenge: "WebRTC signaling had to avoid double-booked connections.",
+        solution: "Separated P2P channels from domain writes with guarded API contracts.",
+      },
+    ],
+    futureEnhancements:
+      "Microservices split, Redis caching, rate limits, RAG attendee insights, and WebRTC scaling.",
+  },
+  {
     title: "Connectify",
     tagline:
       "WhatsApp-style social app — chat, feed, friends, and voice/video calls.",
@@ -266,67 +327,6 @@ export const projectsData: Project[] = [
       "Group chats, push notifications, message search, moderation, and API/socket observability.",
   },
   {
-    title: "Confaero",
-    tagline:
-      "Conference ops — QR check-ins and exhibitor leads without duplicates under load.",
-    description:
-      "Conference platform with QR check-ins, exhibitor lead capture, organizer tooling, and real-time attendee interactions.",
-    features: [
-      "Node.js",
-      "Express",
-      "TypeScript",
-      "MongoDB",
-      "JWT",
-      "React",
-      "Socket.IO",
-      "WebRTC",
-    ],
-    metrics: [
-      "~40% lower p95 latency on check-in APIs after compound indexes",
-      "Zero duplicate check-ins under concurrent QR bursts",
-      "Real-time roster sync via scoped Socket.IO broadcasts",
-      "Lazy-loaded dashboards and optimized images for faster paint",
-    ],
-    devOps: [
-      "Production deploy",
-      "MongoDB Atlas",
-      "Docker",
-      "CI/CD · GitHub Actions",
-      "Redis (caching layer)",
-      "Nginx reverse proxy",
-    ],
-    images: [
-      "/confaero-dashboard.jpg",
-      "/confaero-invitations.jpg",
-      "/confaero-reviewer.jpg",
-      "/confaero-mobile.jpg",
-    ],
-    live: "http://confaero.com/",
-    code: "https://github.com/reazulislamreaz/confaero-backend",
-    sourceNote:
-      "Dashboard (React / Vite): https://github.com/reazulislamreaz/confaero-dashboard",
-    problem:
-      "Large events need reliable check-ins, lead capture, and live dashboards without duplicate records under concurrent writes.",
-    architecture:
-      "Node.js + Express + TypeScript API. MongoDB with compound indexes. JWT RBAC. Socket.IO for event sync; WebRTC for low-latency P2P.",
-    challengeSolutions: [
-      {
-        challenge: "Concurrent QR scans threatened duplicate check-ins.",
-        solution: "Unique constraints, server validation, and compound indexes on hot paths.",
-      },
-      {
-        challenge: "Exhibitor leads and dashboards had to stay consistent under load.",
-        solution: "Role-aware services and scoped Socket.IO broadcasts.",
-      },
-      {
-        challenge: "WebRTC signaling had to avoid double-booked connections.",
-        solution: "Separated P2P channels from domain writes with guarded API contracts.",
-      },
-    ],
-    futureEnhancements:
-      "Microservices split, Redis caching, rate limits, RAG attendee insights, and WebRTC scaling.",
-  },
-  {
     title: "HavenKeys",
     tagline:
       "Real-estate marketplace with RBAC and Stripe premium listings.",
@@ -368,74 +368,7 @@ export const projectsData: Project[] = [
     futureEnhancements:
       "Redis search caching, outbound email queue, and admin audit trails.",
   },
-  {
-    title: "TaskForge",
-    tagline:
-      "Team project management — role-based CRUD, analytics, and business-rule guardrails.",
-    description:
-      "Collaborative project management for teams. React 19 + Vite frontend with TypeScript Express API — JWT auth, three roles, task lifecycle, and analytics dashboard on Vercel.",
-    features: [
-      "React 19",
-      "Vite",
-      "TypeScript",
-      "TanStack Query",
-      "Zustand",
-      "Recharts",
-      "Node.js",
-      "Express 5",
-      "MongoDB",
-      "Mongoose",
-      "Zod",
-      "JWT",
-      "bcrypt",
-    ],
-    metrics: [
-      "Three roles with server-enforced permissions",
-      "Business rules block duplicate titles and invalid reassignment",
-      "Analytics dashboard with KPI cards and Recharts views",
-      "Comments, attachments, activity logs, and workload summaries",
-      "Search, filter, sort, and pagination with dark/light mode",
-    ],
-    devOps: [
-      "Vercel (frontend)",
-      "Vercel serverless (Express handler)",
-      "MongoDB Atlas",
-      "JWT auth middleware",
-      "Env-based config + CORS",
-      "Auto-seeded demo accounts",
-    ],
-    images: [
-      "/taskforge-dashboard.png",
-      "/taskforge-projects.png",
-      "/taskforge-tasks.png",
-      "/taskforge-team.png",
-      "/taskforge-dashboard-dark.png",
-    ],
-    live: "https://elite-alumni-pool-frontend.vercel.app",
-    code: "https://github.com/reazulislamreaz/elite-alumni-pool-frontend",
-    sourceNote:
-      "Backend: https://github.com/reazulislamreaz/elite-alumni-pool-backend · Demo: Admin / PM / Member (Demo@123456).",
-    problem:
-      "Teams need clear ownership and guardrails — without anyone editing anything or reassigning completed work.",
-    architecture:
-      "React 19 + Vite with TanStack Query and Recharts. Express 5 API with Mongoose, Zod, JWT + bcrypt, and three-role RBAC. MongoDB Atlas; serverless on Vercel.",
-    challengeSolutions: [
-      {
-        challenge: "Three roles needed distinct capabilities — not client-side auth.",
-        solution: "Server RBAC on every mutating route; signup creates Team Members only.",
-      },
-      {
-        challenge: "Bad operations had to be blocked before the database.",
-        solution: "Zod validation plus domain rules with consistent error contracts.",
-      },
-      {
-        challenge: "Express on Vercel without a long-lived server.",
-        solution: "Serverless handler, auto-seeded demos, and CLIENT_URL CORS allowlist.",
-      },
-    ],
-    futureEnhancements:
-      "WebSocket notifications, S3/Cloudinary attachments, audit trails, and saved views.",
-  },
+
   {
     title: "Marathon Zone",
     tagline:
