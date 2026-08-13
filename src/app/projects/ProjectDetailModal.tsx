@@ -1,7 +1,21 @@
 "use client";
 
-import { useEffect, useId, useRef } from "react";
-import { FiExternalLink, FiGithub, FiX } from "react-icons/fi";
+import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import {
+  FiActivity,
+  FiBox,
+  FiCheck,
+  FiCpu,
+  FiExternalLink,
+  FiGithub,
+  FiLayers,
+  FiMap,
+  FiServer,
+  FiTarget,
+  FiX,
+  FiZap,
+} from "react-icons/fi";
 import type { Project } from "./projectsData";
 import ProjectCarousel from "./ProjectCarousel";
 
@@ -10,11 +24,22 @@ interface ProjectDetailModalProps {
   onClose: () => void;
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({
+  icon: Icon,
+  children,
+}: {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  children: React.ReactNode;
+}) {
   return (
-    <h4 className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-emerald-500/90">
-      {children}
-    </h4>
+    <div className="mb-3.5 flex items-center gap-2.5">
+      <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10">
+        <Icon size={14} className="text-emerald-500" />
+      </div>
+      <h4 className="text-[0.725rem] font-bold uppercase tracking-[0.14em] text-emerald-500">
+        {children}
+      </h4>
+    </div>
   );
 }
 
@@ -24,11 +49,31 @@ export default function ProjectDetailModal({
 }: ProjectDetailModalProps) {
   const titleId = useId();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
+
+    // Reset internal scroll position to top
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+
+    const rafId = requestAnimationFrame(() => {
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = 0;
+      }
+    });
+
+    closeButtonRef.current?.focus({ preventScroll: true });
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -36,62 +81,95 @@ export default function ProjectDetailModal({
 
     window.addEventListener("keydown", onKeyDown);
     return () => {
+      cancelAnimationFrame(rafId);
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onClose]);
+  }, [mounted, onClose, project.title]);
 
-  return (
+  if (!mounted) return null;
+
+  const modalContent = (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-4"
+      className="fixed inset-0 z-[9999] flex items-end justify-center p-0 sm:items-center sm:p-4"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
     >
+      {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+        className="fixed inset-0 bg-zinc-950/70 backdrop-blur-md dark:bg-black/80"
         aria-hidden
       />
 
+      {/* Modal Dialog */}
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className="relative z-10 flex max-h-[min(90vh,780px)] w-full max-w-xl flex-col overflow-hidden rounded-t-2xl border border-zinc-800/90 bg-zinc-950 shadow-2xl shadow-black/50 sm:max-w-2xl lg:max-w-3xl sm:rounded-3xl"
+        className="modal-enter relative z-10 flex max-h-[min(92vh,880px)] w-full max-w-xl flex-col overflow-hidden rounded-t-2xl border border-zinc-800/80 bg-zinc-950 text-zinc-100 shadow-2xl sm:max-w-2xl sm:rounded-3xl lg:max-w-4xl"
       >
-        <header className="flex shrink-0 items-start justify-between gap-4 border-b border-zinc-800/80 px-5 py-4 sm:px-6 sm:py-5">
-          <h3
-            id={titleId}
-            className="text-xl font-bold tracking-tight text-zinc-100 sm:text-2xl"
-          >
-            {project.title}
-          </h3>
-          <button
-            ref={closeButtonRef}
-            type="button"
-            onClick={onClose}
-            className="inline-flex cursor-pointer min-h-10 min-w-10 shrink-0 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-600 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-            aria-label={`Close ${project.title} case study`}
-          >
-            <FiX size={20} aria-hidden />
-          </button>
+        {/* Header */}
+        <header className="relative shrink-0 border-b border-zinc-800/80 bg-zinc-900 px-5 py-4 sm:px-7 sm:py-5">
+          {/* Top accent bar */}
+          <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500/60 to-transparent" />
+
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0 space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-emerald-500">
+                  <FiLayers size={11} className="shrink-0" />
+                  Case Study
+                </span>
+              </div>
+              <h3
+                id={titleId}
+                className="text-xl font-bold tracking-tight text-zinc-50 sm:text-2xl"
+              >
+                {project.title}
+              </h3>
+              <p className="line-clamp-1 text-xs font-medium text-zinc-400 sm:text-sm">
+                {project.tagline}
+              </p>
+            </div>
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={onClose}
+              className="inline-flex min-h-9 min-w-9 shrink-0 cursor-pointer items-center justify-center rounded-xl border border-zinc-800/80 bg-zinc-900/80 text-zinc-400 transition hover:border-zinc-700 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+              aria-label={`Close ${project.title} case study`}
+            >
+              <FiX size={18} aria-hidden />
+            </button>
+          </div>
         </header>
 
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-6 sm:py-6">
-          <ProjectCarousel
-            images={project.images}
-            title={project.title}
-            className="aspect-[16/10]"
-          />
+        {/* Scrollable Body */}
+        <div
+          ref={scrollContainerRef}
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6"
+        >
+          {/* Carousel */}
+          <div className="overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900 shadow-md">
+            <ProjectCarousel
+              images={project.images}
+              title={project.title}
+              className="aspect-[16/10]"
+            />
+          </div>
+
           <ModalBody project={project} />
         </div>
 
-        <footer className="shrink-0 border-t border-zinc-800/80 px-5 py-4 sm:px-6">
+        {/* Footer */}
+        <footer className="shrink-0 border-t border-zinc-800/80 bg-zinc-900/90 px-5 py-4 backdrop-blur-sm sm:px-7">
           <ModalFooter project={project} />
         </footer>
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 }
 
 function ModalFooter({ project }: { project: Project }) {
@@ -101,7 +179,7 @@ function ModalFooter({ project }: { project: Project }) {
         href={project.live}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2.5 text-sm font-bold text-zinc-950 transition hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-emerald-400 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
       >
         <FiExternalLink size={17} aria-hidden />
         See live demo
@@ -110,7 +188,7 @@ function ModalFooter({ project }: { project: Project }) {
         href={project.code}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-4 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:flex-initial"
+        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-50 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:flex-initial"
       >
         <FiGithub size={17} aria-hidden />
         View on GitHub
@@ -121,95 +199,115 @@ function ModalFooter({ project }: { project: Project }) {
 
 function ModalBody({ project }: { project: Project }) {
   return (
-    <div className="mt-8 space-y-8">
-      <section>
-        <SectionLabel>Overview</SectionLabel>
+    <div className="mt-6 space-y-6">
+      {/* Overview & Problem */}
+      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+        <SectionLabel icon={FiTarget}>Overview</SectionLabel>
         <p className="text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem] sm:leading-7">
           {project.description}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
-          <span className="font-medium text-zinc-300">Problem: </span>
-          {project.problem}
-        </p>
+        <div className="mt-4 rounded-xl border border-zinc-800/80 bg-zinc-950/40 px-4 py-3">
+          <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm sm:leading-6">
+            <span className="font-bold text-emerald-500">Problem Statement: </span>
+            {project.problem}
+          </p>
+        </div>
       </section>
 
-      <section>
-        <SectionLabel>Architecture</SectionLabel>
-        <p className="text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
+      {/* Architecture */}
+      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+        <SectionLabel icon={FiCpu}>Architecture & Design</SectionLabel>
+        <p className="text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem] sm:leading-7">
           {project.architecture}
         </p>
       </section>
 
-      <section>
-        <SectionLabel>Challenges</SectionLabel>
-        <ul className="space-y-4">
-          {project.challengeSolutions.map((item) => (
+      {/* Impact & Key Metrics */}
+      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+        <SectionLabel icon={FiActivity}>Impact & Metrics</SectionLabel>
+        <ul className="grid gap-2.5 sm:grid-cols-2">
+          {project.metrics.map((metric) => (
+            <li
+              key={metric}
+              className="flex items-start gap-3 rounded-xl border border-zinc-800/80 bg-zinc-950/40 p-3.5 text-xs font-medium text-zinc-300 sm:text-sm"
+            >
+              <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-500">
+                <FiCheck size={11} />
+              </span>
+              <span className="leading-snug">{metric}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Challenges & Solutions */}
+      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+        <SectionLabel icon={FiZap}>Key Challenges & Solutions</SectionLabel>
+        <ul className="space-y-3">
+          {project.challengeSolutions.map((item, idx) => (
             <li
               key={item.challenge}
-              className="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-4"
+              className="overflow-hidden rounded-xl border border-zinc-800/80 bg-zinc-950/40 p-4"
             >
-              <p className="text-sm font-medium text-zinc-200">
-                {item.challenge}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-                <span className="text-emerald-500/90">→ </span>
-                {item.solution}
-              </p>
+              <div className="flex items-start gap-3">
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-xs font-bold text-emerald-500">
+                  {idx + 1}
+                </span>
+                <div className="min-w-0 space-y-1.5">
+                  <p className="text-sm font-semibold text-zinc-100">
+                    {item.challenge}
+                  </p>
+                  <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm sm:leading-6">
+                    <span className="font-semibold text-emerald-500">Solution: </span>
+                    {item.solution}
+                  </p>
+                </div>
+              </div>
             </li>
           ))}
         </ul>
       </section>
 
-      <section>
-        <SectionLabel>Impact</SectionLabel>
-        <ul className="space-y-2.5">
-          {project.metrics.map((metric) => (
-            <li key={metric} className="flex gap-2.5 text-sm text-zinc-400">
-              <span
-                className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500/90"
-                aria-hidden
-              />
-              <span>{metric}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* Tech Stack & DevOps Pipeline */}
+      <div className="grid gap-5 sm:grid-cols-2">
+        <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+          <SectionLabel icon={FiBox}>Tech Stack</SectionLabel>
+          <ul className="flex flex-wrap gap-2">
+            {project.features.map((feature) => (
+              <li key={feature}>
+                <span className="rounded-lg border border-zinc-800/80 bg-zinc-950/60 px-3 py-1.5 text-xs font-medium text-zinc-200">
+                  {feature}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
 
-      <section>
-        <SectionLabel>Tech stack</SectionLabel>
-        <ul className="flex flex-wrap gap-2">
-          {project.features.map((feature) => (
-            <li key={feature}>
-              <span className="rounded-lg border border-zinc-700/80 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-200 sm:text-sm">
-                {feature}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
+        <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+          <SectionLabel icon={FiServer}>DevOps & Deploy</SectionLabel>
+          <ul className="flex flex-wrap gap-2">
+            {project.devOps.map((item) => (
+              <li key={item}>
+                <span className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400">
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
 
-      <section>
-        <SectionLabel>Deploy</SectionLabel>
-        <ul className="flex flex-wrap gap-2">
-          {project.devOps.map((item) => (
-            <li key={item}>
-              <span className="rounded-md border border-zinc-700/60 bg-zinc-950/80 px-2.5 py-1 text-xs font-medium text-zinc-300">
-                {item}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <SectionLabel>Roadmap</SectionLabel>
-        <p className="text-sm leading-relaxed text-zinc-500 sm:text-[0.9375rem] sm:leading-7">
+      {/* Future Roadmap */}
+      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+        <SectionLabel icon={FiMap}>Future Roadmap</SectionLabel>
+        <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm sm:leading-6">
           {project.futureEnhancements}
         </p>
       </section>
 
+      {/* Source Note */}
       {project.sourceNote && (
-        <p className="text-xs leading-relaxed text-zinc-500">
+        <p className="rounded-xl border border-zinc-800/80 bg-zinc-950/40 px-4 py-3 text-xs leading-relaxed text-zinc-400">
           {project.sourceNote}
         </p>
       )}

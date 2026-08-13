@@ -75,11 +75,6 @@ export default function Education() {
 
       <div className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-14">
         <div className="min-w-0 space-y-8 lg:col-span-7">
-          <p className="text-sm leading-relaxed text-zinc-400 sm:text-base">
-            Social science, not CS — by design. It sharpens how I research
-            requirements, document decisions, and communicate trade-offs.
-          </p>
-
           <ol className="relative space-y-8 border-l border-zinc-800/80 pl-6 sm:pl-8">
             {educationEntries.map((entry) => (
               <li key={entry.degree} className="relative">

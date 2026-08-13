@@ -98,7 +98,7 @@ export default function ProjectCarousel({
 
   const frameClass = compact
     ? "rounded-xl border border-zinc-800/80 bg-zinc-950/60 shadow-inner ring-1 ring-white/5"
-    : "rounded-2xl border border-zinc-800/80 bg-zinc-950 shadow-lg shadow-black/30";
+    : "rounded-2xl border border-zinc-800/80 bg-zinc-950 shadow-lg shadow-black/10 dark:shadow-black/40";
 
   const slideClass = compact
     ? "bg-gradient-to-b from-zinc-100 to-zinc-200/90"
