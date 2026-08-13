@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
+import { FiChevronDown, FiGrid, FiList } from "react-icons/fi";
 import Section from "../components/ui/Section";
 import SectionHeader from "../components/ui/SectionHeader";
 import ProjectCard from "./ProjectCard";
@@ -11,6 +11,7 @@ const INITIAL_VISIBLE = 4;
 
 export default function ProjectsSection() {
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [layout, setLayout] = useState<"grid" | "list">("grid");
 
   const visibleProjects = useMemo(
     () =>
@@ -27,14 +28,59 @@ export default function ProjectsSection() {
         subtitle="Highlights first — open a case study for architecture and metrics."
       />
 
+      {/* Layout toggle */}
+      <div className="mb-8 flex justify-end">
+        <div className="inline-flex items-center overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/50 backdrop-blur-md">
+          <button
+            type="button"
+            onClick={() => setLayout("grid")}
+            className={`inline-flex min-h-9 cursor-pointer items-center gap-1.5 px-3.5 py-2 text-xs font-medium transition-all duration-200 ${
+              layout === "grid"
+                ? "bg-emerald-500/15 text-emerald-400"
+                : "text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200"
+            }`}
+            aria-label="Grid view — two columns"
+            aria-pressed={layout === "grid"}
+          >
+            <FiGrid size={15} />
+            <span className="hidden sm:inline">Grid</span>
+          </button>
+
+          <span className="h-5 w-px bg-zinc-700/60" aria-hidden />
+
+          <button
+            type="button"
+            onClick={() => setLayout("list")}
+            className={`inline-flex min-h-9 cursor-pointer items-center gap-1.5 px-3.5 py-2 text-xs font-medium transition-all duration-200 ${
+              layout === "list"
+                ? "bg-emerald-500/15 text-emerald-400"
+                : "text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-200"
+            }`}
+            aria-label="List view — single column"
+            aria-pressed={layout === "list"}
+          >
+            <FiList size={15} />
+            <span className="hidden sm:inline">List</span>
+          </button>
+        </div>
+      </div>
+
       <div
-        className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12"
+        className={`grid items-stretch gap-8 transition-all duration-300 ${
+          layout === "grid"
+            ? "grid-cols-1 lg:grid-cols-2 lg:gap-10 xl:gap-12"
+            : "grid-cols-1 gap-6"
+        }`}
         role="list"
         aria-label="Portfolio projects"
       >
         {visibleProjects.map((project, index) => (
           <div key={project.title} role="listitem" className="min-w-0">
-            <ProjectCard project={project} priorityImage={index < 2} />
+            <ProjectCard
+              project={project}
+              priorityImage={index < 2}
+              layout={layout}
+            />
           </div>
         ))}
       </div>
