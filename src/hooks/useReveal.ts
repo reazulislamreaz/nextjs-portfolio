@@ -16,6 +16,7 @@ import { useEffect, useRef } from "react";
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>(
   delay?: number,
+  once = true,
 ) {
   const ref = useRef<T>(null);
 
@@ -38,26 +39,26 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.setAttribute("data-revealed", "true");
-        } else {
-          // Only reset when the element is well outside the viewport.
-          // This prevents the feedback loop where the CSS translateY
-          // displacement (8px) causes the element to oscillate across
-          // the observer boundary near the bottom of the page.
+          if (once) {
+            observer.unobserve(el);
+            observer.disconnect();
+          }
+        } else if (!once) {
           const rect = entry.boundingClientRect;
-          const isWellAbove = rect.bottom < -50;
-          const isWellBelow = rect.top > window.innerHeight + 50;
+          const isWellAbove = rect.bottom < -100;
+          const isWellBelow = rect.top > window.innerHeight + 100;
 
           if (isWellAbove || isWellBelow) {
             el.setAttribute("data-revealed", "");
           }
         }
       },
-      { threshold: 0, rootMargin: "0px" },
+      { threshold: 0.05, rootMargin: "0px 0px -40px 0px" },
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [delay]);
+  }, [delay, once]);
 
   return ref;
 }

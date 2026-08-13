@@ -135,7 +135,7 @@ export default function Navbar() {
       className="fixed top-0 z-50 w-full min-w-0 border-b border-zinc-800/50 bg-zinc-950/70 backdrop-blur-xl"
       aria-label="Main navigation"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12">
         <div
           data-nav-bar
           className="flex h-16 min-w-0 items-center justify-between gap-3 sm:h-20"
@@ -152,8 +152,8 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="hidden min-w-0 flex-1 justify-end md:flex md:px-2 lg:px-4">
-            <div className="flex max-w-full flex-wrap items-center justify-end gap-x-0.5 gap-y-1 lg:gap-x-1">
+          <div className="hidden min-w-0 flex-1 justify-center md:flex md:px-2 lg:px-4">
+            <div className="flex max-w-full flex-wrap items-center justify-center gap-x-0.5 gap-y-1 lg:gap-x-1">
               {navLinks.map(({ href, label }) => {
                 const isActive = isNavLinkActive(
                   href,

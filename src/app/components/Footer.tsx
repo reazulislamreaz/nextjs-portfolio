@@ -11,7 +11,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full border-t border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-12">
         <div
           ref={revealRef}
           data-revealed=""

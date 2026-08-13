@@ -30,11 +30,17 @@ const backendTechStack: TechItem[] = [
 
 export default function HomeHero() {
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setSliderIndex((prev) => (prev + 1) % texts.length);
-    }, 3500);
+      setFade(false);
+      const timer = setTimeout(() => {
+        setSliderIndex((prev) => (prev + 1) % texts.length);
+        setFade(true);
+      }, 250);
+      return () => clearTimeout(timer);
+    }, 3800);
     return () => clearInterval(interval);
   }, []);
 
@@ -65,8 +71,10 @@ export default function HomeHero() {
 
               <div className="min-h-[3.25rem] w-full max-w-xl sm:min-h-[3rem]">
                 <p
-                  key={sliderIndex}
-                  className="hero-line-in text-pretty text-base leading-relaxed text-zinc-400 sm:text-lg md:text-xl"
+                  className={`hero-line-in text-pretty text-base leading-relaxed text-zinc-400 transition-opacity duration-300 sm:text-lg md:text-xl ${
+                    fade ? "opacity-100" : "opacity-0"
+                  }`}
+                  style={{ animationDelay: '240ms' }}
                 >
                   {texts[sliderIndex]}
                 </p>
