@@ -13,10 +13,10 @@ CORE STACK
 TypeScript · Node.js · Express.js · NestJS · Go · PostgreSQL · MySQL · MongoDB · Redis · React · Next.js · Tailwind CSS · REST APIs · GraphQL · Microservices · Socket.IO · WebRTC · JWT/RBAC · Stripe · Docker · AWS · RAG & AI API integrations
 
 SELECTED PROJECTS (portfolio: reazul-islam-reaz.vercel.app)
-• Connectify — Real-time messaging & social platform (Next.js 15, Express, MongoDB, Socket.IO, Redis, AWS S3, ZEGOCLOUD). Live: https://easy-connectify.vercel.app/
-• Confaero — Conference ops with QR check-ins & exhibitor leads (Node, TypeScript, MongoDB, Socket.IO). Live: https://confaero.com/
-• TaskForge — Team project/task collaboration with RBAC & analytics (React 19, Express 5, MongoDB). Live: https://elite-alumni-pool-frontend.vercel.app
-• Also: HavenKeys, Marathon Zone, and portfolio RAG chatbot (Next.js + OpenAI).
+• Elevate Apparel — Production e-commerce platform with Next.js 16 storefront, NestJS 11 API, PostgreSQL, Redis & BullMQ. Live: https://elevateapparel.com.bd/
+• Confaero — Conference ops with QR check-ins & exhibitor leads (Node, TypeScript, MongoDB, Socket.IO). App: https://play.google.com/store/apps/details?id=confaero.com.app
+• J&K Cabinetry CT — Wholesale cabinetry platform with customer portal, admin dashboard & REST API (Next.js, Express, MongoDB, Stripe). Live: https://jkcabinetryct.com/
+• Also: Connectify, HavenKeys, Marathon Zone, and portfolio RAG chatbot (Next.js + OpenAI).
 
 HOW I WORK
 Design modular services and clear API boundaries · Model relational & document schemas · Harden auth, payments, and rate-sensitive flows · Deploy with pragmatic CI/CD · Use AI tools responsibly — architecture and review stay human-owned.
@@ -77,17 +77,7 @@ export const PROJECTS = [
       "Scalable conference platform for real-world events — QR check-ins, exhibitor lead capture, organizer tooling, and low-latency attendee interactions.\n\nTech: Node.js, Express, TypeScript, MongoDB, JWT, React, Socket.IO, WebRTC.\n\n~40% lower p95 latency on check-in APIs after compound MongoDB indexes. Zero duplicate check-ins under concurrent QR scan bursts.",
     skills: ["Node.js", "TypeScript", "MongoDB", "Socket.IO"],
   },
-  {
-    name: "TaskForge",
-    start: { month: "Nov", year: "2025" },
-    end: { month: "Dec", year: "2025" },
-    ongoing: false,
-    url: "https://elite-alumni-pool-frontend.vercel.app",
-    github: "https://github.com/reazulislamreaz/elite-alumni-pool-frontend",
-    description:
-      "Team project & task collaboration app — JWT RBAC (Admin, Project Manager, Team Member), Zod validation, business-rule guardrails, and Recharts analytics dashboard.\n\nTech: React 19, Vite, TypeScript, TanStack Query, Zustand, Node.js, Express 5, MongoDB, Mongoose, JWT.\n\nDeployed serverless on Vercel with MongoDB Atlas.",
-    skills: ["React.js", "Node.js", "MongoDB", "TypeScript"],
-  },
+
   {
     name: "HavenKeys",
     start: { month: "May", year: "2025" },
