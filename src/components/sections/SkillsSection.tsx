@@ -1,384 +1,426 @@
 import type { ReactNode } from "react";
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
-import SkillCard from "@/app/components/ui/SkillCard";
-import { FaNodeJs, FaReact, FaRobot } from "react-icons/fa";
+import SkillCard, { type Skill } from "@/app/components/ui/SkillCard";
 import {
+  SiAmazoncloudwatch,
   SiAmazonwebservices,
+  SiAwslambda,
   SiDigitalocean,
   SiDocker,
-  SiHostinger,
   SiExpress,
   SiGithubactions,
   SiGo,
   SiGraphql,
+  SiHostinger,
   SiLinux,
   SiMongodb,
   SiMysql,
   SiNestjs,
   SiNextdotjs,
   SiNginx,
+  SiNodedotjs,
+  SiOpenai,
   SiPostgresql,
+  SiReact,
   SiReactquery,
-  SiRedux,
   SiRedis,
-  SiSocketdotio,
+  SiRedux,
   SiStripe,
   SiTailwindcss,
   SiTypescript,
   SiVite,
 } from "react-icons/si";
 import {
+  TbActivity,
   TbApi,
+  TbBolt,
+  TbBrain,
   TbCloud,
-  TbLock,
-  TbSchema,
-  TbShieldLock,
+  TbCpu,
+  TbCreditCard,
+  TbDatabase,
+  TbGauge,
+  TbInfinity,
+  TbKey,
+  TbLayersLinked,
+  TbLayout,
+  TbRoute,
+  TbServer,
+  TbShieldCheck,
   TbSparkles,
   TbTopologyStar3,
-  TbCurrencyDollar,
 } from "react-icons/tb";
 import { LuBoxes } from "react-icons/lu";
 import { HiOutlineQueueList } from "react-icons/hi2";
 
-interface SkillData {
-  name: string;
-  icon: ReactNode;
-  color: string;
-  iconColor: string;
-}
-
 interface SkillCategory {
   title: string;
+  icon: ReactNode;
+  iconBg: string;
   hint?: string;
-  skills: SkillData[];
+  skills: Skill[];
 }
 
-const backendSkills: SkillData[] = [
+const backendSkills: Skill[] = [
   {
     name: "Node.js",
-    icon: <FaNodeJs />,
-    color: "from-green-500/20 to-green-700/20",
-    iconColor: "text-green-500",
+    icon: <SiNodedotjs />,
+    iconColor: "text-emerald-500",
+    badgeBg: "bg-emerald-500/10 border border-emerald-500/20",
   },
   {
     name: "TypeScript",
     icon: <SiTypescript />,
-    color: "from-blue-500/20 to-blue-700/20",
-    iconColor: "text-blue-400",
+    iconColor: "text-blue-500",
+    badgeBg: "bg-blue-500/10 border border-blue-500/20",
   },
   {
     name: "Go",
     icon: <SiGo />,
-    color: "from-sky-500/20 to-blue-700/20",
-    iconColor: "text-sky-400",
+    iconColor: "text-cyan-500",
+    badgeBg: "bg-cyan-500/10 border border-cyan-500/20",
   },
   {
     name: "Express.js",
     icon: <SiExpress />,
-    color: "from-zinc-500/20 to-zinc-800/20",
-    iconColor: "text-zinc-300",
+    iconColor: "text-zinc-400",
+    badgeBg: "bg-zinc-500/10 border border-zinc-500/20",
   },
   {
     name: "NestJS",
     icon: <SiNestjs />,
-    color: "from-red-500/20 to-red-700/20",
-    iconColor: "text-red-500",
+    iconColor: "text-rose-500",
+    badgeBg: "bg-rose-500/10 border border-rose-500/20",
   },
   {
     name: "REST APIs",
     icon: <TbApi />,
-    color: "from-cyan-500/20 to-blue-600/20",
-    iconColor: "text-cyan-400",
+    iconColor: "text-teal-500",
+    badgeBg: "bg-teal-500/10 border border-teal-500/20",
   },
   {
     name: "GraphQL",
     icon: <SiGraphql />,
-    color: "from-pink-500/20 to-rose-600/20",
-    iconColor: "text-pink-400",
+    iconColor: "text-pink-500",
+    badgeBg: "bg-pink-500/10 border border-pink-500/20",
   },
   {
     name: "Microservices",
     icon: <LuBoxes />,
-    color: "from-emerald-500/20 to-teal-700/20",
-    iconColor: "text-emerald-400",
+    iconColor: "text-emerald-500",
+    badgeBg: "bg-emerald-500/10 border border-emerald-500/20",
   },
 ];
 
-const databaseSkills: SkillData[] = [
+const databaseSkills: Skill[] = [
   {
     name: "MongoDB",
     icon: <SiMongodb />,
-    color: "from-green-600/20 to-green-800/20",
-    iconColor: "text-green-500",
+    iconColor: "text-emerald-500",
+    badgeBg: "bg-emerald-500/10 border border-emerald-500/20",
   },
   {
     name: "PostgreSQL",
     icon: <SiPostgresql />,
-    color: "from-blue-500/20 to-indigo-600/20",
     iconColor: "text-blue-500",
+    badgeBg: "bg-blue-500/10 border border-blue-500/20",
   },
   {
     name: "MySQL",
     icon: <SiMysql />,
-    color: "from-orange-500/20 to-amber-600/20",
-    iconColor: "text-orange-400",
+    iconColor: "text-amber-500",
+    badgeBg: "bg-amber-500/10 border border-amber-500/20",
   },
   {
     name: "SQL",
-    icon: <TbSchema />,
-    color: "from-amber-500/20 to-yellow-600/20",
-    iconColor: "text-amber-400",
+    icon: <TbDatabase />,
+    iconColor: "text-cyan-500",
+    badgeBg: "bg-cyan-500/10 border border-cyan-500/20",
   },
   {
     name: "Database design",
-    icon: <TbTopologyStar3 />,
-    color: "from-zinc-400/20 to-zinc-600/20",
-    iconColor: "text-zinc-300",
+    icon: <TbLayersLinked />,
+    iconColor: "text-violet-500",
+    badgeBg: "bg-violet-500/10 border border-violet-500/20",
   },
 ];
 
-const architectureSkills: SkillData[] = [
+const architectureSkills: Skill[] = [
   {
     name: "System design",
     icon: <TbTopologyStar3 />,
-    color: "from-zinc-400/20 to-zinc-600/20",
-    iconColor: "text-zinc-200",
+    iconColor: "text-purple-500",
+    badgeBg: "bg-purple-500/10 border border-purple-500/20",
   },
   {
     name: "API architecture",
-    icon: <TbApi />,
-    color: "from-emerald-400/20 to-teal-600/20",
-    iconColor: "text-emerald-400",
+    icon: <TbRoute />,
+    iconColor: "text-teal-500",
+    badgeBg: "bg-teal-500/10 border border-teal-500/20",
   },
   {
     name: "Auth & RBAC",
-    icon: <TbLock />,
-    color: "from-purple-500/20 to-pink-600/20",
-    iconColor: "text-purple-400",
+    icon: <TbKey />,
+    iconColor: "text-indigo-500",
+    badgeBg: "bg-indigo-500/10 border border-indigo-500/20",
   },
   {
     name: "Event-driven patterns",
-    icon: <SiSocketdotio />,
-    color: "from-zinc-200/20 to-zinc-400/20",
-    iconColor: "text-zinc-200",
+    icon: <TbBolt />,
+    iconColor: "text-amber-500",
+    badgeBg: "bg-amber-500/10 border border-amber-500/20",
   },
 ];
 
-const performanceSkills: SkillData[] = [
+const performanceSkills: Skill[] = [
   {
     name: "Redis",
     icon: <SiRedis />,
-    color: "from-red-500/20 to-red-800/20",
-    iconColor: "text-red-400",
+    iconColor: "text-red-500",
+    badgeBg: "bg-red-500/10 border border-red-500/20",
   },
   {
     name: "Caching",
-    icon: <TbCloud />,
-    color: "from-orange-500/20 to-amber-600/20",
-    iconColor: "text-orange-300",
+    icon: <TbGauge />,
+    iconColor: "text-orange-500",
+    badgeBg: "bg-orange-500/10 border border-orange-500/20",
   },
   {
     name: "Rate limiting",
-    icon: <TbShieldLock />,
-    color: "from-slate-500/20 to-slate-700/20",
-    iconColor: "text-slate-300",
+    icon: <TbShieldCheck />,
+    iconColor: "text-sky-500",
+    badgeBg: "bg-sky-500/10 border border-sky-500/20",
   },
   {
     name: "Queues & workers",
     icon: <HiOutlineQueueList />,
-    color: "from-cyan-600/20 to-blue-800/20",
-    iconColor: "text-cyan-300",
+    iconColor: "text-blue-500",
+    badgeBg: "bg-blue-500/10 border border-blue-500/20",
   },
 ];
 
-const devOpsSkills: SkillData[] = [
+const devOpsSkills: Skill[] = [
   {
     name: "Docker",
     icon: <SiDocker />,
-    color: "from-blue-500/20 to-sky-700/20",
-    iconColor: "text-blue-400",
+    iconColor: "text-sky-500",
+    badgeBg: "bg-sky-500/10 border border-sky-500/20",
   },
   {
     name: "Docker Compose",
     icon: <SiDocker />,
-    color: "from-sky-500/20 to-blue-800/20",
-    iconColor: "text-sky-400",
+    iconColor: "text-blue-500",
+    badgeBg: "bg-blue-500/10 border border-blue-500/20",
   },
   {
     name: "Nginx",
     icon: <SiNginx />,
-    color: "from-green-600/20 to-emerald-800/20",
-    iconColor: "text-green-500",
+    iconColor: "text-emerald-500",
+    badgeBg: "bg-emerald-500/10 border border-emerald-500/20",
   },
   {
     name: "AWS · EC2 · S3",
     icon: <SiAmazonwebservices />,
-    color: "from-amber-500/20 to-orange-700/20",
-    iconColor: "text-amber-400",
+    iconColor: "text-amber-500",
+    badgeBg: "bg-amber-500/10 border border-amber-500/20",
   },
   {
     name: "AWS IAM & VPC",
     icon: <SiAmazonwebservices />,
-    color: "from-yellow-500/20 to-amber-700/20",
-    iconColor: "text-yellow-400",
+    iconColor: "text-yellow-500",
+    badgeBg: "bg-yellow-500/10 border border-yellow-500/20",
   },
   {
     name: "DigitalOcean",
     icon: <SiDigitalocean />,
-    color: "from-blue-600/20 to-indigo-800/20",
-    iconColor: "text-blue-400",
+    iconColor: "text-blue-500",
+    badgeBg: "bg-blue-500/10 border border-blue-500/20",
   },
   {
     name: "Hostinger",
     icon: <SiHostinger />,
-    color: "from-violet-600/20 to-purple-800/20",
-    iconColor: "text-violet-400",
+    iconColor: "text-purple-500",
+    badgeBg: "bg-purple-500/10 border border-purple-500/20",
   },
   {
     name: "CI/CD",
-    icon: <SiGithubactions />,
-    color: "from-zinc-400/20 to-zinc-700/20",
-    iconColor: "text-zinc-200",
+    icon: <TbInfinity />,
+    iconColor: "text-teal-500",
+    badgeBg: "bg-teal-500/10 border border-teal-500/20",
   },
   {
     name: "GitHub Actions",
     icon: <SiGithubactions />,
-    color: "from-indigo-500/20 to-violet-700/20",
-    iconColor: "text-indigo-300",
+    iconColor: "text-indigo-500",
+    badgeBg: "bg-indigo-500/10 border border-indigo-500/20",
   },
   {
     name: "Linux",
     icon: <SiLinux />,
-    color: "from-zinc-300/20 to-zinc-600/20",
-    iconColor: "text-zinc-300",
+    iconColor: "text-yellow-500",
+    badgeBg: "bg-yellow-500/10 border border-yellow-500/20",
   },
   {
     name: "CloudWatch",
-    icon: <TbCloud />,
-    color: "from-rose-500/20 to-pink-700/20",
-    iconColor: "text-rose-300",
+    icon: <SiAmazoncloudwatch />,
+    iconColor: "text-rose-500",
+    badgeBg: "bg-rose-500/10 border border-rose-500/20",
   },
   {
     name: "Serverless · Lambda",
-    icon: <SiAmazonwebservices />,
-    color: "from-violet-500/20 to-purple-800/20",
-    iconColor: "text-violet-300",
+    icon: <SiAwslambda />,
+    iconColor: "text-orange-500",
+    badgeBg: "bg-orange-500/10 border border-orange-500/20",
   },
 ];
 
-const aiSkills: SkillData[] = [
+const aiSkills: Skill[] = [
   {
     name: "RAG",
-    icon: <TbSparkles />,
-    color: "from-violet-500/20 to-fuchsia-600/20",
-    iconColor: "text-violet-300",
+    icon: <TbBrain />,
+    iconColor: "text-violet-500",
+    badgeBg: "bg-violet-500/10 border border-violet-500/20",
   },
   {
     name: "AI tooling",
-    icon: <FaRobot />,
-    color: "from-purple-400/20 to-fuchsia-500/20",
-    iconColor: "text-purple-300",
+    icon: <SiOpenai />,
+    iconColor: "text-emerald-500",
+    badgeBg: "bg-emerald-500/10 border border-emerald-500/20",
   },
   {
     name: "Stripe",
     icon: <SiStripe />,
-    color: "from-indigo-500/20 to-violet-600/20",
-    iconColor: "text-indigo-300",
+    iconColor: "text-indigo-500",
+    badgeBg: "bg-indigo-500/10 border border-indigo-500/20",
   },
   {
     name: "SSLCommerz · M-Pesa",
-    icon: <TbCurrencyDollar />,
-    color: "from-teal-500/20 to-emerald-700/20",
-    iconColor: "text-teal-300",
+    icon: <TbCreditCard />,
+    iconColor: "text-teal-500",
+    badgeBg: "bg-teal-500/10 border border-teal-500/20",
   },
 ];
 
-const frontendSkills: SkillData[] = [
+const frontendSkills: Skill[] = [
   {
     name: "React",
-    icon: <FaReact />,
-    color: "from-cyan-400/20 to-blue-500/20",
-    iconColor: "text-cyan-400",
+    icon: <SiReact />,
+    iconColor: "text-cyan-500",
+    badgeBg: "bg-cyan-500/10 border border-cyan-500/20",
   },
   {
     name: "Next.js",
     icon: <SiNextdotjs />,
-    color: "from-zinc-300/20 to-zinc-600/20",
-    iconColor: "text-zinc-300",
+    iconColor: "text-zinc-400",
+    badgeBg: "bg-zinc-500/10 border border-zinc-500/20",
   },
   {
     name: "TypeScript",
     icon: <SiTypescript />,
-    color: "from-blue-500/20 to-blue-700/20",
-    iconColor: "text-blue-400",
+    iconColor: "text-blue-500",
+    badgeBg: "bg-blue-500/10 border border-blue-500/20",
   },
   {
     name: "Tailwind CSS",
     icon: <SiTailwindcss />,
-    color: "from-teal-400/20 to-cyan-500/20",
-    iconColor: "text-teal-400",
+    iconColor: "text-teal-500",
+    badgeBg: "bg-teal-500/10 border border-teal-500/20",
   },
   {
     name: "TanStack Query",
     icon: <SiReactquery />,
-    color: "from-red-500/20 to-orange-600/20",
-    iconColor: "text-red-400",
+    iconColor: "text-rose-500",
+    badgeBg: "bg-rose-500/10 border border-rose-500/20",
   },
   {
     name: "Redux Toolkit",
     icon: <SiRedux />,
-    color: "from-purple-500/20 to-violet-600/20",
-    iconColor: "text-purple-400",
+    iconColor: "text-purple-500",
+    badgeBg: "bg-purple-500/10 border border-purple-500/20",
   },
   {
     name: "Zustand",
     icon: <LuBoxes />,
-    color: "from-amber-500/20 to-orange-600/20",
-    iconColor: "text-amber-400",
+    iconColor: "text-amber-500",
+    badgeBg: "bg-amber-500/10 border border-amber-500/20",
   },
   {
     name: "Vite",
     icon: <SiVite />,
-    color: "from-violet-500/20 to-fuchsia-600/20",
-    iconColor: "text-violet-400",
+    iconColor: "text-violet-500",
+    badgeBg: "bg-violet-500/10 border border-violet-500/20",
   },
 ];
 
 const skillCategories: SkillCategory[] = [
-  { title: "Backend & APIs", skills: backendSkills },
-  { title: "Databases & modeling", skills: databaseSkills },
-  { title: "Architecture", skills: architectureSkills },
-  { title: "Performance & reliability", skills: performanceSkills },
+  {
+    title: "Backend & APIs",
+    icon: <TbServer className="text-emerald-400" />,
+    iconBg: "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+    skills: backendSkills,
+  },
+  {
+    title: "Databases & modeling",
+    icon: <TbDatabase className="text-blue-400" />,
+    iconBg: "bg-blue-500/10 text-blue-400 border border-blue-500/20",
+    skills: databaseSkills,
+  },
+  {
+    title: "Architecture",
+    icon: <TbCpu className="text-purple-400" />,
+    iconBg: "bg-purple-500/10 text-purple-400 border border-purple-500/20",
+    skills: architectureSkills,
+  },
+  {
+    title: "Performance & reliability",
+    icon: <TbActivity className="text-amber-400" />,
+    iconBg: "bg-amber-500/10 text-amber-400 border border-amber-500/20",
+    skills: performanceSkills,
+  },
   {
     title: "DevOps & cloud",
+    icon: <TbCloud className="text-sky-400" />,
+    iconBg: "bg-sky-500/10 text-sky-400 border border-sky-500/20",
     hint: "Containers, proxies, cloud deploys, and CI/CD.",
     skills: devOpsSkills,
   },
   {
     title: "AI & payments",
+    icon: <TbSparkles className="text-fuchsia-400" />,
+    iconBg: "bg-fuchsia-500/10 text-fuchsia-400 border border-fuchsia-500/20",
     hint: "RAG, AI integrations, and idempotent payment webhooks.",
     skills: aiSkills,
   },
-  { title: "Frontend (when needed)", skills: frontendSkills },
+  {
+    title: "Frontend (when needed)",
+    icon: <TbLayout className="text-teal-400" />,
+    iconBg: "bg-teal-500/10 text-teal-400 border border-teal-500/20",
+    skills: frontendSkills,
+  },
 ];
 
-function SkillCategoryPanel({ title, hint, skills }: SkillCategory) {
+function SkillCategoryPanel({ title, icon, iconBg, hint, skills }: SkillCategory) {
   return (
-    <article className="rounded-xl border border-zinc-800/70 bg-zinc-900/35 p-4 shadow-sm backdrop-blur-sm sm:p-5">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h3 className="text-sm font-semibold tracking-tight text-zinc-200 sm:text-base">
-          {title}
-        </h3>
-        <span className="shrink-0 rounded-md bg-zinc-800/80 px-2 py-0.5 text-[0.6875rem] font-medium text-zinc-500">
+    <article className="group/card relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-zinc-700 sm:p-5">
+      <div className="mb-3.5 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2.5">
+          <span className={`flex h-7 w-7 items-center justify-center rounded-lg text-sm sm:text-base ${iconBg}`}>
+            {icon}
+          </span>
+          <h3 className="text-sm font-semibold tracking-tight text-zinc-100 sm:text-base">
+            {title}
+          </h3>
+        </div>
+        <span className="shrink-0 rounded-full border border-zinc-700/80 bg-zinc-950/80 px-2.5 py-0.5 text-[0.6875rem] font-semibold text-zinc-400">
           {skills.length}
         </span>
       </div>
       {hint ? (
-        <p className="mb-3 text-xs leading-relaxed text-zinc-500">{hint}</p>
+        <p className="mb-3.5 text-xs leading-relaxed text-zinc-400">{hint}</p>
       ) : null}
       <ul
-        className="flex flex-wrap gap-2"
+        className="flex flex-wrap gap-2 sm:gap-2.5"
         role="list"
         aria-label={`${title} skills`}
       >
@@ -403,7 +445,7 @@ export default function Skills() {
         subtitle="Backend-first stack — all in active use."
       />
 
-      <p className="mb-6 text-xs text-zinc-600 sm:text-sm">
+      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
         {totalSkills} technologies across {skillCategories.length} areas
       </p>
 
