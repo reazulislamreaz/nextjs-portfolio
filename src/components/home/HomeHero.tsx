@@ -1,181 +1,385 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { resumePath, siteContact, siteSocial } from "@/config/site";
 import SectionLink from "@/app/components/SectionLink";
+import {
+  SiDocker,
+  SiGo,
+  SiGraphql,
+  SiMongodb,
+  SiNestjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiRedis,
+  SiTypescript,
+} from "react-icons/si";
+import {
+  TbApi,
+  TbArrowRight,
+  TbBolt,
+  TbDatabase,
+  TbDownload,
+  TbMail,
+  TbServer,
+} from "react-icons/tb";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
 
-const texts: string[] = [
-  "I build backends and APIs meant to run in production.",
-  "Day to day: Node.js, PostgreSQL, MongoDB, and Redis.",
-  "Full-stack too — when the product needs a solid frontend.",
-];
-
-interface TechItem {
-  name: string;
-  color: string;
+interface NarrativeStatement {
+  tag: string;
+  lead: string;
+  detail: string;
 }
 
-const backendTechStack: TechItem[] = [
-  { name: "PostgreSQL", color: "text-blue-400" },
-  { name: "MongoDB", color: "text-emerald-500" },
-  { name: "Redis", color: "text-red-500" },
-  { name: "Node.js", color: "text-green-500" },
-  { name: "Express", color: "text-gray-300" },
-  { name: "NestJS", color: "text-red-500" },
-  { name: "Go", color: "text-sky-400" },
-  { name: "REST APIs", color: "text-cyan-400" },
-  { name: "GraphQL", color: "text-pink-400" },
+const narrativeStatements: NarrativeStatement[] = [
+  {
+    tag: "Production Architecture",
+    lead: "I architect resilient backends and APIs meant to thrive in production.",
+    detail: "Designing modular services, clear error contracts, and low-latency data pipelines.",
+  },
+  {
+    tag: "Core Daily Stack",
+    lead: "Deep daily focus in Node.js, NestJS, Go, PostgreSQL, MongoDB & Redis.",
+    detail: "ACID-compliant schemas, scalable background queues, and sub-millisecond caching.",
+  },
+  {
+    tag: "End-to-End Delivery",
+    lead: "Full-stack capable — delivering rock-solid APIs with fast, reactive frontends.",
+    detail: "TypeScript, Next.js, hardened webhooks, and idempotent Stripe payment flows.",
+  },
+];
+
+interface TechChip {
+  name: string;
+  icon: ReactNode;
+  iconColor: string;
+}
+
+const coreTechnologies: TechChip[] = [
+  { name: "Node.js", icon: <SiNodedotjs />, iconColor: "text-emerald-400" },
+  { name: "NestJS", icon: <SiNestjs />, iconColor: "text-rose-400" },
+  { name: "Go", icon: <SiGo />, iconColor: "text-cyan-400" },
+  { name: "PostgreSQL", icon: <SiPostgresql />, iconColor: "text-blue-400" },
+  { name: "MongoDB", icon: <SiMongodb />, iconColor: "text-emerald-500" },
+  { name: "Redis", icon: <SiRedis />, iconColor: "text-red-400" },
+  { name: "TypeScript", icon: <SiTypescript />, iconColor: "text-sky-400" },
+  { name: "REST APIs", icon: <TbApi />, iconColor: "text-teal-400" },
+  { name: "Docker", icon: <SiDocker />, iconColor: "text-sky-400" },
+  { name: "GraphQL", icon: <SiGraphql />, iconColor: "text-pink-400" },
+];
+
+const highlights = [
+  { value: "10+", label: "Production Systems", sub: "Shipped & maintained" },
+  { value: "<50ms", label: "Latency Target", sub: "Cached & indexed" },
+  { value: "Clean", label: "Architecture", sub: "Modular & tested" },
+  { value: "Open", label: "Onsite & Remote", sub: "Dhaka & Worldwide" },
 ];
 
 export default function HomeHero() {
-  const [sliderIndex, setSliderIndex] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
   const [fade, setFade] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setFade(false);
-      const timer = setTimeout(() => {
-        setSliderIndex((prev) => (prev + 1) % texts.length);
+      const timeout = setTimeout(() => {
+        setActiveSlide((prev) => (prev + 1) % narrativeStatements.length);
         setFade(true);
       }, 250);
-      return () => clearTimeout(timer);
-    }, 3800);
-    return () => clearInterval(interval);
+      return () => clearTimeout(timeout);
+    }, 4800);
+
+    return () => clearInterval(timer);
   }, []);
+
+  const current = narrativeStatements[activeSlide];
 
   return (
     <section
       aria-label="Introduction"
-      className="relative flex min-h-screen min-w-0 flex-col justify-center overflow-x-hidden"
+      className="relative flex min-h-[calc(100vh-4rem)] min-w-0 flex-col justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28"
     >
-      <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-1 items-center px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-28 md:px-8 lg:px-8 lg:pb-20 lg:pt-32 xl:px-12">
-        <div className="grid w-full min-w-0 grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12 lg:gap-16">
-          <div className="order-2 min-w-0 space-y-6 md:order-1 md:space-y-8">
-            <div className="space-y-3 sm:space-y-4">
-              <div className="hero-line-in inline-flex max-w-full flex-wrap items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium tracking-wide text-emerald-400 sm:px-3 sm:text-sm" style={{ animationDelay: '0ms' }}>
+      {/* Soft ambient background glows */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[100px] sm:h-[40rem] sm:w-[40rem] md:left-1/3"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 top-1/4 -z-10 h-72 w-72 rounded-full bg-teal-500/10 blur-[90px]"
+      />
+
+      <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-1 items-center px-4 pb-14 sm:px-6 sm:pb-16 md:px-8 lg:px-8 lg:pb-20 xl:px-12">
+        <div className="grid w-full min-w-0 grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+
+          {/* Left Column: Headline, Narrative & CTAs (7 cols on desktop) */}
+          <div className="order-2 min-w-0 space-y-6 sm:space-y-7 lg:order-1 lg:col-span-7">
+
+            {/* Top Status & Location */}
+            <div
+              className="hero-line-in flex flex-wrap items-center gap-3"
+              style={{ animationDelay: "0ms" }}
+            >
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium tracking-wide text-emerald-400 backdrop-blur-sm sm:text-sm">
                 <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_6px_#10b981]" />
                 </span>
-                <span className="leading-snug">Available for new roles</span>
+                <span>Available for new roles</span>
               </div>
 
-              <h1 className="hero-line-in text-balance text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl" style={{ animationDelay: '80ms' }}>
-                Reazul Islam Reaz
+              <span className="text-xs text-zinc-500">
+                Dhaka, Bangladesh · Onsite & Remote Available
+              </span>
+            </div>
+
+            {/* Main Name & Title */}
+            <div className="space-y-2.5 sm:space-y-3">
+              <h1
+                className="hero-line-in text-balance text-4xl font-extrabold tracking-tight text-zinc-50 sm:text-5xl md:text-6xl xl:text-7xl"
+                style={{ animationDelay: "80ms" }}
+              >
+                Reazul Islam{" "}
+                <span className="text-emerald-400">
+                  Reaz
+                </span>
               </h1>
 
-              <p className="hero-line-in text-base font-medium text-emerald-400/90 sm:text-lg" style={{ animationDelay: '160ms' }}>
+              <p
+                className="hero-line-in text-base font-semibold text-zinc-300 sm:text-lg lg:text-xl"
+                style={{ animationDelay: "140ms" }}
+              >
                 Backend-focused full-stack engineer
               </p>
+            </div>
 
-              <div className="min-h-[3.25rem] w-full max-w-xl sm:min-h-[3rem]">
-                <p
-                  className={`hero-line-in text-pretty text-base leading-relaxed text-zinc-400 transition-opacity duration-300 sm:text-lg md:text-xl ${
-                    fade ? "opacity-100" : "opacity-0"
-                  }`}
-                  style={{ animationDelay: '240ms' }}
+            {/* Seamless Narrative Pitch Switcher */}
+            <div
+              className="hero-line-in relative rounded-xl border border-zinc-800/70 bg-zinc-900/40 p-4 backdrop-blur-sm transition-colors hover:border-zinc-700/80 sm:p-5"
+              style={{ animationDelay: "200ms" }}
+            >
+              <div className="mb-2.5 flex items-center justify-between gap-2">
+                <span className="text-xs font-semibold uppercase tracking-wider text-emerald-400/90">
+                  {current.tag}
+                </span>
+
+                {/* Micro dot controls */}
+                <div className="flex items-center gap-1.5" role="tablist" aria-label="Overview statements">
+                  {narrativeStatements.map((item, idx) => (
+                    <button
+                      key={item.tag}
+                      type="button"
+                      onClick={() => {
+                        setFade(false);
+                        setTimeout(() => {
+                          setActiveSlide(idx);
+                          setFade(true);
+                        }, 150);
+                      }}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === idx
+                          ? "w-5 bg-emerald-400"
+                          : "w-1.5 bg-zinc-700 hover:bg-zinc-500"
+                        }`}
+                      aria-label={`View topic: ${item.tag}`}
+                      aria-selected={activeSlide === idx}
+                      role="tab"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="min-h-[4rem] sm:min-h-[3.5rem]">
+                <div
+                  className={`transition-opacity duration-250 ${fade ? "opacity-100" : "opacity-0"
+                    }`}
                 >
-                  {texts[sliderIndex]}
-                </p>
+                  <p className="text-sm font-medium text-zinc-200 sm:text-base">
+                    {current.lead}
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-zinc-400 sm:text-sm">
+                    {current.detail}
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="hero-line-in flex flex-wrap gap-2 pt-1 sm:gap-3 sm:pt-2" style={{ animationDelay: '300ms' }}>
-              {backendTechStack.map((tech) => (
-                <div
-                  key={tech.name}
-                  className={`rounded-md border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs font-medium sm:px-3 sm:text-sm ${tech.color}`}
+            {/* Curated Tech Stack Chips */}
+            <div
+              className="hero-line-in space-y-2"
+              style={{ animationDelay: "260ms" }}
+            >
+              <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                <span>Core Stack</span>
+                <span className="text-[0.6875rem] text-zinc-500">
+                  Active in production
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2 sm:gap-2.5">
+                {coreTechnologies.map((tech) => (
+                  <div
+                    key={tech.name}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-800 bg-zinc-900/50 px-2.5 py-1.5 text-xs font-medium text-zinc-300 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-100 sm:px-3 sm:text-sm"
+                  >
+                    <span className={`text-sm ${tech.iconColor}`}>
+                      {tech.icon}
+                    </span>
+                    <span>{tech.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Action Buttons & Socials */}
+            <div
+              className="hero-line-in flex flex-wrap items-center gap-3 pt-2 sm:gap-4 sm:pt-3"
+              style={{ animationDelay: "320ms" }}
+            >
+              <SectionLink
+                href="/#projects"
+                className="group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-zinc-100 px-6 py-2.5 text-sm font-semibold text-zinc-900 shadow-md transition-all duration-200 hover:bg-zinc-200 hover:shadow-lg active:scale-[0.98] sm:w-auto"
+              >
+                <span>View Projects</span>
+                <TbArrowRight
+                  size={16}
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                />
+              </SectionLink>
+
+              <a
+                href={resumePath}
+                download
+                className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900/80 px-6 py-2.5 text-sm font-medium text-zinc-300 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-100 active:scale-[0.98] sm:w-auto"
+              >
+                <TbDownload size={16} className="text-zinc-400" />
+                <span>Resume</span>
+              </a>
+
+              {/* Social icons alongside CTAs */}
+              <div className="flex items-center gap-2 pt-1 sm:pt-0">
+                <a
+                  href={siteSocial.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/60 text-zinc-400 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-100 active:scale-95"
+                  aria-label="GitHub Profile"
                 >
-                  {tech.name}
+                  <FiGithub size={18} />
+                </a>
+
+                <a
+                  href={siteSocial.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/60 text-zinc-400 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-800 hover:text-blue-400 active:scale-95"
+                  aria-label="LinkedIn Profile"
+                >
+                  <FiLinkedin size={18} />
+                </a>
+
+                <a
+                  href={`mailto:${siteContact.email}`}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900/60 text-zinc-400 transition-all duration-200 hover:border-zinc-700 hover:bg-zinc-800 hover:text-emerald-400 active:scale-95"
+                  aria-label="Send an Email"
+                >
+                  <TbMail size={20} />
+                </a>
+              </div>
+            </div>
+
+            {/* Understated Metrics Strip */}
+            <div
+              className="hero-line-in grid grid-cols-2 gap-3 border-t border-zinc-800/60 pt-5 sm:grid-cols-4 sm:gap-4 sm:pt-6"
+              style={{ animationDelay: "380ms" }}
+            >
+              {highlights.map((item) => (
+                <div key={item.label} className="flex min-w-0 flex-col justify-start space-y-0.5">
+                  <p className="text-lg font-bold leading-tight tracking-tight text-zinc-100 sm:text-xl">
+                    {item.value}
+                  </p>
+                  <p className="text-xs font-medium leading-snug text-emerald-400/90">
+                    {item.label}
+                  </p>
+                  <p className="text-[0.6875rem] leading-snug text-zinc-500">
+                    {item.sub}
+                  </p>
                 </div>
               ))}
             </div>
 
-            <div className="hero-line-in flex w-full min-w-0 flex-col gap-3 pt-4 sm:flex-row sm:gap-4 sm:pt-6" style={{ animationDelay: '380ms' }}>
-              <SectionLink
-                href="/#projects"
-                className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg bg-zinc-100 px-6 py-3 text-center text-sm font-semibold text-zinc-900 shadow-[0_0_20px_rgba(255,255,255,0.1)] transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-50 md:hover:shadow-[0_0_25px_rgba(255,255,255,0.2)]"
-              >
-                View Projects
-              </SectionLink>
-              <a
-                href={resumePath}
-                download
-                className="inline-flex min-h-11 w-full transform cursor-pointer items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 px-6 py-3 text-center text-sm font-medium text-zinc-300 transition active:scale-[0.98] sm:min-h-12 sm:w-auto sm:px-8 sm:text-base md:hover:scale-[1.02] md:hover:bg-zinc-800 md:hover:text-zinc-50"
-              >
-                Resume
-              </a>
-            </div>
-
-            <div className="hero-line-in flex flex-wrap gap-4 pt-4 sm:gap-6 sm:pt-6" style={{ animationDelay: '460ms' }}>
-              <a
-                href={siteSocial.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-zinc-50/10 bg-zinc-50/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-zinc-50/20 md:hover:bg-zinc-50/[0.08] md:hover:text-zinc-50 md:hover:shadow-emerald-500/10"
-                aria-label="GitHub"
-              >
-                <svg className="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
-                </svg>
-              </a>
-              <a
-                href={siteSocial.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-zinc-50/10 bg-zinc-50/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-zinc-50/20 md:hover:bg-blue-600/20 md:hover:text-zinc-50 md:hover:shadow-blue-500/10"
-                aria-label="LinkedIn"
-              >
-                <svg className="h-5 w-5 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-              </a>
-              <a
-                href={`mailto:${siteContact.email}`}
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-2xl border border-zinc-50/10 bg-zinc-50/[0.03] p-3 text-gray-400 shadow-lg backdrop-blur-md transition active:scale-95 sm:p-3.5 md:hover:scale-105 md:hover:border-zinc-50/20 md:hover:bg-emerald-600/20 md:hover:text-zinc-50 md:hover:shadow-emerald-500/10"
-                aria-label="Email"
-              >
-                <svg
-                  className="h-6 w-6 shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  />
-                </svg>
-              </a>
-            </div>
           </div>
 
-          <div className="hero-line-in order-1 flex justify-center md:order-2 md:justify-end" style={{ animationDelay: '200ms' }}>
-            <div className="relative mx-auto w-full max-w-[min(100%,18rem)] sm:max-w-[min(100%,20rem)] md:max-w-none">
-              <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-zinc-600 via-emerald-500/10 to-zinc-700 opacity-20 blur-2xl" />
+          {/* Right Column: Natural, Polished Portrait & Telemetry (5 cols on desktop) */}
+          <div
+            className="hero-line-in order-1 flex items-center justify-center lg:order-2 lg:col-span-5"
+            style={{ animationDelay: "150ms" }}
+          >
+            <div className="relative mx-auto flex w-full max-w-[20rem] items-center justify-center sm:max-w-[24rem] lg:max-w-none">
 
-              <div className="relative mx-auto aspect-square w-full max-w-[16.5rem] overflow-hidden rounded-full border-4 border-transparent bg-gradient-to-r from-zinc-600 via-emerald-500/40 to-zinc-700 p-1 sm:max-w-[18rem] md:max-w-[20rem]">
-                <div className="h-full w-full overflow-hidden rounded-full bg-zinc-900">
-                  <div className="relative flex h-full w-full items-center justify-center bg-gradient-to-br from-zinc-800 to-zinc-900">
-                    <Image
-                      src="/reaz.png"
-                      alt="Reazul Islam Reaz"
-                      width={400}
-                      height={400}
-                      priority
-                      sizes="(max-width: 640px) 90vw, (max-width: 1024px) 40vw, 320px"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
+              {/* Soft, calm background ambient aura */}
+              <div
+                aria-hidden="true"
+                className="animate-pulse-glow absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-emerald-500/20 via-teal-500/10 to-zinc-700/20 blur-2xl"
+              />
+
+              {/* Polished Portrait Frame */}
+              <div className="group relative z-10 aspect-square w-[15.5rem] rounded-full border-2 border-zinc-800 bg-zinc-950 p-1.5 shadow-2xl transition-all duration-300 hover:border-zinc-700 sm:w-[18rem] md:w-[19.5rem]">
+                <div className="relative h-full w-full overflow-hidden rounded-full border border-zinc-800/80 bg-zinc-900">
+                  <Image
+                    src="/reaz.png"
+                    alt="Reazul Islam Reaz"
+                    width={400}
+                    height={400}
+                    priority
+                    sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 340px"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Micro status badge anchored to avatar */}
+                <div className="absolute -bottom-2.5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-zinc-700/80 bg-zinc-900/90 px-3 py-1 text-xs font-semibold text-zinc-200 shadow-md backdrop-blur-md">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#10b981]" />
+                  <span>Backend Specialist</span>
+                </div>
+              </div>
+
+              {/* Floating Card 1: Production APIs (Top Right) */}
+              <div
+                className="animate-float-slow absolute -right-2 top-2 z-20 hidden rounded-xl border border-zinc-800 bg-zinc-900/90 p-2.5 shadow-lg backdrop-blur-md sm:flex sm:items-center sm:gap-2.5 md:-right-4"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
+                  <TbServer size={18} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-zinc-100">
+                    Production APIs
+                  </p>
+                  <p className="text-[0.6875rem] text-emerald-400">
+                    99.9% Uptime Architecture
+                  </p>
+                </div>
+              </div>
+
+              {/* Floating Card 2: Low Latency / Redis (Bottom Left) */}
+              <div
+                className="animate-float-reverse absolute -left-2 bottom-6 z-20 hidden rounded-xl border border-zinc-800 bg-zinc-900/90 p-2.5 shadow-lg backdrop-blur-md sm:flex sm:items-center sm:gap-2.5 md:-left-6"
+              >
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-400">
+                  <TbBolt size={18} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-zinc-100">
+                    Low Latency
+                  </p>
+                  <p className="text-[0.6875rem] text-amber-400">
+                    Sub-ms Redis Caching
+                  </p>
                 </div>
               </div>
 
             </div>
           </div>
+
         </div>
       </div>
     </section>

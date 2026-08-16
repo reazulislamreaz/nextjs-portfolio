@@ -205,9 +205,81 @@ html:not(.dark) :is(
   animation: hero-line-in 0.4s ease-out both;
 }
 
+@keyframes hero-float-slow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes hero-float-reverse {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes hero-float-delayed {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes spin-very-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.04);
+  }
+}
+
+.animate-float-slow {
+  animation: hero-float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: hero-float-reverse 7s ease-in-out infinite 0.5s;
+}
+
+.animate-float-delayed {
+  animation: hero-float-delayed 8s ease-in-out infinite 1.5s;
+}
+
+.animate-spin-slow {
+  animation: spin-very-slow 35s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 7s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-line-in {
-    animation: none;
+  .hero-line-in,
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-float-delayed,
+  .animate-spin-slow,
+  .animate-pulse-glow {
+    animation: none !important;
   }
   html {
     scroll-behavior: auto;

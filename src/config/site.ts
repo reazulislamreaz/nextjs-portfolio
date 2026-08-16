@@ -5,7 +5,7 @@ export const siteContact = {
   phone: "+8801770807782",
   phoneHref: "https://wa.me/8801770807782",
   location: "Dhaka, Bangladesh",
-  locationDetail: "Dhaka, Bangladesh (Remote Available)",
+  locationDetail: "Dhaka, Bangladesh (Onsite & Remote Available)",
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d365230.6813912493!2d90.356331!3d23.810475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b85725990c43%3A0x9cf3632f2b4bd153!2sDhaka%2C%20Bangladesh!5e0!3m2!1sen!2sbd!4v1714850000000!5m2!1sen!2sbd",
 } as const;
