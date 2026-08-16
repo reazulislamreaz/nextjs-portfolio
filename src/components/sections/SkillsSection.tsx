@@ -399,7 +399,7 @@ export default function Skills() {
   return (
     <Section id="skills" className="bg-zinc-950/80">
       <SectionHeader
-        title="Toolkit"
+        title="Skills"
         subtitle="Backend-first stack — all in active use."
       />
 
