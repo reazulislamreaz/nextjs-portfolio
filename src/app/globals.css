@@ -11,65 +11,65 @@
   to TaskForge teal (#00897b) and stays consistent across themes.
 */
 
-/* Light theme (default) */
+/* Light theme (default) - Executive Neutral Slate Canvas with Emerald Accents */
 :root {
   --nav-height: 4rem;
-  --zinc-50: #0b1210;
-  --zinc-100: #111827;
-  --zinc-200: #1f2937;
-  --zinc-300: #374151;
-  --zinc-400: #6b7280; /* muted text */
-  --zinc-500: #9ca3af; /* soft text */
-  --zinc-600: #aab4b0;
-  --zinc-700: #d1d5db; /* strong border */
-  --zinc-800: #e5e7eb; /* border */
-  --zinc-900: #ffffff; /* card / elevated surface */
-  --zinc-950: #f4f7f6; /* page background */
+  --zinc-50: #0f172a; /* Deep Slate (Primary Text) */
+  --zinc-100: #1e293b; /* Dark Slate (Headings/Buttons) */
+  --zinc-200: #334155; /* Charcoal Subheadings */
+  --zinc-300: #475569; /* Body Text */
+  --zinc-400: #64748b; /* Muted Meta */
+  --zinc-500: #94a3b8; /* Soft Subtitle */
+  --zinc-600: #cbd5e1; /* Subtle Dividers */
+  --zinc-700: #e2e8f0; /* Strong Border */
+  --zinc-800: #edf2f7; /* Card Border */
+  --zinc-900: #ffffff; /* Elevated Glass Card */
+  --zinc-950: #fafbfc; /* Crisp Neutral Canvas Background */
 
   --teal-200: #80cbc4;
   --teal-300: #4db6ac;
   --teal-400: #26a69a;
-  --teal-500: #00897b; /* primary */
-  --teal-600: #00796b; /* primary hover */
+  --teal-500: #00897b; /* Primary Brand Accent */
+  --teal-600: #00796b; /* Primary Hover */
   --teal-700: #006d5b;
   --teal-800: #005a4a;
   --teal-900: #10302b;
   --teal-950: #0c2722;
 
-  --grid-line: rgba(15, 23, 42, 0.04);
+  --grid-line: rgba(15, 23, 42, 0.035);
   --glow-primary: rgba(0, 137, 123, 0.06);
-  --glow-secondary: rgba(56, 189, 248, 0.04);
-  --glow-tertiary: rgba(148, 163, 184, 0.05);
+  --glow-secondary: rgba(56, 189, 248, 0.035);
+  --glow-tertiary: rgba(148, 163, 184, 0.04);
 
   /* Section heading gradient — dark slate ramp so it stays crisp on light bg */
   --heading-from: #0f172a;
-  --heading-via: #1f2937;
+  --heading-via: #1e293b;
   --heading-to: #334155;
 }
 
-/* Dark theme */
+/* Dark theme - Deep Obsidian with Radiant Emerald Aurora */
 .dark {
-  --zinc-50: #f4f8f7;
-  --zinc-100: #e6edeb; /* primary text */
-  --zinc-200: #d3dedb;
-  --zinc-300: #bcc7c3;
-  --zinc-400: #9fb0ab; /* muted text */
-  --zinc-500: #6f817c; /* soft text */
-  --zinc-600: #54635f;
-  --zinc-700: #3a4844; /* strong border */
-  --zinc-800: #2a3633; /* border */
-  --zinc-900: #16201d; /* card / elevated surface */
-  --zinc-950: #0f1715; /* page background */
+  --zinc-50: #f8fafc;
+  --zinc-100: #f1f5f9; /* primary text */
+  --zinc-200: #e2e8f0;
+  --zinc-300: #cbd5e1;
+  --zinc-400: #94a3b8; /* muted text */
+  --zinc-500: #64748b; /* soft text */
+  --zinc-600: #475569;
+  --zinc-700: #334155; /* strong border */
+  --zinc-800: #1e293b; /* border */
+  --zinc-900: #0f172a; /* card / elevated surface */
+  --zinc-950: #090d0c; /* page background (obsidian deep) */
 
-  --grid-line: rgba(255, 255, 255, 0.02);
-  --glow-primary: rgba(0, 137, 123, 0.1);
-  --glow-secondary: rgba(56, 189, 248, 0.05);
+  --grid-line: rgba(255, 255, 255, 0.025);
+  --glow-primary: rgba(0, 137, 123, 0.12);
+  --glow-secondary: rgba(56, 189, 248, 0.06);
   --glow-tertiary: rgba(148, 163, 184, 0.05);
 
   /* Section heading gradient — light shimmer on dark bg */
-  --heading-from: #f4f8f7;
-  --heading-via: #d3dedb;
-  --heading-to: #9fb0ab;
+  --heading-from: #f8fafc;
+  --heading-via: #e2e8f0;
+  --heading-to: #94a3b8;
 }
 
 /* Expose the tokens to Tailwind utilities. `inline` keeps the var reference in
@@ -373,7 +373,7 @@ html:not(.dark) :is(
   }
 }
 
-/* ─── Active nav indicator underline ─────────────────────────────────────── */
+/* ─── Active nav indicator underline & cyber effects ───────────────────── */
 
 .nav-link-indicator {
   position: relative;
@@ -382,18 +382,70 @@ html:not(.dark) :is(
 .nav-link-indicator::after {
   content: "";
   position: absolute;
-  bottom: -1px;
-  left: 25%;
-  right: 25%;
+  bottom: 0px;
+  left: 20%;
+  right: 20%;
   height: 2px;
-  border-radius: 1px;
-  background: var(--teal-500);
+  border-radius: 9999px;
+  background: var(--teal-400);
+  box-shadow: 0 0 8px var(--teal-400);
   opacity: 0;
   transform: scaleX(0);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+  transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link-indicator[data-active="true"]::after {
   opacity: 1;
   transform: scaleX(1);
 }
+
+/* ─── Cyber laser accent line ────────────────────────────────────────────── */
+
+@keyframes laser-sweep {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.cyber-laser-line {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 137, 123, 0.1) 15%,
+    rgba(38, 166, 154, 0.7) 50%,
+    rgba(0, 137, 123, 0.1) 85%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: laser-sweep 8s linear infinite;
+}
+
+@keyframes live-beacon-ping {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(38, 166, 154, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(38, 166, 154, 0);
+  }
+}
+
+.live-beacon {
+  animation: live-beacon-ping 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber-laser-line,
+  .live-beacon {
+    animation: none;
+  }
+}
+

@@ -25,13 +25,13 @@ export default function ThemeToggle({
           ? `Switch to ${isDark ? "light" : "dark"} mode`
           : "Toggle color theme"
       }
-      className={`inline-flex min-h-10 cursor-pointer min-w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900/50 p-2 text-zinc-400 transition hover:border-emerald-500/40 hover:text-emerald-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 ${className}`}
+      className={`relative inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-zinc-400 hover:text-zinc-100 hover:bg-white/[0.08] transition-all duration-200 focus:outline-none focus-visible:ring-1 focus-visible:ring-emerald-500 ${className}`}
     >
       {/* Render a stable icon until mounted to avoid hydration mismatch */}
       {mounted && !isDark ? (
-        <FiMoon size={18} aria-hidden />
+        <FiMoon size={15} className="transition-transform duration-300 rotate-0 hover:-rotate-12" aria-hidden />
       ) : (
-        <FiSun size={18} aria-hidden />
+        <FiSun size={15} className="transition-transform duration-300 rotate-0 hover:rotate-45 text-amber-400/90" aria-hidden />
       )}
     </button>
   );

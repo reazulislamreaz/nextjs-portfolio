@@ -15,7 +15,8 @@ interface NavClickModifiers {
 function getNavBarHeight(): number {
   const bar = document.querySelector("[data-nav-bar]");
   if (bar instanceof HTMLElement) {
-    return bar.getBoundingClientRect().height;
+    const rect = bar.getBoundingClientRect();
+    return rect.height + (rect.top > 0 ? rect.top : 16) + 12;
   }
 
   const navHeight = getComputedStyle(document.documentElement)
@@ -23,10 +24,10 @@ function getNavBarHeight(): number {
     .trim();
   if (navHeight.endsWith("rem")) {
     const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    return parseFloat(navHeight) * rootSize;
+    return parseFloat(navHeight) * rootSize + 16;
   }
 
-  return 64;
+  return 76;
 }
 
 /**
