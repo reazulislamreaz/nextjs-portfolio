@@ -1,4 +1,4 @@
-import { gsap, registerGsap, isReducedMotion } from "./gsap";
+import { isReducedMotion } from "./gsap";
 
 export function hashFromHref(href: string): string {
   const index = href.indexOf("#");
@@ -14,7 +14,9 @@ interface NavClickModifiers {
   button: number;
 }
 
-function getNavBarHeight(): number {
+export function getNavBarHeight(): number {
+  if (typeof window === "undefined") return 76;
+
   const bar = document.querySelector("[data-nav-bar]");
   if (bar instanceof HTMLElement) {
     const rect = bar.getBoundingClientRect();
@@ -25,7 +27,9 @@ function getNavBarHeight(): number {
     .getPropertyValue("--nav-height")
     .trim();
   if (navHeight.endsWith("rem")) {
-    const rootSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const rootSize = parseFloat(
+      getComputedStyle(document.documentElement).fontSize
+    );
     return parseFloat(navHeight) * rootSize + 16;
   }
 
@@ -33,43 +37,49 @@ function getNavBarHeight(): number {
 }
 
 /**
- * Scrolls to an in-page section with GSAP ScrollToPlugin for silky smooth transitions.
+ * Scrolls to an in-page section using Lenis smooth scrolling or native smooth scroll.
  */
 export function scrollToInPageTarget(href: string, label?: string): void {
   if (typeof window === "undefined") return;
 
-  const isHome = label === "Home" || href === "/";
+  const isHome = label === "Home" || href === "/" || href === "/#";
   const id = isHome ? "" : hashFromHref(href).slice(1);
   const target = id ? document.getElementById(id) : null;
-
   const navHeight = getNavBarHeight();
-  const targetY = target
-    ? target.getBoundingClientRect().top + window.scrollY - navHeight
-    : 0;
+
+  const targetY = isHome
+    ? 0
+    : target
+      ? Math.max(0, target.getBoundingClientRect().top + window.scrollY - navHeight)
+      : 0;
 
   if (isReducedMotion()) {
-    window.scrollTo({ top: Math.max(0, targetY), behavior: "auto" });
+    window.scrollTo({ top: targetY, behavior: "auto" });
+  } else if (window.__lenis) {
+    if (isHome) {
+      window.__lenis.scrollTo(0, { duration: 1.0, offset: 0 });
+    } else if (target) {
+      window.__lenis.scrollTo(target, { offset: -navHeight, duration: 1.0 });
+    } else {
+      window.__lenis.scrollTo(targetY, { duration: 1.0 });
+    }
   } else {
-    registerGsap();
-    gsap.to(window, {
-      duration: 0.85,
-      scrollTo: { y: Math.max(0, targetY), autoKill: true },
-      ease: "power3.inOut",
-    });
+    window.scrollTo({ top: targetY, behavior: "smooth" });
   }
-  history.pushState(null, "", isHome ? "/" : href);
+
+  try {
+    history.pushState(null, "", isHome ? "/" : href);
+  } catch {}
 }
 
 /**
  * Decides whether a nav/CTA click should be handled as an in-page scroll.
- * Returns false (let <Link> route normally) for modified clicks, off-home
- * navigation, or sections not yet mounted.
  */
 export function shouldHandleInPageNav(
   event: NavClickModifiers,
   href: string,
   label: string,
-  pathname: string,
+  pathname: string
 ): boolean {
   if (pathname !== "/") return false;
   if (
@@ -81,10 +91,9 @@ export function shouldHandleInPageNav(
   ) {
     return false;
   }
-  const isHome = label === "Home" || href === "/";
+  const isHome = label === "Home" || href === "/" || href === "/#";
   const id = isHome ? "" : hashFromHref(href).slice(1);
   if (!isHome && !id) return false;
-  if (id && !document.getElementById(id)) return false;
   return true;
 }
 
@@ -92,10 +101,9 @@ export function isNavLinkActive(
   href: string,
   label: string,
   pathname: string,
-  activeSectionId: string,
+  activeSectionId: string
 ): boolean {
   if (label === "Home") {
-    // Home is active at the top of the landing page (no section in view).
     return pathname === "/" && !activeSectionId;
   }
 
