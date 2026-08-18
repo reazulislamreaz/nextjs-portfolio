@@ -91,7 +91,7 @@ export default function ExperienceSection() {
                 {/* Glowing Node Beacon */}
                 <span
                   data-timeline-beacon
-                  className="absolute -left-[1.95rem] sm:-left-[2.25rem] top-8 flex h-4 w-4 rounded-full border-2 border-zinc-900 dark:border-white bg-white dark:bg-black shadow-[0_0_12px_rgba(255,255,255,0.7)]"
+                  className="absolute -left-[1.95rem] sm:-left-[2.25rem] top-8 flex h-4 w-4 rounded-full border-2 border-zinc-50 bg-zinc-950 shadow-md"
                   aria-hidden
                 />
 

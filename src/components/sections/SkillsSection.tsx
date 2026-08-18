@@ -536,7 +536,7 @@ export default function Skills() {
                       {node.icon}
                     </span>
                   </div>
-                  <h4 className="text-xs font-bold text-zinc-100 group-hover:text-white">
+                  <h4 className="text-xs font-bold text-zinc-100 group-hover:text-zinc-50">
                     {node.name}
                   </h4>
                   <p className="mt-1 text-[11px] text-zinc-400 leading-tight">

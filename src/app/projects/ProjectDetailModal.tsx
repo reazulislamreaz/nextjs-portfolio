@@ -179,19 +179,19 @@ function ModalFooter({ project }: { project: Project }) {
         href={project.live}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-emerald-400 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-zinc-50 px-5 py-2.5 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-zinc-200 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
       >
         <FiExternalLink size={17} aria-hidden />
-        See live demo
+        <span>See live demo</span>
       </a>
       <a
         href={project.code}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-zinc-300 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-zinc-50 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:flex-initial"
+        className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-700/80 bg-zinc-800 px-5 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-850 hover:text-zinc-50 active:scale-[0.98] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 sm:flex-initial"
       >
         <FiGithub size={17} aria-hidden />
-        View on GitHub
+        <span>View on GitHub</span>
       </a>
     </div>
   );

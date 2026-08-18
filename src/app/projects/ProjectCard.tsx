@@ -72,7 +72,7 @@ export default function ProjectCard({
                 </span>
                 <h3
                   id={`${slug}-title`}
-                  className="text-xl font-bold tracking-tight text-zinc-100 transition-colors duration-300 group-hover/card:text-white sm:text-2xl lg:text-[1.65rem]"
+                  className="text-xl font-bold tracking-tight text-zinc-100 transition-colors duration-300 group-hover/card:text-zinc-50 sm:text-2xl lg:text-[1.65rem]"
                 >
                   {project.title}
                 </h3>
@@ -119,7 +119,7 @@ export default function ProjectCard({
                   href={project.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-5 py-2 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-5 py-2 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
                 >
                   <ExternalLink size={15} aria-hidden />
                   <span>Live Demo</span>
@@ -128,7 +128,7 @@ export default function ProjectCard({
                   href={project.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-zinc-700/80 bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                  className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-zinc-700/80 bg-zinc-800 px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
                 >
                   <FiGithub size={15} aria-hidden />
                   <span>Source</span>
@@ -184,7 +184,7 @@ export default function ProjectCard({
           <header className="space-y-1.5">
             <h3
               id={`${slug}-title`}
-              className="text-xl font-bold tracking-tight text-zinc-100 transition-colors duration-300 group-hover/card:text-white sm:text-2xl"
+              className="text-xl font-bold tracking-tight text-zinc-100 transition-colors duration-300 group-hover/card:text-zinc-50 sm:text-2xl"
             >
               {project.title}
             </h3>
@@ -225,7 +225,7 @@ export default function ProjectCard({
                 href={project.live}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl bg-zinc-100 px-4 py-2 text-sm font-bold text-zinc-950 shadow-md transition hover:bg-zinc-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
               >
                 <ExternalLink size={15} aria-hidden />
                 <span>Live Demo</span>
@@ -236,7 +236,7 @@ export default function ProjectCard({
                   href={project.code}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-zinc-700/80 bg-zinc-800 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white focus:outline-none sm:text-sm"
+                  className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-zinc-700/80 bg-zinc-800 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-zinc-50 focus:outline-none sm:text-sm"
                 >
                   <FiGithub size={15} aria-hidden />
                   <span>GitHub</span>
@@ -245,7 +245,7 @@ export default function ProjectCard({
                 <button
                   type="button"
                   onClick={() => setDetailsOpen(true)}
-                  className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-zinc-700 bg-zinc-800/80 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-white focus:outline-none sm:text-sm"
+                  className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-zinc-700 bg-zinc-800/80 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-zinc-50 focus:outline-none sm:text-sm"
                 >
                   <Layers size={15} aria-hidden />
                   <span>Case Study</span>

@@ -123,7 +123,7 @@ export default function Education() {
               {educationEntries.map((entry) => (
                 <li key={entry.degree} className="relative">
                   <span
-                    className="absolute -left-[1.625rem] top-1.5 flex h-3 w-3 rounded-full border-2 border-zinc-900 dark:border-white bg-white dark:bg-black sm:-left-[2.125rem]"
+                    className="absolute -left-[1.625rem] top-1.5 flex h-3 w-3 rounded-full border-2 border-zinc-50 bg-zinc-950 sm:-left-[2.125rem] shadow-sm"
                     aria-hidden
                   />
 
