@@ -1,3 +1,5 @@
+import { gsap, registerGsap, isReducedMotion } from "./gsap";
+
 export function hashFromHref(href: string): string {
   const index = href.indexOf("#");
   return index === -1 ? "" : href.slice(index);
@@ -31,12 +33,11 @@ function getNavBarHeight(): number {
 }
 
 /**
- * Scrolls to an in-page section, offsetting for the fixed navbar. Long jumps
- * are instant (smooth scrolling the full page height janks on mobile because
- * the blurred navbar + fixed overlays repaint every frame); short hops stay
- * smooth. Must run client-side.
+ * Scrolls to an in-page section with GSAP ScrollToPlugin for silky smooth transitions.
  */
 export function scrollToInPageTarget(href: string, label?: string): void {
+  if (typeof window === "undefined") return;
+
   const isHome = label === "Home" || href === "/";
   const id = isHome ? "" : hashFromHref(href).slice(1);
   const target = id ? document.getElementById(id) : null;
@@ -46,13 +47,16 @@ export function scrollToInPageTarget(href: string, label?: string): void {
     ? target.getBoundingClientRect().top + window.scrollY - navHeight
     : 0;
 
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-  const isFarJump = Math.abs(targetY - window.scrollY) > window.innerHeight * 2;
-  const behavior: ScrollBehavior = reduceMotion || isFarJump ? "auto" : "smooth";
-
-  window.scrollTo({ top: Math.max(0, targetY), behavior });
+  if (isReducedMotion()) {
+    window.scrollTo({ top: Math.max(0, targetY), behavior: "auto" });
+  } else {
+    registerGsap();
+    gsap.to(window, {
+      duration: 0.85,
+      scrollTo: { y: Math.max(0, targetY), autoKill: true },
+      ease: "power3.inOut",
+    });
+  }
   history.pushState(null, "", isHome ? "/" : href);
 }
 

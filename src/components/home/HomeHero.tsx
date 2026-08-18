@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import { resumePath, siteContact, siteSocial } from "@/config/site";
 import SectionLink from "@/app/components/SectionLink";
+import { useGsapScroll } from "@/hooks/useGsapScroll";
+import { gsap } from "@/lib/gsap";
 import {
   SiDocker,
   SiGo,
@@ -59,6 +61,94 @@ export default function HomeHero() {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
+  const heroContainerRef = useGsapScroll<HTMLElement>((_, isReduced) => {
+    if (isReduced) return;
+
+    // Cinematic fast entrance sequence
+    const entranceTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+    entranceTl
+      .fromTo(
+        "[data-hero-badge]",
+        { y: -18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55 }
+      )
+      .fromTo(
+        "[data-hero-title]",
+        { y: 28, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.65 },
+        "-=0.35"
+      )
+      .fromTo(
+        "[data-hero-laser]",
+        { scaleX: 0, transformOrigin: "left center" },
+        { scaleX: 1, duration: 0.8, ease: "expo.out" },
+        "-=0.45"
+      )
+      .fromTo(
+        "[data-hero-subtitle]",
+        { y: 18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5 },
+        "-=0.4"
+      )
+      .fromTo(
+        "[data-hero-bio]",
+        { y: 18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5 },
+        "-=0.35"
+      )
+      .fromTo(
+        "[data-hero-chip]",
+        { scale: 0.85, opacity: 0, y: 10 },
+        { scale: 1, opacity: 1, y: 0, stagger: 0.025, duration: 0.35 },
+        "-=0.25"
+      )
+      .fromTo(
+        "[data-hero-ctas]",
+        { y: 18, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.45 },
+        "-=0.2"
+      )
+      .fromTo(
+        "[data-hero-metric]",
+        { y: 15, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.06, duration: 0.4 },
+        "-=0.2"
+      )
+      .fromTo(
+        "[data-hero-portrait]",
+        { scale: 0.86, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.85, ease: "back.out(1.3)" },
+        "-=0.75"
+      )
+      .fromTo(
+        ["[data-hero-card-1]", "[data-hero-card-2]", "[data-hero-topology]"],
+        { y: 20, opacity: 0, scale: 0.92 },
+        { y: 0, opacity: 1, scale: 1, stagger: 0.1, duration: 0.55 },
+        "-=0.45"
+      );
+
+    // Scroll-linked scrubbed parallax for depth and storytelling
+    const mm = gsap.matchMedia();
+    mm.add("(min-width: 768px)", () => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: heroContainerRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        })
+        .to("[data-hero-left]", { y: 65, opacity: 0.2, ease: "none" }, 0)
+        .to("[data-hero-portrait-col]", { y: 90, scale: 0.94, ease: "none" }, 0)
+        .to("[data-hero-card-1]", { x: 30, y: -25, ease: "none" }, 0)
+        .to("[data-hero-card-2]", { x: -30, y: 35, ease: "none" }, 0)
+        .to("[data-hero-hud-ring1]", { rotation: 80, scale: 1.15, ease: "none" }, 0)
+        .to("[data-hero-hud-ring2]", { rotation: -80, scale: 1.2, ease: "none" }, 0);
+    });
+  });
+
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(siteContact.email);
     setCopiedEmail(true);
@@ -71,7 +161,7 @@ export default function HomeHero() {
     const y = e.clientY - rect.top;
     setMousePos({ x, y });
 
-    // Subtle 3D tilt calculation (-6deg to +6deg)
+    // Subtle 3D tilt calculation (-4deg to +4deg)
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     const rotateY = ((x - centerX) / centerX) * 4;
@@ -81,6 +171,7 @@ export default function HomeHero() {
 
   return (
     <section
+      ref={heroContainerRef}
       aria-label="Introduction"
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -121,13 +212,10 @@ export default function HomeHero() {
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
 
           {/* Left Column: Formal Human Narrative & CTAs (7 cols on desktop) */}
-          <div className="order-2 min-w-0 space-y-6 sm:space-y-7 lg:order-1 lg:col-span-7">
+          <div data-hero-left className="order-2 min-w-0 space-y-6 sm:space-y-7 lg:order-1 lg:col-span-7">
 
             {/* Top Status & Location Pill */}
-            <div
-              className="hero-line-in flex flex-wrap items-center gap-3"
-              style={{ animationDelay: "0ms" }}
-            >
+            <div data-hero-badge className="flex flex-wrap items-center gap-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1 text-xs font-medium tracking-wide text-zinc-50 backdrop-blur-xl shadow-xs sm:text-sm">
                 <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-zinc-400 opacity-75" />
@@ -145,8 +233,8 @@ export default function HomeHero() {
             <div className="space-y-3">
               <div className="space-y-2">
                 <h1
-                  className="hero-line-in text-balance text-4xl font-black tracking-tight text-zinc-50 sm:text-5xl md:text-6xl xl:text-7xl"
-                  style={{ animationDelay: "80ms" }}
+                  data-hero-title
+                  className="text-balance text-4xl font-black tracking-tight text-zinc-50 sm:text-5xl md:text-6xl xl:text-7xl"
                 >
                   Reazul Islam{" "}
                   <span className="bg-gradient-to-r from-zinc-50 via-zinc-400 to-zinc-300 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(150,150,150,0.25)]">
@@ -156,14 +244,15 @@ export default function HomeHero() {
 
                 {/* Future-Stack Cyber Laser Line */}
                 <div
+                  data-hero-laser
                   aria-hidden="true"
                   className="cyber-laser-line h-[2px] w-48 rounded-full bg-gradient-to-r from-zinc-50 via-zinc-400 to-transparent"
                 />
               </div>
 
               <p
-                className="hero-line-in text-base font-semibold text-zinc-200 sm:text-lg lg:text-xl leading-snug"
-                style={{ animationDelay: "140ms" }}
+                data-hero-subtitle
+                className="text-base font-semibold text-zinc-200 sm:text-lg lg:text-xl leading-snug"
               >
                 Backend-focused software engineer building fast, reliable systems and clean web applications.
               </p>
@@ -171,17 +260,14 @@ export default function HomeHero() {
 
             {/* Human-Written Bio Statement */}
             <p
-              className="hero-line-in text-sm leading-relaxed text-zinc-300 sm:text-base max-w-2xl font-normal"
-              style={{ animationDelay: "200ms" }}
+              data-hero-bio
+              className="text-sm leading-relaxed text-zinc-300 sm:text-base max-w-2xl font-normal"
             >
               I design and build distributed backend services, high-throughput APIs, and ACID-compliant relational schemas. Production-tested across Node.js, NestJS, Go, PostgreSQL, MongoDB, and Redis with an eye for end-to-end craft.
             </p>
 
             {/* Curated Tech Stack Chips with Interactive Inspector */}
-            <div
-              className="hero-line-in space-y-2.5"
-              style={{ animationDelay: "260ms" }}
-            >
+            <div data-hero-stack className="space-y-2.5">
               <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-zinc-400">
                 <span>Core Stack</span>
                 <span className="min-h-[1.25rem] text-[0.6875rem] font-mono text-zinc-50 transition-opacity duration-200 font-bold">
@@ -192,6 +278,7 @@ export default function HomeHero() {
                 {coreTechnologies.map((tech) => (
                   <button
                     key={tech.name}
+                    data-hero-chip
                     type="button"
                     onMouseEnter={() => setActiveTech(tech)}
                     onMouseLeave={() => setActiveTech(null)}
@@ -208,8 +295,8 @@ export default function HomeHero() {
 
             {/* Action Buttons & Socials */}
             <div
-              className="hero-line-in flex flex-wrap items-center gap-3 pt-2 sm:gap-4 sm:pt-3"
-              style={{ animationDelay: "320ms" }}
+              data-hero-ctas
+              className="flex flex-wrap items-center gap-3 pt-2 sm:gap-4 sm:pt-3"
             >
               <SectionLink
                 href="/#projects"
@@ -275,12 +362,13 @@ export default function HomeHero() {
 
             {/* Future-Stack Understated Metrics Strip with Interactive Hover */}
             <div
-              className="hero-line-in grid grid-cols-2 gap-3 border-t border-zinc-700/60 pt-5 sm:grid-cols-4 sm:gap-4 sm:pt-6"
-              style={{ animationDelay: "380ms" }}
+              data-hero-metrics
+              className="grid grid-cols-2 gap-3 border-t border-zinc-700/60 pt-5 sm:grid-cols-4 sm:gap-4 sm:pt-6"
             >
               {highlights.map((item) => (
                 <div
                   key={item.label}
+                  data-hero-metric
                   className="group flex min-w-0 flex-col justify-start space-y-0.5 rounded-xl p-1.5 transition-colors duration-200 hover:bg-zinc-800/40"
                 >
                   <p className="text-xl font-black leading-tight tracking-tight text-zinc-50 transition-colors sm:text-2xl">
@@ -300,10 +388,11 @@ export default function HomeHero() {
 
           {/* Right Column: Spatial Holographic Portrait & Futuristic HUD Telemetry */}
           <div
-            className="hero-line-in order-1 flex flex-col items-center justify-center lg:order-2 lg:col-span-5"
-            style={{ animationDelay: "150ms" }}
+            data-hero-portrait-col
+            className="order-1 flex flex-col items-center justify-center lg:order-2 lg:col-span-5"
           >
             <div
+              data-hero-portrait
               style={{
                 transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
                 transition: isHovered ? "transform 0.15s ease-out" : "transform 0.5s ease-out",
@@ -313,12 +402,14 @@ export default function HomeHero() {
 
               {/* Futuristic HUD Orbit Ring 1 (Dashed) */}
               <div
+                data-hero-hud-ring1
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-6 rounded-full border border-dashed border-zinc-400/40 animate-[spin_50s_linear_infinite]"
               />
 
               {/* Futuristic HUD Orbit Ring 2 (Dotted with coordinates) */}
               <div
+                data-hero-hud-ring2
                 aria-hidden="true"
                 className="pointer-events-none absolute -inset-12 hidden rounded-full border border-dotted border-zinc-400/30 sm:block animate-[spin_80s_linear_infinite_reverse]"
               />
@@ -360,6 +451,7 @@ export default function HomeHero() {
 
               {/* Floating Card 1: Production APIs (Top Right) */}
               <div
+                data-hero-card-1
                 className="animate-float-slow absolute -right-2 top-2 z-20 hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3 shadow-lg backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-right-4"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-50 shadow-xs">
@@ -377,6 +469,7 @@ export default function HomeHero() {
 
               {/* Floating Card 2: Low Latency / Redis (Bottom Left) */}
               <div
+                data-hero-card-2
                 className="animate-float-reverse absolute -left-2 bottom-6 z-20 hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3 shadow-lg backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-left-6"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-50 shadow-xs">
@@ -395,7 +488,10 @@ export default function HomeHero() {
             </div>
 
             {/* Futuristic Live System Topology Visualizer Strip */}
-            <div className="mt-8 hidden w-full max-w-sm rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3.5 backdrop-blur-xl shadow-lg lg:block">
+            <div
+              data-hero-topology
+              className="mt-8 hidden w-full max-w-sm rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3.5 backdrop-blur-xl shadow-lg lg:block"
+            >
               <div className="flex items-center justify-between border-b border-zinc-700/60 pb-2 text-[10px] font-mono text-zinc-400">
                 <span className="flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-zinc-50 live-beacon" />
