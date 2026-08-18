@@ -4,6 +4,7 @@ import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import Providers from "./components/Providers";
 import Footer from "./components/Footer";
+import ScrollProgress from "./components/ui/ScrollProgress";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -87,6 +88,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Providers>
+          <ScrollProgress />
           <div className="glass-gradient" />
           <div className="glass-pattern" />
           

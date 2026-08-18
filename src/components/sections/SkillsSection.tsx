@@ -1,7 +1,11 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import SkillCard, { type Skill } from "@/app/components/ui/SkillCard";
+import { useGsapScroll } from "@/hooks/useGsapScroll";
+import { gsap } from "@/lib/gsap";
 import {
   SiAmazoncloudwatch,
   SiAmazonwebservices,
@@ -61,6 +65,15 @@ interface SkillCategory {
   hint?: string;
   skills: Skill[];
 }
+
+const architecturePipeline = [
+  { step: "01", name: "REST / GraphQL", desc: "API Gateway & Validation", tech: "NestJS · Express · Go", icon: <TbApi /> },
+  { step: "02", name: "Auth & Security", desc: "RBAC · JWT · Rate Limiting", tech: "Guards · Helmet · CORS", icon: <TbKey /> },
+  { step: "03", name: "Relational & NoSQL", desc: "ACID Schemas & Aggregations", tech: "PostgreSQL · MongoDB", icon: <TbDatabase /> },
+  { step: "04", name: "Sub-ms Cache", desc: "Memory Stores & Sessions", tech: "Redis · In-Memory", icon: <TbGauge /> },
+  { step: "05", name: "Job Queues", desc: "Async Workers & Outbox", tech: "BullMQ · Event Loops", icon: <HiOutlineQueueList /> },
+  { step: "06", name: "Cloud & Ops", desc: "Containers & CI/CD", tech: "Docker · AWS · Nginx", icon: <TbCloud /> },
+];
 
 const backendSkills: Skill[] = [
   {
@@ -402,10 +415,15 @@ const skillCategories: SkillCategory[] = [
 
 function SkillCategoryPanel({ title, icon, iconBg, hint, skills }: SkillCategory) {
   return (
-    <article className="group/card relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-zinc-700 sm:p-5">
+    <article
+      data-skill-category
+      className="group/card relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-zinc-700 sm:p-5"
+    >
       <div className="mb-3.5 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
-          <span className={`flex h-7 w-7 items-center justify-center rounded-lg text-sm sm:text-base ${iconBg}`}>
+          <span
+            className={`flex h-7 w-7 items-center justify-center rounded-lg text-sm sm:text-base ${iconBg}`}
+          >
             {icon}
           </span>
           <h3 className="text-sm font-semibold tracking-tight text-zinc-100 sm:text-base">
@@ -433,26 +451,120 @@ function SkillCategoryPanel({ title, icon, iconBg, hint, skills }: SkillCategory
 }
 
 export default function Skills() {
+  const containerRef = useGsapScroll<HTMLDivElement>((_, isReduced) => {
+    if (isReduced) return;
+
+    // Timeline for Backend Architecture Flow
+    gsap.fromTo(
+      "[data-pipeline-node]",
+      { y: 20, opacity: 0, scale: 0.95 },
+      {
+        scrollTrigger: {
+          trigger: "[data-pipeline-container]",
+          start: "top 85%",
+          toggleActions: "play none none none",
+        },
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power2.out",
+      }
+    );
+
+    // Staggered reveal for Skill Category cards
+    gsap.fromTo(
+      "[data-skill-category]",
+      { y: 30, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: "[data-skills-grid]",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.6,
+        ease: "power3.out",
+      }
+    );
+  });
+
   const totalSkills = skillCategories.reduce(
     (count, category) => count + category.skills.length,
-    0,
+    0
   );
 
   return (
     <Section id="skills" className="bg-zinc-950/80">
-      <SectionHeader
-        title="Skills"
-        subtitle="Backend-first stack — all in active use."
-      />
+      <div ref={containerRef}>
+        <SectionHeader
+          title="Skills & Backend Architecture"
+          subtitle="Production-tested systems engineering — from API contracts to high-availability infrastructure."
+        />
 
-      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
-        {totalSkills} technologies across {skillCategories.length} areas
-      </p>
+        {/* Backend Architecture Storytelling Pipeline */}
+        <div
+          data-pipeline-container
+          className="mb-10 sm:mb-12 overflow-hidden rounded-2xl border border-zinc-800/90 bg-gradient-to-b from-zinc-900/60 to-zinc-950/80 p-4 sm:p-6 backdrop-blur-xl shadow-xl"
+        >
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800/80 pb-3 text-xs font-mono">
+            <span className="flex items-center gap-2 font-bold uppercase tracking-wider text-zinc-300">
+              <span className="h-2 w-2 rounded-full bg-emerald-400 live-beacon" />
+              BACKEND SYSTEM LIFECYCLE
+            </span>
+            <span className="text-[11px] text-zinc-500 font-mono">
+              END-TO-END FLOW ARCHITECTURE
+            </span>
+          </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
-        {skillCategories.map((category) => (
-          <SkillCategoryPanel key={category.title} {...category} />
-        ))}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-3.5">
+            {architecturePipeline.map((node) => (
+              <div
+                key={node.step}
+                data-pipeline-node
+                className="group relative flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-3 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600 hover:bg-zinc-850 hover:shadow-lg"
+              >
+                <div>
+                  <div className="flex items-center justify-between text-zinc-400 mb-2">
+                    <span className="text-[10px] font-mono font-bold text-zinc-500">
+                      {node.step}
+                    </span>
+                    <span className="text-base text-zinc-300 group-hover:text-zinc-50 transition-colors">
+                      {node.icon}
+                    </span>
+                  </div>
+                  <h4 className="text-xs font-bold text-zinc-100 group-hover:text-white">
+                    {node.name}
+                  </h4>
+                  <p className="mt-1 text-[11px] text-zinc-400 leading-tight">
+                    {node.desc}
+                  </p>
+                </div>
+                <div className="mt-2.5 pt-2 border-t border-zinc-800/60">
+                  <span className="text-[10px] font-mono text-zinc-400 font-medium">
+                    {node.tech}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
+          {totalSkills} technologies across {skillCategories.length} functional areas
+        </p>
+
+        <div
+          data-skills-grid
+          className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5"
+        >
+          {skillCategories.map((category) => (
+            <SkillCategoryPanel key={category.title} {...category} />
+          ))}
+        </div>
       </div>
     </Section>
   );

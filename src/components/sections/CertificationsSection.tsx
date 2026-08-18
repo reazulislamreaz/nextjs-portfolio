@@ -1,5 +1,9 @@
+"use client";
+
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
+import { useGsapScroll } from "@/hooks/useGsapScroll";
+import { gsap } from "@/lib/gsap";
 
 interface Certification {
   title: string;
@@ -99,85 +103,112 @@ const items: Certification[] = [
 ];
 
 export default function Certifications() {
+  const containerRef = useGsapScroll<HTMLDivElement>((_, isReduced) => {
+    if (isReduced) return;
+
+    gsap.fromTo(
+      "[data-cert-card]",
+      { y: 30, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: "[data-certs-grid]",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "power3.out",
+      }
+    );
+  });
+
   return (
     <Section id="certifications" className="bg-zinc-950/45">
-      <SectionHeader
-        title="Certifications"
-        subtitle="Programs aligned with production backend work."
-      />
+      <div ref={containerRef}>
+        <SectionHeader
+          title="Certifications & Specializations"
+          subtitle="Accredited deep dives aligned with production systems engineering and cloud deployments."
+        />
 
-      <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2">
-        {items.map((item) => (
-          <article
-            key={item.title}
-            className="flex min-w-0 flex-col rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-colors sm:rounded-3xl sm:p-8 hover:border-zinc-500"
-          >
-            <div className="mb-4 flex flex-col gap-3 border-b border-zinc-700/80 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-              <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
-                {item.title}
-              </h3>
-              <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
-                {item.status}
-              </span>
-            </div>
-
-            <p className="mb-5 text-sm leading-relaxed text-zinc-300 sm:mb-6 sm:text-base">
-              {item.summary}
-            </p>
-
-            <div className="mb-5 sm:mb-6">
-              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 sm:mb-3">
-                Topics
-              </h4>
-              <ul className="space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
-                {item.topics.map((topic) => (
-                  <li key={topic} className="flex gap-2">
-                    <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-zinc-50" />
-                    <span>{topic}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <dl className="mt-auto space-y-3 border-t border-zinc-700/80 pt-5 text-xs sm:pt-6 sm:text-sm">
-              <div>
-                <dt className="font-semibold text-zinc-400">Platform</dt>
-                <dd className="mt-1 break-words text-zinc-100 font-medium">
-                  {item.platform}
-                </dd>
+        <div
+          data-certs-grid
+          className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2"
+        >
+          {items.map((item) => (
+            <article
+              key={item.title}
+              data-cert-card
+              className="flex min-w-0 flex-col rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500 hover:-translate-y-0.5"
+            >
+              <div className="mb-4 flex flex-col gap-3 border-b border-zinc-700/80 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+                <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
+                  {item.title}
+                </h3>
+                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
+                  {item.status}
+                </span>
               </div>
-              <div>
-                <dt className="font-semibold text-zinc-400">Focus</dt>
-                <dd className="mt-1 text-zinc-300">{item.focus}</dd>
+
+              <p className="mb-5 text-sm leading-relaxed text-zinc-300 sm:mb-6 sm:text-base">
+                {item.summary}
+              </p>
+
+              <div className="mb-5 sm:mb-6">
+                <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 sm:mb-3">
+                  Topics
+                </h4>
+                <ul className="space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
+                  {item.topics.map((topic) => (
+                    <li key={topic} className="flex gap-2">
+                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-zinc-50" />
+                      <span>{topic}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              {item.credentialUrl ? (
+
+              <dl className="mt-auto space-y-3 border-t border-zinc-700/80 pt-5 text-xs sm:pt-6 sm:text-sm">
                 <div>
-                  <dt className="font-semibold text-zinc-400">Credential</dt>
-                  <dd className="mt-1 flex flex-col gap-1.5">
-                    <a
-                      href={item.credentialUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline"
-                    >
-                      {item.credentialLabel ?? "Open credential"}
-                    </a>
-                    {item.secondaryCredentialUrl ? (
-                      <a
-                        href={item.secondaryCredentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline"
-                      >
-                        {item.secondaryCredentialLabel ?? "Related link"}
-                      </a>
-                    ) : null}
+                  <dt className="font-semibold text-zinc-400">Platform</dt>
+                  <dd className="mt-1 break-words text-zinc-100 font-medium">
+                    {item.platform}
                   </dd>
                 </div>
-              ) : null}
-            </dl>
-          </article>
-        ))}
+                <div>
+                  <dt className="font-semibold text-zinc-400">Focus</dt>
+                  <dd className="mt-1 text-zinc-300">{item.focus}</dd>
+                </div>
+                {item.credentialUrl ? (
+                  <div>
+                    <dt className="font-semibold text-zinc-400">Credential</dt>
+                    <dd className="mt-1 flex flex-col gap-1.5">
+                      <a
+                        href={item.credentialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline"
+                      >
+                        {item.credentialLabel ?? "Open credential"}
+                      </a>
+                      {item.secondaryCredentialUrl ? (
+                        <a
+                          href={item.secondaryCredentialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline"
+                        >
+                          {item.secondaryCredentialLabel ?? "Related link"}
+                        </a>
+                      ) : null}
+                    </dd>
+                  </div>
+                ) : null}
+              </dl>
+            </article>
+          ))}
+        </div>
       </div>
     </Section>
   );
