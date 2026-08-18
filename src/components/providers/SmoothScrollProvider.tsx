@@ -4,6 +4,12 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
 import { gsap, registerGsap, isReducedMotion } from "@/lib/gsap";
 
+declare global {
+  interface Window {
+    __lenis?: Lenis | null;
+  }
+}
+
 export default function SmoothScrollProvider({
   children,
 }: {
@@ -12,7 +18,10 @@ export default function SmoothScrollProvider({
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    if (isReducedMotion()) return;
+    if (isReducedMotion()) {
+      window.__lenis = null;
+      return;
+    }
 
     const { ScrollTrigger } = registerGsap();
 
@@ -26,6 +35,7 @@ export default function SmoothScrollProvider({
     });
 
     lenisRef.current = lenis;
+    window.__lenis = lenis;
 
     // Synchronize Lenis with GSAP ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
@@ -41,6 +51,7 @@ export default function SmoothScrollProvider({
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
       lenisRef.current = null;
+      window.__lenis = null;
     };
   }, []);
 
