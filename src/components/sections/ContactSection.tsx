@@ -116,7 +116,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <p className="text-[11px] font-mono text-zinc-400">EMAIL</p>
-                      <span className="break-all text-zinc-100 transition-colors duration-300 hover:text-white sm:text-base font-medium">
+                      <span className="break-all text-zinc-100 transition-colors duration-300 hover:text-zinc-50 sm:text-base font-medium">
                         {siteContact.email}
                       </span>
                     </div>
@@ -133,7 +133,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <p className="text-[11px] font-mono text-zinc-400">WHATSAPP / PHONE</p>
-                      <span className="text-zinc-100 transition-colors duration-300 hover:text-white font-medium">
+                      <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
                         {siteContact.phone}
                       </span>
                     </div>
@@ -150,7 +150,7 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <p className="text-[11px] font-mono text-zinc-400">LOCATION</p>
-                      <span className="text-zinc-100 transition-colors duration-300 hover:text-white font-medium">
+                      <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
                         Dhaka, Bangladesh · Available Worldwide
                       </span>
                     </div>
@@ -163,7 +163,7 @@ export default function ContactSection() {
                         href={siteSocial.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-white"
+                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
                         aria-label="GitHub"
                       >
                         <FaGithub size={18} />
@@ -172,7 +172,7 @@ export default function ContactSection() {
                         href={siteSocial.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-white"
+                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
                         aria-label="LinkedIn"
                       >
                         <FaLinkedin size={18} />

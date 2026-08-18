@@ -201,7 +201,7 @@ export default function Certifications() {
                         href={item.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline hover:text-white"
+                        className="inline-flex items-center gap-1.5 text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline hover:text-zinc-50"
                       >
                         <span>{item.credentialLabel ?? "Open credential"}</span>
                         <ExternalLink size={13} />

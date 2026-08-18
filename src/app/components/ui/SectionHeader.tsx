@@ -17,7 +17,7 @@ export default function SectionHeader({ title, subtitle }: SectionHeaderProps) {
       </h2>
 
       {subtitle && (
-        <p className="mx-auto mt-3 max-w-2xl px-2 text-sm font-light leading-relaxed text-zinc-400 sm:mt-4 sm:text-base lg:text-lg">
+        <p className="mx-auto mt-3 max-w-2xl px-2 text-sm font-normal leading-relaxed text-zinc-400 sm:mt-4 sm:text-base lg:text-lg">
           {subtitle}
         </p>
       )}

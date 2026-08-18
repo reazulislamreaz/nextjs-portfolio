@@ -294,7 +294,7 @@ export default function HomeHero() {
                     type="button"
                     onMouseEnter={() => setActiveTech(tech)}
                     onMouseLeave={() => setActiveTech(null)}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-zinc-700/80 bg-zinc-900/90 px-3 py-1.5 text-xs font-medium text-zinc-100 backdrop-blur-md shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-white hover:bg-zinc-800 active:scale-95 sm:text-sm"
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-zinc-700/80 bg-zinc-900/90 px-3 py-1.5 text-xs font-medium text-zinc-100 backdrop-blur-md shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-50 hover:bg-zinc-800 active:scale-95 sm:text-sm"
                   >
                     <span className="text-sm text-zinc-300 transition-colors">
                       {tech.icon}

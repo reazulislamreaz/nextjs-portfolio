@@ -129,7 +129,7 @@ export default function ProjectsSection() {
             <button
               type="button"
               onClick={() => setShowAllProjects((prev) => !prev)}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/60 px-8 py-2.5 text-sm font-semibold text-zinc-200 shadow-lg backdrop-blur-md transition hover:border-zinc-500 hover:bg-zinc-850 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/60 px-8 py-2.5 text-sm font-semibold text-zinc-200 shadow-lg backdrop-blur-md transition hover:border-zinc-500 hover:bg-zinc-850 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               aria-expanded={showAllProjects}
             >
               {showAllProjects ? "Show Less Projects" : "Explore More Projects"}

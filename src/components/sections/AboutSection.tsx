@@ -193,7 +193,7 @@ export default function About() {
                           {tenet.tag}
                         </span>
                       </div>
-                      <h4 className="text-sm font-bold text-zinc-100 group-hover:text-white">
+                      <h4 className="text-sm font-bold text-zinc-100 group-hover:text-zinc-50">
                         {tenet.title}
                       </h4>
                       <p className="mt-2 text-xs leading-relaxed text-zinc-400">
@@ -215,7 +215,7 @@ export default function About() {
                 {coreStack.map((tech) => (
                   <span
                     key={tech}
-                    className="cursor-default rounded-lg border border-zinc-700/80 bg-zinc-900 px-3.5 py-1 text-xs font-medium text-zinc-200 shadow-xs transition-colors hover:border-zinc-500 hover:text-white"
+                    className="cursor-default rounded-lg border border-zinc-700/80 bg-zinc-900 px-3.5 py-1 text-xs font-medium text-zinc-200 shadow-xs transition-colors hover:border-zinc-500 hover:text-zinc-50"
                   >
                     {tech}
                   </span>
