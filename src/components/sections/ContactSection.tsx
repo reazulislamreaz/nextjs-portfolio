@@ -1,14 +1,23 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { FiMail, FiMapPin, FiX } from "react-icons/fi";
-import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import ContactForm from "@/app/components/ContactForm";
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import { siteContact, siteSocial } from "@/config/site";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
+import {
+  Mail,
+  MapPin,
+  X,
+  Phone,
+  MessageSquare,
+  Sparkles,
+  Terminal,
+  CheckCircle2,
+} from "lucide-react";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 export default function ContactSection() {
   const [showMap, setShowMap] = useState(false);
@@ -78,8 +87,8 @@ export default function ContactSection() {
     <Section id="contact" className="bg-zinc-950/40">
       <div ref={containerRef}>
         <SectionHeader
-          title="Get In Touch"
-          subtitle="Open to backend roles, distributed systems engineering, and strategic project conversations."
+          title="Direct Communication & Inquiries"
+          subtitle="Open to senior backend roles, scalable distributed systems engineering, and consulting."
         />
 
         <div data-contact-grid className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
@@ -88,72 +97,85 @@ export default function ContactSection() {
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
               <div className="relative z-10">
+                <div className="mb-3 flex items-center gap-2 font-mono text-xs text-zinc-400">
+                  <Terminal size={14} className="text-zinc-500" />
+                  <span>DIRECT CHANNELS // ENCRYPTED</span>
+                </div>
+
                 <p className="mb-6 text-base font-normal leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
-                  Open to new opportunities and interesting projects. Reach out
-                  anytime.
+                  Whether you are hiring for a backend-heavy role or seeking an experienced engineer to scale your systems architecture, let&apos;s talk.
                 </p>
 
-                <div className="space-y-6 text-base">
+                <div className="space-y-4 text-base">
                   <a
                     href={`mailto:${siteContact.email}`}
-                    className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 transition-all duration-300 hover:border-zinc-500"
+                    className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-850"
                   >
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3">
-                      <FiMail className="text-xl text-zinc-50" />
+                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-zinc-100">
+                      <Mail size={18} />
                     </div>
-                    <span className="break-all text-zinc-100 transition-colors duration-300 hover:text-zinc-50 sm:text-base font-medium">
-                      {siteContact.email}
-                    </span>
+                    <div>
+                      <p className="text-[11px] font-mono text-zinc-400">EMAIL</p>
+                      <span className="break-all text-zinc-100 transition-colors duration-300 hover:text-white sm:text-base font-medium">
+                        {siteContact.email}
+                      </span>
+                    </div>
                   </a>
 
                   <a
                     href={siteContact.phoneHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 transition-all duration-300 hover:border-zinc-500"
+                    className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-850"
                   >
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3">
-                      <FaWhatsapp className="text-xl text-zinc-50" />
+                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-emerald-400">
+                      <FaWhatsapp size={18} />
                     </div>
-                    <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
-                      {siteContact.phone}
-                    </span>
+                    <div>
+                      <p className="text-[11px] font-mono text-zinc-400">WHATSAPP / PHONE</p>
+                      <span className="text-zinc-100 transition-colors duration-300 hover:text-white font-medium">
+                        {siteContact.phone}
+                      </span>
+                    </div>
                   </a>
 
                   <button
                     ref={mapTriggerRef}
                     type="button"
                     onClick={() => setShowMap(true)}
-                    className="flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 text-left transition-all duration-300 hover:border-zinc-500"
+                    className="flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 text-left transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-850"
                   >
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3">
-                      <FiMapPin className="text-xl text-zinc-50" />
+                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-zinc-100">
+                      <MapPin size={18} />
                     </div>
-                    <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
-                      Dhaka, Bangladesh
-                    </span>
+                    <div>
+                      <p className="text-[11px] font-mono text-zinc-400">LOCATION</p>
+                      <span className="text-zinc-100 transition-colors duration-300 hover:text-white font-medium">
+                        Dhaka, Bangladesh · Available Worldwide
+                      </span>
+                    </div>
                   </button>
 
-                  <div className="flex flex-wrap items-center gap-4 pt-6 sm:gap-6">
-                    <span className="font-medium text-zinc-400">Follow me:</span>
-                    <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-4 pt-4 sm:gap-6 border-t border-zinc-800/80">
+                    <span className="font-mono text-xs text-zinc-400">Profiles:</span>
+                    <div className="flex items-center gap-3">
                       <a
                         href={siteSocial.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-3 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
+                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-white"
                         aria-label="GitHub"
                       >
-                        <FaGithub className="text-xl" />
+                        <FaGithub size={18} />
                       </a>
                       <a
                         href={siteSocial.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-3 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
+                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-white"
                         aria-label="LinkedIn"
                       >
-                        <FaLinkedin className="text-xl" />
+                        <FaLinkedin size={18} />
                       </a>
                     </div>
                   </div>
@@ -191,8 +213,8 @@ export default function ContactSection() {
                 id="map-dialog-title"
                 className="flex items-center gap-2 text-xl font-bold text-zinc-50"
               >
-                <FiMapPin className="text-emerald-500" />
-                {siteContact.location}
+                <MapPin size={20} className="text-emerald-500" />
+                <span>{siteContact.location}</span>
               </h3>
               <button
                 ref={closeButtonRef}
@@ -201,7 +223,7 @@ export default function ContactSection() {
                 className="cursor-pointer rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-50"
                 aria-label="Close map dialog"
               >
-                <FiX size={24} />
+                <X size={22} />
               </button>
             </div>
             <div className="aspect-video w-full bg-zinc-950">

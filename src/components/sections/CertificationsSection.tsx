@@ -4,6 +4,13 @@ import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
+import {
+  Award,
+  ExternalLink,
+  ShieldCheck,
+  CheckCircle2,
+  Terminal,
+} from "lucide-react";
 
 interface Certification {
   title: string;
@@ -21,7 +28,7 @@ interface Certification {
 const items: Certification[] = [
   {
     title: "Full Stack Web Development",
-    summary: "Modern web stack and full-stack application development.",
+    summary: "Modern web stack, distributed API patterns, and full-stack application development.",
     topics: [
       "React & Next.js",
       "Node.js & Express APIs",
@@ -42,7 +49,7 @@ const items: Certification[] = [
   },
   {
     title: "AWS Cloud Computing",
-    summary: "Hands-on AWS infrastructure and backend deployment.",
+    summary: "Hands-on AWS cloud infrastructure, VPC networking, and backend deployment.",
     topics: [
       "IAM & security",
       "EC2, S3, VPC",
@@ -65,7 +72,7 @@ const items: Certification[] = [
   {
     title: "Next Level Web Development",
     summary:
-      "AI-driven bootcamp — TypeScript full-stack, production patterns, cloud, and AI features.",
+      "AI-driven software engineering bootcamp — TypeScript full-stack, production patterns, cloud, and AI agents.",
     topics: [
       "TypeScript, OOP & modular architecture",
       "Node.js & Express REST APIs",
@@ -88,9 +95,9 @@ const items: Certification[] = [
   },
   {
     title: "AI & Intelligent Systems",
-    summary: "AI-assisted backend patterns and intelligent workflows.",
+    summary: "AI-assisted backend architectures, vector indexing, and intelligent workflows.",
     topics: [
-      "RAG",
+      "RAG & semantic search",
       "Prompt engineering",
       "AI API integrations",
       "Context-aware backends",
@@ -129,7 +136,7 @@ export default function Certifications() {
       <div ref={containerRef}>
         <SectionHeader
           title="Certifications & Specializations"
-          subtitle="Accredited deep dives aligned with production systems engineering and cloud deployments."
+          subtitle="Accredited technical training aligned with production systems engineering, cloud architecture, and AI integrations."
         />
 
         <div
@@ -140,14 +147,20 @@ export default function Certifications() {
             <article
               key={item.title}
               data-cert-card
-              className="flex min-w-0 flex-col rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500 hover:-translate-y-0.5"
+              className="flex min-w-0 flex-col rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500 hover:-translate-y-0.5"
             >
               <div className="mb-4 flex flex-col gap-3 border-b border-zinc-700/80 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
-                  {item.title}
-                </h3>
-                <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
-                  {item.status}
+                <div className="flex items-center gap-2.5">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-100 shadow-xs">
+                    <Award size={18} />
+                  </div>
+                  <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
+                    {item.title}
+                  </h3>
+                </div>
+                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
+                  <CheckCircle2 size={12} />
+                  <span>{item.status}</span>
                 </span>
               </div>
 
@@ -156,13 +169,13 @@ export default function Certifications() {
               </p>
 
               <div className="mb-5 sm:mb-6">
-                <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 sm:mb-3">
-                  Topics
+                <h4 className="mb-2.5 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 sm:mb-3">
+                  CORE MODULES
                 </h4>
                 <ul className="space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
                   {item.topics.map((topic) => (
-                    <li key={topic} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-zinc-50" />
+                    <li key={topic} className="flex gap-2 items-center">
+                      <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
                       <span>{topic}</span>
                     </li>
                   ))}
@@ -171,35 +184,37 @@ export default function Certifications() {
 
               <dl className="mt-auto space-y-3 border-t border-zinc-700/80 pt-5 text-xs sm:pt-6 sm:text-sm">
                 <div>
-                  <dt className="font-semibold text-zinc-400">Platform</dt>
+                  <dt className="font-semibold text-zinc-400 font-mono text-[11px]">PLATFORM</dt>
                   <dd className="mt-1 break-words text-zinc-100 font-medium">
                     {item.platform}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-zinc-400">Focus</dt>
+                  <dt className="font-semibold text-zinc-400 font-mono text-[11px]">FOCUS</dt>
                   <dd className="mt-1 text-zinc-300">{item.focus}</dd>
                 </div>
                 {item.credentialUrl ? (
                   <div>
-                    <dt className="font-semibold text-zinc-400">Credential</dt>
+                    <dt className="font-semibold text-zinc-400 font-mono text-[11px]">CREDENTIAL</dt>
                     <dd className="mt-1 flex flex-col gap-1.5">
                       <a
                         href={item.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline"
+                        className="inline-flex items-center gap-1.5 text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline hover:text-white"
                       >
-                        {item.credentialLabel ?? "Open credential"}
+                        <span>{item.credentialLabel ?? "Open credential"}</span>
+                        <ExternalLink size={13} />
                       </a>
                       {item.secondaryCredentialUrl ? (
                         <a
                           href={item.secondaryCredentialUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline"
+                          className="inline-flex items-center gap-1.5 text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline text-xs"
                         >
-                          {item.secondaryCredentialLabel ?? "Related link"}
+                          <span>{item.secondaryCredentialLabel ?? "Related link"}</span>
+                          <ExternalLink size={11} />
                         </a>
                       ) : null}
                     </dd>

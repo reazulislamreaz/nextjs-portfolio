@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
-import { FiArrowUpRight, FiDownload } from "react-icons/fi";
+import { Menu, X, ArrowUpRight, Download, Sparkles, Terminal } from "lucide-react";
 import {
   hashFromHref,
   isNavLinkActive,
@@ -143,11 +142,11 @@ export default function Navbar() {
       className="fixed top-3 sm:top-5 inset-x-0 z-50 flex flex-col items-center px-3 sm:px-6 pointer-events-none"
       aria-label="Main navigation"
     >
-      {/* Ambient Backlight Glow - Celestial Silver / White */}
+      {/* Ambient Backlight Glow */}
       <div className="relative pointer-events-auto">
-        <div className="pointer-events-none absolute -inset-1 rounded-full bg-gradient-to-r from-zinc-400/20 via-white/20 to-zinc-400/20 blur-md opacity-40 dark:opacity-60 transition-opacity" />
+        <div className="pointer-events-none absolute -inset-1 rounded-full bg-gradient-to-r from-zinc-400/10 via-white/15 to-zinc-400/10 blur-md opacity-40 dark:opacity-60 transition-opacity" />
 
-        {/* Future-Stack Spatial Glass Dock with Interactive Spotlight */}
+        {/* Spatial Glass Dock with Interactive Spotlight */}
         <nav
           data-nav-bar
           onMouseMove={handleMouseMove}
@@ -156,23 +155,23 @@ export default function Navbar() {
             setIsHoveredDock(false);
             setHoveredHref(null);
           }}
-          className={`relative overflow-hidden flex items-center justify-between sm:justify-center gap-1.5 sm:gap-2 p-1.5 sm:px-3 sm:py-1.5 rounded-full backdrop-blur-2xl transition-all duration-300 ${
+          className={`relative overflow-hidden flex items-center justify-between sm:justify-center gap-1.5 sm:gap-2 p-1.5 sm:px-3.5 sm:py-2 rounded-full backdrop-blur-2xl transition-all duration-300 ${
             scrolled
-              ? "bg-white/85 dark:bg-zinc-950/85 border border-zinc-200/80 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
-              : "bg-white/70 dark:bg-zinc-950/75 border border-zinc-200/60 dark:border-white/10 shadow-[0_12px_36px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.4)]"
+              ? "bg-white/90 dark:bg-zinc-950/90 border border-zinc-200/80 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
+              : "bg-white/75 dark:bg-zinc-950/80 border border-zinc-200/60 dark:border-white/10 shadow-[0_12px_36px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.4)]"
           }`}
         >
-          {/* Interactive Mouse Spotlight Follower */}
+          {/* Mouse Spotlight Follower */}
           {isHoveredDock && (
             <div
               className="pointer-events-none absolute -inset-px rounded-full opacity-100 transition-opacity duration-300"
               style={{
-                background: `radial-gradient(130px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.15), transparent 80%)`,
+                background: `radial-gradient(130px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.12), transparent 80%)`,
               }}
             />
           )}
 
-          {/* Spatial Nav Links with Future-Stack Hover & Active States */}
+          {/* Spatial Nav Links */}
           <div className="hidden md:flex items-center gap-1 relative z-10">
             {navLinks.map(({ href, label }) => {
               const isActive = isNavLinkActive(
@@ -202,7 +201,7 @@ export default function Navbar() {
 
                   {/* Active Laser Line Glow */}
                   {isActive && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-4 rounded-full bg-zinc-50 shadow-[0_0_8px_rgba(150,150,150,0.6)] animate-pulse-glow" />
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-4 rounded-full bg-zinc-50 shadow-[0_0_8px_rgba(255,255,255,0.7)] animate-pulse-glow" />
                   )}
                 </Link>
               );
@@ -216,20 +215,17 @@ export default function Navbar() {
           <div className="flex items-center gap-1 sm:gap-2 shrink-0 relative z-10">
             <ThemeToggle />
 
-            {/* Future-Stack Monochrome Shimmering Resume Button */}
+            {/* Shimmering Resume Button */}
             <a
               href={resumePath}
               download
-              className="group relative hidden sm:inline-flex items-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(150,150,150,0.3)] active:scale-95 focus:outline-none"
+              className="group relative hidden sm:inline-flex items-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 focus:outline-none"
               aria-label="Download Resume"
             >
-              {/* Outer radiant animated gradient */}
               <span className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500 opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse-glow" />
-              
-              {/* Inner glass core */}
               <span className="relative flex items-center gap-1.5 rounded-full bg-zinc-900 px-3.5 py-1.5 text-xs font-semibold text-zinc-50 backdrop-blur-xl transition-colors group-hover:bg-zinc-800">
                 <span>Resume</span>
-                <FiArrowUpRight className="h-3 w-3 text-zinc-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                <ArrowUpRight size={13} className="text-zinc-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </span>
             </a>
 
@@ -241,7 +237,7 @@ export default function Navbar() {
               aria-expanded={mobileOpen}
               aria-label="Toggle navigation"
             >
-              {mobileOpen ? <HiX size={18} /> : <HiMenuAlt3 size={18} />}
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </nav>
@@ -256,10 +252,10 @@ export default function Navbar() {
           {/* Status Header */}
           <div className="flex items-center justify-between px-3 py-2 mb-3 rounded-xl bg-zinc-800 border border-zinc-700 text-xs text-zinc-300">
             <span className="flex items-center gap-2 font-mono">
-              <span className="h-1.5 w-1.5 rounded-full bg-zinc-50 live-beacon" />
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon" />
               Available for work
             </span>
-            <span className="text-zinc-400 font-mono text-[11px]">Dhaka, BD</span>
+            <span className="text-zinc-400 font-mono text-[11px]">Dhaka · Remote</span>
           </div>
 
           <div className="grid grid-cols-2 gap-1.5">
@@ -283,7 +279,7 @@ export default function Navbar() {
                 >
                   <span>{label}</span>
                   {isActive && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-zinc-50" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                   )}
                 </Link>
               );
@@ -296,7 +292,7 @@ export default function Navbar() {
             className="mt-3.5 flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-50 px-4 py-2.5 text-xs font-semibold text-zinc-950 shadow-md transition hover:bg-zinc-200"
             onClick={() => setMobileOpen(false)}
           >
-            <FiDownload className="h-3.5 w-3.5" />
+            <Download size={14} />
             <span>Download Resume</span>
           </a>
         </div>
