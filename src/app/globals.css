@@ -9,71 +9,80 @@
   themes: in light mode the ramp is inverted (high shade = dark), in dark mode
   it follows the green-tinted TaskForge surfaces. The emerald scale is remapped
   to TaskForge teal (#00897b) and stays consistent across themes.
-*/
-
-/* Light theme (default) - Executive Neutral Slate Canvas with Emerald Accents */
+*//* Light theme (default) - Pure Minimalist White Canvas with Jet Black & Titanium */
 :root {
   --nav-height: 4rem;
-  --zinc-50: #0f172a; /* Deep Slate (Primary Text) */
-  --zinc-100: #1e293b; /* Dark Slate (Headings/Buttons) */
-  --zinc-200: #334155; /* Charcoal Subheadings */
-  --zinc-300: #475569; /* Body Text */
-  --zinc-400: #64748b; /* Muted Meta */
-  --zinc-500: #94a3b8; /* Soft Subtitle */
-  --zinc-600: #cbd5e1; /* Subtle Dividers */
-  --zinc-700: #e2e8f0; /* Strong Border */
-  --zinc-800: #edf2f7; /* Card Border */
-  --zinc-900: #ffffff; /* Elevated Glass Card */
-  --zinc-950: #fafbfc; /* Crisp Neutral Canvas Background */
+  --zinc-50: #09090b; /* Jet Black (Primary Text & Headings) */
+  --zinc-100: #18181b; /* Deep Obsidian (Headings/Buttons) */
+  --zinc-200: #27272a; /* Charcoal Subheadings */
+  --zinc-300: #3f3f46; /* High-contrast Body Text */
+  --zinc-400: #52525b; /* Crisp Muted Meta */
+  --zinc-500: #71717a; /* Soft Subtitle */
+  --zinc-600: #d4d4d8; /* Dividers */
+  --zinc-700: #e4e4e7; /* Clean Border */
+  --zinc-800: #f4f4f5; /* Subtle Card Accent */
+  --zinc-850: #fafafa;
+  --zinc-900: #ffffff; /* Elevated Crisp White Glass Card */
+  --zinc-950: #ffffff; /* Pure Modern White Canvas */
 
-  --teal-200: #80cbc4;
-  --teal-300: #4db6ac;
-  --teal-400: #26a69a;
-  --teal-500: #00897b; /* Primary Brand Accent */
-  --teal-600: #00796b; /* Primary Hover */
-  --teal-700: #006d5b;
-  --teal-800: #005a4a;
-  --teal-900: #10302b;
-  --teal-950: #0c2722;
+  --teal-200: #e4e4e7;
+  --teal-300: #a1a1aa;
+  --teal-400: #52525b;
+  --teal-500: #09090b; /* Monochromatic Black Accent */
+  --teal-600: #18181b;
+  --teal-700: #27272a;
+  --teal-800: #3f3f46;
+  --teal-900: #52525b;
+  --teal-950: #71717a;
 
-  --grid-line: rgba(15, 23, 42, 0.035);
-  --glow-primary: rgba(0, 137, 123, 0.06);
-  --glow-secondary: rgba(56, 189, 248, 0.035);
-  --glow-tertiary: rgba(148, 163, 184, 0.04);
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --glow-primary: rgba(0, 0, 0, 0.05);
+  --glow-secondary: rgba(0, 0, 0, 0.03);
+  --glow-tertiary: rgba(0, 0, 0, 0.015);
 
-  /* Section heading gradient — dark slate ramp so it stays crisp on light bg */
-  --heading-from: #0f172a;
-  --heading-via: #1e293b;
-  --heading-to: #334155;
+  /* Section heading gradient */
+  --heading-from: #09090b;
+  --heading-via: #18181b;
+  --heading-to: #3f3f46;
 }
 
-/* Dark theme - Deep Obsidian with Radiant Emerald Aurora */
+/* Dark theme - Pitch Black Obsidian & Razor Sharp Titanium White */
 .dark {
-  --zinc-50: #f8fafc;
-  --zinc-100: #f1f5f9; /* primary text */
-  --zinc-200: #e2e8f0;
-  --zinc-300: #cbd5e1;
-  --zinc-400: #94a3b8; /* muted text */
-  --zinc-500: #64748b; /* soft text */
-  --zinc-600: #475569;
-  --zinc-700: #334155; /* strong border */
-  --zinc-800: #1e293b; /* border */
-  --zinc-900: #0f172a; /* card / elevated surface */
-  --zinc-950: #090d0c; /* page background (obsidian deep) */
+  --zinc-50: #ffffff; /* Pure Titanium White (Primary Text & Headings) */
+  --zinc-100: #fafafa; /* Ultra Crisp White */
+  --zinc-200: #f4f4f5; /* Bright Silver Subheadings */
+  --zinc-300: #e4e4e7; /* High-Contrast Clear Body Text */
+  --zinc-400: #cbd5e1; /* Vivid Metadata */
+  --zinc-500: #94a3b8; /* Soft Subtitle */
+  --zinc-600: #3f3f46; /* Strong Border */
+  --zinc-700: #27272a; /* Card Border */
+  --zinc-800: #18181b; /* Card Inner Surface */
+  --zinc-850: #222228;
+  --zinc-900: #0d0d11; /* Elevated Frosted Obsidian Card */
+  --zinc-950: #000000; /* True Pitch Black Canvas */
 
-  --grid-line: rgba(255, 255, 255, 0.025);
-  --glow-primary: rgba(0, 137, 123, 0.12);
-  --glow-secondary: rgba(56, 189, 248, 0.06);
-  --glow-tertiary: rgba(148, 163, 184, 0.05);
+  --teal-200: #94a3b8;
+  --teal-300: #cbd5e1;
+  --teal-400: #f4f4f5;
+  --teal-500: #ffffff; /* Pure White Accent */
+  --teal-600: #fafafa;
+  --teal-700: #f4f4f5;
+  --teal-800: #e4e4e7;
+  --teal-900: #cbd5e1;
+  --teal-950: #94a3b8;
 
-  /* Section heading gradient — light shimmer on dark bg */
-  --heading-from: #f8fafc;
-  --heading-via: #e2e8f0;
-  --heading-to: #94a3b8;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --glow-primary: rgba(255, 255, 255, 0.12);
+  --glow-secondary: rgba(255, 255, 255, 0.08);
+  --glow-tertiary: rgba(255, 255, 255, 0.04);
+
+  /* Section heading gradient — pure white shimmer on black bg */
+  --heading-from: #ffffff;
+  --heading-via: #f4f4f5;
+  --heading-to: #cbd5e1;
 }
 
-/* Expose the tokens to Tailwind utilities. `inline` keeps the var reference in
-   the generated CSS so utilities respond to the .dark override at runtime. */
+/* Expose the tokens to Tailwind utilities */
 @theme inline {
   --color-zinc-50: var(--zinc-50);
   --color-zinc-100: var(--zinc-100);
@@ -84,10 +93,11 @@
   --color-zinc-600: var(--zinc-600);
   --color-zinc-700: var(--zinc-700);
   --color-zinc-800: var(--zinc-800);
+  --color-zinc-850: var(--zinc-850);
   --color-zinc-900: var(--zinc-900);
   --color-zinc-950: var(--zinc-950);
 
-  /* alias the few gray/slate usages onto the zinc ramp */
+  /* alias gray/slate onto the zinc ramp */
   --color-gray-300: var(--zinc-300);
   --color-gray-400: var(--zinc-400);
   --color-slate-300: var(--zinc-300);
@@ -120,7 +130,7 @@ html {
 }
 
 body {
-  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden selection:bg-emerald-500/30 selection:text-zinc-50;
+  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-950;
 }
 
 @layer base {
@@ -232,24 +242,37 @@ html:not(.dark) :is(
   }
 }
 
-@keyframes spin-very-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes pulse-glow {
   0%, 100% {
     opacity: 0.35;
     transform: scale(1);
   }
   50% {
-    opacity: 0.55;
+    opacity: 0.65;
     transform: scale(1.04);
   }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(1000%);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-scan {
+  animation: scan 8s linear infinite;
 }
 
 .animate-float-slow {

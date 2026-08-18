@@ -110,55 +110,55 @@ export default function Certifications() {
         {items.map((item) => (
           <article
             key={item.title}
-            className="flex min-w-0 flex-col rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 shadow-xl backdrop-blur-md transition-colors sm:rounded-3xl sm:p-8 hover:border-zinc-700"
+            className="flex min-w-0 flex-col rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-colors sm:rounded-3xl sm:p-8 hover:border-zinc-500"
           >
-            <div className="mb-4 flex flex-col gap-3 border-b border-zinc-800 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+            <div className="mb-4 flex flex-col gap-3 border-b border-zinc-700/80 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
               <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
                 {item.title}
               </h3>
-              <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
+              <span className="rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
                 {item.status}
               </span>
             </div>
 
-            <p className="mb-5 text-sm leading-relaxed text-zinc-400 sm:mb-6 sm:text-base">
+            <p className="mb-5 text-sm leading-relaxed text-zinc-300 sm:mb-6 sm:text-base">
               {item.summary}
             </p>
 
             <div className="mb-5 sm:mb-6">
-              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 sm:mb-3">
+              <h4 className="mb-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 sm:mb-3">
                 Topics
               </h4>
-              <ul className="space-y-2 text-xs leading-relaxed text-zinc-400 sm:text-sm">
+              <ul className="space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
                 {item.topics.map((topic) => (
                   <li key={topic} className="flex gap-2">
-                    <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-emerald-500/80" />
+                    <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-zinc-50" />
                     <span>{topic}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <dl className="mt-auto space-y-3 border-t border-zinc-800/80 pt-5 text-xs sm:pt-6 sm:text-sm">
+            <dl className="mt-auto space-y-3 border-t border-zinc-700/80 pt-5 text-xs sm:pt-6 sm:text-sm">
               <div>
-                <dt className="font-semibold text-zinc-500">Platform</dt>
-                <dd className="mt-1 break-words text-zinc-300">
+                <dt className="font-semibold text-zinc-400">Platform</dt>
+                <dd className="mt-1 break-words text-zinc-100 font-medium">
                   {item.platform}
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold text-zinc-500">Focus</dt>
-                <dd className="mt-1 text-zinc-400">{item.focus}</dd>
+                <dt className="font-semibold text-zinc-400">Focus</dt>
+                <dd className="mt-1 text-zinc-300">{item.focus}</dd>
               </div>
               {item.credentialUrl ? (
                 <div>
-                  <dt className="font-semibold text-zinc-500">Credential</dt>
+                  <dt className="font-semibold text-zinc-400">Credential</dt>
                   <dd className="mt-1 flex flex-col gap-1.5">
                     <a
                       href={item.credentialUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-emerald-400 underline-offset-4 transition-colors hover:text-emerald-300 hover:underline"
+                      className="text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline"
                     >
                       {item.credentialLabel ?? "Open credential"}
                     </a>
@@ -167,7 +167,7 @@ export default function Certifications() {
                         href={item.secondaryCredentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-300 hover:underline"
+                        className="text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline"
                       >
                         {item.secondaryCredentialLabel ?? "Related link"}
                       </a>

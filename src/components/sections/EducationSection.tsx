@@ -79,29 +79,29 @@ export default function Education() {
             {educationEntries.map((entry) => (
               <li key={entry.degree} className="relative">
                 <span
-                  className="absolute -left-[1.625rem] top-1.5 flex h-3 w-3 rounded-full border-2 border-emerald-500/80 bg-zinc-950 sm:-left-[2.125rem]"
+                  className="absolute -left-[1.625rem] top-1.5 flex h-3 w-3 rounded-full border-2 border-zinc-900 dark:border-white bg-white dark:bg-black sm:-left-[2.125rem]"
                   aria-hidden
                 />
 
-                <article className="group relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 md:hover:border-zinc-700 md:hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]">
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <article className="group relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                   <div className="relative z-10">
                     <div className="mb-4 flex flex-wrap items-center gap-3">
-                      <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
+                      <span className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
                         <FiAward size={14} aria-hidden />
                         {entry.status}
                       </span>
-                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400">
                         <FiCalendar size={14} aria-hidden />
                         {entry.period}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold tracking-tight text-zinc-100 sm:text-2xl">
+                    <h3 className="text-xl font-bold tracking-tight text-zinc-50 sm:text-2xl">
                       {entry.degree}
                     </h3>
-                    <p className="mt-1 text-base font-medium text-emerald-400/90 sm:text-lg">
+                    <p className="mt-1 text-base font-medium text-zinc-200 sm:text-lg">
                       {entry.field}
                     </p>
 
@@ -124,32 +124,32 @@ export default function Education() {
                       </div>
                     </dl>
 
-                    <p className="mt-5 text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem] sm:leading-7">
+                    <p className="mt-5 text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem] sm:leading-7">
                       {entry.summary}
                     </p>
 
                     <div className="mt-6">
-                      <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                      <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">
                         Highlights
                       </h4>
-                      <ul className="space-y-2.5 text-sm leading-relaxed text-zinc-400">
+                      <ul className="space-y-2.5 text-sm leading-relaxed text-zinc-300">
                         {entry.highlights.map((item) => (
                           <li key={item} className="flex gap-2.5">
-                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-emerald-500/80" />
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-zinc-50" />
                             <span>{item}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    <div className="mt-6 border-t border-zinc-800/80 pt-5">
-                      <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                    <div className="mt-6 border-t border-zinc-700/80 pt-5">
+                      <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">
                         Focus areas
                       </h4>
                       <ul className="flex flex-wrap gap-2">
                         {entry.focusAreas.map((area) => (
                           <li key={area}>
-                            <span className="rounded-lg border border-zinc-700/80 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-200">
+                            <span className="rounded-lg border border-zinc-700/80 bg-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-100">
                               {area}
                             </span>
                           </li>
@@ -162,17 +162,17 @@ export default function Education() {
             ))}
           </ol>
 
-          <div className="rounded-2xl border border-zinc-800/80 bg-zinc-950/40 p-5 sm:rounded-3xl sm:p-6">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-500">
+          <div className="rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 sm:rounded-3xl sm:p-6">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
               Technical training
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-zinc-400 sm:text-[0.9375rem]">
+            <p className="mt-2 text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem]">
               Full-stack, cloud, and AI programs are listed under
               certifications.
             </p>
             <SectionLink
               href="/#certifications"
-              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emerald-400 transition-colors hover:text-emerald-300"
+              className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-zinc-50 transition-colors hover:underline"
             >
               View certifications & learning
               <FiArrowRight size={16} aria-hidden />
@@ -182,19 +182,19 @@ export default function Education() {
 
         <aside className="min-w-0 space-y-6 lg:col-span-5 lg:pt-12">
           <div className="space-y-4">
-            <h3 className="text-lg font-bold tracking-tight text-zinc-200 sm:text-xl">
+            <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl">
               Academics → engineering
             </h3>
             <ul className="space-y-4">
               {academicStrengths.map((item) => (
                 <li
                   key={item.title}
-                  className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md transition-colors hover:border-zinc-700"
+                  className="rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 backdrop-blur-md transition-colors hover:border-zinc-500"
                 >
-                  <h4 className="text-sm font-semibold text-zinc-200">
+                  <h4 className="text-sm font-semibold text-zinc-100">
                     {item.title}
                   </h4>
-                  <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                  <p className="mt-2 text-sm leading-relaxed text-zinc-300">
                     {item.description}
                   </p>
                 </li>
@@ -203,8 +203,8 @@ export default function Education() {
           </div>
 
           <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
-            <div className="pointer-events-none absolute inset-0 scale-105 rounded-3xl bg-gradient-to-t from-emerald-500/10 to-transparent opacity-60 blur-2xl" />
-            <div className="relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/30 p-6 shadow-xl backdrop-blur-md sm:rounded-3xl sm:p-8">
+            <div className="pointer-events-none absolute inset-0 scale-105 rounded-3xl bg-gradient-to-t from-black/5 dark:from-white/5 to-transparent opacity-60 blur-2xl" />
+            <div className="relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/30 p-6 shadow-xl backdrop-blur-md sm:rounded-3xl sm:p-8">
               <Image
                 src="/image.png"
                 alt=""

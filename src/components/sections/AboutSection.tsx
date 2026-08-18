@@ -50,13 +50,13 @@ export default function About() {
                 Reazul Islam Reaz
               </span>
               , a{" "}
-              <span className="font-semibold text-emerald-400">
+              <span className="font-semibold text-zinc-50">
                 backend-focused full-stack engineer
               </span>
               .
             </p>
 
-            <p className="text-sm leading-relaxed text-zinc-400 sm:text-[1.05rem]">
+            <p className="text-sm leading-relaxed text-zinc-300 sm:text-[1.05rem]">
               I ship SaaS products end to end — clean APIs, solid data layers,
               and thin frontends. I design for scale, safe payments, and
               operability.
@@ -65,8 +65,8 @@ export default function About() {
 
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <FiCode className="text-2xl text-emerald-500" />
-              <h3 className="text-xl font-bold tracking-tight text-zinc-200">
+              <FiCode className="text-2xl text-zinc-50" />
+              <h3 className="text-xl font-bold tracking-tight text-zinc-50">
                 Core Stack
               </h3>
             </div>
@@ -74,7 +74,7 @@ export default function About() {
               {coreStack.map((tech) => (
                 <span
                   key={tech}
-                  className="cursor-default rounded-lg border border-zinc-700/80 bg-zinc-900 px-4 py-1.5 text-sm font-medium text-zinc-200 shadow-sm transition-colors hover:border-emerald-500/50 hover:bg-zinc-800"
+                  className="cursor-default rounded-lg border border-zinc-700/80 bg-zinc-900 px-4 py-1.5 text-sm font-medium text-zinc-100 shadow-xs transition-colors hover:border-zinc-500 hover:text-zinc-50"
                 >
                   {tech}
                 </span>
@@ -84,15 +84,15 @@ export default function About() {
 
           <div className="space-y-4 pt-2">
             <div className="flex items-center gap-3">
-              <FiCpu className="text-2xl text-emerald-500" />
-              <h3 className="text-xl font-bold tracking-tight text-zinc-200">
+              <FiCpu className="text-2xl text-zinc-50" />
+              <h3 className="text-xl font-bold tracking-tight text-zinc-50">
                 Platform focus
               </h3>
             </div>
-            <ul className="grid grid-cols-1 gap-3 text-zinc-400 sm:grid-cols-2">
+            <ul className="grid grid-cols-1 gap-3 text-zinc-300 sm:grid-cols-2">
               {advancedTech.map((item, idx) => (
                 <li key={idx} className="flex items-center gap-2">
-                  <div className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                  <div className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-zinc-50" />
                   {item}
                 </li>
               ))}
@@ -101,9 +101,9 @@ export default function About() {
         </div>
 
         <div className="relative min-w-0 lg:col-span-5">
-          <div className="h-full w-full space-y-6 rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.03)] sm:space-y-6 sm:rounded-3xl sm:p-8">
-            <div className="mb-6 flex items-center gap-3 border-b border-zinc-800 pb-4">
-              <FiServer className="text-3xl text-emerald-500" />
+          <div className="h-full w-full space-y-6 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-6 shadow-xl backdrop-blur-md transition-all duration-300 hover:border-zinc-500 sm:space-y-6 sm:rounded-3xl sm:p-8">
+            <div className="mb-6 flex items-center gap-3 border-b border-zinc-700/80 pb-4">
+              <FiServer className="text-3xl text-zinc-50" />
               <h3 className="text-2xl font-bold tracking-tight text-zinc-50">
                 How I work
               </h3>
@@ -112,8 +112,8 @@ export default function About() {
             <ul className="space-y-4 text-sm sm:space-y-5 sm:text-[1.05rem]">
               {experience.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <span className="mt-1 text-emerald-500">▹</span>
-                  <span className="font-medium leading-tight text-zinc-300">
+                  <span className="mt-1 text-zinc-50">▹</span>
+                  <span className="font-medium leading-tight text-zinc-200">
                     {item}
                   </span>
                 </li>
