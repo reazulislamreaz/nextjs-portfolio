@@ -6,6 +6,7 @@ import { resumePath, siteContact, siteSocial } from "@/config/site";
 import SectionLink from "@/app/components/SectionLink";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
+import HeroCanvasBackground from "@/components/ui/HeroCanvasBackground";
 import {
   SiDocker,
   SiGo,
@@ -18,37 +19,41 @@ import {
   SiTypescript,
 } from "react-icons/si";
 import {
-  TbApi,
-  TbArrowRight,
-  TbBolt,
-  TbCheck,
-  TbDownload,
-  TbMail,
-  TbServer,
-} from "react-icons/tb";
+  ArrowRight,
+  Download,
+  Server,
+  Zap,
+  Check,
+  Mail,
+  ShieldCheck,
+  Cpu,
+  Terminal,
+} from "lucide-react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { TbApi } from "react-icons/tb";
 
 interface TechChip {
   name: string;
   icon: ReactNode;
   specialty: string;
+  badge: string;
 }
 
 const coreTechnologies: TechChip[] = [
-  { name: "Node.js", icon: <SiNodedotjs />, specialty: "High-throughput runtime" },
-  { name: "NestJS", icon: <SiNestjs />, specialty: "Modular enterprise architecture" },
-  { name: "Go", icon: <SiGo />, specialty: "High concurrency services" },
-  { name: "PostgreSQL", icon: <SiPostgresql />, specialty: "ACID-compliant relational design" },
-  { name: "MongoDB", icon: <SiMongodb />, specialty: "Document & aggregation pipelines" },
-  { name: "Redis", icon: <SiRedis />, specialty: "Sub-millisecond distributed cache" },
-  { name: "TypeScript", icon: <SiTypescript />, specialty: "Type-safe robust contracts" },
-  { name: "REST APIs", icon: <TbApi />, specialty: "Standardized secure endpoints" },
-  { name: "Docker", icon: <SiDocker />, specialty: "Isolated containerization" },
-  { name: "GraphQL", icon: <SiGraphql />, specialty: "Flexible typed query schemas" },
+  { name: "Node.js", icon: <SiNodedotjs />, specialty: "High-throughput async runtime", badge: "Runtime" },
+  { name: "NestJS", icon: <SiNestjs />, specialty: "Modular enterprise architecture", badge: "Framework" },
+  { name: "Go", icon: <SiGo />, specialty: "High concurrency microservices", badge: "Language" },
+  { name: "PostgreSQL", icon: <SiPostgresql />, specialty: "ACID-compliant relational design", badge: "RDBMS" },
+  { name: "MongoDB", icon: <SiMongodb />, specialty: "Document & aggregation pipelines", badge: "NoSQL" },
+  { name: "Redis", icon: <SiRedis />, specialty: "Sub-millisecond distributed cache", badge: "In-Memory" },
+  { name: "TypeScript", icon: <SiTypescript />, specialty: "Type-safe robust contracts", badge: "Contracts" },
+  { name: "REST APIs", icon: <TbApi />, specialty: "Standardized secure endpoints", badge: "API" },
+  { name: "Docker", icon: <SiDocker />, specialty: "Isolated containerization", badge: "DevOps" },
+  { name: "GraphQL", icon: <SiGraphql />, specialty: "Flexible typed query schemas", badge: "Schemas" },
 ];
 
 const highlights = [
-  { value: "10+", label: "Systems Shipped", sub: "Production & Client" },
+  { value: "10+", label: "Systems Shipped", sub: "Production & Client SaaS" },
   { value: "<50ms", label: "P99 API Latency", sub: "Redis & Indexed SQL" },
   { value: "Clean", label: "Architecture", sub: "Modular & Test-Driven" },
   { value: "Available", label: "Onsite & Remote", sub: "Dhaka & Worldwide" },
@@ -64,7 +69,7 @@ export default function HomeHero() {
   const heroContainerRef = useGsapScroll<HTMLElement>((_, isReduced) => {
     if (isReduced) return;
 
-    // Cinematic fast entrance sequence
+    // Cinematic entrance timeline
     const entranceTl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     entranceTl
@@ -128,7 +133,7 @@ export default function HomeHero() {
         "-=0.45"
       );
 
-    // Scroll-linked scrubbed parallax for depth and storytelling
+    // Scroll-linked scrubbed parallax for depth
     const mm = gsap.matchMedia();
     mm.add("(min-width: 768px)", () => {
       gsap
@@ -181,20 +186,23 @@ export default function HomeHero() {
       }}
       className="relative flex min-h-[calc(100vh-4rem)] min-w-0 flex-col justify-center overflow-hidden pt-24 sm:pt-28 lg:pt-32"
     >
-      {/* Ambient background spatial glows - Futuristic Monochrome White/Titanium */}
+      {/* Interactive WebGL / Particle Canvas Constellation Layer */}
+      <HeroCanvasBackground />
+
+      {/* Ambient background spatial glows - Minimalist Futuristic Obsidian/Titanium */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-black/5 via-zinc-400/5 to-transparent dark:from-white/15 dark:via-zinc-400/10 dark:to-transparent blur-[120px] sm:h-[45rem] sm:w-[45rem] md:left-1/3 animate-pulse-glow"
+        className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-black/5 via-zinc-400/5 to-transparent dark:from-white/10 dark:via-zinc-400/5 dark:to-transparent blur-[120px] sm:h-[45rem] sm:w-[45rem] md:left-1/3 animate-pulse-glow"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-16 top-1/4 -z-10 h-80 w-80 rounded-full bg-zinc-400/5 dark:bg-white/10 blur-[100px] animate-pulse-glow"
+        className="pointer-events-none absolute -right-16 top-1/4 -z-10 h-80 w-80 rounded-full bg-zinc-400/5 dark:bg-white/5 blur-[100px] animate-pulse-glow"
       />
 
       {/* Cyber radar scan layer */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-transparent via-white/[0.04] to-transparent animate-scan -z-10"
+        className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-transparent via-white/[0.03] to-transparent animate-scan -z-10"
       />
 
       {/* Interactive mouse spotlight follower */}
@@ -203,7 +211,7 @@ export default function HomeHero() {
           aria-hidden="true"
           className="pointer-events-none absolute -inset-px -z-10 transition-opacity duration-300"
           style={{
-            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.12), transparent 70%)`,
+            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.08), transparent 70%)`,
           }}
         />
       )}
@@ -211,21 +219,22 @@ export default function HomeHero() {
       <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-1 items-center px-4 pb-14 sm:px-6 sm:pb-16 md:px-8 lg:px-8 lg:pb-20 xl:px-12">
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
 
-          {/* Left Column: Formal Human Narrative & CTAs (7 cols on desktop) */}
+          {/* Left Column: Narrative & Action CTAs (7 cols on desktop) */}
           <div data-hero-left className="order-2 min-w-0 space-y-6 sm:space-y-7 lg:order-1 lg:col-span-7">
 
             {/* Top Status & Location Pill */}
             <div data-hero-badge className="flex flex-wrap items-center gap-3">
-              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1 text-xs font-medium tracking-wide text-zinc-50 backdrop-blur-xl shadow-xs sm:text-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700/80 bg-zinc-900/90 px-3.5 py-1 text-xs font-medium tracking-wide text-zinc-100 backdrop-blur-xl shadow-xs sm:text-sm">
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-zinc-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-zinc-50 live-beacon shadow-[0_0_8px_rgba(150,150,150,0.6)]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 live-beacon shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
                 </span>
                 <span>Available for new opportunities</span>
               </div>
 
-              <span className="text-xs font-mono text-zinc-400">
-                Dhaka, Bangladesh · Onsite & Remote
+              <span className="text-xs font-mono text-zinc-400 flex items-center gap-1.5">
+                <Terminal size={13} className="text-zinc-500" />
+                <span>Dhaka · Onsite & Remote</span>
               </span>
             </div>
 
@@ -237,12 +246,12 @@ export default function HomeHero() {
                   className="text-balance text-4xl font-black tracking-tight text-zinc-50 sm:text-5xl md:text-6xl xl:text-7xl"
                 >
                   Reazul Islam{" "}
-                  <span className="bg-gradient-to-r from-zinc-50 via-zinc-400 to-zinc-300 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(150,150,150,0.25)]">
+                  <span className="bg-gradient-to-r from-zinc-50 via-zinc-300 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(255,255,255,0.2)]">
                     Reaz
                   </span>
                 </h1>
 
-                {/* Future-Stack Cyber Laser Line */}
+                {/* Cyber Laser Line */}
                 <div
                   data-hero-laser
                   aria-hidden="true"
@@ -269,9 +278,12 @@ export default function HomeHero() {
             {/* Curated Tech Stack Chips with Interactive Inspector */}
             <div data-hero-stack className="space-y-2.5">
               <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-zinc-400">
-                <span>Core Stack</span>
-                <span className="min-h-[1.25rem] text-[0.6875rem] font-mono text-zinc-50 transition-opacity duration-200 font-bold">
-                  {activeTech ? activeTech.specialty : "Active in production"}
+                <span className="flex items-center gap-1.5">
+                  <Cpu size={14} className="text-zinc-500" />
+                  <span>Core Tech Stack</span>
+                </span>
+                <span className="min-h-[1.25rem] text-[0.6875rem] font-mono text-zinc-200 transition-opacity duration-200 font-bold">
+                  {activeTech ? `${activeTech.name} // ${activeTech.specialty}` : "Hover to inspect production role"}
                 </span>
               </div>
               <div className="flex flex-wrap gap-2 sm:gap-2.5">
@@ -282,7 +294,7 @@ export default function HomeHero() {
                     type="button"
                     onMouseEnter={() => setActiveTech(tech)}
                     onMouseLeave={() => setActiveTech(null)}
-                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-zinc-700/80 bg-zinc-900 px-3 py-1.5 text-xs font-medium text-zinc-100 backdrop-blur-md shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-50 hover:bg-zinc-850 active:scale-95 sm:text-sm"
+                    className="inline-flex cursor-pointer items-center gap-1.5 rounded-xl border border-zinc-700/80 bg-zinc-900/90 px-3 py-1.5 text-xs font-medium text-zinc-100 backdrop-blur-md shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-white hover:bg-zinc-800 active:scale-95 sm:text-sm"
                   >
                     <span className="text-sm text-zinc-300 transition-colors">
                       {tech.icon}
@@ -303,21 +315,21 @@ export default function HomeHero() {
                 className="group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-zinc-50 px-6 py-2.5 text-sm font-semibold text-zinc-950 shadow-md transition-all duration-200 hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
               >
                 <span>View Projects</span>
-                <TbArrowRight
+                <ArrowRight
                   size={16}
                   className="transition-transform duration-200 group-hover:translate-x-1"
                 />
               </SectionLink>
 
-              {/* Future-Stack Monochrome Shimmering Resume Button */}
+              {/* Monochrome Shimmering Resume Button */}
               <a
                 href={resumePath}
                 download
-                className="group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(150,150,150,0.25)] active:scale-95 focus:outline-none sm:w-auto"
+                className="group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 focus:outline-none sm:w-auto"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-zinc-50 backdrop-blur-xl transition-colors group-hover:bg-zinc-850 sm:w-auto">
-                  <TbDownload size={16} className="text-zinc-50" />
+                  <Download size={16} className="text-zinc-50" />
                   <span>Resume</span>
                 </span>
               </a>
@@ -328,7 +340,7 @@ export default function HomeHero() {
                   href={siteSocial.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900 text-zinc-300 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-zinc-500 hover:text-zinc-50 active:scale-95"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-300 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-zinc-500 hover:text-zinc-50 active:scale-95"
                   aria-label="GitHub Profile"
                 >
                   <FiGithub size={18} />
@@ -338,7 +350,7 @@ export default function HomeHero() {
                   href={siteSocial.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900 text-zinc-300 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-zinc-500 hover:text-zinc-50 active:scale-95"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-300 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-zinc-500 hover:text-zinc-50 active:scale-95"
                   aria-label="LinkedIn Profile"
                 >
                   <FiLinkedin size={18} />
@@ -348,19 +360,19 @@ export default function HomeHero() {
                   type="button"
                   onClick={handleCopyEmail}
                   title="Click to copy email"
-                  className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900 text-zinc-300 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-zinc-500 hover:text-zinc-50 active:scale-95 cursor-pointer"
+                  className="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-300 backdrop-blur-md transition-all duration-200 hover:scale-110 hover:border-zinc-500 hover:text-zinc-50 active:scale-95 cursor-pointer"
                   aria-label="Copy Email"
                 >
                   {copiedEmail ? (
-                    <TbCheck size={18} className="text-zinc-50" />
+                    <Check size={18} className="text-emerald-400" />
                   ) : (
-                    <TbMail size={20} />
+                    <Mail size={18} />
                   )}
                 </button>
               </div>
             </div>
 
-            {/* Future-Stack Understated Metrics Strip with Interactive Hover */}
+            {/* Metrics Strip */}
             <div
               data-hero-metrics
               className="grid grid-cols-2 gap-3 border-t border-zinc-700/60 pt-5 sm:grid-cols-4 sm:gap-4 sm:pt-6"
@@ -404,14 +416,14 @@ export default function HomeHero() {
               <div
                 data-hero-hud-ring1
                 aria-hidden="true"
-                className="pointer-events-none absolute -inset-6 rounded-full border border-dashed border-zinc-400/40 animate-[spin_50s_linear_infinite]"
+                className="pointer-events-none absolute -inset-6 rounded-full border border-dashed border-zinc-400/30 animate-[spin_50s_linear_infinite]"
               />
 
               {/* Futuristic HUD Orbit Ring 2 (Dotted with coordinates) */}
               <div
                 data-hero-hud-ring2
                 aria-hidden="true"
-                className="pointer-events-none absolute -inset-12 hidden rounded-full border border-dotted border-zinc-400/30 sm:block animate-[spin_80s_linear_infinite_reverse]"
+                className="pointer-events-none absolute -inset-12 hidden rounded-full border border-dotted border-zinc-400/20 sm:block animate-[spin_80s_linear_infinite_reverse]"
               />
 
               {/* Corner HUD Ticks */}
@@ -422,14 +434,14 @@ export default function HomeHero() {
                 [ LATENCY // 0.4MS ] +
               </div>
 
-              {/* Spatial ambient aura glow - Celestial White / Titanium */}
+              {/* Spatial ambient aura glow */}
               <div
                 aria-hidden="true"
-                className="animate-pulse-glow absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-zinc-400/20 via-zinc-300/10 to-transparent blur-3xl"
+                className="animate-pulse-glow absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-zinc-400/15 via-zinc-300/10 to-transparent blur-3xl"
               />
 
               {/* Spatial Glass Portrait Frame */}
-              <div className="group relative z-10 aspect-square w-[15.5rem] rounded-full border-2 border-zinc-700 bg-zinc-900 p-2 shadow-2xl backdrop-blur-2xl transition-all duration-500 hover:scale-105 hover:border-zinc-500 sm:w-[18rem] md:w-[19.5rem]">
+              <div className="group relative z-10 aspect-square w-[15.5rem] rounded-full border-2 border-zinc-700/80 bg-zinc-900 p-2 shadow-2xl backdrop-blur-2xl transition-all duration-500 hover:scale-105 hover:border-zinc-500 sm:w-[18rem] md:w-[19.5rem]">
                 <div className="relative h-full w-full overflow-hidden rounded-full border border-zinc-800 bg-zinc-950 shadow-inner">
                   <Image
                     src="/reaz.png"
@@ -444,7 +456,7 @@ export default function HomeHero() {
 
                 {/* Spatial status badge anchored to avatar */}
                 <div className="absolute -bottom-2.5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1 text-xs font-semibold text-zinc-50 shadow-lg backdrop-blur-xl">
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-50 live-beacon shadow-[0_0_8px_rgba(150,150,150,0.6)]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
                   <span>Backend Specialist</span>
                 </div>
               </div>
@@ -455,14 +467,14 @@ export default function HomeHero() {
                 className="animate-float-slow absolute -right-2 top-2 z-20 hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3 shadow-lg backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-right-4"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-50 shadow-xs">
-                  <TbServer size={20} />
+                  <Server size={18} />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-zinc-50">
                     Production APIs
                   </p>
                   <p className="text-[0.6875rem] font-semibold text-zinc-300">
-                    99.9% Uptime Architecture
+                    99.9% Target Uptime
                   </p>
                 </div>
               </div>
@@ -473,7 +485,7 @@ export default function HomeHero() {
                 className="animate-float-reverse absolute -left-2 bottom-6 z-20 hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3 shadow-lg backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-left-6"
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-50 shadow-xs">
-                  <TbBolt size={20} />
+                  <Zap size={18} className="text-amber-400" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-zinc-50">
@@ -487,17 +499,17 @@ export default function HomeHero() {
 
             </div>
 
-            {/* Futuristic Live System Topology Visualizer Strip */}
+            {/* Live System Topology Visualizer Strip */}
             <div
               data-hero-topology
               className="mt-8 hidden w-full max-w-sm rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3.5 backdrop-blur-xl shadow-lg lg:block"
             >
               <div className="flex items-center justify-between border-b border-zinc-700/60 pb-2 text-[10px] font-mono text-zinc-400">
                 <span className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-50 live-beacon" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon" />
                   SYSTEM TOPOLOGY
                 </span>
-                <span className="text-zinc-400 font-semibold">LIVE TELEMETRY</span>
+                <span className="text-zinc-400 font-semibold">LIVE ARCHITECTURE</span>
               </div>
               <div className="mt-3 flex items-center justify-between gap-1.5 text-center">
                 <div className="flex flex-col items-center">
@@ -509,19 +521,19 @@ export default function HomeHero() {
                 
                 <div className="relative flex items-center justify-center">
                   <span className="text-xs text-zinc-500">──▶</span>
-                  <span className="absolute h-1 w-1 rounded-full bg-zinc-50 animate-ping" />
+                  <span className="absolute h-1 w-1 rounded-full bg-emerald-400 animate-ping" />
                 </div>
 
                 <div className="flex flex-col items-center">
                   <span className="rounded-lg border border-zinc-500 bg-zinc-50 px-2.5 py-1 text-[11px] font-bold text-zinc-950 shadow-md">
                     Nest / Go
                   </span>
-                  <span className="mt-1 text-[9px] font-mono text-zinc-400">Core</span>
+                  <span className="mt-1 text-[9px] font-mono text-zinc-400">Core API</span>
                 </div>
 
                 <div className="relative flex items-center justify-center">
                   <span className="text-xs text-zinc-500">──▶</span>
-                  <span className="absolute h-1 w-1 rounded-full bg-zinc-50 animate-ping" />
+                  <span className="absolute h-1 w-1 rounded-full bg-emerald-400 animate-ping" />
                 </div>
 
                 <div className="flex flex-col items-center">
@@ -533,7 +545,7 @@ export default function HomeHero() {
 
                 <div className="relative flex items-center justify-center">
                   <span className="text-xs text-zinc-500">──▶</span>
-                  <span className="absolute h-1 w-1 rounded-full bg-zinc-50 animate-ping" />
+                  <span className="absolute h-1 w-1 rounded-full bg-emerald-400 animate-ping" />
                 </div>
 
                 <div className="flex flex-col items-center">

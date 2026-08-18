@@ -2,17 +2,19 @@
 
 import Image from "next/image";
 import SectionLink from "@/app/components/SectionLink";
-import {
-  FiArrowRight,
-  FiAward,
-  FiBookOpen,
-  FiCalendar,
-  FiMapPin,
-} from "react-icons/fi";
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
+import {
+  Award,
+  BookOpen,
+  Calendar,
+  MapPin,
+  ArrowRight,
+  GraduationCap,
+  Brain,
+} from "lucide-react";
 
 interface EducationEntry {
   degree: string;
@@ -35,12 +37,12 @@ const educationEntries: EducationEntry[] = [
     period: "In progress · Expected graduation 2026",
     status: "In progress",
     summary:
-      "Honors program in governance, policy, and research — builds analytical thinking and clear writing for software delivery.",
+      "Honors program in governance, policy, and institutional systems — builds analytical rigor and precise technical writing for software delivery.",
     highlights: [
-      "Research design and academic writing",
-      "Governance and political analysis",
-      "Policy framing and stakeholder context",
-      "Data interpretation and systems evaluation",
+      "Research design and academic synthesis",
+      "Governance and multi-stakeholder policy analysis",
+      "Qualitative systems evaluation & structuring",
+      "Data interpretation and complex reasoning",
     ],
     focusAreas: [
       "Political theory",
@@ -53,19 +55,19 @@ const educationEntries: EducationEntry[] = [
 
 const academicStrengths = [
   {
-    title: "Analytical rigor",
+    title: "Analytical Rigor",
     description:
-      "Break ambiguous problems into testable claims — same discipline as API design.",
+      "Break ambiguous problems into testable claims — the same discipline required for API contracts and distributed invariants.",
   },
   {
-    title: "Clear communication",
+    title: "Precise Communication",
     description:
-      "Strong synthesis for specs, docs, and cross-functional alignment.",
+      "Strong synthesis for architectural decision records (ADRs), API specifications, and cross-functional alignment.",
   },
   {
-    title: "Systems thinking",
+    title: "Systems Thinking",
     description:
-      "Policy and institutions map to multi-service architecture and ownership.",
+      "Institutional policy mapping directly translates to multi-service domain boundaries and permission models.",
   },
 ];
 
@@ -111,8 +113,8 @@ export default function Education() {
     <Section id="education" className="bg-zinc-950/40">
       <div ref={containerRef}>
         <SectionHeader
-          title="Education"
-          subtitle="Academic background. Technical training lives under Certifications."
+          title="Academic Foundation"
+          subtitle="University education in analytical reasoning and systems evaluation."
         />
 
         <div data-edu-container className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-14">
@@ -131,25 +133,25 @@ export default function Education() {
                     <div className="relative z-10">
                       <div className="mb-4 flex flex-wrap items-center gap-3">
                         <span className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
-                          <FiAward size={14} aria-hidden />
-                          {entry.status}
+                          <Award size={14} aria-hidden />
+                          <span>{entry.status}</span>
                         </span>
                         <span className="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-400">
-                          <FiCalendar size={14} aria-hidden />
-                          {entry.period}
+                          <Calendar size={14} aria-hidden />
+                          <span>{entry.period}</span>
                         </span>
                       </div>
 
                       <h3 className="text-xl font-bold tracking-tight text-zinc-50 sm:text-2xl">
                         {entry.degree}
                       </h3>
-                      <p className="mt-1 text-base font-medium text-zinc-200 sm:text-lg">
+                      <p className="mt-1 text-base font-semibold text-zinc-200 sm:text-lg">
                         {entry.field}
                       </p>
 
                       <dl className="mt-4 space-y-2 text-sm text-zinc-400">
                         <div className="flex items-start gap-2">
-                          <FiBookOpen
+                          <BookOpen
                             className="mt-0.5 shrink-0 text-zinc-500"
                             size={16}
                             aria-hidden
@@ -157,7 +159,7 @@ export default function Education() {
                           <dd>{entry.institution}</dd>
                         </div>
                         <div className="flex items-start gap-2">
-                          <FiMapPin
+                          <MapPin
                             className="mt-0.5 shrink-0 text-zinc-500"
                             size={16}
                             aria-hidden
@@ -206,18 +208,18 @@ export default function Education() {
 
             <div className="rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 sm:rounded-3xl sm:p-6">
               <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
-                Technical training
+                Technical Certifications
               </h3>
               <p className="mt-2 text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem]">
-                Full-stack, cloud, and AI programs are listed under
+                Full-stack, cloud computing, and AI specializations are listed under
                 certifications.
               </p>
               <SectionLink
                 href="/#certifications"
                 className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-zinc-50 transition-colors hover:underline"
               >
-                View certifications & learning
-                <FiArrowRight size={16} aria-hidden />
+                <span>View certifications & credentials</span>
+                <ArrowRight size={15} aria-hidden />
               </SectionLink>
             </div>
           </div>
@@ -225,7 +227,7 @@ export default function Education() {
           <aside data-edu-right className="min-w-0 space-y-6 lg:col-span-5 lg:pt-12">
             <div className="space-y-4">
               <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl">
-                Academics → engineering
+                Academics → Engineering Translation
               </h3>
               <ul className="space-y-4">
                 {academicStrengths.map((item) => (
