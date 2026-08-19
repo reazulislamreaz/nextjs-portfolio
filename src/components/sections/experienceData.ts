@@ -22,7 +22,7 @@ export const experienceData: Experience[] = [
     role: "Full Stack Developer (Backend-Focused)",
     employmentType: "Full-time",
     period: "Jan 2026 – Present",
-    duration: "8 mos",
+    duration: "9 mos",
     location: "Mohakhali, Dhaka, Bangladesh",
     workMode: "On-site",
     isCurrent: true,
