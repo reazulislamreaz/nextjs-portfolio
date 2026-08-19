@@ -43,52 +43,178 @@ function buildTemplateParams(payload: ContactPayload) {
   };
 }
 
+let cachedTransporter: nodemailer.Transporter | null = null;
+
+function getPooledGmailTransporter(user: string, pass: string): nodemailer.Transporter {
+  if (!cachedTransporter) {
+    cachedTransporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      pool: true,
+      maxConnections: 3,
+      maxMessages: 100,
+      auth: { user, pass },
+    });
+  }
+  return cachedTransporter;
+}
+
 async function sendViaGmailSmtp(payload: ContactPayload): Promise<void> {
   const config = getGmailSmtpConfig();
   if (!config) return;
 
   const to = process.env.CONTACT_TO_EMAIL?.trim() || siteContact.email;
+  const transporter = getPooledGmailTransporter(config.user, config.pass);
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: config.user,
-      pass: config.pass,
-    },
-  });
+  const escapedName = payload.user_name
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  const escapedEmail = payload.user_email
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 
   const escapedMessage = payload.message
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
+  const replyMailto = `mailto:${payload.user_email}?subject=${encodeURIComponent(
+    `Re: Portfolio Inquiry from ${payload.user_name}`,
+  )}`;
+
   await transporter.sendMail({
-    from: `"Portfolio Contact" <${config.user}>`,
+    from: `"Reazul Islam Portfolio" <${config.user}>`,
     to,
     replyTo: payload.user_email,
-    subject: `Portfolio Inquiry from ${payload.user_name}`,
-    text: `New Portfolio Inquiry\n\nFrom: ${payload.user_name} (${payload.user_email})\nTime: ${payload.time}\n\nMessage:\n${payload.message}`,
+    subject: `⚡ New Portfolio Message: ${payload.user_name}`,
+    text: [
+      `NEW PORTFOLIO CONTACT MESSAGE`,
+      `----------------------------------------`,
+      `Sender:   ${payload.user_name}`,
+      `Email:    ${payload.user_email}`,
+      `Received: ${payload.time}`,
+      `----------------------------------------`,
+      ``,
+      `Message:`,
+      payload.message,
+      ``,
+      `----------------------------------------`,
+      `Reply directly to: ${payload.user_email}`,
+    ].join("\n"),
     html: `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #27272a; border-radius: 12px; background-color: #09090b; color: #f4f4f5;">
-        <div style="border-bottom: 1px solid #27272a; padding-bottom: 16px; margin-bottom: 20px;">
-          <h2 style="color: #10b981; margin: 0 0 8px 0; font-size: 20px;">New Portfolio Contact Message</h2>
-          <p style="margin: 0; color: #a1a1aa; font-size: 13px;">Received on ${payload.time}</p>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-          <p style="margin: 6px 0; font-size: 14px;"><strong style="color: #e4e4e7;">Sender Name:</strong> ${payload.user_name}</p>
-          <p style="margin: 6px 0; font-size: 14px;"><strong style="color: #e4e4e7;">Sender Email:</strong> <a href="mailto:${payload.user_email}" style="color: #34d399; text-decoration: none;">${payload.user_email}</a></p>
-        </div>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Portfolio Message</title>
+      </head>
+      <body style="margin: 0; padding: 0; background-color: #09090b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #09090b; padding: 32px 16px;">
+          <tr>
+            <td align="center">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; background-color: #121215; border: 1px solid #27272a; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6);">
+                
+                <!-- Top Emerald Accent Stripe -->
+                <tr>
+                  <td height="4" style="background: linear-gradient(90deg, #10b981, #34d399, #10b981); font-size: 0; line-height: 0;">&nbsp;</td>
+                </tr>
 
-        <div style="border-top: 1px solid #27272a; padding-top: 16px;">
-          <strong style="color: #e4e4e7; font-size: 14px; display: block; margin-bottom: 8px;">Message Content:</strong>
-          <div style="background-color: #18181b; padding: 16px; border-radius: 8px; border: 1px solid #27272a; white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #d4d4d8;">${escapedMessage}</div>
-        </div>
+                <!-- Header -->
+                <tr>
+                  <td style="padding: 28px 32px 20px 32px; border-bottom: 1px solid #27272a;">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                      <tr>
+                        <td>
+                          <span style="display: inline-block; padding: 4px 10px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #34d399; background-color: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 20px;">
+                            ⚡ Portfolio Inquiry
+                          </span>
+                          <h1 style="margin: 12px 0 4px 0; font-size: 22px; font-weight: 700; color: #ffffff; letter-spacing: -0.02em;">
+                            New Message Received
+                          </h1>
+                          <p style="margin: 0; font-size: 13px; color: #a1a1aa;">
+                            Received via your portfolio contact form • ${payload.time}
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
 
-        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #27272a; font-size: 12px; color: #71717a;">
-          <p style="margin: 0;">Hit "Reply" in your email client to respond directly to ${payload.user_name} (${payload.user_email}).</p>
-        </div>
-      </div>
+                <!-- Sender Info Card -->
+                <tr>
+                  <td style="padding: 24px 32px;">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 18px 20px; margin-bottom: 20px;">
+                      <tr>
+                        <td>
+                          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                              <td style="padding: 4px 0; font-size: 13px; color: #71717a; width: 80px; font-weight: 600;">
+                                SENDER
+                              </td>
+                              <td style="padding: 4px 0; font-size: 14px; color: #f4f4f5; font-weight: 700;">
+                                ${escapedName}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="padding: 4px 0; font-size: 13px; color: #71717a; font-weight: 600;">
+                                EMAIL
+                              </td>
+                              <td style="padding: 4px 0; font-size: 14px; color: #34d399;">
+                                <a href="mailto:${escapedEmail}" style="color: #34d399; text-decoration: none; font-weight: 500;">
+                                  ${escapedEmail}
+                                </a>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- Message Section -->
+                    <div style="margin-bottom: 8px;">
+                      <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #71717a; display: block; margin-bottom: 8px;">
+                        Message
+                      </span>
+                      <div style="background-color: #18181b; border-left: 3px solid #10b981; border-top: 1px solid #27272a; border-right: 1px solid #27272a; border-bottom: 1px solid #27272a; border-radius: 0 12px 12px 0; padding: 20px 22px; color: #e4e4e7; font-size: 14px; line-height: 1.65; white-space: pre-wrap; word-break: break-word;">${escapedMessage}</div>
+                    </div>
+
+                    <!-- Quick Reply Button -->
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 24px;">
+                      <tr>
+                        <td align="center">
+                          <a href="${replyMailto}" style="display: inline-block; background-color: #f4f4f5; color: #09090b; font-size: 13px; font-weight: 700; text-decoration: none; padding: 12px 28px; border-radius: 10px; box-shadow: 0 4px 12px rgba(255,255,255,0.15);">
+                            ↩ Reply to ${escapedName}
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
+                  </td>
+                </tr>
+
+                <!-- Footer -->
+                <tr>
+                  <td style="padding: 20px 32px 24px 32px; border-top: 1px solid #27272a; background-color: #0d0d11; text-align: center;">
+                    <p style="margin: 0 0 6px 0; font-size: 12px; color: #71717a;">
+                      Direct response will be sent to <a href="mailto:${escapedEmail}" style="color: #a1a1aa; text-decoration: underline;">${escapedEmail}</a>
+                    </p>
+                    <p style="margin: 0; font-size: 11px; color: #52525b;">
+                      Reazul Islam Portfolio • Full-Stack Developer
+                    </p>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+      </html>
     `,
   });
 }
