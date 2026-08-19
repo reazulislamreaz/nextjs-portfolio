@@ -394,7 +394,8 @@ export default function AiPortfolioAssistant() {
 
             <div
               ref={listRef}
-              className="flex-1 space-y-3 overflow-y-auto px-4 py-4"
+              data-lenis-prevent
+              className="flex-1 space-y-3 overflow-y-auto px-4 py-4 overscroll-contain touch-pan-y"
               aria-live="polite"
             >
               {messages.map((message) => (

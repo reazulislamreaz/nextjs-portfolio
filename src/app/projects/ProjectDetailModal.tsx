@@ -59,8 +59,13 @@ export default function ProjectDetailModal({
   useEffect(() => {
     if (!mounted) return;
 
-    const previousOverflow = document.body.style.overflow;
+    // Pause Lenis smooth scrolling for the background
+    window.__lenis?.stop();
+
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     // Reset internal scroll position to top
     if (scrollContainerRef.current) {
@@ -82,7 +87,10 @@ export default function ProjectDetailModal({
     window.addEventListener("keydown", onKeyDown);
     return () => {
       cancelAnimationFrame(rafId);
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      // Resume Lenis smooth scrolling for the background
+      window.__lenis?.start();
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [mounted, onClose, project.title]);
@@ -91,10 +99,13 @@ export default function ProjectDetailModal({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-[9999] flex items-end justify-center p-0 sm:items-center sm:p-4"
+      data-lenis-prevent
+      className="fixed inset-0 z-[9999] flex items-end justify-center p-0 sm:items-center sm:p-4 overscroll-none"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
+      onWheel={(e) => e.stopPropagation()}
+      onTouchMove={(e) => e.stopPropagation()}
     >
       {/* Backdrop */}
       <div
@@ -104,6 +115,7 @@ export default function ProjectDetailModal({
 
       {/* Modal Dialog */}
       <div
+        data-lenis-prevent
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -147,7 +159,10 @@ export default function ProjectDetailModal({
         {/* Scrollable Body */}
         <div
           ref={scrollContainerRef}
-          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6"
+          data-lenis-prevent
+          data-lenis-prevent-wheel
+          data-lenis-prevent-touch
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6 touch-pan-y"
         >
           {/* Carousel */}
           <div className="overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900 shadow-md">
