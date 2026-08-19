@@ -86,11 +86,16 @@ async function sendViaGmailSmtp(payload: ContactPayload): Promise<void> {
     `Re: Portfolio Inquiry from ${payload.user_name}`,
   )}`;
 
-  await transporter.sendMail({
+  const info = await transporter.sendMail({
     from: `"Reazul Islam Portfolio" <${config.user}>`,
     to,
     replyTo: payload.user_email,
-    subject: `⚡ New Portfolio Message: ${payload.user_name}`,
+    subject: `🔔 [Portfolio Contact] ${payload.user_name} (${payload.time})`,
+    headers: {
+      "X-Priority": "1",
+      "X-MSMail-Priority": "High",
+      Importance: "high",
+    },
     text: [
       `NEW PORTFOLIO CONTACT MESSAGE`,
       `----------------------------------------`,
@@ -217,6 +222,8 @@ async function sendViaGmailSmtp(payload: ContactPayload): Promise<void> {
       </html>
     `,
   });
+
+  console.log(`[contact-email] Successfully delivered email to ${to}. MessageId: ${info.messageId}`);
 }
 
 async function sendViaResend(payload: ContactPayload): Promise<void> {
