@@ -58,9 +58,14 @@ export async function POST(request: NextRequest) {
     }
 
     const ip = getClientIp(request);
+    console.log(
+      `[contact-api] Processing submission from: "${user_name}" <${user_email}> (IP: ${ip})`,
+    );
+
     const rate = checkRateLimit(`contact:${ip}`, 15, 60 * 60 * 1000);
 
     if (!rate.allowed) {
+      console.warn(`[contact-api] Rate limit reached for IP: ${ip}`);
       return NextResponse.json(
         { error: "Too many messages sent. Please wait a few minutes before trying again." },
         {
@@ -74,11 +79,10 @@ export async function POST(request: NextRequest) {
 
     await sendContactEmail({ user_name, user_email, message, time });
 
+    console.log(`[contact-api] Successfully dispatched message from: ${user_email}`);
     return NextResponse.json({ ok: true });
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("Contact API error:", error);
-    }
+    console.error("[contact-api] ERROR dispatching message:", error);
     return NextResponse.json(
       { error: sanitizeContactError(error) },
       { status: 500 },
