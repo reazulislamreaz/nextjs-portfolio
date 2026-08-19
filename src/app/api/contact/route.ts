@@ -20,15 +20,20 @@ export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as Record<string, unknown>;
 
-    const honeypot = String(body.website ?? "").trim();
+    const honeypot = String(
+      body._honey_trap_field ?? body.company_fax ?? body.website ?? "",
+    ).trim();
     if (honeypot) {
+      if (process.env.NODE_ENV === "development") {
+        console.warn("Contact form honeypot triggered by:", honeypot);
+      }
       return NextResponse.json({ ok: true });
     }
 
     const user_name = String(body.user_name ?? "").trim();
     const user_email = String(body.user_email ?? "").trim();
     const message = String(body.message ?? "").trim();
-    const time = String(body.time ?? new Date().toISOString());
+    const time = String(body.time ?? new Date().toLocaleString());
 
     if (!user_name || !user_email || !message) {
       return NextResponse.json(
@@ -50,11 +55,11 @@ export async function POST(request: NextRequest) {
     }
 
     const ip = getClientIp(request);
-    const rate = checkRateLimit(`contact:${ip}`, 5, 60 * 60 * 1000);
+    const rate = checkRateLimit(`contact:${ip}`, 15, 60 * 60 * 1000);
 
     if (!rate.allowed) {
       return NextResponse.json(
-        { error: "Too many messages. Please try again later." },
+        { error: "Too many messages sent. Please wait a few minutes before trying again." },
         {
           status: 429,
           headers: rate.retryAfterSec

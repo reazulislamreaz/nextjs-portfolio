@@ -27,7 +27,7 @@ export default function ContactForm() {
     const user_name = String(formData.get("user_name") ?? "").trim();
     const user_email = String(formData.get("user_email") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
-    const website = String(formData.get("website") ?? "").trim();
+    const website = String(formData.get("_honey_trap_field") ?? "").trim();
 
     if (!user_name || !user_email || !message) {
       setErrorMessage("Please fill in all required fields.");
@@ -57,7 +57,7 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...payload,
-          website,
+          _honey_trap_field: website,
         }),
       });
 
@@ -143,11 +143,11 @@ export default function ContactForm() {
                 aria-hidden="true"
                 className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
               >
-                <label htmlFor="website">Website</label>
+                <label htmlFor="_honey_trap_field">Do not fill</label>
                 <input
                   type="text"
-                  id="website"
-                  name="website"
+                  id="_honey_trap_field"
+                  name="_honey_trap_field"
                   tabIndex={-1}
                   autoComplete="off"
                   defaultValue=""

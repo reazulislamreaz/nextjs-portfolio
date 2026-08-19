@@ -57,12 +57,39 @@ async function sendViaGmailSmtp(payload: ContactPayload): Promise<void> {
     },
   });
 
+  const escapedMessage = payload.message
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
   await transporter.sendMail({
     from: `"Portfolio Contact" <${config.user}>`,
     to,
     replyTo: payload.user_email,
-    subject: `Portfolio inquiry from ${payload.user_name}`,
-    text: payload.message,
+    subject: `Portfolio Inquiry from ${payload.user_name}`,
+    text: `New Portfolio Inquiry\n\nFrom: ${payload.user_name} (${payload.user_email})\nTime: ${payload.time}\n\nMessage:\n${payload.message}`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #27272a; border-radius: 12px; background-color: #09090b; color: #f4f4f5;">
+        <div style="border-bottom: 1px solid #27272a; padding-bottom: 16px; margin-bottom: 20px;">
+          <h2 style="color: #10b981; margin: 0 0 8px 0; font-size: 20px;">New Portfolio Contact Message</h2>
+          <p style="margin: 0; color: #a1a1aa; font-size: 13px;">Received on ${payload.time}</p>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+          <p style="margin: 6px 0; font-size: 14px;"><strong style="color: #e4e4e7;">Sender Name:</strong> ${payload.user_name}</p>
+          <p style="margin: 6px 0; font-size: 14px;"><strong style="color: #e4e4e7;">Sender Email:</strong> <a href="mailto:${payload.user_email}" style="color: #34d399; text-decoration: none;">${payload.user_email}</a></p>
+        </div>
+
+        <div style="border-top: 1px solid #27272a; padding-top: 16px;">
+          <strong style="color: #e4e4e7; font-size: 14px; display: block; margin-bottom: 8px;">Message Content:</strong>
+          <div style="background-color: #18181b; padding: 16px; border-radius: 8px; border: 1px solid #27272a; white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #d4d4d8;">${escapedMessage}</div>
+        </div>
+
+        <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #27272a; font-size: 12px; color: #71717a;">
+          <p style="margin: 0;">Hit "Reply" in your email client to respond directly to ${payload.user_name} (${payload.user_email}).</p>
+        </div>
+      </div>
+    `,
   });
 }
 
