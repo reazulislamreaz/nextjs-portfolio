@@ -12,6 +12,7 @@
 *//* Light theme (default) - Pure Minimalist White Canvas with Jet Black & Titanium */
 :root {
   --nav-height: 4rem;
+  --nav-scroll-offset: 4.75rem; /* ~76px on mobile */
   --zinc-50: #09090b; /* Jet Black (Primary Text & Headings) */
   --zinc-100: #18181b; /* Deep Obsidian (Headings/Buttons) */
   --zinc-200: #27272a; /* Charcoal Subheadings */
@@ -118,15 +119,27 @@
 html {
   transition: background-color 0.3s, color 0.3s;
   scroll-behavior: smooth;
-  scroll-padding-top: var(--nav-height);
   overflow-x: hidden;
   @apply bg-zinc-950 text-zinc-300;
 }
 
 @media (min-width: 640px) {
   :root {
-    --nav-height: 5rem;
+    --nav-height: 4.75rem;
+    --nav-scroll-offset: 5.5rem; /* ~88px on tablet */
   }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --nav-height: 5rem;
+    --nav-scroll-offset: 5.75rem; /* ~92px on desktop */
+  }
+}
+
+/* Ensure all named section targets natively respect the responsive top clearance */
+section[id] {
+  scroll-margin-top: var(--nav-scroll-offset);
 }
 
 body {

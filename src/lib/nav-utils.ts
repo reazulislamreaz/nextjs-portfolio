@@ -14,57 +14,63 @@ interface NavClickModifiers {
   button: number;
 }
 
-export function getNavBarHeight(): number {
-  if (typeof window === "undefined") return 76;
+export function getNavBarOffset(): number {
+  if (typeof window === "undefined") return 96;
 
   const bar = document.querySelector("[data-nav-bar]");
   if (bar instanceof HTMLElement) {
     const rect = bar.getBoundingClientRect();
-    return rect.height + (rect.top > 0 ? rect.top : 16) + 12;
+    // On sticky/fixed navbar, calculate total bottom edge + comfortable breathing room
+    const topOffset = rect.top > 0 ? rect.top : window.innerWidth >= 640 ? 20 : 12;
+    const breathingRoom = window.innerWidth >= 1024 ? 24 : window.innerWidth >= 640 ? 18 : 14;
+    return rect.height + topOffset + breathingRoom;
   }
 
-  const navHeight = getComputedStyle(document.documentElement)
-    .getPropertyValue("--nav-height")
+  const offsetValue = getComputedStyle(document.documentElement)
+    .getPropertyValue("--nav-scroll-offset")
     .trim();
-  if (navHeight.endsWith("rem")) {
-    const rootSize = parseFloat(
-      getComputedStyle(document.documentElement).fontSize
-    );
-    return parseFloat(navHeight) * rootSize + 16;
+  if (offsetValue.endsWith("rem")) {
+    const rootSize =
+      parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    return parseFloat(offsetValue) * rootSize;
+  }
+  if (offsetValue.endsWith("px")) {
+    return parseFloat(offsetValue);
   }
 
-  return 76;
+  return window.innerWidth >= 1024 ? 100 : window.innerWidth >= 640 ? 92 : 76;
 }
 
-/**
- * Scrolls to an in-page section using Lenis smooth scrolling or native smooth scroll.
- */
+export const getNavBarHeight = getNavBarOffset;
+
 export function scrollToInPageTarget(href: string, label?: string): void {
   if (typeof window === "undefined") return;
 
-  const isHome = label === "Home" || href === "/" || href === "/#";
+  const isHome =
+    label === "Home" || href === "/" || href === "/#" || href === "#home";
   const id = isHome ? "" : hashFromHref(href).slice(1);
   const target = id ? document.getElementById(id) : null;
-  const navHeight = getNavBarHeight();
 
-  const targetY = isHome
-    ? 0
-    : target
-      ? Math.max(0, target.getBoundingClientRect().top + window.scrollY - navHeight)
-      : 0;
-
-  if (isReducedMotion()) {
-    window.scrollTo({ top: targetY, behavior: "auto" });
-  } else if (window.__lenis) {
-    if (isHome) {
-      window.__lenis.scrollTo(0, { duration: 1.0, offset: 0 });
-    } else if (target) {
-      window.__lenis.scrollTo(target, { offset: -navHeight, duration: 1.0 });
+  if (isHome) {
+    if (isReducedMotion()) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    } else if (window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 1.0 });
     } else {
-      window.__lenis.scrollTo(targetY, { duration: 1.0 });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
-  } else {
-    window.scrollTo({ top: targetY, behavior: "smooth" });
+  } else if (target) {
+    if (isReducedMotion()) {
+      target.scrollIntoView({ behavior: "auto", block: "start" });
+    } else if (window.__lenis) {
+      // Lenis natively accounts for target's CSS scroll-margin-top automatically
+      window.__lenis.scrollTo(target, {
+        duration: 1.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   }
 
   try {
