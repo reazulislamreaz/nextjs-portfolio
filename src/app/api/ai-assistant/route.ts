@@ -5,9 +5,12 @@ import { AiProvidersUnavailableError } from "@/server/ai/errors";
 import { aiChatService } from "@/server/ai/services/ai-chat.service";
 import type { AiChatMessage } from "@/server/ai/types";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 const MAX_MESSAGES = 8;
 const MAX_CONTENT_LENGTH = 1000;
-const DEFAULT_TIMEOUT_MS = 15000;
+const DEFAULT_TIMEOUT_MS = 20000;
 
 interface ChatMessage {
   role: "user" | "assistant";

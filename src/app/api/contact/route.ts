@@ -2,6 +2,9 @@ import { NextResponse, type NextRequest } from "next/server";
 import { sanitizeContactError, sendContactEmail } from "@/lib/contact-email";
 import { checkRateLimit } from "@/lib/rate-limit";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 const MAX_NAME = 120;
 const MAX_EMAIL = 254;
 const MAX_MESSAGE = 5000;
