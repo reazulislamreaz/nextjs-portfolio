@@ -404,9 +404,9 @@ export default function AiPortfolioAssistant() {
                   className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
-                    className={`max-w-[88%] sm:max-w-[85%] break-words [overflow-wrap:anywhere] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                    className={`max-w-[88%] sm:max-w-[85%] break-words [overflow-wrap:anywhere] whitespace-pre-wrap rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                       message.role === "user"
-                        ? "bg-emerald-600 font-medium text-white shadow-md"
+                        ? "bg-zinc-100 text-zinc-950 font-semibold dark:bg-zinc-100 dark:text-zinc-950"
                         : "border border-zinc-800/90 bg-zinc-900/90 text-zinc-200"
                     }`}
                   >
@@ -457,7 +457,7 @@ export default function AiPortfolioAssistant() {
                 <button
                   type="submit"
                   disabled={loading || !input.trim()}
-                  className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-emerald-500 text-zinc-950 font-bold transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
+                  className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 font-bold shadow-md transition hover:bg-white active:scale-95 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
                   aria-label="Send message"
                 >
                   <FiSend size={18} aria-hidden />
@@ -469,15 +469,22 @@ export default function AiPortfolioAssistant() {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="group inline-flex h-14 w-14 items-center cursor-pointer justify-center rounded-2xl border border-emerald-400/30 bg-emerald-500 text-white shadow-xl shadow-emerald-950/40 transition hover:scale-105 hover:bg-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-300 focus:ring-offset-2 focus:ring-offset-zinc-950"
+            className="group relative inline-flex h-13 w-13 sm:h-14 sm:w-14 cursor-pointer items-center justify-center rounded-2xl border border-zinc-700/80 bg-zinc-900 text-zinc-100 shadow-[0_10px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl transition-all duration-300 hover:scale-105 hover:border-zinc-500 hover:bg-zinc-800 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
             aria-label="Open AI portfolio assistant"
             aria-expanded="false"
           >
-            <TbMessageChatbot
-              size={28}
-              aria-hidden
-              className="transition group-hover:scale-105"
-            />
+            <span className="absolute -inset-0.5 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-zinc-400/15 to-emerald-500/20 blur-sm opacity-50 transition duration-300 group-hover:opacity-100" />
+            <span className="relative z-10 flex items-center justify-center">
+              <TbMessageChatbot
+                size={26}
+                aria-hidden
+                className="text-zinc-100 transition-transform duration-300 group-hover:scale-110"
+              />
+              <span className="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </span>
+            </span>
           </button>
         )}
       </div>

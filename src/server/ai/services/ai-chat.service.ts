@@ -15,8 +15,8 @@ const DEFAULT_TIMEOUT_MS = 15000;
 export class AiChatService {
   constructor(
     private readonly providers: AiProvider[] = [
-      new ClaudeProvider(),
       new GroqProvider(),
+      new ClaudeProvider(),
       new TogetherProvider(),
     ],
   ) {}

@@ -2,7 +2,7 @@ import { createOpenAICompatibleChatCompletion } from "./openai-compatible.provid
 import type { AiChatCompletionInput, AiProvider, AiProviderResponse } from "../types";
 
 const GROQ_BASE_URL = "https://api.groq.com/openai/v1";
-const GROQ_MODEL = "llama-3.3-70b-versatile";
+const GROQ_MODEL = "openai/gpt-oss-120b";
 
 export class GroqProvider implements AiProvider {
   readonly name = "groq" as const;
