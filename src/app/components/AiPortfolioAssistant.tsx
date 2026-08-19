@@ -29,8 +29,8 @@ interface ContactLead {
 
 const starterPrompts = [
   "Summarize Reaz's backend skills",
+  "What is Reaz's most successful project?",
   "Which project uses AI?",
-  "Start a project inquiry",
   "How can I contact Reaz?",
 ];
 
