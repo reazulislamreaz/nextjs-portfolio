@@ -1,6 +1,9 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { aiChatController } from "@/server/ai/controllers/ai-chat.controller";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 export async function POST(request: NextRequest) {
   try {
     const body = (await request.json()) as Record<string, unknown>;
