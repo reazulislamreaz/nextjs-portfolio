@@ -312,7 +312,7 @@ export default function HomeHero() {
             >
               <SectionLink
                 href="/#projects"
-                className="group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-zinc-50 px-6 py-2.5 text-sm font-semibold text-zinc-950 shadow-md transition-all duration-200 hover:bg-zinc-200 hover:scale-[1.02] active:scale-[0.98] sm:w-auto"
+                className="group inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-zinc-50 px-6 py-2.5 text-sm font-semibold text-zinc-950 shadow-md transition-all duration-200 hover:bg-zinc-200 hover:scale-[1.002] active:scale-[0.98] sm:w-auto"
               >
                 <span>View Projects</span>
                 <ArrowRight
@@ -325,7 +325,7 @@ export default function HomeHero() {
               <a
                 href={resumePath}
                 download
-                className="group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 focus:outline-none sm:w-auto"
+                className="group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-101 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 focus:outline-none sm:w-auto"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-zinc-50 backdrop-blur-xl transition-colors group-hover:bg-zinc-850 sm:w-auto">
