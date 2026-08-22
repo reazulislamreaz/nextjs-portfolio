@@ -276,7 +276,7 @@ export default function About() {
               <div className="pt-4 border-t border-zinc-800">
                 <SectionLink
                   href="/#contact"
-                  className="group flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-zinc-100 px-8 py-3 text-center text-sm font-semibold text-zinc-950 shadow-md transition hover:scale-[1.02] hover:bg-zinc-50 active:scale-[0.98]"
+                  className="group flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-zinc-100 px-8 py-3 text-center text-sm font-semibold text-zinc-950 shadow-md transition hover:scale-[1.002] hover:bg-zinc-50 active:scale-[0.98]"
                 >
                   <span>Let&apos;s Build Resilient Systems</span>
                   <ArrowRight

@@ -207,7 +207,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-zinc-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.02] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
+                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-zinc-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.001] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2.5">
                   {status === "loading" ? (
