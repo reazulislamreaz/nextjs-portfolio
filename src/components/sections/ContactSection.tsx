@@ -4,10 +4,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ContactForm from "@/app/components/ContactForm";
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
-import { siteContact, siteSocial } from "@/config/site";
+import { resumePath, siteContact, siteSocial } from "@/config/site";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
-import { Mail, MapPin, X } from "lucide-react";
+import { Download, Mail, MapPin, X } from "lucide-react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 export default function ContactSection() {
@@ -83,8 +83,8 @@ export default function ContactSection() {
         />
 
         <div data-contact-grid className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
-          <div data-contact-left className="w-full min-w-0 space-y-6 md:space-y-8">
-            <div className="relative flex h-full flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
+          <div data-contact-left className="flex h-full w-full min-w-0 flex-col">
+            <div className="relative flex h-full flex-col rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
               <div>
                 <p className="mb-6 text-base leading-relaxed text-zinc-300 sm:mb-8">
                   If you&apos;re hiring a backend or full-stack engineer, I&apos;d like to hear from you. I work on-site in Dhaka and remotely.
@@ -164,6 +164,21 @@ export default function ContactSection() {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-auto space-y-5 border-t border-zinc-800/80 pt-6">
+                <p className="text-sm leading-relaxed text-zinc-400">
+                  A role title, stack, and whether it&apos;s on-site in Dhaka or remote is enough to start. I usually reply within 24–48 hours.
+                </p>
+
+                <a
+                  href={resumePath}
+                  download
+                  className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-850 hover:text-zinc-50"
+                >
+                  <Download size={16} aria-hidden />
+                  Download Resume
+                </a>
               </div>
             </div>
           </div>
