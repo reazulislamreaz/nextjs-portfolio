@@ -87,8 +87,8 @@ export default function ContactSection() {
     <Section id="contact" className="bg-zinc-950/40">
       <div ref={containerRef}>
         <SectionHeader
-          title="Direct Communication & Inquiries"
-          subtitle="Open to senior backend roles, scalable distributed systems engineering, and consulting."
+          title="Contact"
+          subtitle="Open to backend and full-stack engineering roles — onsite in Dhaka or remote. Currently at Sparktech Agency."
         />
 
         <div data-contact-grid className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
@@ -99,11 +99,11 @@ export default function ContactSection() {
               <div className="relative z-10">
                 <div className="mb-3 flex items-center gap-2 font-mono text-xs text-zinc-400">
                   <Terminal size={14} className="text-zinc-500" />
-                  <span>DIRECT CHANNELS // ENCRYPTED</span>
+                  <span>DIRECT CHANNELS</span>
                 </div>
 
                 <p className="mb-6 text-base font-normal leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
-                  Whether you are hiring for a backend-heavy role or seeking an experienced engineer to scale your systems architecture, let&apos;s talk.
+                  Whether you are hiring for a backend-heavy role or need someone to build and maintain the API and data layer behind your product, let&apos;s talk.
                 </p>
 
                 <div className="space-y-4 text-base">

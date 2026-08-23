@@ -4,7 +4,6 @@ import { sectionMetadata } from "@/config/seo";
 
 export const metadata: Metadata = {
   ...sectionMetadata(
-    "projects",
     "Projects",
     "Full-stack and backend systems — Confaero, HavenKeys, and more.",
   ),

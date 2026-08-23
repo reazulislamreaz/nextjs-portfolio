@@ -128,7 +128,7 @@ export default function Education() {
                   />
 
                   <article className="group relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500">
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/[0.03] dark:from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
                     <div className="relative z-10">
                       <div className="mb-4 flex flex-wrap items-center gap-3">

@@ -36,7 +36,7 @@ export default function ScrollProgress() {
     >
       <div
         ref={progressBarRef}
-        className="h-full w-full origin-left bg-gradient-to-r from-zinc-400 via-white to-zinc-300 dark:from-zinc-500 dark:via-white dark:to-zinc-400 shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+        className="h-full w-full origin-left bg-gradient-to-r from-zinc-400 via-zinc-50 to-zinc-300 dark:from-zinc-500 dark:via-white dark:to-zinc-400 dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

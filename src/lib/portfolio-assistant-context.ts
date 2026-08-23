@@ -2,31 +2,47 @@ import { siteContact, siteSocial, resumePath } from "@/config/site";
 import { projectsData } from "@/app/projects/projectsData";
 import { experienceData } from "@/components/sections/experienceData";
 
-const skills = [
+/** Technologies backed by a shipped project or a listed role. */
+const productionSkills = [
   "TypeScript",
   "Node.js",
   "Express.js",
   "NestJS",
-  "Go",
   "PostgreSQL",
   "MySQL",
   "MongoDB",
+  "Prisma",
+  "Mongoose",
   "Redis",
+  "BullMQ",
   "React",
   "Next.js",
   "Tailwind CSS",
   "REST APIs",
-  "GraphQL",
-  "Microservices",
   "Auth & RBAC",
+  "JWT",
+  "Zod",
   "Socket.IO",
   "WebRTC",
   "Stripe",
-  "RAG",
+  "AWS S3",
   "AI API integrations",
   "Docker",
-  "AWS basics",
+  "Nginx",
   "CI/CD",
+];
+
+/**
+ * Studied through coursework or side reading but not yet shipped in any project
+ * listed on this site. The assistant must not present these as production
+ * experience.
+ */
+const learningSkills = [
+  "Go",
+  "GraphQL",
+  "Microservices architecture",
+  "RAG and vector search",
+  "AWS IAM, EC2, VPC, Lambda (via AWS certification coursework)",
 ];
 
 const workStyle = [
@@ -63,8 +79,11 @@ Identity:
 Positioning:
 ${workStyle.map((item) => `- ${item}`).join("\n")}
 
-Skills:
-${skills.map((skill) => `- ${skill}`).join("\n")}
+Skills used in shipped projects or paid roles:
+${productionSkills.map((skill) => `- ${skill}`).join("\n")}
+
+Skills studied but not yet used in any project listed here (never describe these as production experience):
+${learningSkills.map((skill) => `- ${skill}`).join("\n")}
 
 Projects:
 ${projectsData

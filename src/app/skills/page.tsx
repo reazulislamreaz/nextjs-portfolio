@@ -3,7 +3,6 @@ import SkillsSection from "@/components/sections/SkillsSection";
 import { sectionMetadata } from "@/config/seo";
 
 export const metadata: Metadata = sectionMetadata(
-  "skills",
   "Skills",
   "Backend, databases, DevOps, and AI-assisted development.",
 );

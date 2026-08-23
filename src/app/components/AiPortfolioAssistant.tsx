@@ -432,7 +432,7 @@ export default function AiPortfolioAssistant() {
                       key={prompt}
                       type="button"
                       onClick={() => void sendMessage(prompt)}
-                      className="shrink-0 whitespace-nowrap rounded-lg border border-zinc-800 cursor-pointer bg-zinc-900/80 px-3 py-2 text-left text-xs text-zinc-300 transition hover:border-emerald-500/40 hover:text-emerald-300 sm:shrink sm:whitespace-normal"
+                      className="shrink-0 whitespace-nowrap rounded-lg border border-zinc-800 cursor-pointer bg-zinc-900/80 px-3 py-2 text-left text-xs text-zinc-300 transition hover:border-emerald-500/40 hover:text-emerald-500 sm:shrink sm:whitespace-normal"
                     >
                       {prompt}
                     </button>
@@ -457,7 +457,7 @@ export default function AiPortfolioAssistant() {
                 <button
                   type="submit"
                   disabled={loading || !input.trim()}
-                  className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 font-bold shadow-md transition hover:bg-white active:scale-95 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
+                  className="inline-flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-zinc-100 text-zinc-950 font-bold shadow-md transition hover:scale-101 active:scale-95 disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
                   aria-label="Send message"
                 >
                   <FiSend size={18} aria-hidden />

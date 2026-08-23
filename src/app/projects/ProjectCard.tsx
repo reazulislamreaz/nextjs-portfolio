@@ -44,7 +44,7 @@ export default function ProjectCard({
         <article
           id={`project-${slug}`}
           data-project-card
-          className="group/card relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/50 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:flex-row md:hover:-translate-y-0.5 md:hover:border-zinc-600 md:hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+          className="group/card relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/50 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:flex-row md:hover:-translate-y-0.5 md:hover:border-zinc-600 md:hover:shadow-lg md:dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
           aria-labelledby={`${slug}-title`}
         >
           {/* Top Index HUD Marker */}
@@ -162,7 +162,7 @@ export default function ProjectCard({
       <article
         id={`project-${slug}`}
         data-project-card
-        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/50 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:-translate-y-0.5 md:hover:border-zinc-600 md:hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/50 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:-translate-y-0.5 md:hover:border-zinc-600 md:hover:shadow-lg md:dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
         aria-labelledby={`${slug}-title`}
       >
         {/* Top HUD Index Marker */}

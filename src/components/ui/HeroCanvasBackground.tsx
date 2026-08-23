@@ -1,10 +1,20 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 import { isReducedMotion } from "@/lib/gsap";
+
+/** Particle/line color per theme — white on the dark canvas, ink on the light one. */
+const PARTICLE_RGB = {
+  dark: "255, 255, 255",
+  light: "39, 39, 42",
+} as const;
 
 export default function HeroCanvasBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
+  const particleRgb =
+    resolvedTheme === "light" ? PARTICLE_RGB.light : PARTICLE_RGB.dark;
 
   useEffect(() => {
     if (isReducedMotion()) return;
@@ -72,7 +82,7 @@ export default function HeroCanvasBackground() {
 
           if (dist < 120) {
             const alpha = (1 - dist / 120) * 0.15;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+            ctx.strokeStyle = `rgba(${particleRgb}, ${alpha})`;
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -105,7 +115,7 @@ export default function HeroCanvasBackground() {
           p.y -= (dy / dist) * 0.6;
         }
 
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.fillStyle = `rgba(${particleRgb}, ${p.alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -121,7 +131,7 @@ export default function HeroCanvasBackground() {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [particleRgb]);
 
   return (
     <canvas

@@ -35,10 +35,10 @@ const engineeringTenets = [
   },
   {
     icon: <Zap className="text-zinc-100" size={20} />,
-    title: "Sub-Millisecond Cache & Async Relays",
+    title: "Caching & Async Job Processing",
     description:
-      "Layered Redis caching, distributed session stores, and BullMQ worker queues for background job processing without blocking the HTTP event loop.",
-    tag: "High Throughput",
+      "Redis caching, distributed session stores, and BullMQ worker queues so background job processing never blocks the HTTP event loop.",
+    tag: "Throughput",
   },
   {
     icon: <ShieldCheck className="text-zinc-100" size={20} />,
@@ -243,18 +243,6 @@ export default function About() {
                       PRODUCTION STANDARDS
                     </p>
                   </div>
-                </div>
-              </div>
-
-              {/* Verified Metrics Strip */}
-              <div className="grid grid-cols-2 gap-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
-                <div>
-                  <p className="text-lg font-black text-zinc-50">&lt;50ms</p>
-                  <p className="text-[11px] font-mono text-zinc-400">P99 API Latency</p>
-                </div>
-                <div>
-                  <p className="text-lg font-black text-zinc-50">99.9%</p>
-                  <p className="text-[11px] font-mono text-zinc-400">Target Uptime</p>
                 </div>
               </div>
 

@@ -72,7 +72,7 @@ export const projectsData: Project[] = [
     live: "https://elevateapparel.com.bd/",
     code: "https://github.com/reazulislamreaz/private-projects",
     sourceNote:
-      "Workspace: ecommerce-platform · Frontend (Next.js 16): https://elevateapparel.com.bd · Backend (NestJS 11): http://localhost:4000/api/v1 · Swagger: http://localhost:4000/docs",
+      "Workspace: ecommerce-platform · Frontend (Next.js 16): https://elevateapparel.com.bd · Backend: NestJS 11 versioned REST API (/api/v1) with Swagger docs, not publicly exposed",
     problem:
       "A premium apparel brand needed a high-performance storefront with fast faceted search and variant selection, alongside a secure, role-gated admin console for managing orders, stock alerts, CRM, and analytics without cross-component drift.",
     architecture:
@@ -190,7 +190,7 @@ export const projectsData: Project[] = [
   {
     title: "Confaero",
     tagline:
-      "Conference ops — QR check-ins and exhibitor leads without duplicates under load.",
+      "Conference ops — QR check-ins and exhibitor lead capture with duplicate-safe writes.",
     description:
       "Conference platform with QR check-ins, exhibitor lead capture, organizer tooling, and real-time attendee interactions.",
     features: [
@@ -204,17 +204,17 @@ export const projectsData: Project[] = [
       "WebRTC",
     ],
     metrics: [
-      "~40% lower p95 latency on check-in APIs after compound indexes",
-      "Zero duplicate check-ins under concurrent QR bursts",
+      "Published to Google Play as an organizer/attendee app",
+      "Compound MongoDB indexes on the check-in read paths",
+      "Unique constraints and server-side validation guard against duplicate check-ins on concurrent QR scans",
       "Real-time roster sync via scoped Socket.IO broadcasts",
       "Lazy-loaded dashboards and optimized images for faster paint",
     ],
     devOps: [
-      "Production deploy",
+      "Google Play release",
       "MongoDB Atlas",
       "Docker",
       "CI/CD · GitHub Actions",
-      "Redis (caching layer)",
       "Nginx reverse proxy",
     ],
     images: [
@@ -334,9 +334,9 @@ export const projectsData: Project[] = [
       "Real-estate marketplace with RBAC, relational inventory, and Stripe-backed premium listings.",
     features: ["React", "Node.js", "Express", "MongoDB", "JWT", "Stripe"],
     metrics: [
-      "~35% faster listing searches after indexed role-aware queries",
-      "Idempotent Stripe webhooks — no double-charged placements",
-      "RBAC API layer with zero cross-tenant leaks in testing",
+      "Indexed role-aware listing queries for search and filtering",
+      "Idempotent Stripe webhooks so payment retries cannot double-charge a premium placement",
+      "RBAC enforced on every protected route, with query paths scoped per persona",
       "Code-split routes for smaller mobile bundles",
     ],
     devOps: [
@@ -372,14 +372,14 @@ export const projectsData: Project[] = [
   {
     title: "Marathon Zone",
     tagline:
-      "Marathon registration that survives deadline spikes — organizer console and public signup.",
+      "Marathon registration — organizer console and public signup with validated, indexed writes.",
     description:
-      "Event ops console for organizers and participant signup — registration throughput, auth, and reliable event data.",
+      "Event ops console for organizers and participant signup — registration flow, Firebase Auth, and validated event data.",
     features: ["Node.js", "Express", "MongoDB", "Firebase Auth", "React"],
     metrics: [
-      "Stable registration throughput during deadline spikes",
-      "~30% faster roster loads after aggregation tuning",
-      "Server validation blocked conflicting registrations",
+      "Separate organizer and public registration endpoints with indexed hot paths",
+      "MongoDB aggregation pipelines for roster and event listing reads",
+      "Server-side validation rejects conflicting registrations",
       "Lazy-loaded public flow for mobile performance",
     ],
     devOps: [
@@ -404,7 +404,8 @@ export const projectsData: Project[] = [
       },
       {
         challenge: "Rosters needed to load quickly mid-event.",
-        solution: "MongoDB aggregation tuning — ~30% faster loads.",
+        solution:
+          "MongoDB aggregation pipelines with projection, replacing per-row lookups on the roster read path.",
       },
     ],
     futureEnhancements:

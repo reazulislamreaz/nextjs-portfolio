@@ -78,7 +78,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.className} min-w-0 overflow-x-hidden antialiased bg-zinc-950 selection:bg-emerald-500/30 selection:text-emerald-200`}
+        className={`${geistSans.className} min-w-0 overflow-x-hidden antialiased bg-zinc-950`}
       >
         <JsonLd />
         <a

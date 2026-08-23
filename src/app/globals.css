@@ -4,12 +4,29 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
-  Theme tokens — adapted from the TaskForge (elite-alumni-pool) palette.
-  The zinc scale is remapped so a single set of utility classes works in both
-  themes: in light mode the ramp is inverted (high shade = dark), in dark mode
-  it follows the green-tinted TaskForge surfaces. The emerald scale is remapped
-  to TaskForge teal (#00897b) and stays consistent across themes.
-*//* Light theme (default) - Pure Minimalist White Canvas with Jet Black & Titanium */
+  Theme tokens.
+
+  The zinc scale is remapped so one set of utility classes works in both themes.
+  The ramp is *semantic*, not literal, and the same rung means the same thing in
+  both themes:
+
+    50 – 500  text, from primary heading down to muted meta
+    600       strong border / divider
+    700       default card border
+    800       inner surface (chips, nested panels)
+    850       hover surface (one step further from the canvas than 800)
+    900       elevated card surface
+    950       page canvas
+
+  Surfaces therefore always step *away* from the canvas as they elevate: darker
+  canvas → lighter cards in dark mode, lighter canvas → white cards in light
+  mode. Keeping 900 distinct from 950 is what stops cards blending into the page.
+
+  The emerald scale is aliased onto a green ramp (`--teal-*`) that is tuned per
+  theme so accent text stays legible: bright greens on the dark canvas, darker
+  greens on the light canvas.
+*/
+/* Light theme - off-white canvas, pure white elevated cards, jet-black text */
 :root {
   --nav-height: 4rem;
   --nav-scroll-offset: 4.75rem; /* ~76px on mobile */
@@ -19,22 +36,28 @@
   --zinc-300: #3f3f46; /* High-contrast Body Text */
   --zinc-400: #52525b; /* Crisp Muted Meta */
   --zinc-500: #71717a; /* Soft Subtitle */
-  --zinc-600: #d4d4d8; /* Dividers */
-  --zinc-700: #e4e4e7; /* Clean Border */
-  --zinc-800: #f4f4f5; /* Subtle Card Accent */
-  --zinc-850: #fafafa;
-  --zinc-900: #ffffff; /* Elevated Crisp White Glass Card */
-  --zinc-950: #ffffff; /* Pure Modern White Canvas */
+  --zinc-600: #c4c4cb; /* Strong border / divider */
+  --zinc-700: #dcdce2; /* Default card border */
+  --zinc-800: #f0f0f3; /* Inner surface (chips, nested panels) */
+  --zinc-850: #e5e5ea; /* Hover surface */
+  --zinc-900: #ffffff; /* Elevated card surface */
+  --zinc-950: #f5f5f8; /* Page canvas */
 
-  --teal-200: #e4e4e7;
-  --teal-300: #a1a1aa;
-  --teal-400: #52525b;
-  --teal-500: #09090b; /* Monochromatic Black Accent */
-  --teal-600: #18181b;
-  --teal-700: #27272a;
-  --teal-800: #3f3f46;
-  --teal-900: #52525b;
-  --teal-950: #71717a;
+  /* Accent — darker greens so accent text clears 4.5:1 on white */
+  --teal-200: #a7f3d0;
+  --teal-300: #059669;
+  --teal-400: #047857;
+  --teal-500: #065f46;
+  --teal-600: #064e3b;
+  --teal-700: #053726;
+  --teal-800: #042b1e;
+  --teal-900: #032117;
+  --teal-950: #021610;
+
+  /* Accent channel for gradients / glows that cannot use a utility class. */
+  --accent-rgb: 6 95 70;
+  /* Polarity for the cursor spotlight and particle field. */
+  --spotlight-rgb: 24 24 27;
 
   --grid-line: rgba(0, 0, 0, 0.04);
   --glow-primary: rgba(0, 0, 0, 0.05);
@@ -62,15 +85,19 @@
   --zinc-900: #0d0d11; /* Elevated Frosted Obsidian Card */
   --zinc-950: #000000; /* True Pitch Black Canvas */
 
-  --teal-200: #94a3b8;
-  --teal-300: #cbd5e1;
-  --teal-400: #f4f4f5;
-  --teal-500: #ffffff; /* Pure White Accent */
-  --teal-600: #fafafa;
-  --teal-700: #f4f4f5;
-  --teal-800: #e4e4e7;
-  --teal-900: #cbd5e1;
-  --teal-950: #94a3b8;
+  /* Accent — bright greens for legibility on the near-black canvas */
+  --teal-200: #a7f3d0;
+  --teal-300: #6ee7b7;
+  --teal-400: #34d399;
+  --teal-500: #10b981;
+  --teal-600: #059669;
+  --teal-700: #047857;
+  --teal-800: #065f46;
+  --teal-900: #064e3b;
+  --teal-950: #022c22;
+
+  --accent-rgb: 16 185 129;
+  --spotlight-rgb: 255 255 255;
 
   --grid-line: rgba(255, 255, 255, 0.05);
   --glow-primary: rgba(255, 255, 255, 0.12);
@@ -170,11 +197,13 @@ body {
 }
 
 /*
-  #1 — In light mode, elevated surfaces (cards, panels, pill buttons) are solid
-  white with a subtle shadow so they pop against the page background, matching
-  the TaskForge light theme. In dark mode the original translucent green
-  surfaces are kept (these overrides don't apply). Hover variants are left
-  untouched so interactive states still read.
+  Light-mode surface corrections.
+
+  Card backgrounds in this codebase are written as translucent `bg-zinc-900/NN`.
+  Over the light canvas those alpha values would wash the card back down to
+  roughly the page color, so in light mode every elevated surface is forced to
+  the opaque elevated token and given a hairline shadow. Dark mode keeps the
+  translucent frosted look (these rules don't apply there).
 */
 html:not(.dark) :is(
   .bg-zinc-900,
@@ -185,10 +214,39 @@ html:not(.dark) :is(
   .bg-zinc-900\/60,
   .bg-zinc-900\/70,
   .bg-zinc-900\/80,
-  .bg-zinc-900\/90
+  .bg-zinc-900\/90,
+  .bg-zinc-900\/95
 ) {
-  background-color: #ffffff;
+  background-color: var(--zinc-900);
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+}
+
+/*
+  `border-zinc-800` is deliberately near-invisible against the dark canvas. In
+  light mode the same rung is an inner-surface fill, so as a border it would
+  disappear against white — step it up to the dedicated border token instead.
+*/
+html:not(.dark) :is(
+  .border-zinc-800,
+  .border-zinc-800\/60,
+  .border-zinc-800\/80,
+  .border-zinc-800\/90
+) {
+  border-color: var(--zinc-700);
+}
+
+/*
+  Nested chips and inner panels use translucent `bg-zinc-800/NN`, which over a
+  white card resolves to almost white. Force the opaque inner-surface token so
+  chips stay distinguishable from the card they sit on.
+*/
+html:not(.dark) :is(
+  .bg-zinc-800\/40,
+  .bg-zinc-800\/60,
+  .bg-zinc-800\/80,
+  .bg-zinc-800\/90
+) {
+  background-color: var(--zinc-800);
 }
 
 /* Global Glassmorphic Pattern overlay - Minimal Tech Grid */
@@ -450,9 +508,9 @@ html:not(.dark) :is(
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 137, 123, 0.1) 15%,
-    rgba(38, 166, 154, 0.7) 50%,
-    rgba(0, 137, 123, 0.1) 85%,
+    rgb(var(--accent-rgb) / 0.1) 15%,
+    rgb(var(--accent-rgb) / 0.7) 50%,
+    rgb(var(--accent-rgb) / 0.1) 85%,
     transparent 100%
   );
   background-size: 200% 100%;
@@ -462,20 +520,29 @@ html:not(.dark) :is(
 @keyframes live-beacon-ping {
   0% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.6);
+    box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0.6);
   }
   70% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 6px rgba(38, 166, 154, 0);
+    box-shadow: 0 0 0 6px rgb(var(--accent-rgb) / 0);
   }
   100% {
     transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(38, 166, 154, 0);
+    box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0);
   }
 }
 
 .live-beacon {
   animation: live-beacon-ping 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* Theme-aware accent glows, replacing hardcoded emerald rgba() shadows. */
+.accent-glow-sm {
+  box-shadow: 0 0 8px rgb(var(--accent-rgb) / 0.8);
+}
+
+.accent-glow-lg {
+  box-shadow: 0 0 24px rgb(var(--accent-rgb) / 0.18);
 }
 
 @media (prefers-reduced-motion: reduce) {

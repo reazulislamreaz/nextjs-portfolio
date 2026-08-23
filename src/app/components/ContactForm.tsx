@@ -92,7 +92,7 @@ export default function ContactForm() {
           >
             <div className="relative mb-6">
               <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/20" />
-              <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 shadow-[0_0_24px_rgba(16,185,129,0.15)] sm:h-20 sm:w-20">
+              <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 accent-glow-lg sm:h-20 sm:w-20">
                 <FiCheck className="h-8 w-8 text-emerald-400 sm:h-9 sm:w-9" aria-hidden />
               </span>
             </div>
@@ -207,7 +207,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-zinc-50 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.001] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
+                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-zinc-50 hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.001] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2.5">
                   {status === "loading" ? (
