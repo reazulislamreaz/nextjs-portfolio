@@ -170,7 +170,35 @@ section[id] {
 }
 
 body {
-  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-zinc-950;
+  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden;
+}
+
+/*
+  Text selection.
+
+  Do not use remapped zinc utilities here. In light mode --zinc-900 is the
+  white card surface, so selection:bg-zinc-900 + selection:text-white painted
+  white text on a white highlight. Use fixed colors so the highlight and
+  text always contrast, on both canvases and on cards.
+*/
+::selection {
+  background-color: #d4d4d8;
+  color: #09090b;
+}
+
+::-moz-selection {
+  background-color: #d4d4d8;
+  color: #09090b;
+}
+
+.dark ::selection {
+  background-color: #3f3f46;
+  color: #fafafa;
+}
+
+.dark ::-moz-selection {
+  background-color: #3f3f46;
+  color: #fafafa;
 }
 
 @layer base {
