@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-<<<<<<< HEAD
 import { useTheme } from "next-themes";
 import { isReducedMotion } from "@/lib/gsap";
 
@@ -16,12 +15,6 @@ export default function HeroCanvasBackground() {
   const { resolvedTheme } = useTheme();
   const particleRgb =
     resolvedTheme === "light" ? PARTICLE_RGB.light : PARTICLE_RGB.dark;
-=======
-import { isReducedMotion } from "@/lib/gsap";
-
-export default function HeroCanvasBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
 
   useEffect(() => {
     if (isReducedMotion()) return;
@@ -89,11 +82,7 @@ export default function HeroCanvasBackground() {
 
           if (dist < 120) {
             const alpha = (1 - dist / 120) * 0.15;
-<<<<<<< HEAD
             ctx.strokeStyle = `rgba(${particleRgb}, ${alpha})`;
-=======
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
             ctx.lineWidth = 0.6;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
@@ -126,11 +115,7 @@ export default function HeroCanvasBackground() {
           p.y -= (dy / dist) * 0.6;
         }
 
-<<<<<<< HEAD
         ctx.fillStyle = `rgba(${particleRgb}, ${p.alpha})`;
-=======
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fill();
@@ -146,11 +131,7 @@ export default function HeroCanvasBackground() {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-<<<<<<< HEAD
   }, [particleRgb]);
-=======
-  }, []);
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
 
   return (
     <canvas

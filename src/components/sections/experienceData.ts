@@ -49,11 +49,6 @@ export const experienceData: Experience[] = [
       "React",
       "Next.js",
       "Tailwind CSS",
-<<<<<<< HEAD
-=======
-      "Go",
-      "FastAPI",
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
       "MongoDB",
       "PostgreSQL",
       "MySQL",

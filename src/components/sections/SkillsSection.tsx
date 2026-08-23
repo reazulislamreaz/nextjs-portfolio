@@ -70,11 +70,7 @@ const architecturePipeline = [
   { step: "01", name: "REST / GraphQL", desc: "API Gateway & Validation", tech: "NestJS · Express · Go", icon: <TbApi /> },
   { step: "02", name: "Auth & Security", desc: "RBAC · JWT · Rate Limiting", tech: "Guards · Helmet · CORS", icon: <TbKey /> },
   { step: "03", name: "Relational & NoSQL", desc: "ACID Schemas & Aggregations", tech: "PostgreSQL · MongoDB", icon: <TbDatabase /> },
-<<<<<<< HEAD
   { step: "04", name: "Caching", desc: "Memory Stores & Sessions", tech: "Redis · In-Memory", icon: <TbGauge /> },
-=======
-  { step: "04", name: "Sub-ms Cache", desc: "Memory Stores & Sessions", tech: "Redis · In-Memory", icon: <TbGauge /> },
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
   { step: "05", name: "Job Queues", desc: "Async Workers & Outbox", tech: "BullMQ · Event Loops", icon: <HiOutlineQueueList /> },
   { step: "06", name: "Cloud & Ops", desc: "Containers & CI/CD", tech: "Docker · AWS · Nginx", icon: <TbCloud /> },
 ];
@@ -506,11 +502,7 @@ export default function Skills() {
       <div ref={containerRef}>
         <SectionHeader
           title="Skills & Backend Architecture"
-<<<<<<< HEAD
           subtitle="The stack I work in — from API contracts and data modeling through caching, queues, and deployment."
-=======
-          subtitle="Production-tested systems engineering — from API contracts to high-availability infrastructure."
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
         />
 
         {/* Backend Architecture Storytelling Pipeline */}

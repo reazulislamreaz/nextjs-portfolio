@@ -72,11 +72,7 @@ export const projectsData: Project[] = [
     live: "https://elevateapparel.com.bd/",
     code: "https://github.com/reazulislamreaz/private-projects",
     sourceNote:
-<<<<<<< HEAD
       "Workspace: ecommerce-platform · Frontend (Next.js 16): https://elevateapparel.com.bd · Backend: NestJS 11 versioned REST API (/api/v1) with Swagger docs, not publicly exposed",
-=======
-      "Workspace: ecommerce-platform · Frontend (Next.js 16): https://elevateapparel.com.bd · Backend (NestJS 11): http://localhost:4000/api/v1 · Swagger: http://localhost:4000/docs",
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
     problem:
       "A premium apparel brand needed a high-performance storefront with fast faceted search and variant selection, alongside a secure, role-gated admin console for managing orders, stock alerts, CRM, and analytics without cross-component drift.",
     architecture:
@@ -194,11 +190,7 @@ export const projectsData: Project[] = [
   {
     title: "Confaero",
     tagline:
-<<<<<<< HEAD
       "Conference ops — QR check-ins and exhibitor lead capture with duplicate-safe writes.",
-=======
-      "Conference ops — QR check-ins and exhibitor leads without duplicates under load.",
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
     description:
       "Conference platform with QR check-ins, exhibitor lead capture, organizer tooling, and real-time attendee interactions.",
     features: [
@@ -212,30 +204,17 @@ export const projectsData: Project[] = [
       "WebRTC",
     ],
     metrics: [
-<<<<<<< HEAD
       "Published to Google Play as an organizer/attendee app",
       "Compound MongoDB indexes on the check-in read paths",
       "Unique constraints and server-side validation guard against duplicate check-ins on concurrent QR scans",
-=======
-      "~40% lower p95 latency on check-in APIs after compound indexes",
-      "Zero duplicate check-ins under concurrent QR bursts",
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
       "Real-time roster sync via scoped Socket.IO broadcasts",
       "Lazy-loaded dashboards and optimized images for faster paint",
     ],
     devOps: [
-<<<<<<< HEAD
       "Google Play release",
       "MongoDB Atlas",
       "Docker",
       "CI/CD · GitHub Actions",
-=======
-      "Production deploy",
-      "MongoDB Atlas",
-      "Docker",
-      "CI/CD · GitHub Actions",
-      "Redis (caching layer)",
->>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
       "Nginx reverse proxy",
     ],
     images: [
