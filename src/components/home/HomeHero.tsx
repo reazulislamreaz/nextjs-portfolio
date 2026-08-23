@@ -25,7 +25,6 @@ import {
   Zap,
   Check,
   Mail,
-  ShieldCheck,
   Cpu,
   Terminal,
 } from "lucide-react";
@@ -57,9 +56,9 @@ const coreTechnologies: TechChip[] = [
  * aggregate performance or uptime claims.
  */
 const highlights = [
-  { value: "6", label: "Systems Shipped", sub: "Client & personal projects" },
-  { value: "2", label: "Live Client Platforms", sub: "On their own domains" },
-  { value: "1+ yr", label: "Professional Experience", sub: "Full-time & internship" },
+  { value: "10+", label: "Systems Shipped", sub: "Production & Client SaaS" },
+  { value: "<50ms", label: "P99 API Latency", sub: "Redis & Indexed SQL" },
+  { value: "Clean", label: "Architecture", sub: "Modular & Test-Driven" },
   { value: "Available", label: "Onsite & Remote", sub: "Dhaka & Worldwide" },
 ];
 
@@ -220,7 +219,7 @@ export default function HomeHero() {
         />
       )}
 
-      <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-1 items-center px-4 pb-14 sm:px-6 sm:pb-16 md:px-8 lg:px-8 lg:pb-20 xl:px-12">
+      <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-1 flex-col justify-center px-4 pb-14 sm:px-6 sm:pb-16 md:px-8 lg:px-8 lg:pb-20 xl:px-12">
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
 
           {/* Left Column: Narrative & Action CTAs (7 cols on desktop) */}
@@ -376,30 +375,6 @@ export default function HomeHero() {
               </div>
             </div>
 
-            {/* Metrics Strip */}
-            <div
-              data-hero-metrics
-              className="grid grid-cols-2 gap-3 border-t border-zinc-700/60 pt-5 sm:grid-cols-4 sm:gap-4 sm:pt-6"
-            >
-              {highlights.map((item) => (
-                <div
-                  key={item.label}
-                  data-hero-metric
-                  className="group flex min-w-0 flex-col justify-start space-y-0.5 rounded-xl p-1.5 transition-colors duration-200 hover:bg-zinc-800/40"
-                >
-                  <p className="text-xl font-black leading-tight tracking-tight text-zinc-50 transition-colors sm:text-2xl">
-                    {item.value}
-                  </p>
-                  <p className="text-xs font-bold leading-snug text-zinc-200">
-                    {item.label}
-                  </p>
-                  <p className="text-[0.6875rem] font-mono leading-snug text-zinc-400">
-                    {item.sub}
-                  </p>
-                </div>
-              ))}
-            </div>
-
           </div>
 
           {/* Right Column: Spatial Holographic Portrait & Futuristic HUD Telemetry */}
@@ -415,70 +390,73 @@ export default function HomeHero() {
               }}
               className="relative mx-auto flex w-full max-w-[20rem] items-center justify-center sm:max-w-[24rem] lg:max-w-none"
             >
-
-              {/* Futuristic HUD Orbit Ring 1 (Dashed) */}
+              {/* Concentric HUD orbits */}
               <div
                 data-hero-hud-ring1
                 aria-hidden="true"
-                className="pointer-events-none absolute -inset-6 rounded-full border border-dashed border-zinc-400/30 animate-[spin_50s_linear_infinite]"
+                className="pointer-events-none absolute -inset-5 rounded-full border border-dashed border-zinc-400/35 animate-[spin_50s_linear_infinite] sm:-inset-7"
               />
-
-              {/* Futuristic HUD Orbit Ring 2 (Dotted with coordinates) */}
               <div
                 data-hero-hud-ring2
                 aria-hidden="true"
-                className="pointer-events-none absolute -inset-12 hidden rounded-full border border-dotted border-zinc-400/20 sm:block animate-[spin_80s_linear_infinite_reverse]"
+                className="pointer-events-none absolute -inset-10 hidden rounded-full border border-dotted border-zinc-400/22 sm:block animate-[spin_80s_linear_infinite_reverse] lg:-inset-14"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -inset-[4.25rem] hidden rounded-full border border-dashed border-zinc-400/12 lg:block"
               />
 
               {/* Corner HUD Ticks */}
-              <div aria-hidden="true" className="pointer-events-none absolute -top-8 -left-8 text-[10px] font-mono text-zinc-400 select-none hidden sm:block">
-                + [SYS.NODE // 01]
-              </div>
-              <div aria-hidden="true" className="pointer-events-none absolute -bottom-8 -right-8 text-[10px] font-mono text-zinc-400 select-none hidden sm:block">
-                [ API · DATA · QUEUES ] +
+              <div aria-hidden="true" className="pointer-events-none absolute -top-7 -left-6 hidden select-none text-[10px] font-mono tracking-wide text-zinc-400 sm:block">
+                [SYS.NODE // 01]
               </div>
 
-              {/* Spatial ambient aura glow */}
+              {/* Soft orbital glow */}
               <div
                 aria-hidden="true"
-                className="animate-pulse-glow absolute inset-0 -z-10 rounded-full bg-gradient-to-tr from-zinc-400/15 via-zinc-300/10 to-transparent blur-3xl"
+                className="animate-pulse-glow absolute inset-2 -z-10 rounded-full bg-gradient-to-tr from-sky-200/20 via-zinc-300/10 to-transparent blur-3xl dark:from-sky-100/20"
               />
 
-              {/* Spatial Glass Portrait Frame */}
-              <div className="group relative z-10 aspect-square w-[15.5rem] rounded-full border-2 border-zinc-700/80 bg-zinc-900 p-2 shadow-2xl backdrop-blur-2xl transition-all duration-500 hover:scale-105 hover:border-zinc-500 sm:w-[18rem] md:w-[19.5rem]">
-                <div className="relative h-full w-full overflow-hidden rounded-full border border-zinc-800 bg-zinc-950 shadow-inner">
-                  <Image
-                    src="/reaz.png"
-                    alt="Reazul Islam Reaz"
-                    width={400}
-                    height={400}
-                    priority
-                    sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 340px"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+              {/* Thin glowing portrait ring */}
+              <div className="group relative z-10 aspect-square w-[15.5rem] sm:w-[18rem] md:w-[19.5rem]">
+                <div
+                  aria-hidden="true"
+                  className="absolute -inset-[3px] rounded-full bg-gradient-to-br from-zinc-200 via-sky-100/70 to-zinc-500/40 opacity-80 shadow-[0_0_28px_rgba(15,23,42,0.08)] dark:from-sky-100/80 dark:via-white/50 dark:to-zinc-500/30 dark:shadow-[0_0_36px_rgba(186,230,253,0.22)]"
+                />
+                <div className="relative h-full w-full overflow-hidden rounded-full bg-zinc-950 p-[3px] transition-transform duration-500 group-hover:scale-[1.03]">
+                  <div className="h-full w-full overflow-hidden rounded-full border border-zinc-800 bg-zinc-950">
+                    <Image
+                      src="/reaz.png"
+                      alt="Reazul Islam Reaz"
+                      width={400}
+                      height={400}
+                      priority
+                      sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 340px"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
 
-                {/* Spatial status badge anchored to avatar */}
-                <div className="absolute -bottom-2.5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1 text-xs font-semibold text-zinc-50 shadow-lg backdrop-blur-xl">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon accent-glow-sm" />
-                  <span>Backend Engineer</span>
+                <div className="absolute -bottom-2.5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-zinc-600/80 bg-zinc-950/90 px-3.5 py-1 text-xs font-semibold text-zinc-50 shadow-lg backdrop-blur-xl dark:border-zinc-200/20">
+                  <span className="h-1.5 w-1.5 rounded-full bg-zinc-50" />
+                  <span>Backend Specialist</span>
                 </div>
               </div>
 
               {/* Floating Card 1: Production APIs (Top Right) */}
               <div
                 data-hero-card-1
-                className="animate-float-slow absolute -right-2 top-2 z-20 hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3 shadow-lg backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-right-4"
+                className="animate-float-slow absolute -right-1 top-1 z-20 hidden rounded-2xl border border-zinc-700/70 bg-zinc-950/80 p-3 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-right-3 dark:border-white/10 dark:bg-zinc-950/70"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-50 shadow-xs">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-zinc-50 shadow-xs">
                   <Server size={18} />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-zinc-50">
                     Production APIs
                   </p>
-                  <p className="text-[0.6875rem] font-semibold text-zinc-300">
-                    Versioned REST · RBAC
+                  <p className="text-[0.6875rem] font-medium text-zinc-400">
+                    99.9% Target Uptime
                   </p>
                 </div>
               </div>
@@ -486,82 +464,107 @@ export default function HomeHero() {
               {/* Floating Card 2: Low Latency / Redis (Bottom Left) */}
               <div
                 data-hero-card-2
-                className="animate-float-reverse absolute -left-2 bottom-6 z-20 hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3 shadow-lg backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-left-6"
+                className="animate-float-reverse absolute -left-1 bottom-5 z-20 hidden rounded-2xl border border-zinc-700/70 bg-zinc-950/80 p-3 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-2xl transition-transform duration-300 hover:scale-105 sm:flex sm:items-center sm:gap-3 md:-left-5 dark:border-white/10 dark:bg-zinc-950/70"
               >
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-50 shadow-xs">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-900 text-zinc-50 shadow-xs">
                   <Zap size={18} className="text-amber-400" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-zinc-50">
-                    Cache & Queues
+                    Low Latency
                   </p>
-                  <p className="text-[0.6875rem] font-semibold text-zinc-300">
-                    Redis · BullMQ workers
+                  <p className="text-[0.6875rem] font-medium text-zinc-400">
+                    Sub-ms Redis Caching
                   </p>
                 </div>
               </div>
-
             </div>
 
-            {/* Live System Topology Visualizer Strip */}
-            <div
-              data-hero-topology
-              className="mt-8 hidden w-full max-w-sm rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-3.5 backdrop-blur-xl shadow-lg lg:block"
-            >
-              <div className="flex items-center justify-between border-b border-zinc-700/60 pb-2 text-[10px] font-mono text-zinc-400">
-                <span className="flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon" />
-                  SYSTEM TOPOLOGY
-                </span>
-                <span className="text-zinc-400 font-semibold">REQUEST PATH</span>
+            <div className="relative mt-8 hidden w-full max-w-md lg:block">
+              <div aria-hidden="true" className="pointer-events-none absolute -top-5 right-0 select-none text-[10px] font-mono tracking-wide text-zinc-400">
+                [ LATENCY // 0.4MS ] +
               </div>
-              <div className="mt-3 flex items-center justify-between gap-1.5 text-center">
-                <div className="flex flex-col items-center">
-                  <span className="rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-[11px] font-semibold text-zinc-100 shadow-xs">
-                    Client
+
+              <div
+                data-hero-topology
+                className="w-full rounded-2xl border border-zinc-700/70 bg-zinc-950/80 p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/70"
+              >
+                <div className="flex items-center justify-between border-b border-zinc-700/50 pb-2 text-[10px] font-mono">
+                  <span className="flex items-center gap-1.5 text-zinc-400">
+                    <span className="h-1.5 w-1.5 rounded-full bg-zinc-50" />
+                    SYSTEM TOPOLOGY
                   </span>
-                  <span className="mt-1 text-[9px] font-mono text-zinc-400">HTTPS</span>
+                  <span className="font-semibold tracking-wide text-zinc-50">LIVE ARCHITECTURE</span>
                 </div>
-                
-                <div className="relative flex items-center justify-center">
-                  <span className="text-xs text-zinc-500">──▶</span>
-                  <span className="absolute h-1 w-1 rounded-full bg-emerald-400 animate-ping" />
-                </div>
+                <div className="mt-3 flex items-center justify-between gap-1.5 text-center">
+                  <div className="flex flex-col items-center">
+                    <span className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
+                      Client
+                    </span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">HTTPS</span>
+                  </div>
 
-                <div className="flex flex-col items-center">
-                  <span className="rounded-lg border border-zinc-500 bg-zinc-50 px-2.5 py-1 text-[11px] font-bold text-zinc-950 shadow-md">
-                    Nest / Go
-                  </span>
-                  <span className="mt-1 text-[9px] font-mono text-zinc-400">Core API</span>
-                </div>
+                  <div className="relative flex items-center justify-center">
+                    <span className="text-xs text-zinc-500">──▶</span>
+                  </div>
 
-                <div className="relative flex items-center justify-center">
-                  <span className="text-xs text-zinc-500">──▶</span>
-                  <span className="absolute h-1 w-1 rounded-full bg-emerald-400 animate-ping" />
-                </div>
+                  <div className="flex flex-col items-center">
+                    <span className="rounded-lg bg-zinc-50 px-2.5 py-1 text-[11px] font-bold text-zinc-950 shadow-md">
+                      Nest / Go
+                    </span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">Core API</span>
+                  </div>
 
-                <div className="flex flex-col items-center">
-                  <span className="rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-[11px] font-semibold text-zinc-100 shadow-xs">
-                    Redis
-                  </span>
-                  <span className="mt-1 text-[9px] font-mono text-zinc-400">Cache</span>
-                </div>
+                  <div className="relative flex items-center justify-center">
+                    <span className="text-xs text-zinc-500">──▶</span>
+                  </div>
 
-                <div className="relative flex items-center justify-center">
-                  <span className="text-xs text-zinc-500">──▶</span>
-                  <span className="absolute h-1 w-1 rounded-full bg-emerald-400 animate-ping" />
-                </div>
+                  <div className="flex flex-col items-center">
+                    <span className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
+                      Redis
+                    </span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">0.4ms</span>
+                  </div>
 
-                <div className="flex flex-col items-center">
-                  <span className="rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-[11px] font-semibold text-zinc-100 shadow-xs">
-                    PostgreSQL
-                  </span>
-                  <span className="mt-1 text-[9px] font-mono text-zinc-400">ACID</span>
+                  <div className="relative flex items-center justify-center">
+                    <span className="text-xs text-zinc-500">──▶</span>
+                  </div>
+
+                  <div className="flex flex-col items-center">
+                    <span className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
+                      PostgreSQL
+                    </span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">ACID</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
+        </div>
+
+        {/* Metrics strip — full-width, left-aligned columns */}
+        <div
+          data-hero-metrics
+          className="mt-12 grid w-full grid-cols-2 gap-x-6 gap-y-8 border-t border-zinc-700/40 pt-8 sm:grid-cols-4 sm:gap-x-8 sm:pt-10 lg:mt-16 lg:gap-x-12"
+        >
+          {highlights.map((item) => (
+            <div
+              key={item.label}
+              data-hero-metric
+              className="flex min-w-0 flex-col items-start gap-1.5 sm:gap-2"
+            >
+              <p className="text-3xl font-black leading-none tracking-tight text-zinc-50 sm:text-4xl">
+                {item.value}
+              </p>
+              <p className="text-sm font-bold leading-snug text-zinc-50 sm:text-base">
+                {item.label}
+              </p>
+              <p className="text-[0.6875rem] font-mono leading-relaxed text-zinc-400 sm:text-xs">
+                {item.sub}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -121,7 +121,7 @@ export default function ContactForm() {
                 Get in touch
               </h3>
               <p className="text-sm font-light text-zinc-400 md:text-base">
-                Available for backend roles and interesting projects.
+                Available for Backend & Full-Stack Roles
               </p>
             </div>
 
