@@ -417,12 +417,12 @@ function SkillCategoryPanel({ title, icon, iconBg, hint, skills }: SkillCategory
   return (
     <article
       data-skill-category
-      className="group/card relative overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 shadow-sm backdrop-blur-md transition-all duration-300 hover:border-zinc-700 sm:p-5"
+      className="relative border-b border-zinc-800/80 py-5 last:border-b-0 md:rounded-lg md:border md:border-zinc-800 md:bg-zinc-900/50 md:px-5 md:py-5"
     >
       <div className="mb-3.5 flex items-center justify-between gap-2">
         <div className="flex items-center gap-2.5">
           <span
-            className={`flex h-7 w-7 items-center justify-center rounded-lg text-sm sm:text-base ${iconBg}`}
+            className={`flex h-7 w-7 items-center justify-center rounded-md text-sm sm:text-base ${iconBg}`}
           >
             {icon}
           </span>
@@ -430,7 +430,7 @@ function SkillCategoryPanel({ title, icon, iconBg, hint, skills }: SkillCategory
             {title}
           </h3>
         </div>
-        <span className="shrink-0 rounded-full border border-zinc-700/80 bg-zinc-950/80 px-2.5 py-0.5 text-[0.6875rem] font-semibold text-zinc-400">
+        <span className="shrink-0 text-xs text-zinc-500">
           {skills.length}
         </span>
       </div>
@@ -501,60 +501,49 @@ export default function Skills() {
     <Section id="skills" className="bg-zinc-950/80">
       <div ref={containerRef}>
         <SectionHeader
-          title="Skills & Backend Architecture"
-          subtitle="The stack I work in — from API contracts and data modeling through caching, queues, and deployment."
+          title="Skills"
+          subtitle="The stack I use to design APIs, model data, and run production backends."
         />
 
-        {/* Backend Architecture Storytelling Pipeline */}
         <div
           data-pipeline-container
-          className="mb-10 sm:mb-12 overflow-hidden rounded-2xl border border-zinc-800/90 bg-gradient-to-b from-zinc-900/60 to-zinc-950/80 p-4 sm:p-6 backdrop-blur-xl shadow-xl"
+          className="mb-10 border-b border-zinc-800/80 pb-10 sm:mb-12"
         >
-          <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800/80 pb-3 text-xs font-mono">
-            <span className="flex items-center gap-2 font-bold uppercase tracking-wider text-zinc-300">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 live-beacon" />
-              BACKEND SYSTEM LIFECYCLE
-            </span>
-            <span className="text-[11px] text-zinc-500 font-mono">
-              END-TO-END FLOW ARCHITECTURE
-            </span>
-          </div>
+          <h3 className="mb-5 text-sm font-semibold text-zinc-200">
+            Typical backend flow
+          </h3>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-3.5">
+          <div className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6 lg:gap-x-5">
             {architecturePipeline.map((node) => (
               <div
                 key={node.step}
                 data-pipeline-node
-                className="group relative flex flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-3 transition-all duration-300 hover:-translate-y-1 hover:border-zinc-600 hover:bg-zinc-850 hover:shadow-lg"
+                className="flex flex-col"
               >
-                <div>
-                  <div className="flex items-center justify-between text-zinc-400 mb-2">
-                    <span className="text-[10px] font-mono font-bold text-zinc-500">
-                      {node.step}
-                    </span>
-                    <span className="text-base text-zinc-300 group-hover:text-zinc-50 transition-colors">
-                      {node.icon}
-                    </span>
-                  </div>
-                  <h4 className="text-xs font-bold text-zinc-100 group-hover:text-zinc-50">
-                    {node.name}
-                  </h4>
-                  <p className="mt-1 text-[11px] text-zinc-400 leading-tight">
-                    {node.desc}
-                  </p>
-                </div>
-                <div className="mt-2.5 pt-2 border-t border-zinc-800/60">
-                  <span className="text-[10px] font-mono text-zinc-400 font-medium">
-                    {node.tech}
+                <div className="mb-2 flex items-center justify-between text-zinc-500">
+                  <span className="text-[11px] font-medium tabular-nums">
+                    {node.step}
+                  </span>
+                  <span className="text-base text-zinc-400">
+                    {node.icon}
                   </span>
                 </div>
+                <h4 className="text-sm font-semibold text-zinc-100">
+                  {node.name}
+                </h4>
+                <p className="mt-1 text-xs leading-relaxed text-zinc-400">
+                  {node.desc}
+                </p>
+                <p className="mt-2 text-[11px] text-zinc-500">
+                  {node.tech}
+                </p>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
-          {totalSkills} technologies across {skillCategories.length} functional areas
+        <p className="mb-6 text-xs text-zinc-500 sm:text-sm">
+          {totalSkills} technologies in {skillCategories.length} groups
         </p>
 
         <div

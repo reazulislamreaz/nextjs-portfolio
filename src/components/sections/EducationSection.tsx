@@ -12,8 +12,6 @@ import {
   Calendar,
   MapPin,
   ArrowRight,
-  GraduationCap,
-  Brain,
 } from "lucide-react";
 
 interface EducationEntry {
@@ -37,7 +35,7 @@ const educationEntries: EducationEntry[] = [
     period: "In progress · Expected graduation 2026",
     status: "In progress",
     summary:
-      "Honors program in governance, policy, and institutional systems — builds analytical rigor and precise technical writing for software delivery.",
+      "Honors program covering governance, policy, research methods, and institutional systems.",
     highlights: [
       "Research design and academic synthesis",
       "Governance and multi-stakeholder policy analysis",
@@ -55,19 +53,19 @@ const educationEntries: EducationEntry[] = [
 
 const academicStrengths = [
   {
-    title: "Analytical Rigor",
+    title: "Research and analysis",
     description:
-      "Break ambiguous problems into testable claims — the same discipline required for API contracts and distributed invariants.",
+      "Breaking a messy question into something I can test, document, and defend — useful when designing APIs and data models.",
   },
   {
-    title: "Precise Communication",
+    title: "Writing clearly",
     description:
-      "Strong synthesis for architectural decision records (ADRs), API specifications, and cross-functional alignment.",
+      "Practice writing precise arguments. That carries over to API docs, tickets, and explaining a design to other engineers.",
   },
   {
-    title: "Systems Thinking",
+    title: "How institutions work",
     description:
-      "Institutional policy mapping directly translates to multi-service domain boundaries and permission models.",
+      "Policy and governance study is mostly about roles, rules, and who can do what — similar to permission models in software.",
   },
 ];
 
@@ -113,8 +111,8 @@ export default function Education() {
     <Section id="education" className="bg-zinc-950/40">
       <div ref={containerRef}>
         <SectionHeader
-          title="Academic Foundation"
-          subtitle="University education in analytical reasoning and systems evaluation."
+          title="Education"
+          subtitle="Honors program in Political Science at National University, Bangladesh."
         />
 
         <div data-edu-container className="grid min-w-0 gap-10 lg:grid-cols-12 lg:gap-14">
@@ -127,10 +125,7 @@ export default function Education() {
                     aria-hidden
                   />
 
-                  <article className="group relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500">
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/[0.03] dark:from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-                    <div className="relative z-10">
+                  <article className="relative rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
                       <div className="mb-4 flex flex-wrap items-center gap-3">
                         <span className="inline-flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-zinc-50">
                           <Award size={14} aria-hidden />
@@ -173,7 +168,7 @@ export default function Education() {
                       </p>
 
                       <div className="mt-6">
-                        <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                        <h4 className="mb-3 text-xs font-semibold text-zinc-400">
                           Highlights
                         </h4>
                         <ul className="space-y-2.5 text-sm leading-relaxed text-zinc-300">
@@ -187,7 +182,7 @@ export default function Education() {
                       </div>
 
                       <div className="mt-6 border-t border-zinc-700/80 pt-5">
-                        <h4 className="mb-3 text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                        <h4 className="mb-3 text-xs font-semibold text-zinc-400">
                           Focus areas
                         </h4>
                         <ul className="flex flex-wrap gap-2">
@@ -200,25 +195,24 @@ export default function Education() {
                           ))}
                         </ul>
                       </div>
-                    </div>
                   </article>
                 </li>
               ))}
             </ol>
 
-            <div className="rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 sm:rounded-3xl sm:p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
-                Technical Certifications
+            <div className="border-t border-zinc-800/80 pt-6">
+              <h3 className="text-sm font-semibold text-zinc-200">
+                Certifications
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem]">
-                Full-stack, cloud computing, and AI specializations are listed under
-                certifications.
+              <p className="mt-2 text-sm leading-relaxed text-zinc-400">
+                Full-stack, cloud, and AI coursework is listed in the certifications
+                section.
               </p>
               <SectionLink
                 href="/#certifications"
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-zinc-50 transition-colors hover:underline"
+                className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-zinc-100 transition-colors hover:underline"
               >
-                <span>View certifications & credentials</span>
+                <span>View certifications</span>
                 <ArrowRight size={15} aria-hidden />
               </SectionLink>
             </div>
@@ -226,19 +220,16 @@ export default function Education() {
 
           <aside data-edu-right className="min-w-0 space-y-6 lg:col-span-5 lg:pt-12">
             <div className="space-y-4">
-              <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl">
-                Academics → Engineering Translation
+              <h3 className="text-lg font-semibold tracking-tight text-zinc-50">
+                What this trained me to do
               </h3>
-              <ul className="space-y-4">
+              <ul className="space-y-5">
                 {academicStrengths.map((item) => (
-                  <li
-                    key={item.title}
-                    className="rounded-2xl border border-zinc-700/80 bg-zinc-900 p-5 backdrop-blur-md transition-colors hover:border-zinc-500"
-                  >
+                  <li key={item.title} className="border-b border-zinc-800/80 pb-5 last:border-b-0 last:pb-0">
                     <h4 className="text-sm font-semibold text-zinc-100">
                       {item.title}
                     </h4>
-                    <p className="mt-2 text-sm leading-relaxed text-zinc-300">
+                    <p className="mt-1.5 text-sm leading-relaxed text-zinc-400">
                       {item.description}
                     </p>
                   </li>
@@ -247,8 +238,7 @@ export default function Education() {
             </div>
 
             <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
-              <div className="pointer-events-none absolute inset-0 scale-105 rounded-3xl bg-gradient-to-t from-black/5 dark:from-white/5 to-transparent opacity-60 blur-2xl" />
-              <div className="relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/30 p-6 shadow-xl backdrop-blur-md sm:rounded-3xl sm:p-8">
+              <div className="relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/40 p-6">
                 <Image
                   src="/image.png"
                   alt=""

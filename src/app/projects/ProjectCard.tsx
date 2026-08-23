@@ -4,15 +4,7 @@ import { useState } from "react";
 import type { Project } from "./projectsData";
 import ProjectCarousel from "./ProjectCarousel";
 import ProjectDetailModal from "./ProjectDetailModal";
-import {
-  ExternalLink,
-  Layers,
-  Server,
-  Database,
-  Cpu,
-  CheckCircle2,
-  Sparkles,
-} from "lucide-react";
+import { ExternalLink, Layers } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 
 const MAX_VISIBLE_STACK = 7;
@@ -28,14 +20,12 @@ export default function ProjectCard({
   project,
   priorityImage = false,
   layout = "grid",
-  index = 0,
 }: ProjectCardProps) {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const slug = project.title.toLowerCase().replace(/\s+/g, "-");
 
   const visibleStack = project.features.slice(0, MAX_VISIBLE_STACK);
   const hiddenStackCount = project.features.length - visibleStack.length;
-  const projectNumber = String(index + 1).padStart(2, "0");
 
   /* ─── List (expanded horizontal case-study) layout ─────────── */
   if (layout === "list") {
@@ -44,14 +34,9 @@ export default function ProjectCard({
         <article
           id={`project-${slug}`}
           data-project-card
-          className="group/card relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/50 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:flex-row md:hover:-translate-y-0.5 md:hover:border-zinc-600 md:hover:shadow-lg md:dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+          className="group/card relative flex min-w-0 flex-col overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/60 md:flex-row"
           aria-labelledby={`${slug}-title`}
         >
-          {/* Top Index HUD Marker */}
-          <div className="absolute top-3.5 right-4 z-20 hidden md:flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-950/85 px-3 py-1 text-[10px] font-mono font-bold text-zinc-400">
-            <span className="text-zinc-500">SYSTEM</span>
-            <span className="text-zinc-100">{projectNumber}</span>
-          </div>
 
           {/* Media / Carousel Column */}
           <div className="relative z-10 w-full shrink-0 p-4 pb-0 md:w-[48%] md:p-5">
@@ -67,12 +52,9 @@ export default function ProjectCard({
           <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6 md:py-6 md:pr-7 md:pl-2">
             <header className="space-y-2">
               <div className="flex items-center gap-2">
-                <span className="md:hidden inline-block rounded-md border border-zinc-800 bg-zinc-950 px-2 py-0.5 text-[10px] font-mono font-bold text-zinc-400">
-                  SYSTEM // {projectNumber}
-                </span>
                 <h3
                   id={`${slug}-title`}
-                  className="text-xl font-bold tracking-tight text-zinc-100 transition-colors duration-300 group-hover/card:text-zinc-50 sm:text-2xl lg:text-[1.65rem]"
+                  className="text-xl font-bold tracking-tight text-zinc-100 sm:text-2xl lg:text-[1.65rem]"
                 >
                   {project.title}
                 </h3>
@@ -84,15 +66,9 @@ export default function ProjectCard({
 
             {/* Architecture Highlights / Key metric */}
             {project.metrics && project.metrics.length > 0 && (
-              <div className="mt-3 rounded-xl border border-zinc-800/80 bg-zinc-950/50 p-2.5 text-xs text-zinc-300">
-                <div className="flex items-center gap-1.5 font-mono text-[10px] text-zinc-500 uppercase font-bold mb-1">
-                  <CheckCircle2 size={12} className="text-emerald-400" />
-                  <span>KEY SYSTEM ACHIEVEMENT</span>
-                </div>
-                <p className="line-clamp-2 text-[11px] leading-relaxed text-zinc-300">
-                  {project.metrics[0]}
-                </p>
-              </div>
+              <p className="mt-3 text-xs leading-relaxed text-zinc-400">
+                {project.metrics[0]}
+              </p>
             )}
 
             {/* Tech Stack Chips */}
@@ -139,7 +115,7 @@ export default function ProjectCard({
                   className="inline-flex min-h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800/80 px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
                 >
                   <Layers size={15} aria-hidden />
-                  <span>Architecture & Case Study</span>
+                  <span>Case study</span>
                 </button>
               </div>
             </footer>
@@ -162,14 +138,9 @@ export default function ProjectCard({
       <article
         id={`project-${slug}`}
         data-project-card
-        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-zinc-800/80 bg-zinc-900/50 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl md:hover:-translate-y-0.5 md:hover:border-zinc-600 md:hover:shadow-lg md:dark:hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]"
+        className="group/card relative flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/60"
         aria-labelledby={`${slug}-title`}
       >
-        {/* Top HUD Index Marker */}
-        <div className="absolute top-3.5 right-4 z-20 flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-950/85 px-3 py-1 text-[10px] font-mono font-bold text-zinc-400">
-          <span className="text-zinc-500">SYSTEM</span>
-          <span className="text-zinc-100">{projectNumber}</span>
-        </div>
 
         <div className="relative z-10 p-4 pb-0 sm:p-5 sm:pb-0">
           <ProjectCarousel
@@ -193,13 +164,10 @@ export default function ProjectCard({
             </p>
           </header>
 
-          {/* Quick Production Highlight */}
           {project.metrics && project.metrics.length > 0 && (
-            <div className="mt-3 rounded-lg border border-zinc-800/80 bg-zinc-950/60 p-2 text-xs text-zinc-300">
-              <p className="line-clamp-1 text-[11px] font-mono text-zinc-300">
-                ⚡ {project.metrics[0]}
-              </p>
-            </div>
+            <p className="mt-3 line-clamp-2 text-xs leading-relaxed text-zinc-400">
+              {project.metrics[0]}
+            </p>
           )}
 
           <ul className="mt-3.5 flex flex-wrap gap-1.5" aria-label="Tech stack">

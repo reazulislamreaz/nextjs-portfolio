@@ -7,16 +7,7 @@ import SectionHeader from "@/app/components/ui/SectionHeader";
 import { siteContact, siteSocial } from "@/config/site";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
-import {
-  Mail,
-  MapPin,
-  X,
-  Phone,
-  MessageSquare,
-  Sparkles,
-  Terminal,
-  CheckCircle2,
-} from "lucide-react";
+import { Mail, MapPin, X } from "lucide-react";
 import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 export default function ContactSection() {
@@ -88,34 +79,27 @@ export default function ContactSection() {
       <div ref={containerRef}>
         <SectionHeader
           title="Contact"
-          subtitle="Open to backend and full-stack engineering roles — onsite in Dhaka or remote. Currently at Sparktech Agency."
+          subtitle="Open to backend and full-stack roles in Dhaka or remote. Currently at Sparktech Agency."
         />
 
         <div data-contact-grid className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
           <div data-contact-left className="w-full min-w-0 space-y-6 md:space-y-8">
-            <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-zinc-200 dark:border-white/10 bg-white/80 dark:bg-zinc-900/60 p-5 shadow-xl backdrop-blur-md transition-all duration-500 sm:rounded-3xl sm:p-8 hover:border-zinc-400 dark:hover:border-white/20">
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/5 dark:from-white/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-              <div className="relative z-10">
-                <div className="mb-3 flex items-center gap-2 font-mono text-xs text-zinc-400">
-                  <Terminal size={14} className="text-zinc-500" />
-                  <span>DIRECT CHANNELS</span>
-                </div>
-
-                <p className="mb-6 text-base font-normal leading-relaxed text-zinc-300 sm:mb-8 sm:text-lg">
-                  Whether you are hiring for a backend-heavy role or need someone to build and maintain the API and data layer behind your product, let&apos;s talk.
+            <div className="relative flex h-full flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
+              <div>
+                <p className="mb-6 text-base leading-relaxed text-zinc-300 sm:mb-8">
+                  If you&apos;re hiring a backend or full-stack engineer, I&apos;d like to hear from you. I work on-site in Dhaka and remotely.
                 </p>
 
                 <div className="space-y-4 text-base">
                   <a
                     href={`mailto:${siteContact.email}`}
-                    className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-850"
+                    className="flex cursor-pointer items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 transition-colors hover:border-zinc-600"
                   >
                     <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-zinc-100">
                       <Mail size={18} />
                     </div>
                     <div>
-                      <p className="text-[11px] font-mono text-zinc-400">EMAIL</p>
+                      <p className="text-xs text-zinc-500">Email</p>
                       <span className="break-all text-zinc-100 transition-colors duration-300 hover:text-zinc-50 sm:text-base font-medium">
                         {siteContact.email}
                       </span>
@@ -126,13 +110,13 @@ export default function ContactSection() {
                     href={siteContact.phoneHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-850"
+                    className="flex cursor-pointer items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 transition-colors hover:border-zinc-600"
                   >
                     <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-emerald-400">
                       <FaWhatsapp size={18} />
                     </div>
                     <div>
-                      <p className="text-[11px] font-mono text-zinc-400">WHATSAPP / PHONE</p>
+                      <p className="text-xs text-zinc-500">WhatsApp / Phone</p>
                       <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
                         {siteContact.phone}
                       </span>
@@ -143,13 +127,13 @@ export default function ContactSection() {
                     ref={mapTriggerRef}
                     type="button"
                     onClick={() => setShowMap(true)}
-                    className="flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-zinc-700/80 bg-zinc-900 p-4 text-left transition-all duration-300 hover:border-zinc-500 hover:bg-zinc-850"
+                    className="flex w-full cursor-pointer items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 text-left transition-colors hover:border-zinc-600"
                   >
                     <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-zinc-100">
                       <MapPin size={18} />
                     </div>
                     <div>
-                      <p className="text-[11px] font-mono text-zinc-400">LOCATION</p>
+                      <p className="text-xs text-zinc-500">Location</p>
                       <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
                         Dhaka, Bangladesh · Available Worldwide
                       </span>
@@ -157,7 +141,7 @@ export default function ContactSection() {
                   </button>
 
                   <div className="flex flex-wrap items-center gap-4 pt-4 sm:gap-6 border-t border-zinc-800/80">
-                    <span className="font-mono text-xs text-zinc-400">Profiles:</span>
+                    <span className="text-xs text-zinc-500">Profiles</span>
                     <div className="flex items-center gap-3">
                       <a
                         href={siteSocial.github}

@@ -36,7 +36,7 @@ function SectionLabel({
       <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-emerald-500/20 bg-emerald-500/10">
         <Icon size={14} className="text-emerald-500" />
       </div>
-      <h4 className="text-[0.725rem] font-bold uppercase tracking-[0.14em] text-emerald-500">
+      <h4 className="text-xs font-semibold text-zinc-200">
         {children}
       </h4>
     </div>
@@ -216,30 +216,30 @@ function ModalBody({ project }: { project: Project }) {
   return (
     <div className="mt-6 space-y-6">
       {/* Overview & Problem */}
-      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
         <SectionLabel icon={FiTarget}>Overview</SectionLabel>
         <p className="text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem] sm:leading-7">
           {project.description}
         </p>
         <div className="mt-4 rounded-xl border border-zinc-800/80 bg-zinc-950/40 px-4 py-3">
           <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm sm:leading-6">
-            <span className="font-bold text-emerald-500">Problem Statement: </span>
+            <span className="font-semibold text-zinc-200">Problem: </span>
             {project.problem}
           </p>
         </div>
       </section>
 
       {/* Architecture */}
-      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
-        <SectionLabel icon={FiCpu}>Architecture & Design</SectionLabel>
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+        <SectionLabel icon={FiCpu}>Architecture</SectionLabel>
         <p className="text-sm leading-relaxed text-zinc-300 sm:text-[0.9375rem] sm:leading-7">
           {project.architecture}
         </p>
       </section>
 
       {/* Impact & Key Metrics */}
-      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
-        <SectionLabel icon={FiActivity}>Impact & Metrics</SectionLabel>
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+        <SectionLabel icon={FiActivity}>Outcomes</SectionLabel>
         <ul className="grid gap-2.5 sm:grid-cols-2">
           {project.metrics.map((metric) => (
             <li
@@ -256,8 +256,8 @@ function ModalBody({ project }: { project: Project }) {
       </section>
 
       {/* Challenges & Solutions */}
-      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
-        <SectionLabel icon={FiZap}>Key Challenges & Solutions</SectionLabel>
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+        <SectionLabel icon={FiZap}>Challenges</SectionLabel>
         <ul className="space-y-3">
           {project.challengeSolutions.map((item, idx) => (
             <li
@@ -285,7 +285,7 @@ function ModalBody({ project }: { project: Project }) {
 
       {/* Tech Stack & DevOps Pipeline */}
       <div className="grid gap-5 sm:grid-cols-2">
-        <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
+        <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
           <SectionLabel icon={FiBox}>Tech Stack</SectionLabel>
           <ul className="flex flex-wrap gap-2">
             {project.features.map((feature) => (
@@ -298,8 +298,8 @@ function ModalBody({ project }: { project: Project }) {
           </ul>
         </section>
 
-        <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
-          <SectionLabel icon={FiServer}>DevOps & Deploy</SectionLabel>
+        <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+          <SectionLabel icon={FiServer}>Deploy</SectionLabel>
           <ul className="flex flex-wrap gap-2">
             {project.devOps.map((item) => (
               <li key={item}>
@@ -313,8 +313,8 @@ function ModalBody({ project }: { project: Project }) {
       </div>
 
       {/* Future Roadmap */}
-      <section className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5 backdrop-blur-md shadow-sm">
-        <SectionLabel icon={FiMap}>Future Roadmap</SectionLabel>
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/40 p-5">
+        <SectionLabel icon={FiMap}>Next steps</SectionLabel>
         <p className="text-xs leading-relaxed text-zinc-400 sm:text-sm sm:leading-6">
           {project.futureEnhancements}
         </p>

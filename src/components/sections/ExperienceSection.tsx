@@ -69,8 +69,8 @@ export default function ExperienceSection() {
     <Section id="experience" className="bg-zinc-950/30">
       <div ref={containerRef}>
         <SectionHeader
-          title="Experience & Impact"
-          subtitle="Production backend roles — architecture, real-time engines, and mission-critical systems."
+          title="Experience"
+          subtitle="Roles where I built and maintained production backends."
         />
 
         <div data-timeline-container className="relative mx-auto max-w-4xl">

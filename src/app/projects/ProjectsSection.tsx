@@ -56,18 +56,16 @@ export default function ProjectsSection() {
     <Section id="projects" className="bg-zinc-950/20">
       <div ref={containerRef}>
         <SectionHeader
-          title="Featured Projects"
-          subtitle="Production architectures, distributed services, and high-performance applications."
+          title="Projects"
+          subtitle="Selected work — what I built, the stack, and links to live apps."
         />
 
-        {/* Layout toggle & Recruiter Metrics Pill */}
         <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 live-beacon" />
-            <span>SHOWING {visibleProjects.length} OF {projectsData.length} SYSTEMS</span>
-          </div>
+          <p className="text-sm text-zinc-500">
+            Showing {visibleProjects.length} of {projectsData.length}
+          </p>
 
-          <div className="inline-flex items-center overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/50 backdrop-blur-md">
+          <div className="inline-flex items-center overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/60">
             <button
               type="button"
               onClick={() => setLayout("grid")}
@@ -129,10 +127,10 @@ export default function ProjectsSection() {
             <button
               type="button"
               onClick={() => setShowAllProjects((prev) => !prev)}
-              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/60 px-8 py-2.5 text-sm font-semibold text-zinc-200 shadow-lg backdrop-blur-md transition hover:border-zinc-500 hover:bg-zinc-850 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-zinc-700 bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               aria-expanded={showAllProjects}
             >
-              {showAllProjects ? "Show Less Projects" : "Explore More Projects"}
+              {showAllProjects ? "Show fewer projects" : "Show more projects"}
               <FiChevronDown
                 size={18}
                 className={`transition-transform duration-200 ${

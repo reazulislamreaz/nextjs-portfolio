@@ -4,13 +4,7 @@ import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
-import {
-  Award,
-  ExternalLink,
-  ShieldCheck,
-  CheckCircle2,
-  Terminal,
-} from "lucide-react";
+import { Award, ExternalLink, CheckCircle2 } from "lucide-react";
 
 interface Certification {
   title: string;
@@ -135,8 +129,8 @@ export default function Certifications() {
     <Section id="certifications" className="bg-zinc-950/45">
       <div ref={containerRef}>
         <SectionHeader
-          title="Certifications & Specializations"
-          subtitle="Accredited technical training aligned with production systems engineering, cloud architecture, and AI integrations."
+          title="Certifications"
+          subtitle="Courses I have completed in web development, AWS, and AI-assisted engineering."
         />
 
         <div
@@ -147,7 +141,7 @@ export default function Certifications() {
             <article
               key={item.title}
               data-cert-card
-              className="flex min-w-0 flex-col rounded-2xl border border-zinc-700/80 bg-zinc-900/90 p-5 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl sm:p-8 hover:border-zinc-500 hover:-translate-y-0.5"
+              className="flex min-w-0 flex-col rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7"
             >
               <div className="mb-4 flex flex-col gap-3 border-b border-zinc-700/80 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
                 <div className="flex items-center gap-2.5">
@@ -169,8 +163,8 @@ export default function Certifications() {
               </p>
 
               <div className="mb-5 sm:mb-6">
-                <h4 className="mb-2.5 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400 sm:mb-3">
-                  CORE MODULES
+                <h4 className="mb-2.5 text-xs font-semibold text-zinc-400 sm:mb-3">
+                  Topics
                 </h4>
                 <ul className="space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
                   {item.topics.map((topic) => (
@@ -184,18 +178,18 @@ export default function Certifications() {
 
               <dl className="mt-auto space-y-3 border-t border-zinc-700/80 pt-5 text-xs sm:pt-6 sm:text-sm">
                 <div>
-                  <dt className="font-semibold text-zinc-400 font-mono text-[11px]">PLATFORM</dt>
+                  <dt className="text-xs font-semibold text-zinc-500">Platform</dt>
                   <dd className="mt-1 break-words text-zinc-100 font-medium">
                     {item.platform}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-zinc-400 font-mono text-[11px]">FOCUS</dt>
+                  <dt className="text-xs font-semibold text-zinc-500">Focus</dt>
                   <dd className="mt-1 text-zinc-300">{item.focus}</dd>
                 </div>
                 {item.credentialUrl ? (
                   <div>
-                    <dt className="font-semibold text-zinc-400 font-mono text-[11px]">CREDENTIAL</dt>
+                    <dt className="text-xs font-semibold text-zinc-500">Credential</dt>
                     <dd className="mt-1 flex flex-col gap-1.5">
                       <a
                         href={item.credentialUrl}

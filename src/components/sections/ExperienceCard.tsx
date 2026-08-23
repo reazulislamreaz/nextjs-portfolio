@@ -6,7 +6,6 @@ import {
   Calendar,
   ChevronDown,
   MapPin,
-  CheckCircle2,
   Layers,
   Terminal,
 } from "lucide-react";
@@ -29,10 +28,8 @@ export default function ExperienceCard({
   const panelId = `${entry.id}-details`;
 
   return (
-    <article className="group/card relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl hover:border-zinc-500 hover:-translate-y-0.5">
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/[0.03] dark:from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
-
-      <div className="relative z-10 p-5 sm:p-6 lg:p-7">
+    <article className="relative rounded-xl border border-zinc-800 bg-zinc-900/70">
+      <div className="p-5 sm:p-6 lg:p-7">
         <header className="space-y-3">
           <div className="flex flex-wrap items-center gap-2">
             {entry.isCurrent && (
@@ -105,7 +102,7 @@ export default function ExperienceCard({
             aria-expanded={expanded}
             aria-controls={panelId}
           >
-            <span>{expanded ? "Collapse role details" : "Explore full contributions"}</span>
+            <span>{expanded ? "Hide details" : "Show details"}</span>
             <ChevronDown
               size={16}
               className={`transition-transform duration-200 ${
@@ -158,10 +155,10 @@ function ExperienceDetails({
           </p>
 
           {entry.architecture && (
-            <section className="rounded-xl border border-zinc-800 bg-zinc-950/60 p-3.5">
-              <h4 className="mb-1.5 flex items-center gap-1.5 text-[0.6875rem] font-bold font-mono uppercase tracking-wider text-zinc-200">
+            <section>
+              <h4 className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold text-zinc-200">
                 <Layers size={13} className="text-zinc-400" />
-                <span>ARCHITECTURE & PATTERNS</span>
+                <span>Architecture</span>
               </h4>
               <p className="text-xs leading-relaxed text-zinc-300">
                 {entry.architecture}
@@ -170,9 +167,9 @@ function ExperienceDetails({
           )}
 
           <section>
-            <h4 className="mb-3 flex items-center gap-1.5 text-[0.6875rem] font-bold font-mono uppercase tracking-wider text-zinc-400">
+            <h4 className="mb-3 flex items-center gap-1.5 text-xs font-semibold text-zinc-400">
               <Terminal size={13} className="text-zinc-500" />
-              <span>KEY CONTRIBUTIONS & IMPACT</span>
+              <span>What I worked on</span>
             </h4>
             <ul className="space-y-2.5">
               {entry.highlights.map((item) => (
@@ -191,8 +188,8 @@ function ExperienceDetails({
           </section>
 
           <section>
-            <h4 className="mb-3 text-[0.6875rem] font-bold font-mono uppercase tracking-wider text-zinc-400">
-              COMPLETE TECH STACK
+            <h4 className="mb-3 text-xs font-semibold text-zinc-400">
+              Tech stack
             </h4>
             <ul className="flex flex-wrap gap-1.5 sm:gap-2">
               {entry.techStack.map((tech) => (
