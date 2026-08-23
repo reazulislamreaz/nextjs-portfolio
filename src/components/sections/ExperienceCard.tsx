@@ -30,7 +30,11 @@ export default function ExperienceCard({
 
   return (
     <article className="group/card relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/90 shadow-xl backdrop-blur-md transition-all duration-300 sm:rounded-3xl hover:border-zinc-500 hover:-translate-y-0.5">
+<<<<<<< HEAD
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/[0.03] dark:from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
+=======
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 transition-opacity duration-300 group-hover/card:opacity-100" />
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
 
       <div className="relative z-10 p-5 sm:p-6 lg:p-7">
         <header className="space-y-3">

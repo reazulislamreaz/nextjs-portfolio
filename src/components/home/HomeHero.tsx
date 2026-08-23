@@ -52,6 +52,7 @@ const coreTechnologies: TechChip[] = [
   { name: "GraphQL", icon: <SiGraphql />, specialty: "Flexible typed query schemas", badge: "Schemas" },
 ];
 
+<<<<<<< HEAD
 /**
  * Every value here is checkable against `projectsData` / `experienceData` — no
  * aggregate performance or uptime claims.
@@ -60,6 +61,12 @@ const highlights = [
   { value: "6", label: "Systems Shipped", sub: "Client & personal projects" },
   { value: "2", label: "Live Client Platforms", sub: "On their own domains" },
   { value: "1+ yr", label: "Professional Experience", sub: "Full-time & internship" },
+=======
+const highlights = [
+  { value: "10+", label: "Systems Shipped", sub: "Production & Client SaaS" },
+  { value: "<50ms", label: "P99 API Latency", sub: "Redis & Indexed SQL" },
+  { value: "Clean", label: "Architecture", sub: "Modular & Test-Driven" },
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
   { value: "Available", label: "Onsite & Remote", sub: "Dhaka & Worldwide" },
 ];
 
@@ -206,7 +213,11 @@ export default function HomeHero() {
       {/* Cyber radar scan layer */}
       <div
         aria-hidden="true"
+<<<<<<< HEAD
         className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-transparent via-black/[0.02] to-transparent dark:via-white/[0.03] animate-scan -z-10"
+=======
+        className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-transparent via-white/[0.03] to-transparent animate-scan -z-10"
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
       />
 
       {/* Interactive mouse spotlight follower */}
@@ -215,7 +226,11 @@ export default function HomeHero() {
           aria-hidden="true"
           className="pointer-events-none absolute -inset-px -z-10 transition-opacity duration-300"
           style={{
+<<<<<<< HEAD
             background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgb(var(--spotlight-rgb) / 0.08), transparent 70%)`,
+=======
+            background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.08), transparent 70%)`,
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
           }}
         />
       )}
@@ -231,7 +246,11 @@ export default function HomeHero() {
               <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700/80 bg-zinc-900/90 px-3.5 py-1 text-xs font-medium tracking-wide text-zinc-100 backdrop-blur-xl shadow-xs sm:text-sm">
                 <span className="relative flex h-2 w-2 shrink-0">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+<<<<<<< HEAD
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 live-beacon accent-glow-sm" />
+=======
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 live-beacon shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                 </span>
                 <span>Available for new opportunities</span>
               </div>
@@ -250,7 +269,11 @@ export default function HomeHero() {
                   className="text-balance text-4xl font-black tracking-tight text-zinc-50 sm:text-5xl md:text-6xl xl:text-7xl"
                 >
                   Reazul Islam{" "}
+<<<<<<< HEAD
                   <span className="bg-gradient-to-r from-zinc-50 via-zinc-300 to-zinc-400 bg-clip-text text-transparent dark:drop-shadow-[0_0_24px_rgba(255,255,255,0.2)]">
+=======
+                  <span className="bg-gradient-to-r from-zinc-50 via-zinc-300 to-zinc-400 bg-clip-text text-transparent drop-shadow-[0_0_24px_rgba(255,255,255,0.2)]">
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                     Reaz
                   </span>
                 </h1>
@@ -267,7 +290,11 @@ export default function HomeHero() {
                 data-hero-subtitle
                 className="text-base font-semibold text-zinc-200 sm:text-lg lg:text-xl leading-snug"
               >
+<<<<<<< HEAD
                 Backend-focused full-stack engineer — I build the APIs, data models, and background workers behind production web applications.
+=======
+                Backend-focused software engineer building fast, reliable systems and clean web applications.
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               </p>
             </div>
 
@@ -276,7 +303,11 @@ export default function HomeHero() {
               data-hero-bio
               className="text-sm leading-relaxed text-zinc-300 sm:text-base max-w-2xl font-normal"
             >
+<<<<<<< HEAD
               I design REST APIs, relational and document data models, role-based access control, and queue-backed background jobs. My production work runs on Node.js, NestJS, Express, PostgreSQL, MongoDB, and Redis — including two platforms live today for paying clients.
+=======
+              I design and build distributed backend services, high-throughput APIs, and ACID-compliant relational schemas. Production-tested across Node.js, NestJS, Go, PostgreSQL, MongoDB, and Redis with an eye for end-to-end craft.
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
             </p>
 
             {/* Curated Tech Stack Chips with Interactive Inspector */}
@@ -329,7 +360,11 @@ export default function HomeHero() {
               <a
                 href={resumePath}
                 download
+<<<<<<< HEAD
                 className="group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-101 hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 focus:outline-none sm:w-auto"
+=======
+                className="group relative inline-flex min-h-11 w-full items-center justify-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-101 hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] active:scale-95 focus:outline-none sm:w-auto"
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500 opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
                 <span className="relative flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-zinc-50 backdrop-blur-xl transition-colors group-hover:bg-zinc-850 sm:w-auto">
@@ -435,7 +470,11 @@ export default function HomeHero() {
                 + [SYS.NODE // 01]
               </div>
               <div aria-hidden="true" className="pointer-events-none absolute -bottom-8 -right-8 text-[10px] font-mono text-zinc-400 select-none hidden sm:block">
+<<<<<<< HEAD
                 [ API · DATA · QUEUES ] +
+=======
+                [ LATENCY // 0.4MS ] +
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               </div>
 
               {/* Spatial ambient aura glow */}
@@ -460,8 +499,13 @@ export default function HomeHero() {
 
                 {/* Spatial status badge anchored to avatar */}
                 <div className="absolute -bottom-2.5 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-zinc-700 bg-zinc-900 px-3.5 py-1 text-xs font-semibold text-zinc-50 shadow-lg backdrop-blur-xl">
+<<<<<<< HEAD
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon accent-glow-sm" />
                   <span>Backend Engineer</span>
+=======
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+                  <span>Backend Specialist</span>
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                 </div>
               </div>
 
@@ -478,7 +522,11 @@ export default function HomeHero() {
                     Production APIs
                   </p>
                   <p className="text-[0.6875rem] font-semibold text-zinc-300">
+<<<<<<< HEAD
                     Versioned REST · RBAC
+=======
+                    99.9% Target Uptime
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                   </p>
                 </div>
               </div>
@@ -493,10 +541,17 @@ export default function HomeHero() {
                 </div>
                 <div>
                   <p className="text-xs font-bold text-zinc-50">
+<<<<<<< HEAD
                     Cache & Queues
                   </p>
                   <p className="text-[0.6875rem] font-semibold text-zinc-300">
                     Redis · BullMQ workers
+=======
+                    Low Latency
+                  </p>
+                  <p className="text-[0.6875rem] font-semibold text-zinc-300">
+                    Sub-ms Redis Caching
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                   </p>
                 </div>
               </div>
@@ -513,7 +568,11 @@ export default function HomeHero() {
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon" />
                   SYSTEM TOPOLOGY
                 </span>
+<<<<<<< HEAD
                 <span className="text-zinc-400 font-semibold">REQUEST PATH</span>
+=======
+                <span className="text-zinc-400 font-semibold">LIVE ARCHITECTURE</span>
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               </div>
               <div className="mt-3 flex items-center justify-between gap-1.5 text-center">
                 <div className="flex flex-col items-center">
@@ -544,7 +603,11 @@ export default function HomeHero() {
                   <span className="rounded-lg border border-zinc-700 bg-zinc-800 px-2.5 py-1 text-[11px] font-semibold text-zinc-100 shadow-xs">
                     Redis
                   </span>
+<<<<<<< HEAD
                   <span className="mt-1 text-[9px] font-mono text-zinc-400">Cache</span>
+=======
+                  <span className="mt-1 text-[9px] font-mono text-zinc-400">0.4ms</span>
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                 </div>
 
                 <div className="relative flex items-center justify-center">

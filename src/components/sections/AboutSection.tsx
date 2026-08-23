@@ -35,10 +35,17 @@ const engineeringTenets = [
   },
   {
     icon: <Zap className="text-zinc-100" size={20} />,
+<<<<<<< HEAD
     title: "Caching & Async Job Processing",
     description:
       "Redis caching, distributed session stores, and BullMQ worker queues so background job processing never blocks the HTTP event loop.",
     tag: "Throughput",
+=======
+    title: "Sub-Millisecond Cache & Async Relays",
+    description:
+      "Layered Redis caching, distributed session stores, and BullMQ worker queues for background job processing without blocking the HTTP event loop.",
+    tag: "High Throughput",
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
   },
   {
     icon: <ShieldCheck className="text-zinc-100" size={20} />,
@@ -246,6 +253,21 @@ export default function About() {
                 </div>
               </div>
 
+<<<<<<< HEAD
+=======
+              {/* Verified Metrics Strip */}
+              <div className="grid grid-cols-2 gap-2 rounded-xl border border-zinc-800 bg-zinc-950/60 p-3">
+                <div>
+                  <p className="text-lg font-black text-zinc-50">&lt;50ms</p>
+                  <p className="text-[11px] font-mono text-zinc-400">P99 API Latency</p>
+                </div>
+                <div>
+                  <p className="text-lg font-black text-zinc-50">99.9%</p>
+                  <p className="text-[11px] font-mono text-zinc-400">Target Uptime</p>
+                </div>
+              </div>
+
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               <ul className="space-y-3.5 text-xs sm:text-sm text-zinc-300">
                 {howIShip.map((item, idx) => (
                   <li

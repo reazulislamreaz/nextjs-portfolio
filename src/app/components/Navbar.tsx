@@ -166,7 +166,11 @@ export default function Navbar() {
             <div
               className="pointer-events-none absolute -inset-px rounded-full opacity-100 transition-opacity duration-300"
               style={{
+<<<<<<< HEAD
                 background: `radial-gradient(130px circle at ${mousePos.x}px ${mousePos.y}px, rgb(var(--spotlight-rgb) / 0.12), transparent 80%)`,
+=======
+                background: `radial-gradient(130px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.12), transparent 80%)`,
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               }}
             />
           )}
@@ -201,7 +205,11 @@ export default function Navbar() {
 
                   {/* Active Laser Line Glow */}
                   {isActive && (
+<<<<<<< HEAD
                     <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-4 rounded-full bg-zinc-50 dark:shadow-[0_0_8px_rgba(255,255,255,0.7)] animate-pulse-glow" />
+=======
+                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-4 rounded-full bg-zinc-50 shadow-[0_0_8px_rgba(255,255,255,0.7)] animate-pulse-glow" />
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
                   )}
                 </Link>
               );
@@ -219,7 +227,11 @@ export default function Navbar() {
             <a
               href={resumePath}
               download
+<<<<<<< HEAD
               className="group relative hidden sm:inline-flex items-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-101 hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 focus:outline-none"
+=======
+              className="group relative hidden sm:inline-flex items-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-101 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 focus:outline-none"
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
               aria-label="Download Resume"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500 opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse-glow" />

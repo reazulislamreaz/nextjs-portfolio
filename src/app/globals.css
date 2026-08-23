@@ -4,6 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
+<<<<<<< HEAD
   Theme tokens.
 
   The zinc scale is remapped so one set of utility classes works in both themes.
@@ -27,6 +28,14 @@
   greens on the light canvas.
 */
 /* Light theme - off-white canvas, pure white elevated cards, jet-black text */
+=======
+  Theme tokens — adapted from the TaskForge (elite-alumni-pool) palette.
+  The zinc scale is remapped so a single set of utility classes works in both
+  themes: in light mode the ramp is inverted (high shade = dark), in dark mode
+  it follows the green-tinted TaskForge surfaces. The emerald scale is remapped
+  to TaskForge teal (#00897b) and stays consistent across themes.
+*//* Light theme (default) - Pure Minimalist White Canvas with Jet Black & Titanium */
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
 :root {
   --nav-height: 4rem;
   --nav-scroll-offset: 4.75rem; /* ~76px on mobile */
@@ -36,6 +45,7 @@
   --zinc-300: #3f3f46; /* High-contrast Body Text */
   --zinc-400: #52525b; /* Crisp Muted Meta */
   --zinc-500: #71717a; /* Soft Subtitle */
+<<<<<<< HEAD
   --zinc-600: #c4c4cb; /* Strong border / divider */
   --zinc-700: #dcdce2; /* Default card border */
   --zinc-800: #f0f0f3; /* Inner surface (chips, nested panels) */
@@ -64,6 +74,30 @@
   --glow-secondary: rgba(0, 0, 0, 0.03);
   --glow-tertiary: rgba(0, 0, 0, 0.015);
 
+=======
+  --zinc-600: #d4d4d8; /* Dividers */
+  --zinc-700: #e4e4e7; /* Clean Border */
+  --zinc-800: #f4f4f5; /* Subtle Card Accent */
+  --zinc-850: #fafafa;
+  --zinc-900: #ffffff; /* Elevated Crisp White Glass Card */
+  --zinc-950: #ffffff; /* Pure Modern White Canvas */
+
+  --teal-200: #e4e4e7;
+  --teal-300: #a1a1aa;
+  --teal-400: #52525b;
+  --teal-500: #09090b; /* Monochromatic Black Accent */
+  --teal-600: #18181b;
+  --teal-700: #27272a;
+  --teal-800: #3f3f46;
+  --teal-900: #52525b;
+  --teal-950: #71717a;
+
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --glow-primary: rgba(0, 0, 0, 0.05);
+  --glow-secondary: rgba(0, 0, 0, 0.03);
+  --glow-tertiary: rgba(0, 0, 0, 0.015);
+
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
   /* Section heading gradient */
   --heading-from: #09090b;
   --heading-via: #18181b;
@@ -85,6 +119,7 @@
   --zinc-900: #0d0d11; /* Elevated Frosted Obsidian Card */
   --zinc-950: #000000; /* True Pitch Black Canvas */
 
+<<<<<<< HEAD
   /* Accent — bright greens for legibility on the near-black canvas */
   --teal-200: #a7f3d0;
   --teal-300: #6ee7b7;
@@ -99,6 +134,18 @@
   --accent-rgb: 16 185 129;
   --spotlight-rgb: 255 255 255;
 
+=======
+  --teal-200: #94a3b8;
+  --teal-300: #cbd5e1;
+  --teal-400: #f4f4f5;
+  --teal-500: #ffffff; /* Pure White Accent */
+  --teal-600: #fafafa;
+  --teal-700: #f4f4f5;
+  --teal-800: #e4e4e7;
+  --teal-900: #cbd5e1;
+  --teal-950: #94a3b8;
+
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
   --grid-line: rgba(255, 255, 255, 0.05);
   --glow-primary: rgba(255, 255, 255, 0.12);
   --glow-secondary: rgba(255, 255, 255, 0.08);
@@ -508,9 +555,15 @@ html:not(.dark) :is(
   background: linear-gradient(
     90deg,
     transparent 0%,
+<<<<<<< HEAD
     rgb(var(--accent-rgb) / 0.1) 15%,
     rgb(var(--accent-rgb) / 0.7) 50%,
     rgb(var(--accent-rgb) / 0.1) 85%,
+=======
+    rgba(0, 137, 123, 0.1) 15%,
+    rgba(38, 166, 154, 0.7) 50%,
+    rgba(0, 137, 123, 0.1) 85%,
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
     transparent 100%
   );
   background-size: 200% 100%;
@@ -520,6 +573,7 @@ html:not(.dark) :is(
 @keyframes live-beacon-ping {
   0% {
     transform: scale(0.95);
+<<<<<<< HEAD
     box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0.6);
   }
   70% {
@@ -529,6 +583,17 @@ html:not(.dark) :is(
   100% {
     transform: scale(0.95);
     box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0);
+=======
+    box-shadow: 0 0 0 0 rgba(38, 166, 154, 0.6);
+  }
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 6px rgba(38, 166, 154, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(38, 166, 154, 0);
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
   }
 }
 
@@ -536,6 +601,7 @@ html:not(.dark) :is(
   animation: live-beacon-ping 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
+<<<<<<< HEAD
 /* Theme-aware accent glows, replacing hardcoded emerald rgba() shadows. */
 .accent-glow-sm {
   box-shadow: 0 0 8px rgb(var(--accent-rgb) / 0.8);
@@ -545,6 +611,8 @@ html:not(.dark) :is(
   box-shadow: 0 0 24px rgb(var(--accent-rgb) / 0.18);
 }
 
+=======
+>>>>>>> a2308501b292a7ea70fa8ef104e2522dad5c3c23
 @media (prefers-reduced-motion: reduce) {
   .cyber-laser-line,
   .live-beacon {
