@@ -39,16 +39,66 @@ interface TechChip {
 }
 
 const coreTechnologies: TechChip[] = [
-  { name: "Node.js", icon: <SiNodedotjs />, specialty: "High-throughput async runtime", badge: "Runtime" },
-  { name: "NestJS", icon: <SiNestjs />, specialty: "Modular enterprise architecture", badge: "Framework" },
-  { name: "Go", icon: <SiGo />, specialty: "High concurrency microservices", badge: "Language" },
-  { name: "PostgreSQL", icon: <SiPostgresql />, specialty: "ACID-compliant relational design", badge: "RDBMS" },
-  { name: "MongoDB", icon: <SiMongodb />, specialty: "Document & aggregation pipelines", badge: "NoSQL" },
-  { name: "Redis", icon: <SiRedis />, specialty: "Sub-millisecond distributed cache", badge: "In-Memory" },
-  { name: "TypeScript", icon: <SiTypescript />, specialty: "Type-safe robust contracts", badge: "Contracts" },
-  { name: "REST APIs", icon: <TbApi />, specialty: "Standardized secure endpoints", badge: "API" },
-  { name: "Docker", icon: <SiDocker />, specialty: "Isolated containerization", badge: "DevOps" },
-  { name: "GraphQL", icon: <SiGraphql />, specialty: "Flexible typed query schemas", badge: "Schemas" },
+  {
+    name: "Node.js",
+    icon: <SiNodedotjs />,
+    specialty: "High-throughput async runtime",
+    badge: "Runtime",
+  },
+  {
+    name: "NestJS",
+    icon: <SiNestjs />,
+    specialty: "Modular enterprise architecture",
+    badge: "Framework",
+  },
+  {
+    name: "Go",
+    icon: <SiGo />,
+    specialty: "High concurrency microservices",
+    badge: "Language",
+  },
+  {
+    name: "PostgreSQL",
+    icon: <SiPostgresql />,
+    specialty: "ACID-compliant relational design",
+    badge: "RDBMS",
+  },
+  {
+    name: "MongoDB",
+    icon: <SiMongodb />,
+    specialty: "Document & aggregation pipelines",
+    badge: "NoSQL",
+  },
+  {
+    name: "Redis",
+    icon: <SiRedis />,
+    specialty: "Sub-millisecond distributed cache",
+    badge: "In-Memory",
+  },
+  {
+    name: "TypeScript",
+    icon: <SiTypescript />,
+    specialty: "Type-safe robust contracts",
+    badge: "Contracts",
+  },
+  {
+    name: "REST APIs",
+    icon: <TbApi />,
+    specialty: "Standardized secure endpoints",
+    badge: "API",
+  },
+  {
+    name: "Docker",
+    icon: <SiDocker />,
+    specialty: "Isolated containerization",
+    badge: "DevOps",
+  },
+  {
+    name: "GraphQL",
+    icon: <SiGraphql />,
+    specialty: "Flexible typed query schemas",
+    badge: "Schemas",
+  },
 ];
 
 /**
@@ -79,61 +129,61 @@ export default function HomeHero() {
       .fromTo(
         "[data-hero-badge]",
         { y: -18, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.55 }
+        { y: 0, opacity: 1, duration: 0.55 },
       )
       .fromTo(
         "[data-hero-title]",
         { y: 28, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.65 },
-        "-=0.35"
+        "-=0.35",
       )
       .fromTo(
         "[data-hero-laser]",
         { scaleX: 0, transformOrigin: "left center" },
         { scaleX: 1, duration: 0.8, ease: "expo.out" },
-        "-=0.45"
+        "-=0.45",
       )
       .fromTo(
         "[data-hero-subtitle]",
         { y: 18, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.5 },
-        "-=0.4"
+        "-=0.4",
       )
       .fromTo(
         "[data-hero-bio]",
         { y: 18, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.5 },
-        "-=0.35"
+        "-=0.35",
       )
       .fromTo(
         "[data-hero-chip]",
         { scale: 0.85, opacity: 0, y: 10 },
         { scale: 1, opacity: 1, y: 0, stagger: 0.025, duration: 0.35 },
-        "-=0.25"
+        "-=0.25",
       )
       .fromTo(
         "[data-hero-ctas]",
         { y: 18, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.45 },
-        "-=0.2"
+        "-=0.2",
       )
       .fromTo(
         "[data-hero-metric]",
         { y: 15, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.06, duration: 0.4 },
-        "-=0.2"
+        "-=0.2",
       )
       .fromTo(
         "[data-hero-portrait]",
         { scale: 0.86, opacity: 0 },
         { scale: 1, opacity: 1, duration: 0.85, ease: "back.out(1.3)" },
-        "-=0.75"
+        "-=0.75",
       )
       .fromTo(
         ["[data-hero-card-1]", "[data-hero-card-2]", "[data-hero-topology]"],
         { y: 20, opacity: 0, scale: 0.92 },
         { y: 0, opacity: 1, scale: 1, stagger: 0.1, duration: 0.55 },
-        "-=0.45"
+        "-=0.45",
       );
 
     // Scroll-linked scrubbed parallax for depth
@@ -152,8 +202,16 @@ export default function HomeHero() {
         .to("[data-hero-portrait-col]", { y: 90, scale: 0.94, ease: "none" }, 0)
         .to("[data-hero-card-1]", { x: 30, y: -25, ease: "none" }, 0)
         .to("[data-hero-card-2]", { x: -30, y: 35, ease: "none" }, 0)
-        .to("[data-hero-hud-ring1]", { rotation: 80, scale: 1.15, ease: "none" }, 0)
-        .to("[data-hero-hud-ring2]", { rotation: -80, scale: 1.2, ease: "none" }, 0);
+        .to(
+          "[data-hero-hud-ring1]",
+          { rotation: 80, scale: 1.15, ease: "none" },
+          0,
+        )
+        .to(
+          "[data-hero-hud-ring2]",
+          { rotation: -80, scale: 1.2, ease: "none" },
+          0,
+        );
     });
   });
 
@@ -221,20 +279,13 @@ export default function HomeHero() {
 
       <div className="relative z-10 mx-auto flex w-full min-w-0 max-w-7xl flex-1 flex-col justify-center px-4 pb-14 sm:px-6 sm:pb-16 md:px-8 lg:px-8 lg:pb-20 xl:px-12">
         <div className="grid w-full min-w-0 grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-14 xl:gap-16">
-
           {/* Left Column: Narrative & Action CTAs (7 cols on desktop) */}
-          <div data-hero-left className="order-2 min-w-0 space-y-6 sm:space-y-7 lg:order-1 lg:col-span-7">
-
+          <div
+            data-hero-left
+            className="order-2 min-w-0 space-y-6 sm:space-y-7 lg:order-1 lg:col-span-7"
+          >
             {/* Top Status & Location Pill */}
             <div data-hero-badge className="flex flex-wrap items-center gap-3">
-              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-700/80 bg-zinc-900/90 px-3.5 py-1 text-xs font-medium tracking-wide text-zinc-100 backdrop-blur-xl shadow-xs sm:text-sm">
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 live-beacon accent-glow-sm" />
-                </span>
-                <span>Available for new opportunities</span>
-              </div>
-
               <span className="text-xs font-mono text-zinc-400 flex items-center gap-1.5">
                 <Terminal size={13} className="text-zinc-500" />
                 <span>Dhaka · Onsite & Remote</span>
@@ -266,7 +317,9 @@ export default function HomeHero() {
                 data-hero-subtitle
                 className="text-base font-semibold text-zinc-200 sm:text-lg lg:text-xl leading-snug"
               >
-                Backend-focused full-stack engineer — I build the APIs, data models, and background workers behind production web applications.
+                Backend-focused full-stack engineer — I build the APIs, data
+                models, and background workers behind production web
+                applications.
               </p>
             </div>
 
@@ -275,7 +328,11 @@ export default function HomeHero() {
               data-hero-bio
               className="text-sm leading-relaxed text-zinc-300 sm:text-base max-w-2xl font-normal"
             >
-              I design REST APIs, relational and document data models, role-based access control, and queue-backed background jobs. My production work runs on Node.js, NestJS, Express, PostgreSQL, MongoDB, and Redis — including two platforms live today for paying clients.
+              I design REST APIs, relational and document data models,
+              role-based access control, and queue-backed background jobs. My
+              production work runs on Node.js, NestJS, Express, PostgreSQL,
+              MongoDB, and Redis — including two platforms live today for paying
+              clients.
             </p>
 
             {/* Curated Tech Stack Chips with Interactive Inspector */}
@@ -286,7 +343,9 @@ export default function HomeHero() {
                   <span>Core Tech Stack</span>
                 </span>
                 <span className="min-h-[1.25rem] text-[0.6875rem] font-mono text-zinc-200 transition-opacity duration-200 font-bold">
-                  {activeTech ? `${activeTech.name} // ${activeTech.specialty}` : "Hover to inspect production role"}
+                  {activeTech
+                    ? `${activeTech.name} // ${activeTech.specialty}`
+                    : "Hover to inspect production role"}
                 </span>
               </div>
               <div className="flex flex-wrap gap-2 sm:gap-2.5">
@@ -374,7 +433,6 @@ export default function HomeHero() {
                 </button>
               </div>
             </div>
-
           </div>
 
           {/* Right Column: Spatial Holographic Portrait & Futuristic HUD Telemetry */}
@@ -386,7 +444,9 @@ export default function HomeHero() {
               data-hero-portrait
               style={{
                 transform: `perspective(1000px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
-                transition: isHovered ? "transform 0.15s ease-out" : "transform 0.5s ease-out",
+                transition: isHovered
+                  ? "transform 0.15s ease-out"
+                  : "transform 0.5s ease-out",
               }}
               className="relative mx-auto flex w-full max-w-[20rem] items-center justify-center sm:max-w-[24rem] lg:max-w-none"
             >
@@ -407,7 +467,10 @@ export default function HomeHero() {
               />
 
               {/* Corner HUD Ticks */}
-              <div aria-hidden="true" className="pointer-events-none absolute -top-7 -left-6 hidden select-none text-[10px] font-mono tracking-wide text-zinc-400 sm:block">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-7 -left-6 hidden select-none text-[10px] font-mono tracking-wide text-zinc-400 sm:block"
+              >
                 [SYS.NODE // 01]
               </div>
 
@@ -470,9 +533,7 @@ export default function HomeHero() {
                   <Zap size={18} className="text-amber-400" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-zinc-50">
-                    Low Latency
-                  </p>
+                  <p className="text-xs font-bold text-zinc-50">Low Latency</p>
                   <p className="text-[0.6875rem] font-medium text-zinc-400">
                     Sub-ms Redis Caching
                   </p>
@@ -481,7 +542,10 @@ export default function HomeHero() {
             </div>
 
             <div className="relative mt-8 hidden w-full max-w-md lg:block">
-              <div aria-hidden="true" className="pointer-events-none absolute -top-5 right-0 select-none text-[10px] font-mono tracking-wide text-zinc-400">
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute -top-5 right-0 select-none text-[10px] font-mono tracking-wide text-zinc-400"
+              >
                 [ LATENCY // 0.4MS ] +
               </div>
 
@@ -494,14 +558,18 @@ export default function HomeHero() {
                     <span className="h-1.5 w-1.5 rounded-full bg-zinc-50" />
                     SYSTEM TOPOLOGY
                   </span>
-                  <span className="font-semibold tracking-wide text-zinc-50">LIVE ARCHITECTURE</span>
+                  <span className="font-semibold tracking-wide text-zinc-50">
+                    LIVE ARCHITECTURE
+                  </span>
                 </div>
                 <div className="mt-3 flex items-center justify-between gap-1.5 text-center">
                   <div className="flex flex-col items-center">
                     <span className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
                       Client
                     </span>
-                    <span className="mt-1 text-[9px] font-mono text-zinc-400">HTTPS</span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">
+                      HTTPS
+                    </span>
                   </div>
 
                   <div className="relative flex items-center justify-center">
@@ -512,7 +580,9 @@ export default function HomeHero() {
                     <span className="rounded-lg bg-zinc-50 px-2.5 py-1 text-[11px] font-bold text-zinc-950 shadow-md">
                       Nest / Go
                     </span>
-                    <span className="mt-1 text-[9px] font-mono text-zinc-400">Core API</span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">
+                      Core API
+                    </span>
                   </div>
 
                   <div className="relative flex items-center justify-center">
@@ -523,7 +593,9 @@ export default function HomeHero() {
                     <span className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
                       Redis
                     </span>
-                    <span className="mt-1 text-[9px] font-mono text-zinc-400">0.4ms</span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">
+                      0.4ms
+                    </span>
                   </div>
 
                   <div className="relative flex items-center justify-center">
@@ -534,13 +606,14 @@ export default function HomeHero() {
                     <span className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-1 text-[11px] font-semibold text-zinc-100">
                       PostgreSQL
                     </span>
-                    <span className="mt-1 text-[9px] font-mono text-zinc-400">ACID</span>
+                    <span className="mt-1 text-[9px] font-mono text-zinc-400">
+                      ACID
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
 
         {/* Metrics strip — full-width, left-aligned columns */}
