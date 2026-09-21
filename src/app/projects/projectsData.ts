@@ -221,7 +221,6 @@ export const projectsData: Project[] = [
       "/confaero-dashboard.jpg",
       "/confaero-invitations.jpg",
       "/confaero-reviewer.jpg",
-      "/confaero-mobile.jpg",
     ],
     live: "https://play.google.com/store/apps/details?id=confaero.com.app",
     code: "https://github.com/reazulislamreaz/confaero-backend",

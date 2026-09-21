@@ -17,7 +17,8 @@
 
 :root {
   --nav-height: 4rem;
-  --nav-scroll-offset: 4.75rem;
+  /* Clearance under the fixed navbar when scrolling to in-page anchors */
+  --nav-scroll-offset: calc(var(--nav-height) + 0.5rem);
 
   --zinc-50: #1a1714;
   --zinc-100: #2a241e;
@@ -133,14 +134,12 @@ html {
 @media (min-width: 640px) {
   :root {
     --nav-height: 4.25rem;
-    --nav-scroll-offset: 5rem;
   }
 }
 
 @media (min-width: 1024px) {
   :root {
     --nav-height: 4.5rem;
-    --nav-scroll-offset: 5.25rem;
   }
 }
 

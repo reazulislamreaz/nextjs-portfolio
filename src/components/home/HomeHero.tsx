@@ -183,11 +183,12 @@ export default function HomeHero() {
           <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-800 sm:max-w-md lg:ml-auto lg:mr-0 lg:max-w-[22rem] xl:max-w-[24rem]">
             <div className="relative aspect-[4/5] w-full">
               <Image
-                src="/reaz.png"
+                src="/reaz.jpg"
                 alt="Reazul Islam Reaz"
                 fill
                 priority
-                sizes="(max-width: 1024px) 360px, 384px"
+                quality={92}
+                sizes="(max-width: 639px) 384px, (max-width: 1023px) 448px, (max-width: 1279px) 352px, 384px"
                 className="object-cover object-[center_18%]"
               />
             </div>

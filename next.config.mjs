@@ -13,8 +13,9 @@ const securityHeaders = [
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Include ~2× of hero CSS widths (352–448px) so Retina picks a sharp candidate
+    deviceSizes: [640, 750, 828, 896, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 448],
     qualities: [75, 88, 92],
   },
   experimental: {
