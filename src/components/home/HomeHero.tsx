@@ -198,16 +198,6 @@ export default function HomeHero() {
                 className="object-cover object-[center_18%] transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
               />
             </div>
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-zinc-950/85 via-zinc-950/40 to-transparent"
-            />
-            <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-              <p className="type-eyebrow">Currently</p>
-              <p className="mt-1 text-sm font-medium text-zinc-50">
-                Sparktech Agency
-              </p>
-            </div>
           </div>
         </div>
       </div>
