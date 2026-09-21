@@ -10,7 +10,7 @@ import { gsap } from "@/lib/gsap";
 import { ArrowRight, Check, Download, Mail } from "lucide-react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 
-const heroTech = showcaseTech.slice(0, 5);
+const heroTech = showcaseTech.slice(0, 6);
 
 const facts = [
   { label: "Focus", value: "APIs, data, realtime" },
