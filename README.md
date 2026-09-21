@@ -160,7 +160,17 @@ CONTACT_TO_EMAIL=reazul.dev@gmail.com
 
 Create the app password: Google Account → **Security** → **2-Step Verification** (on) → **App passwords** → create one named “Portfolio”.
 
-Add the same variables on **Vercel** and redeploy.
+Add the **same server-only variables** in the Vercel project:
+**Settings → Environment Variables → Production** (and Preview if needed), then **Redeploy**.
+
+Verify configuration after deploy:
+
+```bash
+curl https://your-domain/api/contact
+# Expect: { "configured": true, "activeProvider": "gmail", ... }
+```
+
+If `configured` is `false`, messages cannot be delivered until env vars are set.
 
 ```bash
 npm run dev    # http://localhost:3000

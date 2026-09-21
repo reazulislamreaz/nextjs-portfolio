@@ -6,6 +6,7 @@ import { FiAlertCircle, FiCheck, FiLoader, FiSend } from "react-icons/fi";
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 const MAX_NAME = 120;
+const MAX_SUBJECT = 160;
 const MAX_MESSAGE = 5000;
 
 const fieldClass =
@@ -15,11 +16,13 @@ export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [provider, setProvider] = useState<string | null>(null);
 
   const resetForm = () => {
     form.current?.reset();
     setStatus("idle");
     setErrorMessage("");
+    setProvider(null);
   };
 
   const sendEmail = async (e: FormEvent) => {
@@ -29,6 +32,7 @@ export default function ContactForm() {
     const formData = new FormData(form.current);
     const user_name = String(formData.get("user_name") ?? "").trim();
     const user_email = String(formData.get("user_email") ?? "").trim();
+    const subject = String(formData.get("subject") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
     const website = String(formData.get("_honey_trap_field") ?? "").trim();
 
@@ -38,7 +42,11 @@ export default function ContactForm() {
       return;
     }
 
-    if (user_name.length > MAX_NAME || message.length > MAX_MESSAGE) {
+    if (
+      user_name.length > MAX_NAME ||
+      subject.length > MAX_SUBJECT ||
+      message.length > MAX_MESSAGE
+    ) {
       setErrorMessage("One or more fields exceed the allowed length.");
       setStatus("error");
       return;
@@ -46,26 +54,28 @@ export default function ContactForm() {
 
     setStatus("loading");
     setErrorMessage("");
+    setProvider(null);
 
     try {
-      const payload = {
-        user_name,
-        user_email,
-        message,
-        time: new Date().toLocaleString(),
-      };
-
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...payload,
+          user_name,
+          user_email,
+          subject,
+          message,
+          time: new Date().toLocaleString(),
           _honey_trap_field: website,
         }),
       });
 
       const data = (await response.json().catch(() => ({}))) as {
         error?: string;
+        ok?: boolean;
+        delivered?: boolean;
+        provider?: string;
+        code?: string;
       };
 
       if (!response.ok) {
@@ -76,7 +86,16 @@ export default function ContactForm() {
         return;
       }
 
+      if (data.delivered === false) {
+        setErrorMessage(
+          "Your message could not be delivered. Please email Reaz directly or use WhatsApp.",
+        );
+        setStatus("error");
+        return;
+      }
+
       form.current.reset();
+      setProvider(data.provider ?? null);
       setStatus("success");
     } catch {
       setErrorMessage(
@@ -99,9 +118,12 @@ export default function ContactForm() {
           </span>
           <h3 className="type-card-title mt-5">Message sent</h3>
           <p className="type-body mt-2 max-w-sm text-pretty">
-            Thanks — I&apos;ll reply within 24–48 hours. Reply goes to your
-            email.
+            Thanks — I&apos;ll reply within 24–48 hours. If you don&apos;t see a
+            reply, check spam or follow up via WhatsApp.
           </p>
+          {provider ? (
+            <p className="type-meta mt-3">Delivery confirmed via {provider}.</p>
+          ) : null}
           <button
             type="button"
             onClick={resetForm}
@@ -170,6 +192,7 @@ export default function ContactForm() {
                 disabled={status === "loading"}
                 className={fieldClass}
                 placeholder="Your full name"
+                autoComplete="name"
               />
             </div>
 
@@ -188,6 +211,26 @@ export default function ContactForm() {
                 disabled={status === "loading"}
                 className={fieldClass}
                 placeholder="your.email@example.com"
+                autoComplete="email"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="subject"
+                className="mb-1.5 block text-sm font-medium text-zinc-300"
+              >
+                Subject{" "}
+                <span className="font-normal text-zinc-500">(optional)</span>
+              </label>
+              <input
+                type="text"
+                name="subject"
+                id="subject"
+                maxLength={MAX_SUBJECT}
+                disabled={status === "loading"}
+                className={fieldClass}
+                placeholder="Role, project, or topic"
               />
             </div>
 
@@ -214,6 +257,7 @@ export default function ContactForm() {
               type="submit"
               disabled={status === "loading"}
               className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
+              aria-busy={status === "loading"}
             >
               {status === "loading" ? (
                 <>
