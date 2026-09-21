@@ -9,16 +9,23 @@ interface ProjectCarouselProps {
   title: string;
   priority?: boolean;
   showThumbs?: boolean;
+  /** Override responsive sizes (e.g. wider modal frames). */
+  sizes?: string;
 }
 
 /** Stable frame — avoids decoding every slide just to measure natural size. */
 const FRAME_RATIO = "16 / 10";
+
+/** Match card/modal CSS width closely so Retina can pick a sharp srcset candidate. */
+const DEFAULT_SIZES =
+  "(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) calc(100vw - 3rem), (max-width: 1279px) 58vw, 800px";
 
 export default function ProjectCarousel({
   images,
   title,
   priority = false,
   showThumbs = true,
+  sizes = DEFAULT_SIZES,
 }: ProjectCarouselProps) {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
@@ -134,8 +141,8 @@ export default function ProjectCarousel({
               }
               fill
               priority={priority && imageIndex === 0}
-              quality={88}
-              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 58vw, 720px"
+              quality={95}
+              sizes={sizes}
               className={`object-contain object-center ${
                 reduceMotion ? "" : "transition-opacity duration-300"
               } ${
@@ -194,8 +201,8 @@ export default function ProjectCarousel({
                   src={src}
                   alt=""
                   fill
-                  quality={75}
-                  sizes="88px"
+                  quality={85}
+                  sizes="(max-width: 639px) 76px, 88px"
                   loading="lazy"
                   className="object-contain"
                 />

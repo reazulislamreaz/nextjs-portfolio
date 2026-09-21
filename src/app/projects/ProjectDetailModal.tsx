@@ -139,6 +139,7 @@ export default function ProjectDetailModal({
               images={project.images}
               title={project.title}
               showThumbs={false}
+              sizes="(max-width: 639px) calc(100vw - 2.5rem), (max-width: 1023px) min(672px, calc(100vw - 3.5rem)), min(896px, 90vw)"
             />
           </div>
 
