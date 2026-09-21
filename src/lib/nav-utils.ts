@@ -1,4 +1,4 @@
-import { isReducedMotion } from "./gsap";
+import { isReducedMotion } from "./motion";
 
 export function hashFromHref(href: string): string {
   const index = href.indexOf("#");

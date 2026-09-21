@@ -10,6 +10,8 @@ const sora = Sora({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const instrumentSerif = Instrument_Serif({
@@ -17,6 +19,8 @@ const instrumentSerif = Instrument_Serif({
   weight: "400",
   display: "swap",
   variable: "--font-display",
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -24,6 +28,8 @@ const ibmPlexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   display: "swap",
   variable: "--font-mono",
+  preload: false,
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {

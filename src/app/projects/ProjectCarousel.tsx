@@ -11,10 +11,8 @@ interface ProjectCarouselProps {
   showThumbs?: boolean;
 }
 
-interface NaturalSize {
-  width: number;
-  height: number;
-}
+/** Stable frame — avoids decoding every slide just to measure natural size. */
+const FRAME_RATIO = "16 / 10";
 
 export default function ProjectCarousel({
   images,
@@ -23,52 +21,41 @@ export default function ProjectCarousel({
   showThumbs = true,
 }: ProjectCarouselProps) {
   const [index, setIndex] = useState(0);
-  const [sizes, setSizes] = useState<Record<string, NaturalSize>>({});
+  const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
-
-  const current = images[index] ?? "";
-  const size = current ? sizes[current] : undefined;
-  const ratio = size ? `${size.width} / ${size.height}` : "2 / 1";
+  const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const go = useCallback(
     (next: number) => {
       if (!images.length) return;
-      setIndex((next + images.length) % images.length);
+      const normalized = (next + images.length) % images.length;
+      setIndex((current) => {
+        if (current === normalized) return current;
+        setPrevIndex(current);
+        return normalized;
+      });
     },
     [images.length],
   );
 
   useEffect(() => {
     setIndex(0);
+    setPrevIndex(null);
   }, [images]);
 
   useEffect(() => {
-    if (!images.length) return;
-    let cancelled = false;
-
-    for (const src of images) {
-      const img = new window.Image();
-      const ready = () => {
-        if (cancelled || !img.naturalWidth || !img.naturalHeight) return;
-        setSizes((prev) => {
-          if (prev[src]) return prev;
-          return {
-            ...prev,
-            [src]: { width: img.naturalWidth, height: img.naturalHeight },
-          };
-        });
-      };
-      img.addEventListener("load", ready);
-      img.src = src;
-      if (img.complete) ready();
+    if (prevIndex == null || reduceMotion) {
+      setPrevIndex(null);
+      return;
     }
-
+    if (fadeTimer.current) clearTimeout(fadeTimer.current);
+    fadeTimer.current = setTimeout(() => setPrevIndex(null), 320);
     return () => {
-      cancelled = true;
+      if (fadeTimer.current) clearTimeout(fadeTimer.current);
     };
-  }, [images]);
+  }, [index, prevIndex, reduceMotion]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -82,7 +69,11 @@ export default function ProjectCarousel({
     if (images.length <= 1 || reduceMotion || paused) return;
     const timer = window.setInterval(() => {
       if (document.visibilityState !== "visible") return;
-      setIndex((prev) => (prev + 1) % images.length);
+      setIndex((prev) => {
+        const next = (prev + 1) % images.length;
+        setPrevIndex(prev);
+        return next;
+      });
     }, 7000);
     return () => window.clearInterval(timer);
   }, [images.length, paused, reduceMotion]);
@@ -95,6 +86,13 @@ export default function ProjectCarousel({
     );
   }
 
+  const visibleIndexes = new Set<number>([index]);
+  if (prevIndex != null && prevIndex !== index) visibleIndexes.add(prevIndex);
+  // Warm the next slide without keeping the whole gallery decoded
+  if (images.length > 1) {
+    visibleIndexes.add((index + 1) % images.length);
+  }
+
   return (
     <figure
       className="w-full"
@@ -105,7 +103,7 @@ export default function ProjectCarousel({
     >
       <div
         className="relative w-full overflow-hidden bg-zinc-800"
-        style={{ aspectRatio: ratio }}
+        style={{ aspectRatio: FRAME_RATIO }}
         role="region"
         aria-roledescription="carousel"
         aria-label={`${title} screenshots`}
@@ -122,7 +120,8 @@ export default function ProjectCarousel({
           go(delta < 0 ? index + 1 : index - 1);
         }}
       >
-        {images.map((src, imageIndex) => {
+        {[...visibleIndexes].map((imageIndex) => {
+          const src = images[imageIndex];
           const active = imageIndex === index;
           return (
             <Image
@@ -135,7 +134,8 @@ export default function ProjectCarousel({
               }
               fill
               priority={priority && imageIndex === 0}
-              sizes="(max-width: 1024px) 100vw, 58vw"
+              quality={88}
+              sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 58vw, 720px"
               className={`object-contain object-center ${
                 reduceMotion ? "" : "transition-opacity duration-300"
               } ${
@@ -176,7 +176,6 @@ export default function ProjectCarousel({
           aria-label={`${title} screenshot thumbnails`}
         >
           {images.map((src, imageIndex) => {
-            const thumb = sizes[src];
             const active = imageIndex === index;
             return (
               <button
@@ -185,22 +184,19 @@ export default function ProjectCarousel({
                 onClick={() => go(imageIndex)}
                 aria-label={`Show screenshot ${imageIndex + 1} of ${images.length}`}
                 aria-current={active}
-                className={`relative h-12 shrink-0 overflow-hidden rounded-md border bg-zinc-800 transition sm:h-14 ${
+                className={`relative h-12 w-[4.75rem] shrink-0 overflow-hidden rounded-md border bg-zinc-800 transition sm:h-14 sm:w-[5.5rem] ${
                   active
                     ? "border-emerald-400"
                     : "border-zinc-700 opacity-70 hover:opacity-100"
                 }`}
-                style={{
-                  aspectRatio: thumb
-                    ? `${thumb.width} / ${thumb.height}`
-                    : "2 / 1",
-                }}
               >
                 <Image
                   src={src}
                   alt=""
                   fill
-                  sizes="120px"
+                  quality={75}
+                  sizes="88px"
+                  loading="lazy"
                   className="object-contain"
                 />
               </button>

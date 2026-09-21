@@ -89,41 +89,58 @@ export default function Navbar() {
     }
 
     let ticking = false;
+    let lastScrolled = false;
+    let lastActive = "";
+
+    // Cache section nodes once — avoid querySelector on every scroll frame
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el));
 
     const computeActive = () => {
       ticking = false;
       const scrollY = window.scrollY;
       const viewportH = window.innerHeight;
 
-      setScrolled(scrollY > 12);
+      const nextScrolled = scrollY > 12;
+      if (nextScrolled !== lastScrolled) {
+        lastScrolled = nextScrolled;
+        setScrolled(nextScrolled);
+      }
 
       if (scrollY < 100) {
-        setActiveSectionId("");
+        if (lastActive !== "") {
+          lastActive = "";
+          setActiveSectionId("");
+        }
         return;
       }
 
       const docH = document.documentElement.scrollHeight;
       if (scrollY + viewportH >= docH - 2) {
-        const last = [...sectionIds]
-          .reverse()
-          .find((id) => document.getElementById(id));
-        if (last) setActiveSectionId(last);
+        const last = [...sections].reverse()[0];
+        const id = last?.id ?? "";
+        if (id && id !== lastActive) {
+          lastActive = id;
+          setActiveSectionId(id);
+        }
         return;
       }
 
       const line = viewportH * 0.3;
       let current = "";
       let bestTop = -Infinity;
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
+      for (const el of sections) {
         const top = el.getBoundingClientRect().top;
         if (top <= line && top > bestTop) {
           bestTop = top;
-          current = id;
+          current = el.id;
         }
       }
-      if (current) setActiveSectionId(current);
+      if (current !== lastActive) {
+        lastActive = current;
+        setActiveSectionId(current);
+      }
     };
 
     const onScroll = () => {

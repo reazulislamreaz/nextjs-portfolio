@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import Lenis from "lenis";
-import { gsap, registerGsap, isReducedMotion } from "@/lib/gsap";
+import { gsap, registerGsap } from "@/lib/gsap";
+import { isReducedMotion } from "@/lib/motion";
 
 declare global {
   interface Window {

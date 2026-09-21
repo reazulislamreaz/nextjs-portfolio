@@ -2,6 +2,8 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
+export { isReducedMotion } from "./motion";
+
 let registered = false;
 
 export function registerGsap() {
@@ -10,11 +12,6 @@ export function registerGsap() {
     registered = true;
   }
   return { gsap, ScrollTrigger, ScrollToPlugin };
-}
-
-export function isReducedMotion(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export { gsap, ScrollTrigger, ScrollToPlugin };

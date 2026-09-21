@@ -1,13 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import type { Project } from "./projectsData";
 import { presentProject } from "./projectPresentation";
 import ProjectCarousel from "./ProjectCarousel";
-import ProjectDetailModal from "./ProjectDetailModal";
 import { ArrowUpRight } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 import { iconForTech } from "@/components/ui/tech";
+
+const ProjectDetailModal = dynamic(() => import("./ProjectDetailModal"), {
+  ssr: false,
+});
 
 const STACK_LIMIT = 5;
 

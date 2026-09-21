@@ -273,7 +273,7 @@ export default function Skills() {
                 const Icon = tech.icon;
                 return (
                   <li key={tech.name} data-skill-item>
-                    <div className="group flex h-full items-center gap-2.5 rounded-md bg-zinc-800/60 px-3 py-2.5 transition-[background-color,transform] duration-200 ease-out will-change-transform motion-safe:hover:-translate-y-0.5 motion-safe:hover:bg-zinc-800 motion-reduce:transition-colors">
+                    <div className="group flex h-full items-center gap-2.5 rounded-md bg-zinc-800/60 px-3 py-2.5 transition-[background-color,transform] duration-200 ease-out motion-safe:hover:-translate-y-0.5 motion-safe:hover:bg-zinc-800 motion-reduce:transition-colors">
                       <Icon
                         className="shrink-0 text-base text-emerald-400 transition-transform duration-200 ease-out motion-safe:group-hover:scale-110"
                         aria-hidden
