@@ -1,116 +1,94 @@
 @import "tailwindcss";
 
-/* Class-based dark mode (next-themes sets class="dark" / "light" on <html>) */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
-  Theme tokens.
-
-  The zinc scale is remapped so one set of utility classes works in both themes.
-  The ramp is *semantic*, not literal, and the same rung means the same thing in
-  both themes:
-
-    50 – 500  text, from primary heading down to muted meta
-    600       strong border / divider
-    700       default card border
-    800       inner surface (chips, nested panels)
-    850       hover surface (one step further from the canvas than 800)
-    900       elevated card surface
-    950       page canvas
-
-  Surfaces therefore always step *away* from the canvas as they elevate: darker
-  canvas → lighter cards in dark mode, lighter canvas → white cards in light
-  mode. Keeping 900 distinct from 950 is what stops cards blending into the page.
-
-  The emerald scale is aliased onto a green ramp (`--teal-*`) that is tuned per
-  theme so accent text stays legible: bright greens on the dark canvas, darker
-  greens on the light canvas.
+  Design system: "Graphite Ledger"
+  Warm stone in light, deep graphite in dark. One copper accent.
+  Zinc ramp is semantic (works in both themes):
+    50–500  text (primary → muted)
+    600     strong divider
+    700     default border
+    800     nested surface
+    850     hover surface
+    900     elevated surface
+    950     page canvas
 */
-/* Light theme - off-white canvas, pure white elevated cards, jet-black text */
+
 :root {
   --nav-height: 4rem;
-  --nav-scroll-offset: 4.75rem; /* ~76px on mobile */
-  --zinc-50: #09090b; /* Jet Black (Primary Text & Headings) */
-  --zinc-100: #18181b; /* Deep Obsidian (Headings/Buttons) */
-  --zinc-200: #27272a; /* Charcoal Subheadings */
-  --zinc-300: #3f3f46; /* High-contrast Body Text */
-  --zinc-400: #52525b; /* Crisp Muted Meta */
-  --zinc-500: #71717a; /* Soft Subtitle */
-  --zinc-600: #c4c4cb; /* Strong border / divider */
-  --zinc-700: #dcdce2; /* Default card border */
-  --zinc-800: #f0f0f3; /* Inner surface (chips, nested panels) */
-  --zinc-850: #e5e5ea; /* Hover surface */
-  --zinc-900: #ffffff; /* Elevated card surface */
-  --zinc-950: #f5f5f8; /* Page canvas */
+  --nav-scroll-offset: 4.75rem;
 
-  /* Accent — darker greens so accent text clears 4.5:1 on white */
-  --teal-200: #a7f3d0;
-  --teal-300: #059669;
-  --teal-400: #047857;
-  --teal-500: #065f46;
-  --teal-600: #064e3b;
-  --teal-700: #053726;
-  --teal-800: #042b1e;
-  --teal-900: #032117;
-  --teal-950: #021610;
+  --zinc-50: #1a1714;
+  --zinc-100: #2a241e;
+  --zinc-200: #3d342c;
+  --zinc-300: #52483e;
+  --zinc-400: #6d6256;
+  --zinc-500: #8a7d70;
+  --zinc-600: #d4c9bb;
+  --zinc-700: #e4dcd2;
+  --zinc-800: #efe8e0;
+  --zinc-850: #e7dfd5;
+  --zinc-900: #f7f3ee;
+  --zinc-950: #ebe4db;
 
-  /* Accent channel for gradients / glows that cannot use a utility class. */
-  --accent-rgb: 6 95 70;
-  /* Polarity for the cursor spotlight and particle field. */
-  --spotlight-rgb: 24 24 27;
+  /* Copper — dark enough for text on the stone canvas */
+  --teal-200: #f3e2cf;
+  --teal-300: #8a4e22;
+  --teal-400: #7a431c;
+  --teal-500: #6a3918;
+  --teal-600: #552d13;
+  --teal-700: #412210;
+  --teal-800: #2e180b;
+  --teal-900: #1c0e06;
+  --teal-950: #120904;
 
-  --grid-line: rgba(0, 0, 0, 0.04);
-  --glow-primary: rgba(0, 0, 0, 0.05);
-  --glow-secondary: rgba(0, 0, 0, 0.03);
-  --glow-tertiary: rgba(0, 0, 0, 0.015);
+  --accent-rgb: 138 78 34;
+  --spotlight-rgb: 26 23 20;
 
-  /* Section heading gradient */
-  --heading-from: #09090b;
-  --heading-via: #18181b;
-  --heading-to: #3f3f46;
+  --grid-line: rgba(26, 23, 20, 0.05);
+  --atmosphere-a: rgba(138, 78, 34, 0.1);
+  --atmosphere-b: rgba(26, 23, 20, 0.04);
+
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-sans), system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Dark theme - Pitch Black Obsidian & Razor Sharp Titanium White */
 .dark {
-  --zinc-50: #ffffff; /* Pure Titanium White (Primary Text & Headings) */
-  --zinc-100: #fafafa; /* Ultra Crisp White */
-  --zinc-200: #f4f4f5; /* Bright Silver Subheadings */
-  --zinc-300: #e4e4e7; /* High-Contrast Clear Body Text */
-  --zinc-400: #cbd5e1; /* Vivid Metadata */
-  --zinc-500: #94a3b8; /* Soft Subtitle */
-  --zinc-600: #3f3f46; /* Strong Border */
-  --zinc-700: #27272a; /* Card Border */
-  --zinc-800: #18181b; /* Card Inner Surface */
-  --zinc-850: #222228;
-  --zinc-900: #0d0d11; /* Elevated Frosted Obsidian Card */
-  --zinc-950: #000000; /* True Pitch Black Canvas */
+  --zinc-50: #f6f1ea;
+  --zinc-100: #ebe4da;
+  --zinc-200: #d8cec2;
+  --zinc-300: #b7ab9d;
+  --zinc-400: #8f8478;
+  --zinc-500: #6f655c;
+  --zinc-600: #3a332c;
+  --zinc-700: #2a241f;
+  --zinc-800: #1c1916;
+  --zinc-850: #221e1a;
+  --zinc-900: #161311;
+  --zinc-950: #0c0b0a;
 
-  /* Accent — bright greens for legibility on the near-black canvas */
-  --teal-200: #a7f3d0;
-  --teal-300: #6ee7b7;
-  --teal-400: #34d399;
-  --teal-500: #10b981;
-  --teal-600: #059669;
-  --teal-700: #047857;
-  --teal-800: #065f46;
-  --teal-900: #064e3b;
-  --teal-950: #022c22;
+  --teal-200: #f6e4cc;
+  --teal-300: #f0c48a;
+  --teal-400: #e0a15a;
+  --teal-500: #c9843a;
+  --teal-600: #a86a2c;
+  --teal-700: #855222;
+  --teal-800: #5e3a18;
+  --teal-900: #3d2610;
+  --teal-950: #241608;
 
-  --accent-rgb: 16 185 129;
-  --spotlight-rgb: 255 255 255;
+  --accent-rgb: 224 161 90;
+  --spotlight-rgb: 246 241 234;
 
-  --grid-line: rgba(255, 255, 255, 0.05);
-  --glow-primary: rgba(255, 255, 255, 0.12);
-  --glow-secondary: rgba(255, 255, 255, 0.08);
-  --glow-tertiary: rgba(255, 255, 255, 0.04);
-
-  /* Section heading gradient — pure white shimmer on black bg */
-  --heading-from: #ffffff;
-  --heading-via: #f4f4f5;
-  --heading-to: #cbd5e1;
+  --grid-line: rgba(246, 241, 234, 0.04);
+  --atmosphere-a: rgba(224, 161, 90, 0.1);
+  --atmosphere-b: rgba(246, 241, 234, 0.03);
 }
 
-/* Expose the tokens to Tailwind utilities */
 @theme inline {
   --color-zinc-50: var(--zinc-50);
   --color-zinc-100: var(--zinc-100);
@@ -125,7 +103,6 @@
   --color-zinc-900: var(--zinc-900);
   --color-zinc-950: var(--zinc-950);
 
-  /* alias gray/slate onto the zinc ramp */
   --color-gray-300: var(--zinc-300);
   --color-gray-400: var(--zinc-400);
   --color-slate-300: var(--zinc-300);
@@ -141,10 +118,13 @@
   --color-emerald-800: var(--teal-800);
   --color-emerald-900: var(--teal-900);
   --color-emerald-950: var(--teal-950);
+
+  --font-family-display: var(--font-display);
+  --font-family-sans: var(--font-sans);
+  --font-family-mono: var(--font-mono);
 }
 
 html {
-  transition: background-color 0.3s, color 0.3s;
   scroll-behavior: smooth;
   overflow-x: hidden;
   @apply bg-zinc-950 text-zinc-300;
@@ -152,53 +132,34 @@ html {
 
 @media (min-width: 640px) {
   :root {
-    --nav-height: 4.75rem;
-    --nav-scroll-offset: 5.5rem; /* ~88px on tablet */
+    --nav-height: 4.25rem;
+    --nav-scroll-offset: 5rem;
   }
 }
 
 @media (min-width: 1024px) {
   :root {
-    --nav-height: 5rem;
-    --nav-scroll-offset: 5.75rem; /* ~92px on desktop */
+    --nav-height: 4.5rem;
+    --nav-scroll-offset: 5.25rem;
   }
 }
 
-/* Ensure all named section targets natively respect the responsive top clearance */
 section[id] {
   scroll-margin-top: var(--nav-scroll-offset);
 }
 
 body {
-  @apply bg-zinc-950 min-h-screen min-w-0 overflow-x-hidden;
+  @apply min-h-screen min-w-0 overflow-x-hidden bg-zinc-950 font-sans antialiased;
 }
 
-/*
-  Text selection.
-
-  Do not use remapped zinc utilities here. In light mode --zinc-900 is the
-  white card surface, so selection:bg-zinc-900 + selection:text-white painted
-  white text on a white highlight. Use fixed colors so the highlight and
-  text always contrast, on both canvases and on cards.
-*/
 ::selection {
-  background-color: #d4d4d8;
-  color: #09090b;
-}
-
-::-moz-selection {
-  background-color: #d4d4d8;
-  color: #09090b;
+  background-color: #e8c9a4;
+  color: #1a1714;
 }
 
 .dark ::selection {
-  background-color: #3f3f46;
-  color: #fafafa;
-}
-
-.dark ::-moz-selection {
-  background-color: #3f3f46;
-  color: #fafafa;
+  background-color: #8a4e22;
+  color: #f6f1ea;
 }
 
 @layer base {
@@ -211,28 +172,40 @@ body {
   }
 }
 
-/* #3 — Theme-aware section heading gradient (clipped to text). */
-.heading-gradient {
-  background-image: linear-gradient(
-    to right,
-    var(--heading-from),
-    var(--heading-via),
-    var(--heading-to)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* Soft atmosphere — not glow soup */
+.site-atmosphere {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 10% -10%, var(--atmosphere-a), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 95% 20%, var(--atmosphere-b), transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 100%, var(--atmosphere-b), transparent 45%);
 }
 
-/*
-  Light-mode surface corrections.
+.site-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
 
-  Card backgrounds in this codebase are written as translucent `bg-zinc-900/NN`.
-  Over the light canvas those alpha values would wash the card back down to
-  roughly the page color, so in light mode every elevated surface is forced to
-  the opaque elevated token and given a hairline shadow. Dark mode keeps the
-  translucent frosted look (these rules don't apply there).
-*/
+.dark .site-grain {
+  opacity: 0.2;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Light-mode surface corrections for translucent utility classes */
 html:not(.dark) :is(
   .bg-zinc-900,
   .bg-zinc-900\/30,
@@ -246,14 +219,8 @@ html:not(.dark) :is(
   .bg-zinc-900\/95
 ) {
   background-color: var(--zinc-900);
-  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
 }
 
-/*
-  `border-zinc-800` is deliberately near-invisible against the dark canvas. In
-  light mode the same rung is an inner-surface fill, so as a border it would
-  disappear against white — step it up to the dedicated border token instead.
-*/
 html:not(.dark) :is(
   .border-zinc-800,
   .border-zinc-800\/60,
@@ -263,11 +230,6 @@ html:not(.dark) :is(
   border-color: var(--zinc-700);
 }
 
-/*
-  Nested chips and inner panels use translucent `bg-zinc-800/NN`, which over a
-  white card resolves to almost white. Force the opaque inner-surface token so
-  chips stay distinguishable from the card they sit on.
-*/
 html:not(.dark) :is(
   .bg-zinc-800\/40,
   .bg-zinc-800\/60,
@@ -277,32 +239,10 @@ html:not(.dark) :is(
   background-color: var(--zinc-800);
 }
 
-/* Global Glassmorphic Pattern overlay - Minimal Tech Grid */
-.glass-pattern {
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Global Glowing Gradient overlay - Professional Slate/Emerald Accent */
-.glass-gradient {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 50% -20%, var(--glow-primary) 0%, transparent 60%),
-              radial-gradient(circle at 100% 50%, var(--glow-secondary) 0%, transparent 60%),
-              radial-gradient(circle at 0% 100%, var(--glow-tertiary) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
 @keyframes hero-line-in {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -311,150 +251,8 @@ html:not(.dark) :is(
 }
 
 .hero-line-in {
-  animation: hero-line-in 0.4s ease-out both;
+  animation: hero-line-in 0.55s var(--ease-out-expo) both;
 }
-
-@keyframes hero-float-slow {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes hero-float-reverse {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-}
-
-@keyframes hero-float-delayed {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-4px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.35;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.65;
-    transform: scale(1.04);
-  }
-}
-
-@keyframes scan {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: translateY(1000%);
-    opacity: 0;
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-.animate-scan {
-  animation: scan 8s linear infinite;
-}
-
-.animate-float-slow {
-  animation: hero-float-slow 6s ease-in-out infinite;
-}
-
-.animate-float-reverse {
-  animation: hero-float-reverse 7s ease-in-out infinite 0.5s;
-}
-
-.animate-float-delayed {
-  animation: hero-float-delayed 8s ease-in-out infinite 1.5s;
-}
-
-.animate-spin-slow {
-  animation: spin-very-slow 35s linear infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 7s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-line-in,
-  .animate-float-slow,
-  .animate-float-reverse,
-  .animate-float-delayed,
-  .animate-spin-slow,
-  .animate-pulse-glow {
-    animation: none !important;
-  }
-  html {
-    scroll-behavior: auto;
-  }
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* ─── Scroll-reveal transition ───────────────────────────────────────────── */
-
-@media (prefers-reduced-motion: no-preference) {
-  [data-revealed] {
-    opacity: 0;
-    transform: translateY(12px);
-    transition:
-      opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
-      transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
-    will-change: opacity, transform;
-  }
-
-  [data-revealed="true"] {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Mobile: reduce translateY distance */
-  @media (max-width: 639px) {
-    [data-revealed] {
-      transform: translateY(6px);
-    }
-  }
-}
-
-/* Reduced motion: reveal immediately, no animation */
-@media (prefers-reduced-motion: reduce) {
-  [data-revealed] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-}
-
-/* ─── Mobile nav menu slide ──────────────────────────────────────────────── */
 
 @keyframes nav-slide-down {
   from {
@@ -468,15 +266,13 @@ html:not(.dark) :is(
 }
 
 .nav-slide-down {
-  animation: nav-slide-down 0.25s ease-out both;
+  animation: nav-slide-down 0.22s var(--ease-out-expo) both;
 }
-
-/* ─── Modal entrance animation ────────────────────────────────────────────── */
 
 @keyframes modal-enter {
   from {
     opacity: 0;
-    transform: scale(0.97) translateY(8px);
+    transform: scale(0.98) translateY(6px);
   }
   to {
     opacity: 1;
@@ -485,17 +281,8 @@ html:not(.dark) :is(
 }
 
 .modal-enter {
-  animation: modal-enter 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: modal-enter 0.25s var(--ease-out-expo) both;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-slide-down,
-  .modal-enter {
-    animation: none;
-  }
-}
-
-/* ─── Active nav indicator underline & cyber effects ───────────────────── */
 
 .nav-link-indicator {
   position: relative;
@@ -504,16 +291,16 @@ html:not(.dark) :is(
 .nav-link-indicator::after {
   content: "";
   position: absolute;
-  bottom: 0px;
-  left: 20%;
-  right: 20%;
-  height: 2px;
-  border-radius: 9999px;
-  background: var(--teal-400);
-  box-shadow: 0 0 8px var(--teal-400);
+  bottom: 0;
+  left: 12%;
+  right: 12%;
+  height: 1.5px;
+  background: var(--teal-300);
   opacity: 0;
   transform: scaleX(0);
-  transition: opacity 0.25s ease-out, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s var(--ease-out-expo);
 }
 
 .nav-link-indicator[data-active="true"]::after {
@@ -521,62 +308,279 @@ html:not(.dark) :is(
   transform: scaleX(1);
 }
 
-/* ─── Cyber laser accent line ────────────────────────────────────────────── */
-
-@keyframes laser-sweep {
-  0% {
-    background-position: -200% 0;
+@media (prefers-reduced-motion: no-preference) {
+  [data-revealed] {
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.5s var(--ease-out-expo) var(--reveal-delay, 0ms),
+      transform 0.5s var(--ease-out-expo) var(--reveal-delay, 0ms);
   }
-  100% {
-    background-position: 200% 0;
+
+  [data-revealed="true"] {
+    opacity: 1;
+    transform: translateY(0);
   }
-}
 
-.cyber-laser-line {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgb(var(--accent-rgb) / 0.1) 15%,
-    rgb(var(--accent-rgb) / 0.7) 50%,
-    rgb(var(--accent-rgb) / 0.1) 85%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: laser-sweep 8s linear infinite;
-}
-
-@keyframes live-beacon-ping {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0.6);
+  @media (max-width: 639px) {
+    [data-revealed] {
+      transform: translateY(6px);
+    }
   }
-  70% {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 6px rgb(var(--accent-rgb) / 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgb(var(--accent-rgb) / 0);
-  }
-}
-
-.live-beacon {
-  animation: live-beacon-ping 2.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-}
-
-/* Theme-aware accent glows, replacing hardcoded emerald rgba() shadows. */
-.accent-glow-sm {
-  box-shadow: 0 0 8px rgb(var(--accent-rgb) / 0.8);
-}
-
-.accent-glow-lg {
-  box-shadow: 0 0 24px rgb(var(--accent-rgb) / 0.18);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cyber-laser-line,
-  .live-beacon {
+  .hero-line-in,
+  .nav-slide-down,
+  .modal-enter {
+    animation: none !important;
+  }
+
+  [data-revealed] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 42s) linear infinite;
+}
+
+.marquee-track[data-reverse="true"] {
+  animation-direction: reverse;
+}
+
+.marquee-mask:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
     animation: none;
   }
 }
 
+.surface-card {
+  background: color-mix(in srgb, var(--zinc-900) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--zinc-700) 90%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--zinc-50) 4%, transparent);
+}
+
+.dark .surface-card {
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.03);
+}
+
+/* Shared type & control language — one designer, one system */
+.type-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal-400);
+}
+
+.type-section {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 2.4vw, 2.375rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--zinc-50);
+}
+
+.type-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.375rem, 1.8vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--zinc-50);
+}
+
+.type-body {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--zinc-400);
+}
+
+.type-lede {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--zinc-300);
+}
+
+.type-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--zinc-500);
+}
+
+.type-label {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--zinc-500);
+}
+
+.btn-primary {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  background: var(--zinc-50);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--zinc-950);
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--zinc-50) 88%, var(--zinc-400));
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible,
+.btn-accent:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--zinc-950), 0 0 0 4px var(--teal-400);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--zinc-600);
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--zinc-200);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--zinc-400);
+  background: color-mix(in srgb, var(--zinc-900) 80%, transparent);
+  color: var(--zinc-50);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--zinc-300);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--zinc-50);
+  background: color-mix(in srgb, var(--zinc-800) 70%, transparent);
+}
+
+.btn-accent {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--teal-400);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.btn-accent:hover {
+  color: var(--teal-300);
+  background: color-mix(in srgb, var(--teal-400) 8%, transparent);
+}
+
+.badge-tech {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, var(--zinc-800) 90%, transparent);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--zinc-200);
+}
+
+.divider-soft {
+  border-color: color-mix(in srgb, var(--zinc-700) 80%, transparent);
+}
+
+.icon-btn {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  color: var(--zinc-400);
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: var(--zinc-800);
+  color: var(--zinc-50);
+}
+
+.icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--zinc-950), 0 0 0 4px var(--teal-400);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

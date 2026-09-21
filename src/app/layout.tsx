@@ -1,14 +1,29 @@
 import { type Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Instrument_Serif, Sora, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import JsonLd from "@/components/JsonLd";
 import Providers from "./components/Providers";
 import Footer from "./components/Footer";
 import ScrollProgress from "./components/ui/ScrollProgress";
 
-const geistSans = Geist({
+const sora = Sora({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-sans",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-display",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -76,22 +91,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.className} min-w-0 overflow-x-hidden antialiased bg-zinc-950`}
-      >
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${sora.variable} ${instrumentSerif.variable} ${ibmPlexMono.variable}`}
+    >
+      <body className="min-w-0 overflow-x-hidden bg-zinc-950 font-sans antialiased">
         <JsonLd />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-emerald-500 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-emerald-400 focus:px-4 focus:py-2 focus:font-medium focus:text-zinc-950"
         >
           Skip to main content
         </a>
         <Providers>
           <ScrollProgress />
-          <div className="glass-gradient" />
-          <div className="glass-pattern" />
-          
+          <div className="site-atmosphere" aria-hidden />
+          <div className="site-grain" aria-hidden />
+
           <div className="relative z-10 flex min-h-screen min-w-0 flex-col">
             <main id="main-content" className="min-w-0 flex-grow">
               {children}

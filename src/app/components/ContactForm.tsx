@@ -8,6 +8,9 @@ type FormStatus = "idle" | "loading" | "success" | "error";
 const MAX_NAME = 120;
 const MAX_MESSAGE = 5000;
 
+const fieldClass =
+  "w-full rounded-md border border-zinc-700 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-50 placeholder-zinc-500 transition hover:border-zinc-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 disabled:cursor-not-allowed disabled:opacity-60";
+
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
@@ -61,7 +64,9 @@ export default function ContactForm() {
         }),
       });
 
-      const data = (await response.json().catch(() => ({}))) as { error?: string };
+      const data = (await response.json().catch(() => ({}))) as {
+        error?: string;
+      };
 
       if (!response.ok) {
         setErrorMessage(
@@ -74,162 +79,157 @@ export default function ContactForm() {
       form.current.reset();
       setStatus("success");
     } catch {
-      setErrorMessage("Network error. Please check your connection and try again.");
+      setErrorMessage(
+        "Network error. Please check your connection and try again.",
+      );
       setStatus("error");
     }
   };
 
   return (
-    <div className="relative h-full w-full overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/60 p-6 sm:p-8">
-
-      <div className="relative z-10">
-        {status === "success" ? (
-          <div
-            className="flex flex-col items-center py-6 text-center sm:py-10"
-            role="status"
-            aria-live="polite"
+    <div className="surface-card h-full w-full rounded-lg p-5 sm:p-6 lg:p-7">
+      {status === "success" ? (
+        <div
+          className="flex flex-col items-start py-2"
+          role="status"
+          aria-live="polite"
+        >
+          <span className="flex h-11 w-11 items-center justify-center rounded-md border border-emerald-400/30 bg-emerald-400/10 text-emerald-400">
+            <FiCheck size={20} aria-hidden />
+          </span>
+          <h3 className="type-card-title mt-5">Message sent</h3>
+          <p className="type-body mt-2 max-w-sm text-pretty">
+            Thanks — I&apos;ll reply within 24–48 hours. Reply goes to your
+            email.
+          </p>
+          <button
+            type="button"
+            onClick={resetForm}
+            className="btn-secondary mt-6"
           >
-            <div className="relative mb-6">
-              <span className="absolute inset-0 animate-ping rounded-full bg-emerald-500/20" />
-              <span className="relative flex h-16 w-16 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 accent-glow-lg sm:h-20 sm:w-20">
-                <FiCheck className="h-8 w-8 text-emerald-400 sm:h-9 sm:w-9" aria-hidden />
-              </span>
+            Send another message
+          </button>
+        </div>
+      ) : (
+        <>
+          <div className="mb-6">
+            <h3 className="type-card-title">Send a message</h3>
+            <p className="type-meta mt-1.5">
+              Backend & full-stack roles welcome
+            </p>
+          </div>
+
+          {status === "error" && errorMessage ? (
+            <div
+              className="mb-5 flex gap-3 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3"
+              role="alert"
+            >
+              <FiAlertCircle
+                className="mt-0.5 shrink-0 text-red-400"
+                size={18}
+                aria-hidden
+              />
+              <div>
+                <p className="text-sm font-medium text-red-200">
+                  Couldn&apos;t send message
+                </p>
+                <p className="mt-1 text-sm text-red-200/80">{errorMessage}</p>
+              </div>
+            </div>
+          ) : null}
+
+          <form ref={form} onSubmit={sendEmail} className="space-y-5" noValidate>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+            >
+              <label htmlFor="_honey_trap_field">Do not fill</label>
+              <input
+                type="text"
+                id="_honey_trap_field"
+                name="_honey_trap_field"
+                tabIndex={-1}
+                autoComplete="off"
+                defaultValue=""
+              />
             </div>
 
-            <h3 className="text-2xl font-bold tracking-tight text-zinc-50 sm:text-3xl">
-              Message sent
-            </h3>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-zinc-400 sm:text-base">
-              Thanks — I&apos;ll reply within{" "}
-              <span className="text-zinc-300">24–48 hours</span>.
-            </p>
-            <p className="mt-2 text-xs text-zinc-500">Reply goes to your email.</p>
+            <div>
+              <label
+                htmlFor="name"
+                className="mb-1.5 block text-sm font-medium text-zinc-300"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                name="user_name"
+                id="name"
+                required
+                maxLength={MAX_NAME}
+                disabled={status === "loading"}
+                className={fieldClass}
+                placeholder="Your full name"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="mb-1.5 block text-sm font-medium text-zinc-300"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                name="user_email"
+                id="email"
+                required
+                disabled={status === "loading"}
+                className={fieldClass}
+                placeholder="your.email@example.com"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="message"
+                className="mb-1.5 block text-sm font-medium text-zinc-300"
+              >
+                Message
+              </label>
+              <textarea
+                name="message"
+                id="message"
+                rows={4}
+                required
+                maxLength={MAX_MESSAGE}
+                disabled={status === "loading"}
+                className={`${fieldClass} resize-none`}
+                placeholder="Role, stack, and whether it’s onsite or remote…"
+              />
+            </div>
 
             <button
-              type="button"
-              onClick={resetForm}
-              className="mt-8 inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-xl border border-zinc-700 bg-zinc-900/80 px-6 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-emerald-500/40 hover:bg-zinc-800 hover:text-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              type="submit"
+              disabled={status === "loading"}
+              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70"
             >
-              Send another message
+              {status === "loading" ? (
+                <>
+                  <FiLoader className="animate-spin" size={16} aria-hidden />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  Send message
+                  <FiSend size={15} aria-hidden />
+                </>
+              )}
             </button>
-          </div>
-        ) : (
-          <>
-            <div className="mb-8">
-              <h3 className="mb-2 text-3xl font-bold tracking-tight text-zinc-50">
-                Get in touch
-              </h3>
-              <p className="text-sm font-light text-zinc-400 md:text-base">
-                Available for Backend & Full-Stack Roles
-              </p>
-            </div>
-
-            {status === "error" && errorMessage ? (
-              <div
-                className="mb-6 flex gap-3 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-left"
-                role="alert"
-              >
-                <FiAlertCircle className="mt-0.5 shrink-0 text-red-400" size={18} aria-hidden />
-                <div>
-                  <p className="text-sm font-semibold text-red-200">Couldn&apos;t send message</p>
-                  <p className="mt-1 text-sm text-red-200/80">{errorMessage}</p>
-                </div>
-              </div>
-            ) : null}
-
-            <form ref={form} onSubmit={sendEmail} className="space-y-6" noValidate>
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
-              >
-                <label htmlFor="_honey_trap_field">Do not fill</label>
-                <input
-                  type="text"
-                  id="_honey_trap_field"
-                  name="_honey_trap_field"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  defaultValue=""
-                />
-              </div>
-
-              <div>
-                <label htmlFor="name" className="mb-2 block pl-1 text-sm font-medium text-zinc-300">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="user_name"
-                  id="name"
-                  required
-                  maxLength={MAX_NAME}
-                  disabled={status === "loading"}
-                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
-                  placeholder="Your full name"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="mb-2 block pl-1 text-sm font-medium text-zinc-300">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="user_email"
-                  id="email"
-                  required
-                  disabled={status === "loading"}
-                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="mb-2 block pl-1 text-sm font-medium text-zinc-300"
-                >
-                  Message
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={4}
-                  required
-                  maxLength={MAX_MESSAGE}
-                  disabled={status === "loading"}
-                  className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950/50 px-5 py-3.5 text-zinc-50 placeholder-zinc-500 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/50 disabled:cursor-not-allowed disabled:opacity-60"
-                  placeholder="Your message..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={status === "loading"}
-                className="group/btn relative w-full cursor-pointer overflow-hidden rounded-xl bg-zinc-100 px-8 py-4 font-semibold text-zinc-950 shadow-lg transition-all duration-300 hover:bg-zinc-50 hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:enabled:scale-[1.001] active:enabled:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-80"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2.5">
-                  {status === "loading" ? (
-                    <>
-                      <FiLoader className="animate-spin" size={18} aria-hidden />
-                      Sending…
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <FiSend
-                        size={17}
-                        className="transition-transform group-hover/btn:translate-x-0.5"
-                        aria-hidden
-                      />
-                    </>
-                  )}
-                </span>
-              </button>
-            </form>
-          </>
-        )}
-      </div>
+          </form>
+        </>
+      )}
     </div>
   );
 }

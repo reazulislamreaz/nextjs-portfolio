@@ -23,14 +23,12 @@ export interface NavLink {
   sectionId?: string;
 }
 
+/** Recruiter-first nav — proof of work before biography */
 export const navLinks: NavLink[] = [
-  { href: "/", label: "Home" },
-  { href: "/#about", label: "About", sectionId: "about" },
-  { href: "/#skills", label: "Skills", sectionId: "skills" },
-  { href: "/#education", label: "Education", sectionId: "education" },
+  { href: "/#projects", label: "Work", sectionId: "projects" },
+  { href: "/#skills", label: "Expertise", sectionId: "skills" },
   { href: "/#experience", label: "Experience", sectionId: "experience" },
-  { href: "/#certifications", label: "Learning", sectionId: "certifications" },
-  { href: "/#projects", label: "Projects", sectionId: "projects" },
+  { href: "/#about", label: "About", sectionId: "about" },
   { href: "/#contact", label: "Contact", sectionId: "contact" },
 ];
 

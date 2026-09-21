@@ -8,12 +8,12 @@ import { resumePath, siteContact, siteSocial } from "@/config/site";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
 import { Download, Mail, MapPin, X } from "lucide-react";
-import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function ContactSection() {
   const [showMap, setShowMap] = useState(false);
   const mapTriggerRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const closeMap = useCallback(() => setShowMap(false), []);
@@ -22,36 +22,20 @@ export default function ContactSection() {
     if (isReduced) return;
 
     gsap.fromTo(
-      "[data-contact-left]",
-      { x: -30, opacity: 0 },
+      "[data-contact-col]",
+      { y: 20, opacity: 0 },
       {
         scrollTrigger: {
           trigger: "[data-contact-grid]",
           start: "top 80%",
           toggleActions: "play none none none",
         },
-        x: 0,
+        y: 0,
         opacity: 1,
-        duration: 0.65,
-        ease: "power3.out",
-      }
-    );
-
-    gsap.fromTo(
-      "[data-contact-right]",
-      { x: 30, opacity: 0 },
-      {
-        scrollTrigger: {
-          trigger: "[data-contact-grid]",
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-        x: 0,
-        opacity: 1,
-        duration: 0.65,
-        delay: 0.15,
-        ease: "power3.out",
-      }
+        stagger: 0.12,
+        duration: 0.55,
+        ease: "power2.out",
+      },
     );
   });
 
@@ -75,115 +59,113 @@ export default function ContactSection() {
   }, [showMap, closeMap]);
 
   return (
-    <Section id="contact" className="bg-zinc-950/40">
+    <Section id="contact" className="border-t border-zinc-700/50 bg-zinc-900/30">
       <div ref={containerRef}>
         <SectionHeader
-          title="Contact"
+          eyebrow="Contact"
+          title="Let’s talk about the role"
           subtitle="Open to backend and full-stack roles in Dhaka or remote. Currently at Sparktech Agency."
         />
 
-        <div data-contact-grid className="grid min-w-0 grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10">
-          <div data-contact-left className="flex h-full w-full min-w-0 flex-col">
-            <div className="relative flex h-full flex-col rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7">
-              <div>
-                <p className="mb-6 text-base leading-relaxed text-zinc-300 sm:mb-8">
-                  If you&apos;re hiring a backend or full-stack engineer, I&apos;d like to hear from you. I work on-site in Dhaka and remotely.
-                </p>
+        <div
+          data-contact-grid
+          className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-14"
+        >
+          <div data-contact-col className="flex min-w-0 flex-col">
+            <p className="type-body text-pretty sm:text-base sm:leading-relaxed">
+              If you&apos;re hiring a backend or full-stack engineer, send a short
+              note with the role, stack, and whether it&apos;s on-site or remote. I
+              usually reply within 24–48 hours.
+            </p>
 
-                <div className="space-y-4 text-base">
-                  <a
-                    href={`mailto:${siteContact.email}`}
-                    className="flex cursor-pointer items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 transition-colors hover:border-zinc-600"
-                  >
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-zinc-100">
-                      <Mail size={18} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-zinc-500">Email</p>
-                      <span className="break-all text-zinc-100 transition-colors duration-300 hover:text-zinc-50 sm:text-base font-medium">
-                        {siteContact.email}
-                      </span>
-                    </div>
-                  </a>
-
-                  <a
-                    href={siteContact.phoneHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex cursor-pointer items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 transition-colors hover:border-zinc-600"
-                  >
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-emerald-400">
-                      <FaWhatsapp size={18} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-zinc-500">WhatsApp / Phone</p>
-                      <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
-                        {siteContact.phone}
-                      </span>
-                    </div>
-                  </a>
-
-                  <button
-                    ref={mapTriggerRef}
-                    type="button"
-                    onClick={() => setShowMap(true)}
-                    className="flex w-full cursor-pointer items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-950/50 p-4 text-left transition-colors hover:border-zinc-600"
-                  >
-                    <div className="rounded-xl border border-zinc-700 bg-zinc-800 p-3 text-zinc-100">
-                      <MapPin size={18} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-zinc-500">Location</p>
-                      <span className="text-zinc-100 transition-colors duration-300 hover:text-zinc-50 font-medium">
-                        Dhaka, Bangladesh · Available Worldwide
-                      </span>
-                    </div>
-                  </button>
-
-                  <div className="flex flex-wrap items-center gap-4 pt-4 sm:gap-6 border-t border-zinc-800/80">
-                    <span className="text-xs text-zinc-500">Profiles</span>
-                    <div className="flex items-center gap-3">
-                      <a
-                        href={siteSocial.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
-                        aria-label="GitHub"
-                      >
-                        <FaGithub size={18} />
-                      </a>
-                      <a
-                        href={siteSocial.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="rounded-xl border border-zinc-700/80 bg-zinc-800 p-2.5 text-zinc-300 shadow-sm transition-all duration-300 hover:border-zinc-500 hover:text-zinc-50"
-                        aria-label="LinkedIn"
-                      >
-                        <FaLinkedin size={18} />
-                      </a>
-                    </div>
-                  </div>
+            <div className="mt-8 space-y-0">
+              <a
+                href={`mailto:${siteContact.email}`}
+                className="group flex items-start gap-4 border-b border-zinc-700/60 py-4 transition first:pt-0"
+              >
+                <Mail
+                  size={18}
+                  className="mt-0.5 shrink-0 text-emerald-400"
+                  aria-hidden
+                />
+                <div>
+                  <p className="type-label">Email</p>
+                  <span className="mt-1 block break-all text-sm font-medium text-zinc-100 transition group-hover:text-emerald-400 sm:text-[0.9375rem]">
+                    {siteContact.email}
+                  </span>
                 </div>
-              </div>
+              </a>
 
-              <div className="mt-auto space-y-5 border-t border-zinc-800/80 pt-6">
-                <p className="text-sm leading-relaxed text-zinc-400">
-                  A role title, stack, and whether it&apos;s on-site in Dhaka or remote is enough to start. I usually reply within 24–48 hours.
-                </p>
+              <a
+                href={siteContact.phoneHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-start gap-4 border-b border-zinc-700/60 py-4"
+              >
+                <FaWhatsapp
+                  size={18}
+                  className="mt-0.5 shrink-0 text-emerald-400"
+                  aria-hidden
+                />
+                <div>
+                  <p className="type-label">WhatsApp / Phone</p>
+                  <span className="mt-1 block text-sm font-medium text-zinc-100 transition group-hover:text-emerald-400 sm:text-[0.9375rem]">
+                    {siteContact.phone}
+                  </span>
+                </div>
+              </a>
 
-                <a
-                  href={resumePath}
-                  download
-                  className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm font-semibold text-zinc-100 transition-colors hover:border-zinc-500 hover:bg-zinc-850 hover:text-zinc-50"
-                >
-                  <Download size={16} aria-hidden />
-                  Download Resume
-                </a>
-              </div>
+              <button
+                ref={mapTriggerRef}
+                type="button"
+                onClick={() => setShowMap(true)}
+                className="group flex w-full items-start gap-4 border-b border-zinc-700/60 py-4 text-left"
+              >
+                <MapPin
+                  size={18}
+                  className="mt-0.5 shrink-0 text-emerald-400"
+                  aria-hidden
+                />
+                <div>
+                  <p className="type-label">Location</p>
+                  <span className="mt-1 block text-sm font-medium text-zinc-100 transition group-hover:text-emerald-400 sm:text-[0.9375rem]">
+                    Dhaka, Bangladesh · Onsite & Remote
+                  </span>
+                </div>
+              </button>
+            </div>
+
+            <div className="mt-6 flex items-center gap-1.5">
+              <a
+                href={siteSocial.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="icon-btn"
+                aria-label="GitHub"
+              >
+                <FiGithub size={18} />
+              </a>
+              <a
+                href={siteSocial.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="icon-btn"
+                aria-label="LinkedIn"
+              >
+                <FiLinkedin size={18} />
+              </a>
+              <a
+                href={resumePath}
+                download
+                className="btn-secondary ml-auto"
+              >
+                <Download size={15} aria-hidden />
+                Resume
+              </a>
             </div>
           </div>
 
-          <div data-contact-right>
+          <div data-contact-col>
             <ContactForm />
           </div>
         </div>
@@ -198,31 +180,29 @@ export default function ContactSection() {
             type="button"
             aria-label="Close map"
             onClick={closeMap}
-            className="absolute inset-0 cursor-pointer bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
           <div
-            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="map-dialog-title"
-            className="relative z-10 w-full max-w-4xl overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900 shadow-2xl"
+            className="relative z-10 w-full max-w-4xl overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 shadow-xl"
           >
-            <div className="flex items-center justify-between border-b border-zinc-800 p-6">
+            <div className="flex items-center justify-between border-b border-zinc-700/80 px-5 py-4">
               <h3
                 id="map-dialog-title"
-                className="flex items-center gap-2 text-xl font-bold text-zinc-50"
+                className="font-display text-lg text-zinc-50"
               >
-                <MapPin size={20} className="text-emerald-500" />
-                <span>{siteContact.location}</span>
+                {siteContact.location}
               </h3>
               <button
                 ref={closeButtonRef}
                 type="button"
                 onClick={closeMap}
-                className="cursor-pointer rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-zinc-50"
+                className="icon-btn"
                 aria-label="Close map dialog"
               >
-                <X size={22} />
+                <X size={20} />
               </button>
             </div>
             <div className="aspect-video w-full bg-zinc-950">

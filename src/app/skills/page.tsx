@@ -3,8 +3,8 @@ import SkillsSection from "@/components/sections/SkillsSection";
 import { sectionMetadata } from "@/config/seo";
 
 export const metadata: Metadata = sectionMetadata(
-  "Skills",
-  "Backend, databases, DevOps, and AI-assisted development.",
+  "Expertise",
+  "API design, data modeling, auth, caching, realtime, and production backend systems.",
 );
 
 export default function SkillsPage() {

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, Download, Sparkles, Terminal } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import {
   hashFromHref,
   isNavLinkActive,
@@ -54,13 +54,12 @@ export default function Navbar() {
 
     const computeActive = () => {
       ticking = false;
-
       const scrollY = window.scrollY;
       const viewportH = window.innerHeight;
 
-      setScrolled(scrollY > 20);
+      setScrolled(scrollY > 12);
 
-      if (scrollY < 120) {
+      if (scrollY < 100) {
         setActiveSectionId("");
         return;
       }
@@ -74,7 +73,7 @@ export default function Navbar() {
         return;
       }
 
-      const line = viewportH * 0.32;
+      const line = viewportH * 0.3;
       let current = "";
       let bestTop = -Infinity;
       for (const id of sectionIds) {
@@ -113,7 +112,7 @@ export default function Navbar() {
   ) => {
     if (!shouldHandleInPageNav(event, href, label, pathname)) return;
     event.preventDefault();
-    const sectionId = label === "Home" ? "" : hashFromHref(href).slice(1);
+    const sectionId = hashFromHref(href).slice(1);
     setActiveSectionId(sectionId);
 
     if (mobileOpen) {
@@ -125,175 +124,126 @@ export default function Navbar() {
     scrollToInPageTarget(href, label);
   };
 
-  const [hoveredHref, setHoveredHref] = useState<string | null>(null);
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const [isHoveredDock, setIsHoveredDock] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setMousePos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
   return (
     <header
-      className="fixed top-3 sm:top-5 inset-x-0 z-50 flex flex-col items-center px-3 sm:px-6 pointer-events-none"
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "border-b border-zinc-700/80 bg-zinc-950/90 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
       aria-label="Main navigation"
     >
-      {/* Ambient Backlight Glow */}
-      <div className="relative pointer-events-auto">
-        <div className="pointer-events-none absolute -inset-1 rounded-full bg-gradient-to-r from-zinc-400/10 via-white/15 to-zinc-400/10 blur-md opacity-40 dark:opacity-60 transition-opacity" />
-
-        {/* Spatial Glass Dock with Interactive Spotlight */}
-        <nav
-          data-nav-bar
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setIsHoveredDock(true)}
-          onMouseLeave={() => {
-            setIsHoveredDock(false);
-            setHoveredHref(null);
+      <nav
+        data-nav-bar
+        className="mx-auto flex h-[var(--nav-height)] w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-12"
+      >
+        <Link
+          href="/"
+          onClick={(e) => {
+            if (pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setActiveSectionId("");
+              setMobileOpen(false);
+            }
           }}
-          className={`relative overflow-hidden flex items-center justify-between sm:justify-center gap-1.5 sm:gap-2 p-1.5 sm:px-3.5 sm:py-2 rounded-full backdrop-blur-2xl transition-all duration-300 ${
-            scrolled
-              ? "bg-white/90 dark:bg-zinc-950/90 border border-zinc-200/80 dark:border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
-              : "bg-white/75 dark:bg-zinc-950/80 border border-zinc-200/60 dark:border-white/10 shadow-[0_12px_36px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_36px_rgba(0,0,0,0.4)]"
-          }`}
+          className="group flex min-w-0 shrink-0 flex-col justify-center"
+          aria-label="Reazul Islam Reaz — home"
         >
-          {/* Mouse Spotlight Follower */}
-          {isHoveredDock && (
-            <div
-              className="pointer-events-none absolute -inset-px rounded-full opacity-100 transition-opacity duration-300"
-              style={{
-                background: `radial-gradient(130px circle at ${mousePos.x}px ${mousePos.y}px, rgb(var(--spotlight-rgb) / 0.12), transparent 80%)`,
-              }}
-            />
-          )}
+          <span className="font-display text-[1.3rem] leading-none tracking-tight text-zinc-50 transition-colors group-hover:text-emerald-400">
+            Reaz
+          </span>
+          <span className="type-label mt-0.5 hidden sm:block">Full-Stack</span>
+        </Link>
 
-          {/* Spatial Nav Links */}
-          <div className="hidden md:flex items-center gap-1 relative z-10">
-            {navLinks.map(({ href, label }) => {
-              const isActive = isNavLinkActive(
-                href,
-                label,
-                pathname,
-                activeSectionId,
-              );
-              const isHovered = hoveredHref === href;
+        <div className="hidden items-center gap-1 md:flex">
+          {navLinks.map(({ href, label }) => {
+            const isActive = isNavLinkActive(
+              href,
+              label,
+              pathname,
+              activeSectionId,
+            );
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={(e) => handleNavClick(e, href, label)}
+                data-active={isActive ? "true" : undefined}
+                className={`nav-link-indicator px-3 py-2 text-sm transition-colors ${
+                  isActive
+                    ? "font-medium text-zinc-50"
+                    : "text-zinc-400 hover:text-zinc-100"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </div>
 
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href, label)}
-                  onMouseEnter={() => setHoveredHref(href)}
-                  data-active={isActive ? "true" : undefined}
-                  className={`relative px-3 py-1.5 rounded-full text-xs font-medium tracking-tight transition-all duration-200 ${
-                    isActive
-                      ? "text-zinc-50 bg-zinc-800 border border-zinc-600 shadow-sm font-semibold scale-[1.02]"
-                      : isHovered
-                        ? "text-zinc-50 bg-zinc-800/60 border border-zinc-700/60 -translate-y-[1px]"
-                        : "text-zinc-400 hover:text-zinc-50 border border-transparent"
-                  }`}
-                >
-                  <span className="relative z-10">{label}</span>
-
-                  {/* Active Laser Line Glow */}
-                  {isActive && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-[2px] w-4 rounded-full bg-zinc-50 dark:shadow-[0_0_8px_rgba(255,255,255,0.7)] animate-pulse-glow" />
-                  )}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Hairline Divider */}
-          <div className="hidden md:block h-4 w-[1px] bg-gradient-to-b from-transparent via-zinc-700 to-transparent mx-1 relative z-10" />
-
-          {/* Action Cluster */}
-          <div className="flex items-center gap-1 sm:gap-2 shrink-0 relative z-10">
-            <ThemeToggle />
-
-            {/* Shimmering Resume Button */}
-            <a
-              href={resumePath}
-              download
-              className="group relative hidden sm:inline-flex items-center overflow-hidden rounded-full p-[1px] transition-all duration-300 hover:scale-101 hover:shadow-lg dark:hover:shadow-[0_0_20px_rgba(255,255,255,0.2)] active:scale-95 focus:outline-none"
-              aria-label="Download Resume"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-zinc-500 via-zinc-300 to-zinc-500 opacity-70 group-hover:opacity-100 transition-opacity duration-300 group-hover:animate-pulse-glow" />
-              <span className="relative flex items-center gap-1.5 rounded-full bg-zinc-900 px-3.5 py-1.5 text-xs font-semibold text-zinc-50 backdrop-blur-xl transition-colors group-hover:bg-zinc-800">
-                <span>Resume</span>
-                <ArrowUpRight size={13} className="text-zinc-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
-            </a>
-
-            {/* Mobile Menu Trigger */}
-            <button
-              type="button"
-              className="md:hidden flex h-8 w-8 cursor-pointer items-center justify-center rounded-full text-zinc-400 hover:text-zinc-50 hover:bg-zinc-800 transition-all"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-expanded={mobileOpen}
-              aria-label="Toggle navigation"
-            >
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
-          </div>
-        </nav>
-      </div>
-
-      {/* Floating Spatial Mobile Glass Card */}
-      {mobileOpen ? (
-        <div
-          id="mobile-nav-menu"
-          className="pointer-events-auto nav-slide-down mt-3 w-full max-w-sm rounded-2xl bg-zinc-900/95 backdrop-blur-2xl border border-zinc-700 shadow-2xl p-4 md:hidden"
-        >
-          {/* Status Header */}
-          <div className="flex items-center justify-between px-3 py-2 mb-3 rounded-xl bg-zinc-800 border border-zinc-700 text-xs text-zinc-300">
-            <span className="flex items-center gap-2 font-mono">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 live-beacon" />
-              Available for work
-            </span>
-            <span className="text-zinc-400 font-mono text-[11px]">Dhaka · Remote</span>
-          </div>
-
-          <div className="grid grid-cols-2 gap-1.5">
-            {navLinks.map(({ href, label }) => {
-              const isActive = isNavLinkActive(
-                href,
-                label,
-                pathname,
-                activeSectionId,
-              );
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={(e) => handleNavClick(e, href, label)}
-                  className={`flex items-center justify-between rounded-xl px-3.5 py-2.5 text-xs font-medium transition-all ${
-                    isActive
-                      ? "bg-zinc-800 text-zinc-50 font-semibold border border-zinc-600"
-                      : "text-zinc-400 hover:bg-zinc-800/60 hover:text-zinc-50"
-                  }`}
-                >
-                  <span>{label}</span>
-                  {isActive && (
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  )}
-                </Link>
-              );
-            })}
-          </div>
-
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           <a
             href={resumePath}
             download
-            className="mt-3.5 flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-50 px-4 py-2.5 text-xs font-semibold text-zinc-950 shadow-md transition hover:bg-zinc-200"
+            className="btn-primary hidden !min-h-9 px-3.5 py-1.5 sm:inline-flex"
+            aria-label="Download Resume"
+          >
+            <span>Resume</span>
+            <ArrowUpRight size={14} aria-hidden />
+          </a>
+          <button
+            type="button"
+            className="icon-btn md:hidden"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav-menu"
+            aria-label="Toggle navigation"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </nav>
+
+      {mobileOpen ? (
+        <div
+          id="mobile-nav-menu"
+          className="nav-slide-down border-t border-zinc-700 bg-zinc-950 px-4 pb-5 pt-3 md:hidden"
+        >
+          <p className="type-label mb-3">Dhaka · Onsite & Remote</p>
+          <div className="flex flex-col gap-0.5">
+            {navLinks.map(({ href, label }) => {
+              const isActive = isNavLinkActive(
+                href,
+                label,
+                pathname,
+                activeSectionId,
+              );
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={(e) => handleNavClick(e, href, label)}
+                  className={`rounded-md px-3 py-3 text-base transition ${
+                    isActive
+                      ? "bg-zinc-800 font-medium text-zinc-50"
+                      : "text-zinc-300 hover:bg-zinc-800/70 hover:text-zinc-50"
+                  }`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </div>
+          <a
+            href={resumePath}
+            download
+            className="btn-primary mt-4 w-full"
             onClick={() => setMobileOpen(false)}
           >
-            <Download size={14} />
-            <span>Download Resume</span>
+            Download Resume
+            <ArrowUpRight size={14} aria-hidden />
           </a>
         </div>
       ) : null}

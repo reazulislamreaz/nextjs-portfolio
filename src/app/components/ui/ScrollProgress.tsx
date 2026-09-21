@@ -32,11 +32,11 @@ export default function ScrollProgress() {
   return (
     <div
       aria-hidden="true"
-      className="fixed top-0 left-0 right-0 z-[60] h-[2px] pointer-events-none bg-transparent"
+      className="pointer-events-none fixed left-0 right-0 top-0 z-[60] h-[2px] bg-transparent"
     >
       <div
         ref={progressBarRef}
-        className="h-full w-full origin-left bg-gradient-to-r from-zinc-400 via-zinc-50 to-zinc-300 dark:from-zinc-500 dark:via-white dark:to-zinc-400 dark:shadow-[0_0_8px_rgba(255,255,255,0.7)]"
+        className="h-full w-full origin-left bg-emerald-400"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

@@ -4,102 +4,48 @@ import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
-import { Award, ExternalLink, CheckCircle2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 interface Certification {
   title: string;
   summary: string;
-  topics: string[];
   platform: string;
-  status: string;
-  focus: string;
   credentialUrl?: string;
   credentialLabel?: string;
-  secondaryCredentialUrl?: string;
-  secondaryCredentialLabel?: string;
 }
 
 const items: Certification[] = [
   {
     title: "Full Stack Web Development",
-    summary: "Modern web stack, distributed API patterns, and full-stack application development.",
-    topics: [
-      "React & Next.js",
-      "Node.js & Express APIs",
-      "MongoDB",
-      "JWT auth",
-      "REST APIs",
-      "Full-stack architecture",
-    ],
-    platform: "Udemy — Full Stack Development (React, Next.js, Node.js)",
-    status: "Completed",
-    focus: "End-to-end apps with backend integration.",
+    summary:
+      "Modern web stack, distributed API patterns, and full-stack application development.",
+    platform: "Udemy — React, Next.js, Node.js",
     credentialUrl:
       "https://www.udemy.com/certificate/UC-6e1f340a-b9ee-4cda-8cd8-74de0b57ba5a/",
-    credentialLabel: "View verified certificate",
-    secondaryCredentialUrl:
-      "https://www.udemy.com/course/full-stack-development-for-beginner-react-nextjs-nodejs/",
-    secondaryCredentialLabel: "View course on Udemy",
+    credentialLabel: "View certificate",
   },
   {
     title: "AWS Cloud Computing",
-    summary: "Hands-on AWS cloud infrastructure, VPC networking, and backend deployment.",
-    topics: [
-      "IAM & security",
-      "EC2, S3, VPC",
-      "Load balancing & auto scaling",
-      "Lambda & serverless",
-      "CloudWatch",
-      "CI/CD",
-      "Docker & cloud basics",
-    ],
-    platform: "Udemy — Hands-On Introduction to Cloud Computing with AWS",
-    status: "Completed",
-    focus: "Scalable backends, cloud deploys, and infrastructure.",
+    summary:
+      "Hands-on AWS infrastructure, VPC networking, and backend deployment patterns.",
+    platform: "Udemy — Cloud Computing with AWS",
     credentialUrl:
       "https://www.udemy.com/certificate/UC-737af03a-d89d-4d2f-98e3-5c48dc7d0e8f/",
-    credentialLabel: "View verified certificate",
-    secondaryCredentialUrl:
-      "https://www.udemy.com/course/hands-on-introduction-to-cloud-computing-with-aws/",
-    secondaryCredentialLabel: "View course on Udemy",
+    credentialLabel: "View certificate",
   },
   {
     title: "Next Level Web Development",
     summary:
-      "AI-driven software engineering bootcamp — TypeScript full-stack, production patterns, cloud, and AI agents.",
-    topics: [
-      "TypeScript, OOP & modular architecture",
-      "Node.js & Express REST APIs",
-      "Next.js App Router & auth",
-      "PostgreSQL, SQL & Prisma",
-      "RAG, vector DBs & embeddings",
-      "LangChain & AI agents",
-      "Docker, Nginx & orchestration",
-      "AWS, Linux & GitHub Actions CI/CD",
-      "SDLC, Agile, TDD & API testing",
-      "AI-integrated full-stack capstone",
-    ],
-    platform:
-      "Programming Hero — Next Level AI-Driven Software Engineering Bootcamp",
-    status: "Completed",
-    focus:
-      "AI-driven engineering — scalable backends, TypeScript, and deployable infrastructure.",
+      "AI-driven software engineering bootcamp — TypeScript full-stack, production patterns, and cloud.",
+    platform: "Programming Hero — Next Level Bootcamp",
     credentialUrl: "https://next.programming-hero.com/",
-    credentialLabel: "View bootcamp overview",
+    credentialLabel: "Bootcamp overview",
   },
   {
     title: "AI & Intelligent Systems",
-    summary: "AI-assisted backend architectures, vector indexing, and intelligent workflows.",
-    topics: [
-      "RAG & semantic search",
-      "Prompt engineering",
-      "AI API integrations",
-      "Context-aware backends",
-      "Vector retrieval",
-    ],
+    summary:
+      "AI-assisted backends, RAG patterns, and intelligent workflow integrations.",
     platform: "OpenAI, Claude, Cursor, ChatGPT, Gemini",
-    status: "Completed",
-    focus: "Intelligent backends with AI integration.",
   },
 ];
 
@@ -108,113 +54,60 @@ export default function Certifications() {
     if (isReduced) return;
 
     gsap.fromTo(
-      "[data-cert-card]",
-      { y: 30, opacity: 0 },
+      "[data-cert]",
+      { y: 18, opacity: 0 },
       {
         scrollTrigger: {
-          trigger: "[data-certs-grid]",
-          start: "top 80%",
+          trigger: "[data-certs]",
+          start: "top 82%",
           toggleActions: "play none none none",
         },
         y: 0,
         opacity: 1,
-        stagger: 0.1,
-        duration: 0.6,
-        ease: "power3.out",
-      }
+        stagger: 0.08,
+        duration: 0.5,
+        ease: "power2.out",
+      },
     );
   });
 
   return (
-    <Section id="certifications" className="bg-zinc-950/45">
+    <Section id="certifications" tight>
       <div ref={containerRef}>
         <SectionHeader
-          title="Certifications"
-          subtitle="Courses I have completed in web development, AWS, and AI-assisted engineering."
+          eyebrow="Learning"
+          title="Certifications & coursework"
+          subtitle="Focused study in full-stack delivery, AWS, and AI-assisted engineering."
         />
 
         <div
-          data-certs-grid
-          className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2"
+          data-certs
+          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4"
         >
           {items.map((item) => (
             <article
               key={item.title}
-              data-cert-card
-              className="flex min-w-0 flex-col rounded-xl border border-zinc-800 bg-zinc-900/60 p-5 sm:p-7"
+              data-cert
+              className="surface-card flex min-w-0 flex-col rounded-lg p-5 sm:p-5"
             >
-              <div className="mb-4 flex flex-col gap-3 border-b border-zinc-700/80 pb-4 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-                <div className="flex items-center gap-2.5">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 text-zinc-100 shadow-xs">
-                    <Award size={18} />
-                  </div>
-                  <h3 className="text-lg font-bold tracking-tight text-zinc-50 sm:text-xl md:text-2xl">
-                    {item.title}
-                  </h3>
-                </div>
-                <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
-                  <CheckCircle2 size={12} />
-                  <span>{item.status}</span>
-                </span>
-              </div>
-
-              <p className="mb-5 text-sm leading-relaxed text-zinc-300 sm:mb-6 sm:text-base">
+              <h3 className="text-[0.9375rem] font-medium tracking-tight text-zinc-50 sm:text-base">
+                {item.title}
+              </h3>
+              <p className="type-body mt-2 flex-1 text-pretty text-[0.875rem] leading-relaxed">
                 {item.summary}
               </p>
-
-              <div className="mb-5 sm:mb-6">
-                <h4 className="mb-2.5 text-xs font-semibold text-zinc-400 sm:mb-3">
-                  Topics
-                </h4>
-                <ul className="space-y-2 text-xs leading-relaxed text-zinc-300 sm:text-sm">
-                  {item.topics.map((topic) => (
-                    <li key={topic} className="flex gap-2 items-center">
-                      <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-400" />
-                      <span>{topic}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <dl className="mt-auto space-y-3 border-t border-zinc-700/80 pt-5 text-xs sm:pt-6 sm:text-sm">
-                <div>
-                  <dt className="text-xs font-semibold text-zinc-500">Platform</dt>
-                  <dd className="mt-1 break-words text-zinc-100 font-medium">
-                    {item.platform}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-semibold text-zinc-500">Focus</dt>
-                  <dd className="mt-1 text-zinc-300">{item.focus}</dd>
-                </div>
-                {item.credentialUrl ? (
-                  <div>
-                    <dt className="text-xs font-semibold text-zinc-500">Credential</dt>
-                    <dd className="mt-1 flex flex-col gap-1.5">
-                      <a
-                        href={item.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-zinc-50 font-semibold underline-offset-4 transition-colors hover:underline hover:text-zinc-50"
-                      >
-                        <span>{item.credentialLabel ?? "Open credential"}</span>
-                        <ExternalLink size={13} />
-                      </a>
-                      {item.secondaryCredentialUrl ? (
-                        <a
-                          href={item.secondaryCredentialUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline text-xs"
-                        >
-                          <span>{item.secondaryCredentialLabel ?? "Related link"}</span>
-                          <ExternalLink size={11} />
-                        </a>
-                      ) : null}
-                    </dd>
-                  </div>
-                ) : null}
-              </dl>
+              <p className="type-meta mt-4">{item.platform}</p>
+              {item.credentialUrl ? (
+                <a
+                  href={item.credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-accent mt-2.5 !min-h-9 px-0 hover:bg-transparent"
+                >
+                  {item.credentialLabel ?? "Open credential"}
+                  <ExternalLink size={13} aria-hidden />
+                </a>
+              ) : null}
             </article>
           ))}
         </div>

@@ -15,16 +15,7 @@ interface NavClickModifiers {
 }
 
 export function getNavBarOffset(): number {
-  if (typeof window === "undefined") return 96;
-
-  const bar = document.querySelector("[data-nav-bar]");
-  if (bar instanceof HTMLElement) {
-    const rect = bar.getBoundingClientRect();
-    // On sticky/fixed navbar, calculate total bottom edge + comfortable breathing room
-    const topOffset = rect.top > 0 ? rect.top : window.innerWidth >= 640 ? 20 : 12;
-    const breathingRoom = window.innerWidth >= 1024 ? 24 : window.innerWidth >= 640 ? 18 : 14;
-    return rect.height + topOffset + breathingRoom;
-  }
+  if (typeof window === "undefined") return 84;
 
   const offsetValue = getComputedStyle(document.documentElement)
     .getPropertyValue("--nav-scroll-offset")
@@ -38,7 +29,12 @@ export function getNavBarOffset(): number {
     return parseFloat(offsetValue);
   }
 
-  return window.innerWidth >= 1024 ? 100 : window.innerWidth >= 640 ? 92 : 76;
+  const bar = document.querySelector("[data-nav-bar]");
+  if (bar instanceof HTMLElement) {
+    return bar.getBoundingClientRect().height + 16;
+  }
+
+  return window.innerWidth >= 1024 ? 84 : window.innerWidth >= 640 ? 80 : 76;
 }
 
 export const getNavBarHeight = getNavBarOffset;

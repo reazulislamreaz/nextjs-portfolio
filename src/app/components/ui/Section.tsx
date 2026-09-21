@@ -6,16 +6,27 @@ interface SectionProps {
   id?: string;
   children: ReactNode;
   className?: string;
+  tight?: boolean;
 }
 
-export default function Section({ id, children, className = "" }: SectionProps) {
+export default function Section({
+  id,
+  children,
+  className = "",
+  tight = false,
+}: SectionProps) {
   return (
     <section
       id={id}
-      className={`relative z-10 scroll-mt-[var(--nav-scroll-offset)] pt-4 pb-10 sm:pt-5 sm:pb-12 lg:pt-6 lg:pb-16 xl:pb-20 ${className}`}
-      style={{ scrollMarginTop: "var(--nav-scroll-offset)" }}
+      className={`relative z-10 scroll-mt-[var(--nav-scroll-offset)] ${
+        tight ? "py-14 sm:py-16 lg:py-20" : "py-16 sm:py-20 lg:py-24"
+      } ${className}`}
     >
-      <div className="mx-auto w-full max-w-7xl min-w-0 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <div
+        className={`mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-8 xl:px-12 ${
+          tight ? "max-w-5xl" : "max-w-7xl"
+        }`}
+      >
         {children}
       </div>
     </section>
