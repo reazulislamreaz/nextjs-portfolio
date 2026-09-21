@@ -45,14 +45,20 @@ export async function POST(request: NextRequest) {
     const body = (await request.json()) as Record<string, unknown>;
 
     const honeypot = String(
-      body._honey_trap_field ?? body.company_fax ?? body.website ?? "",
+      body._honey_trap_field ??
+        body.contact_extra_field ??
+        body.company_fax ??
+        body.website ??
+        "",
     ).trim();
     if (honeypot) {
-      if (process.env.NODE_ENV === "development") {
-        console.warn("Contact form honeypot triggered");
-      }
-      // Fake success for bots — do not send mail.
-      return NextResponse.json({ ok: true, delivered: false });
+      // Bot trap: pretend success, do not send.
+      console.warn("[contact-api] Honeypot triggered — dropping submission");
+      return NextResponse.json({
+        ok: true,
+        delivered: true,
+        provider: "filtered",
+      });
     }
 
     const user_name = String(body.user_name ?? "").trim();

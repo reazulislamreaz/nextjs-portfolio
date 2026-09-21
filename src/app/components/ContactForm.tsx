@@ -34,7 +34,9 @@ export default function ContactForm() {
     const user_email = String(formData.get("user_email") ?? "").trim();
     const subject = String(formData.get("subject") ?? "").trim();
     const message = String(formData.get("message") ?? "").trim();
-    const website = String(formData.get("_honey_trap_field") ?? "").trim();
+    // Ignore honeypot value from autofill — only treat clearly bot-like values.
+    // Real bots often fill every input; humans/autofill leave it empty when hidden with display:none.
+    const honeypotRaw = String(formData.get("contact_extra_field") ?? "").trim();
 
     if (!user_name || !user_email || !message) {
       setErrorMessage("Please fill in all required fields.");
@@ -66,7 +68,8 @@ export default function ContactForm() {
           subject,
           message,
           time: new Date().toLocaleString(),
-          _honey_trap_field: website,
+          // Only send honeypot key when non-empty so empty autofill noise isn't an issue
+          ...(honeypotRaw ? { _honey_trap_field: honeypotRaw } : {}),
         }),
       });
 
@@ -86,16 +89,21 @@ export default function ContactForm() {
         return;
       }
 
-      if (data.delivered === false) {
+      // Treat missing `delivered` as success for older API responses.
+      // Never show a hard failure for silent bot filtering.
+      if (data.ok === false) {
         setErrorMessage(
-          "Your message could not be delivered. Please email Reaz directly or use WhatsApp.",
+          data.error ??
+            "Your message could not be delivered. Please email Reaz directly or use WhatsApp.",
         );
         setStatus("error");
         return;
       }
 
       form.current.reset();
-      setProvider(data.provider ?? null);
+      setProvider(
+        data.provider && data.provider !== "filtered" ? data.provider : null,
+      );
       setStatus("success");
     } catch {
       setErrorMessage(
@@ -163,13 +171,13 @@ export default function ContactForm() {
           <form ref={form} onSubmit={sendEmail} className="space-y-5" noValidate>
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+              className="hidden"
             >
-              <label htmlFor="_honey_trap_field">Do not fill</label>
+              <label htmlFor="contact_extra_field">Company website</label>
               <input
                 type="text"
-                id="_honey_trap_field"
-                name="_honey_trap_field"
+                id="contact_extra_field"
+                name="contact_extra_field"
                 tabIndex={-1}
                 autoComplete="off"
                 defaultValue=""
