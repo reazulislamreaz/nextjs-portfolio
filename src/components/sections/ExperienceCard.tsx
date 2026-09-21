@@ -21,7 +21,7 @@ export default function ExperienceCard({
   const panelId = `${entry.id}-details`;
 
   return (
-    <article className="surface-card rounded-lg">
+    <article className="surface-card rounded-lg transition-[border-color,box-shadow] duration-200 motion-safe:hover:border-zinc-600/80">
       <div className="p-5 sm:p-6 lg:p-7">
         <header className="space-y-3">
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">

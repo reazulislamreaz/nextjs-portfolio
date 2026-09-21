@@ -43,13 +43,17 @@ export default function ProjectCard({
             imageOnRight ? "lg:order-2" : ""
           }`}
         >
-          <div className="overflow-hidden rounded-lg border border-zinc-700/40 bg-zinc-800 transition duration-500 ease-out group-hover/visual:-translate-y-0.5">
-            <ProjectCarousel
-              images={project.images}
-              title={project.title}
-              priority={priorityImage}
-              showThumbs={project.images.length > 1}
-            />
+          <div className="overflow-hidden rounded-lg border border-zinc-700/40 bg-zinc-800 transition duration-500 ease-out motion-safe:group-hover/visual:-translate-y-0.5">
+            <div className="overflow-hidden">
+              <div className="transition-transform duration-700 ease-out motion-safe:group-hover/visual:scale-[1.02]">
+                <ProjectCarousel
+                  images={project.images}
+                  title={project.title}
+                  priority={priorityImage}
+                  showThumbs={project.images.length > 1}
+                />
+              </div>
+            </div>
           </div>
         </div>
 

@@ -85,7 +85,7 @@ export default function ContactSection() {
               >
                 <Mail
                   size={18}
-                  className="mt-0.5 shrink-0 text-emerald-400"
+                  className="mt-0.5 shrink-0 text-emerald-400 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5"
                   aria-hidden
                 />
                 <div>
@@ -104,7 +104,7 @@ export default function ContactSection() {
               >
                 <FaWhatsapp
                   size={18}
-                  className="mt-0.5 shrink-0 text-emerald-400"
+                  className="mt-0.5 shrink-0 text-emerald-400 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5"
                   aria-hidden
                 />
                 <div>
@@ -123,7 +123,7 @@ export default function ContactSection() {
               >
                 <MapPin
                   size={18}
-                  className="mt-0.5 shrink-0 text-emerald-400"
+                  className="mt-0.5 shrink-0 text-emerald-400 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5"
                   aria-hidden
                 />
                 <div>
@@ -186,7 +186,7 @@ export default function ContactSection() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="map-dialog-title"
-            className="relative z-10 w-full max-w-4xl overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 shadow-xl"
+            className="modal-enter relative z-10 w-full max-w-4xl overflow-hidden rounded-lg border border-zinc-700 bg-zinc-900 shadow-xl"
           >
             <div className="flex items-center justify-between border-b border-zinc-700/80 px-5 py-4">
               <h3

@@ -27,11 +27,26 @@ export default function ThemeToggle({
       }
       className={`icon-btn ${className}`}
     >
-      {mounted && !isDark ? (
-        <FiMoon size={16} aria-hidden />
-      ) : (
-        <FiSun size={16} aria-hidden />
-      )}
+      <span className="relative flex h-4 w-4 items-center justify-center">
+        <FiSun
+          size={16}
+          aria-hidden
+          className={`absolute transition-[opacity,transform] duration-200 ease-out ${
+            mounted && !isDark
+              ? "scale-75 opacity-0"
+              : "scale-100 opacity-100"
+          }`}
+        />
+        <FiMoon
+          size={16}
+          aria-hidden
+          className={`absolute transition-[opacity,transform] duration-200 ease-out ${
+            mounted && !isDark
+              ? "scale-100 opacity-100"
+              : "scale-75 opacity-0"
+          }`}
+        />
+      </span>
     </button>
   );
 }

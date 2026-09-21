@@ -117,7 +117,7 @@ export default function ContactForm() {
     <div className="surface-card h-full w-full rounded-lg p-5 sm:p-6 lg:p-7">
       {status === "success" ? (
         <div
-          className="flex flex-col items-start py-2"
+          className="status-enter flex flex-col items-start py-2"
           role="status"
           aria-live="polite"
         >
@@ -151,7 +151,7 @@ export default function ContactForm() {
 
           {status === "error" && errorMessage ? (
             <div
-              className="mb-5 flex gap-3 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3"
+              className="status-enter mb-5 flex gap-3 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3"
               role="alert"
             >
               <FiAlertCircle

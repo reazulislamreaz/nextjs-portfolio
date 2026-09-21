@@ -36,6 +36,24 @@ export default function About() {
         ease: "power2.out",
       },
     );
+
+    gsap.fromTo(
+      "[data-about-point]",
+      { y: 8, opacity: 0 },
+      {
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 72%",
+          toggleActions: "play none none none",
+        },
+        y: 0,
+        opacity: 1,
+        stagger: 0.05,
+        duration: 0.35,
+        delay: 0.15,
+        ease: "power2.out",
+      },
+    );
   });
 
   return (
@@ -77,6 +95,7 @@ export default function About() {
               {howIWork.map((item) => (
                 <li
                   key={item}
+                  data-about-point
                   className="flex items-start gap-2.5 text-sm leading-relaxed text-zinc-400"
                 >
                   <span

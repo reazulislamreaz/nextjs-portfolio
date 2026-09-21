@@ -60,6 +60,12 @@ export default function HomeHero() {
         { y: 16, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.65 },
         "-=0.5",
+      )
+      .fromTo(
+        "[data-hero-facts] > div",
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.06, duration: 0.4 },
+        "-=0.35",
       );
   });
 
@@ -180,8 +186,8 @@ export default function HomeHero() {
           data-hero-visual
           className="order-2 relative min-w-0 lg:col-span-5"
         >
-          <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-800 sm:max-w-md lg:ml-auto lg:mr-0 lg:max-w-[22rem] xl:max-w-[24rem]">
-            <div className="relative aspect-[4/5] w-full">
+          <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg border border-zinc-700/50 bg-zinc-800 sm:max-w-md lg:ml-auto lg:mr-0 lg:max-w-[22rem] xl:max-w-[24rem]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
               <Image
                 src="/reaz.jpg"
                 alt="Reazul Islam Reaz"
@@ -189,7 +195,7 @@ export default function HomeHero() {
                 priority
                 quality={92}
                 sizes="(max-width: 639px) 384px, (max-width: 1023px) 448px, (max-width: 1279px) 352px, 384px"
-                className="object-cover object-[center_18%]"
+                className="object-cover object-[center_18%] transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
               />
             </div>
             <div
@@ -207,7 +213,10 @@ export default function HomeHero() {
       </div>
 
       <div className="relative z-10 mx-auto mt-12 w-full max-w-7xl px-4 sm:mt-14 sm:px-6 lg:px-8 xl:px-12">
-        <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-zinc-700/60 bg-zinc-700/30 sm:grid-cols-4">
+        <dl
+          data-hero-facts
+          className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-zinc-700/60 bg-zinc-700/30 sm:grid-cols-4"
+        >
           {facts.map((fact) => (
             <div
               key={fact.label}

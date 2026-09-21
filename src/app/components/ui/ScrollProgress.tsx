@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap, registerGsap } from "@/lib/gsap";
+import { gsap, registerGsap, isReducedMotion } from "@/lib/gsap";
 
 export default function ScrollProgress() {
   const progressBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isReducedMotion()) return;
+
     const { ScrollTrigger } = registerGsap();
     const bar = progressBarRef.current;
     if (!bar) return;
@@ -32,7 +34,7 @@ export default function ScrollProgress() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 right-0 top-0 z-[60] h-[2px] bg-transparent"
+      className="pointer-events-none fixed left-0 right-0 top-0 z-[60] h-[2px] bg-transparent motion-reduce:hidden"
     >
       <div
         ref={progressBarRef}
