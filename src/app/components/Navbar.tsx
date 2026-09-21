@@ -173,7 +173,7 @@ export default function Navbar() {
     >
       <nav
         data-nav-bar
-        className="mx-auto grid h-[var(--nav-height)] w-full min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 sm:gap-4 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-6 lg:px-8 xl:px-12"
+        className="mx-auto grid h-[var(--nav-height)] w-full min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 pl-4 sm:gap-4 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-6 lg:px-8 xl:px-12"
       >
         <Link
           href="/"
@@ -226,7 +226,7 @@ export default function Navbar() {
           <a
             href={resumePath}
             download
-            className="btn-primary hidden !min-h-9 whitespace-nowrap px-3.5 py-1.5 md:inline-flex"
+            className="btn-primary nav-resume-desktop !min-h-9 whitespace-nowrap px-3.5 py-1.5"
             aria-label="Download Resume"
           >
             <span>Resume</span>

@@ -569,6 +569,17 @@ html:not(.dark) :is(
   }
 }
 
+/* Hide Resume in the mobile bar only (beats .btn-primary display) */
+.nav-resume-desktop {
+  display: none !important;
+}
+
+@media (width >= 48rem) {
+  .nav-resume-desktop {
+    display: inline-flex !important;
+  }
+}
+
 .icon-btn:hover {
   background: var(--zinc-800);
   color: var(--zinc-50);
