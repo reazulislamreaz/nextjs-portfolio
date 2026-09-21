@@ -563,6 +563,13 @@ html:not(.dark) :is(
     background-color 0.2s ease;
 }
 
+/* Force-hide hamburger on tablet + desktop (beats .icon-btn display) */
+@media (width >= 48rem) {
+  .nav-menu-toggle {
+    display: none !important;
+  }
+}
+
 .icon-btn:hover {
   background: var(--zinc-800);
   color: var(--zinc-50);

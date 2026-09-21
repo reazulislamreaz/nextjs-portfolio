@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
@@ -13,11 +13,16 @@ import {
 import { navLinks, resumePath, sectionIds } from "@/config/site";
 import ThemeToggle from "./ThemeToggle";
 
+/** Desktop + tablet: full links. Mobile only: hamburger. */
+const DESKTOP_MQ = "(min-width: 768px)";
+
 export default function Navbar() {
   const pathname = usePathname();
+  const menuId = useId();
   const [activeSectionId, setActiveSectionId] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   const [pendingScroll, setPendingScroll] = useState<{
     href: string;
     label: string;
@@ -28,6 +33,39 @@ export default function Navbar() {
     scrollToInPageTarget(pendingScroll.href, pendingScroll.label);
     setPendingScroll(null);
   }, [mobileOpen, pendingScroll]);
+
+  // Track breakpoint — hide hamburger on tablet/desktop, close drawer on resize
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_MQ);
+    const sync = () => {
+      const desktop = mq.matches;
+      setIsDesktop(desktop);
+      if (desktop) setMobileOpen(false);
+    };
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // Prevent background scroll while mobile menu is open
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.__lenis?.stop();
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.__lenis?.start();
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (pathname !== "/") {
@@ -126,16 +164,16 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-zinc-700/80 bg-zinc-950/90 backdrop-blur-md"
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
+        scrolled || mobileOpen
+          ? "border-b border-zinc-700/80 bg-zinc-950/95 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
       aria-label="Main navigation"
     >
       <nav
         data-nav-bar
-        className="mx-auto flex h-[var(--nav-height)] w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 xl:px-12"
+        className="mx-auto grid h-[var(--nav-height)] w-full min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 sm:gap-4 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-6 lg:px-8 xl:px-12"
       >
         <Link
           href="/"
@@ -147,7 +185,7 @@ export default function Navbar() {
               setMobileOpen(false);
             }
           }}
-          className="group flex min-w-0 shrink-0 flex-col justify-center"
+          className="group flex min-w-0 shrink-0 flex-col justify-center justify-self-start"
           aria-label="Reazul Islam Reaz — home"
         >
           <span className="font-display text-[1.3rem] leading-none tracking-tight text-zinc-50 transition-colors group-hover:text-emerald-400">
@@ -156,7 +194,8 @@ export default function Navbar() {
           <span className="type-label mt-0.5 hidden sm:block">Full-Stack</span>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        {/* Desktop + tablet links */}
+        <div className="hidden items-center justify-center gap-0.5 md:flex">
           {navLinks.map(({ href, label }) => {
             const isActive = isNavLinkActive(
               href,
@@ -170,7 +209,7 @@ export default function Navbar() {
                 href={href}
                 onClick={(e) => handleNavClick(e, href, label)}
                 data-active={isActive ? "true" : undefined}
-                className={`nav-link-indicator px-3 py-2 text-sm transition-colors ${
+                className={`nav-link-indicator whitespace-nowrap px-2 py-2 text-sm transition-colors lg:px-3 xl:px-3.5 ${
                   isActive
                     ? "font-medium text-zinc-50"
                     : "text-zinc-400 hover:text-zinc-100"
@@ -182,37 +221,44 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center justify-self-end gap-1.5 sm:gap-2">
           <ThemeToggle />
           <a
             href={resumePath}
             download
-            className="btn-primary hidden !min-h-9 px-3.5 py-1.5 sm:inline-flex"
+            className="btn-primary hidden !min-h-9 whitespace-nowrap px-3.5 py-1.5 md:inline-flex"
             aria-label="Download Resume"
           >
             <span>Resume</span>
             <ArrowUpRight size={14} aria-hidden />
           </a>
+
           <button
             type="button"
-            className="icon-btn md:hidden"
+            className="nav-menu-toggle icon-btn !h-11 !w-11 touch-manipulation md:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
-            aria-controls="mobile-nav-menu"
-            aria-label="Toggle navigation"
+            aria-controls={menuId}
+            aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+            hidden={isDesktop}
+            tabIndex={isDesktop ? -1 : undefined}
           >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileOpen ? (
+              <X size={20} aria-hidden />
+            ) : (
+              <Menu size={20} aria-hidden />
+            )}
           </button>
         </div>
       </nav>
 
-      {mobileOpen ? (
+      {!isDesktop && mobileOpen ? (
         <div
-          id="mobile-nav-menu"
-          className="nav-slide-down border-t border-zinc-700 bg-zinc-950 px-4 pb-5 pt-3 md:hidden"
+          id={menuId}
+          className="nav-slide-down max-h-[min(100dvh-var(--nav-height),32rem)] overflow-y-auto overscroll-contain border-t border-zinc-700/80 bg-zinc-950 px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 sm:px-6"
         >
-          <p className="type-label mb-3">Dhaka · Onsite & Remote</p>
-          <div className="flex flex-col gap-0.5">
+          <p className="type-label mb-2.5">Dhaka · Onsite & Remote</p>
+          <div className="flex flex-col">
             {navLinks.map(({ href, label }) => {
               const isActive = isNavLinkActive(
                 href,
@@ -225,7 +271,7 @@ export default function Navbar() {
                   key={href}
                   href={href}
                   onClick={(e) => handleNavClick(e, href, label)}
-                  className={`rounded-md px-3 py-3 text-base transition ${
+                  className={`flex min-h-11 items-center rounded-md px-3 py-3 text-base leading-none transition ${
                     isActive
                       ? "bg-zinc-800 font-medium text-zinc-50"
                       : "text-zinc-300 hover:bg-zinc-800/70 hover:text-zinc-50"
