@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import {
+  getNavBarOffset,
   hashFromHref,
   isNavLinkActive,
   scrollToInPageTarget,
@@ -91,11 +92,9 @@ export default function Navbar() {
     let ticking = false;
     let lastScrolled = false;
     let lastActive = "";
-
-    // Cache section nodes once — avoid querySelector on every scroll frame
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
+    let activationLine = getNavBarOffset();
+    let lenisOff: (() => void) | undefined;
+    let lenisPoll: ReturnType<typeof setInterval> | undefined;
 
     const computeActive = () => {
       ticking = false;
@@ -116,10 +115,14 @@ export default function Navbar() {
         return;
       }
 
+      // Resolve live — mid-page sections are dynamic imports and may mount late.
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter((el): el is HTMLElement => Boolean(el));
+
       const docH = document.documentElement.scrollHeight;
       if (scrollY + viewportH >= docH - 2) {
-        const last = [...sections].reverse()[0];
-        const id = last?.id ?? "";
+        const id = [...sections].reverse()[0]?.id ?? "";
         if (id && id !== lastActive) {
           lastActive = id;
           setActiveSectionId(id);
@@ -127,12 +130,12 @@ export default function Navbar() {
         return;
       }
 
-      const line = viewportH * 0.3;
+      // Active = last nav section whose top has crossed under the fixed navbar.
       let current = "";
       let bestTop = -Infinity;
       for (const el of sections) {
         const top = el.getBoundingClientRect().top;
-        if (top <= line && top > bestTop) {
+        if (top <= activationLine && top > bestTop) {
           bestTop = top;
           current = el.id;
         }
@@ -150,13 +153,55 @@ export default function Navbar() {
       }
     };
 
+    const onResize = () => {
+      activationLine = getNavBarOffset();
+      onScroll();
+    };
+
+    const attachLenis = () => {
+      const lenis = window.__lenis;
+      if (!lenis || lenisOff) return Boolean(lenis);
+      const onLenisScroll = () => onScroll();
+      lenis.on("scroll", onLenisScroll);
+      lenisOff = () => {
+        lenis.off("scroll", onLenisScroll);
+        lenisOff = undefined;
+      };
+      return true;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+
+    // Lenis mounts in a sibling provider effect; attach when available.
+    if (!attachLenis()) {
+      let polls = 0;
+      lenisPoll = setInterval(() => {
+        polls += 1;
+        if (attachLenis() || polls > 40) {
+          if (lenisPoll) clearInterval(lenisPoll);
+          lenisPoll = undefined;
+        }
+      }, 50);
+    }
+
+    // When deferred sections mount, recompute without waiting for a scroll.
+    const mo = new MutationObserver(() => {
+      onScroll();
+      if (sectionIds.every((id) => document.getElementById(id))) {
+        mo.disconnect();
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
     computeActive();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("resize", onResize);
+      mo.disconnect();
+      lenisOff?.();
+      if (lenisPoll) clearInterval(lenisPoll);
     };
   }, [pathname]);
 
