@@ -1,8 +1,9 @@
 "use client";
 
-import { navLinks, siteSocial } from "@/config/site";
+import { navLinks, resumePath, siteRole, siteSocial } from "@/config/site";
 import SectionLink from "./SectionLink";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { Download } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,9 +17,7 @@ export default function Footer() {
             <p className="font-display text-xl tracking-tight text-zinc-50">
               Reazul Islam Reaz
             </p>
-            <p className="mt-1.5 text-sm text-zinc-500">
-              Backend-focused full-stack engineer
-            </p>
+            <p className="mt-1.5 text-sm text-zinc-500">{siteRole}</p>
             <p className="type-meta mt-5">
               © {currentYear} All rights reserved.
             </p>
@@ -38,6 +37,14 @@ export default function Footer() {
                   {label}
                 </SectionLink>
               ))}
+              <a
+                href={resumePath}
+                download
+                className="inline-flex items-center gap-1 text-sm text-zinc-400 transition hover:text-zinc-50"
+              >
+                Resume
+                <Download size={12} aria-hidden />
+              </a>
             </nav>
             <div className="flex items-center gap-1">
               <a
@@ -45,18 +52,18 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon-btn !h-9 !w-9 text-zinc-500"
-                aria-label="GitHub"
+                aria-label="GitHub Profile"
               >
-                <FiGithub size={16} />
+                <FiGithub size={16} aria-hidden />
               </a>
               <a
                 href={siteSocial.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon-btn !h-9 !w-9 text-zinc-500"
-                aria-label="LinkedIn"
+                aria-label="LinkedIn Profile"
               >
-                <FiLinkedin size={16} />
+                <FiLinkedin size={16} aria-hidden />
               </a>
             </div>
           </div>

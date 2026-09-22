@@ -70,6 +70,9 @@ export default function ProjectCard({
           <p className="type-body mt-3 line-clamp-3 max-w-md text-pretty">
             {project.tagline}
           </p>
+          <p className="type-meta mt-2.5 text-emerald-400/90">
+            {presentation.architectureLine}
+          </p>
 
           <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies">
             {visibleStack.map((feature) => {
@@ -95,7 +98,7 @@ export default function ProjectCard({
           </ul>
 
           {highlights.length > 0 ? (
-            <ul className="mt-5 max-w-md space-y-2">
+            <ul className="mt-5 max-w-md space-y-2" aria-label="Highlights">
               {highlights.map((item) => (
                 <li
                   key={item}
@@ -112,13 +115,20 @@ export default function ProjectCard({
           ) : null}
 
           <div className="mt-6 flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <button
+              type="button"
+              onClick={() => setDetailsOpen(true)}
+              className="btn-primary"
+            >
+              Case study
+            </button>
             <a
               href={project.live}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary group/cta"
+              className="btn-secondary group/cta"
             >
-              View project
+              Live
               <ArrowUpRight
                 size={14}
                 className="transition-transform duration-200 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5"
@@ -134,13 +144,6 @@ export default function ProjectCard({
               <FiGithub size={14} aria-hidden />
               Source
             </a>
-            <button
-              type="button"
-              onClick={() => setDetailsOpen(true)}
-              className="btn-accent"
-            >
-              Case study
-            </button>
           </div>
         </div>
       </article>

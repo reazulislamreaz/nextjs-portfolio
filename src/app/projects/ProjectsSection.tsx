@@ -51,12 +51,12 @@ export default function ProjectsSection() {
     <Section id="projects">
       <div ref={containerRef}>
         <SectionHeader
-          eyebrow="Selected work"
+          eyebrow="Work"
           title="Products, then the engineering underneath"
           subtitle="Featured systems in production — open a case study for architecture and decisions."
         />
 
-        <div data-projects-list>
+        <div data-projects-list id="projects-list">
           {featured.map((project, index) => (
             <ProjectCard
               key={project.title}
@@ -83,6 +83,7 @@ export default function ProjectsSection() {
               onClick={() => setShowAll((prev) => !prev)}
               className="btn-secondary"
               aria-expanded={showAll}
+              aria-controls="projects-list"
             >
               {showAll ? "Show featured only" : `More work · ${more.length}`}
               <FiChevronDown

@@ -16,13 +16,11 @@ export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [provider, setProvider] = useState<string | null>(null);
 
   const resetForm = () => {
     form.current?.reset();
     setStatus("idle");
     setErrorMessage("");
-    setProvider(null);
   };
 
   const sendEmail = async (e: FormEvent) => {
@@ -56,7 +54,6 @@ export default function ContactForm() {
 
     setStatus("loading");
     setErrorMessage("");
-    setProvider(null);
 
     try {
       const response = await fetch("/api/contact", {
@@ -101,9 +98,6 @@ export default function ContactForm() {
       }
 
       form.current.reset();
-      setProvider(
-        data.provider && data.provider !== "filtered" ? data.provider : null,
-      );
       setStatus("success");
     } catch {
       setErrorMessage(
@@ -129,9 +123,6 @@ export default function ContactForm() {
             Thanks — I&apos;ll reply within 24–48 hours. If you don&apos;t see a
             reply, check spam or follow up via WhatsApp.
           </p>
-          {provider ? (
-            <p className="type-meta mt-3">Delivery confirmed via {provider}.</p>
-          ) : null}
           <button
             type="button"
             onClick={resetForm}
@@ -145,7 +136,7 @@ export default function ContactForm() {
           <div className="mb-6">
             <h3 className="type-card-title">Send a message</h3>
             <p className="type-meta mt-1.5">
-              Backend & full-stack roles welcome
+              Role, stack, and onsite or remote
             </p>
           </div>
 

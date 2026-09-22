@@ -15,6 +15,7 @@ export default function ContactSection() {
   const [showMap, setShowMap] = useState(false);
   const mapTriggerRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   const closeMap = useCallback(() => setShowMap(false), []);
 
@@ -47,7 +48,24 @@ export default function ContactSection() {
     closeButtonRef.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeMap();
+      if (e.key === "Escape") {
+        closeMap();
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+      const focusable = dialogRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], iframe, [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
 
     window.addEventListener("keydown", onKey);
@@ -64,7 +82,7 @@ export default function ContactSection() {
         <SectionHeader
           eyebrow="Contact"
           title="Let’s talk about the role"
-          subtitle="Open to backend and full-stack roles in Dhaka or remote. Currently at Sparktech Agency."
+          subtitle="Open to backend and full-stack roles — Dhaka or remote. I usually reply within 24–48 hours."
         />
 
         <div
@@ -72,13 +90,7 @@ export default function ContactSection() {
           className="grid min-w-0 grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-14"
         >
           <div data-contact-col className="flex min-w-0 flex-col">
-            <p className="type-body text-pretty sm:text-base sm:leading-relaxed">
-              If you&apos;re hiring a backend or full-stack engineer, send a short
-              note with the role, stack, and whether it&apos;s on-site or remote. I
-              usually reply within 24–48 hours.
-            </p>
-
-            <div className="mt-8 space-y-0">
+            <div className="space-y-0">
               <a
                 href={`mailto:${siteContact.email}`}
                 className="group flex items-start gap-4 border-b border-zinc-700/60 py-4 transition first:pt-0"
@@ -115,24 +127,27 @@ export default function ContactSection() {
                 </div>
               </a>
 
-              <button
-                ref={mapTriggerRef}
-                type="button"
-                onClick={() => setShowMap(true)}
-                className="group flex w-full items-start gap-4 border-b border-zinc-700/60 py-4 text-left"
-              >
+              <div className="flex items-start gap-4 border-b border-zinc-700/60 py-4">
                 <MapPin
                   size={18}
-                  className="mt-0.5 shrink-0 text-emerald-400 transition-transform duration-200 motion-safe:group-hover:translate-x-0.5"
+                  className="mt-0.5 shrink-0 text-emerald-400"
                   aria-hidden
                 />
                 <div>
                   <p className="type-label">Location</p>
-                  <span className="mt-1 block text-sm font-medium text-zinc-100 transition group-hover:text-emerald-400 sm:text-[0.9375rem]">
+                  <p className="mt-1 text-sm font-medium text-zinc-100 sm:text-[0.9375rem]">
                     Dhaka, Bangladesh · Onsite & Remote
-                  </span>
+                  </p>
+                  <button
+                    ref={mapTriggerRef}
+                    type="button"
+                    onClick={() => setShowMap(true)}
+                    className="mt-1.5 text-sm text-zinc-500 underline-offset-2 transition hover:text-emerald-400 hover:underline"
+                  >
+                    View map
+                  </button>
                 </div>
-              </button>
+              </div>
             </div>
 
             <div className="mt-6 flex items-center gap-1.5">
@@ -141,24 +156,20 @@ export default function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon-btn"
-                aria-label="GitHub"
+                aria-label="GitHub Profile"
               >
-                <FiGithub size={18} />
+                <FiGithub size={18} aria-hidden />
               </a>
               <a
                 href={siteSocial.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="icon-btn"
-                aria-label="LinkedIn"
+                aria-label="LinkedIn Profile"
               >
-                <FiLinkedin size={18} />
+                <FiLinkedin size={18} aria-hidden />
               </a>
-              <a
-                href={resumePath}
-                download
-                className="btn-secondary ml-auto"
-              >
+              <a href={resumePath} download className="btn-secondary ml-auto">
                 <Download size={15} aria-hidden />
                 Resume
               </a>
@@ -173,7 +184,7 @@ export default function ContactSection() {
 
       {showMap ? (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[95] flex items-center justify-center p-4"
           role="presentation"
         >
           <button
@@ -183,6 +194,7 @@ export default function ContactSection() {
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
           <div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
             aria-labelledby="map-dialog-title"

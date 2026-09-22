@@ -25,7 +25,7 @@ export const projectsData: Project[] = [
   {
     title: "Elevate Apparel — E-Commerce Platform",
     tagline:
-      "Production-grade apparel e-commerce platform — Next.js 16 storefront, role-gated admin console, and NestJS 11 REST API with BullMQ & PostgreSQL.",
+      "Apparel commerce for a live merchant — faceted search, variant stock, and a role-gated admin API that keeps checkout and inventory in sync.",
     description:
       "Full-stack e-commerce platform built for a premium apparel brand. Features a high-performance Next.js 16 storefront with server-side faceted search, live stock selection, and optimistic Redux cart management, paired with a role-gated NestJS 11 backend, PostgreSQL (Prisma 7), and BullMQ worker queues for background job relay and analytics.",
     features: [
@@ -47,11 +47,11 @@ export const projectsData: Project[] = [
       "Swagger",
     ],
     metrics: [
-      "Production deployment for live merchant (elevateapparel.com.bd)",
-      "Single npm workspace monorepo for Next.js 16 storefront and NestJS 11 backend",
-      "Faceted server-side search, product variants, real-time stock & COD checkout flow",
+      "Live on elevateapparel.com.bd",
+      "BullMQ workers for outbox relay, CRM backfills, and cart recovery",
+      "Faceted server-side search, product variants, real-time stock & COD checkout",
       "Role-gated /admin console (ADMIN/SUPER_ADMIN) with analytics & CSV/XLSX exports",
-      "BullMQ background jobs for outbox relay, CRM backfills, and cart recovery",
+      "Monorepo workspace for Next.js storefront and NestJS API",
     ],
     devOps: [
       "Production deploy (elevateapparel.com.bd)",
@@ -103,17 +103,16 @@ export const projectsData: Project[] = [
   {
     title: "J&K Cabinetry CT",
     tagline:
-      "Wholesale cabinetry platform — customer portal, admin dashboard, and REST API in production.",
+      "Wholesale cabinetry for dealers and showrooms — verified accounts, catalog checkout, and realtime admin messaging across three production apps.",
     description:
       "Full-stack wholesale cabinetry platform for dealers, contractors, and showrooms. Next.js customer site with catalog and checkout, React admin dashboard for users and inventory, and a TypeScript Express API with MongoDB, S3 uploads, Stripe, and Socket.IO messaging — all live on jkcabinetryct.com.",
     features: [
       "Next.js 16",
-      "React 19",
+      "React",
       "TypeScript",
       "Tailwind CSS",
       "Redux Toolkit",
       "RTK Query",
-      "React 18",
       "Vite",
       "Ant Design",
       "Node.js",
@@ -127,11 +126,11 @@ export const projectsData: Project[] = [
       "Zod",
     ],
     metrics: [
-      "Three production apps — customer site, admin dashboard, and REST API",
-      "Wholesale registration with document upload and admin verification workflow",
+      "Three live hosts — storefront, dashboard, and API",
+      "Wholesale registration with document upload and admin verification",
       "Real-time inbox messaging between customers and admins via Socket.IO",
       "Role-based access — customer, admin, and super_admin with guarded routes",
-      "Catalog, collections, cabinetry, stock parts, orders, and checkout flow",
+      "Catalog, collections, cabinetry, stock parts, orders, and checkout",
     ],
     devOps: [
       "Production deploy (jkcabinetryct.com)",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
@@ -14,12 +14,17 @@ import {
 import { navLinks, resumePath, sectionIds } from "@/config/site";
 import ThemeToggle from "./ThemeToggle";
 
-/** Desktop + tablet: full links. Mobile only: hamburger. */
-const DESKTOP_MQ = "(min-width: 768px)";
+/** Desktop: full links. Tablet + mobile: hamburger (avoids crowded mid-width nav). */
+const DESKTOP_MQ = "(min-width: 1024px)";
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 export default function Navbar() {
   const pathname = usePathname();
   const menuId = useId();
+  const menuToggleRef = useRef<HTMLButtonElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null);
   const [activeSectionId, setActiveSectionId] = useState("");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -35,7 +40,7 @@ export default function Navbar() {
     setPendingScroll(null);
   }, [mobileOpen, pendingScroll]);
 
-  // Track breakpoint — hide hamburger on tablet/desktop, close drawer on resize
+  // Track breakpoint — hide hamburger on desktop, close drawer on resize
   useEffect(() => {
     const mq = window.matchMedia(DESKTOP_MQ);
     const sync = () => {
@@ -48,7 +53,7 @@ export default function Navbar() {
     return () => mq.removeEventListener("change", sync);
   }, []);
 
-  // Prevent background scroll while mobile menu is open
+  // Prevent background scroll + focus trap while mobile menu is open
   useEffect(() => {
     if (!mobileOpen) return;
 
@@ -56,8 +61,28 @@ export default function Navbar() {
     document.body.style.overflow = "hidden";
     window.__lenis?.stop();
 
+    const drawer = drawerRef.current;
+    const focusable = drawer
+      ? [...drawer.querySelectorAll<HTMLElement>(FOCUSABLE)]
+      : [];
+    focusable[0]?.focus();
+
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileOpen(false);
+      if (event.key === "Escape") {
+        setMobileOpen(false);
+        return;
+      }
+      if (event.key !== "Tab" || !drawer || !focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
 
@@ -65,6 +90,7 @@ export default function Navbar() {
       document.body.style.overflow = previousOverflow;
       window.__lenis?.start();
       window.removeEventListener("keydown", onKey);
+      menuToggleRef.current?.focus();
     };
   }, [mobileOpen]);
 
@@ -235,7 +261,7 @@ export default function Navbar() {
     >
       <nav
         data-nav-bar
-        className="mx-auto grid h-[var(--nav-height)] w-full min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 pl-4 sm:gap-4 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-6 lg:px-8 xl:px-12"
+        className="mx-auto grid h-[var(--nav-height)] w-full min-w-0 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 pl-4 sm:gap-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8 xl:px-12"
       >
         <Link
           href="/"
@@ -256,8 +282,8 @@ export default function Navbar() {
           <span className="type-label mt-0.5 hidden sm:block">Full-Stack</span>
         </Link>
 
-        {/* Desktop + tablet links */}
-        <div className="hidden items-center justify-center gap-0.5 md:flex">
+        {/* Desktop links */}
+        <div className="hidden items-center justify-center gap-0.5 lg:flex">
           {navLinks.map(({ href, label }) => {
             const isActive = isNavLinkActive(
               href,
@@ -296,8 +322,9 @@ export default function Navbar() {
           </a>
 
           <button
+            ref={menuToggleRef}
             type="button"
-            className="nav-menu-toggle icon-btn !h-11 !w-11 touch-manipulation md:hidden"
+            className="nav-menu-toggle icon-btn !h-11 !w-11 touch-manipulation lg:hidden"
             onClick={() => setMobileOpen((v) => !v)}
             aria-expanded={mobileOpen}
             aria-controls={menuId}
@@ -316,10 +343,10 @@ export default function Navbar() {
 
       {!isDesktop && mobileOpen ? (
         <div
+          ref={drawerRef}
           id={menuId}
           className="nav-slide-down max-h-[min(100dvh-var(--nav-height),32rem)] overflow-y-auto overscroll-contain border-t border-zinc-700/80 bg-zinc-950 px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 sm:px-6"
         >
-          <p className="type-label mb-2.5">Dhaka · Onsite & Remote</p>
           <div className="flex flex-col">
             {navLinks.map(({ href, label }) => {
               const isActive = isNavLinkActive(
@@ -350,7 +377,7 @@ export default function Navbar() {
             className="btn-primary mt-4 w-full"
             onClick={() => setMobileOpen(false)}
           >
-            Download Resume
+            Resume
             <ArrowUpRight size={14} aria-hidden />
           </a>
         </div>

@@ -6,10 +6,10 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  type KeyboardEvent,
 } from "react";
 import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
-import TechMarquee from "@/components/ui/TechMarquee";
 import { showcaseTech, type TechItem } from "@/components/ui/tech";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap, isReducedMotion } from "@/lib/gsap";
@@ -27,7 +27,7 @@ const groups: TechGroup[] = [
     label: "Backend",
     summary:
       "The core of the work: NestJS and Express APIs, typed contracts, Socket.IO, and server-side payment flows.",
-    names: ["Node.js", "NestJS", "Express", "TypeScript", "GraphQL", "Go", "Socket.IO", "Stripe"],
+    names: ["Node.js", "NestJS", "Express", "TypeScript", "Socket.IO", "Stripe"],
   },
   {
     id: "frontend",
@@ -59,9 +59,6 @@ function toolsFor(names: string[]): TechItem[] {
     .map((name) => byName.get(name))
     .filter((item): item is TechItem => Boolean(item));
 }
-
-const rowA = showcaseTech.slice(0, 10);
-const rowB = showcaseTech.slice(10);
 
 export default function Skills() {
   const [activeId, setActiveId] = useState(groups[0].id);
@@ -107,7 +104,8 @@ export default function Skills() {
     const onResize = () => syncIndicator();
     window.addEventListener("resize", onResize);
 
-    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(onResize) : null;
+    const ro =
+      typeof ResizeObserver !== "undefined" ? new ResizeObserver(onResize) : null;
     ro?.observe(list);
 
     return () => {
@@ -115,6 +113,37 @@ export default function Skills() {
       ro?.disconnect();
     };
   }, [syncIndicator]);
+
+  const selectByIndex = useCallback((index: number) => {
+    const next = groups[(index + groups.length) % groups.length];
+    setActiveId(next.id);
+    requestAnimationFrame(() => tabRefs.current.get(next.id)?.focus());
+  }, []);
+
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    switch (event.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        event.preventDefault();
+        selectByIndex(index + 1);
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        event.preventDefault();
+        selectByIndex(index - 1);
+        break;
+      case "Home":
+        event.preventDefault();
+        selectByIndex(0);
+        break;
+      case "End":
+        event.preventDefault();
+        selectByIndex(groups.length - 1);
+        break;
+      default:
+        break;
+    }
+  };
 
   const containerRef = useGsapScroll<HTMLDivElement>((_, reduced) => {
     if (reduced) return;
@@ -134,7 +163,6 @@ export default function Skills() {
         duration: 0.45,
         ease: "power2.out",
         onComplete: () => {
-          // First paint is handled by scroll; later tab switches animate the panel.
           skipPanelAnim.current = false;
         },
       },
@@ -195,23 +223,16 @@ export default function Skills() {
   }, [activeId]);
 
   return (
-    <Section id="skills" className="overflow-hidden border-y border-zinc-700/60 bg-zinc-900/40">
+    <Section
+      id="skills"
+      className="overflow-hidden border-y border-zinc-700/60 bg-zinc-900/40"
+    >
       <div ref={containerRef}>
         <SectionHeader
           eyebrow="Expertise"
           title="What the systems are made of"
           subtitle="Backend first, then the interface, the database, and the deploy path."
         />
-
-        <div className="mb-8 space-y-2.5 sm:mb-10">
-          <TechMarquee items={rowA} label="Primary technologies" duration="40s" />
-          <TechMarquee
-            items={rowB}
-            reverse
-            label="Infrastructure and integrations"
-            duration="48s"
-          />
-        </div>
 
         <div data-skills-board>
           <div
@@ -227,7 +248,7 @@ export default function Skills() {
               className="pointer-events-none absolute top-0 left-0 z-0 rounded-md bg-zinc-50 will-change-transform"
               style={{ width: 0, height: 0 }}
             />
-            {groups.map((group) => {
+            {groups.map((group, index) => {
               const selected = group.id === active.id;
               return (
                 <button
@@ -237,11 +258,13 @@ export default function Skills() {
                   id={`tech-tab-${group.id}`}
                   aria-selected={selected}
                   aria-controls="tech-panel"
+                  tabIndex={selected ? 0 : -1}
                   ref={(node) => {
                     if (node) tabRefs.current.set(group.id, node);
                     else tabRefs.current.delete(group.id);
                   }}
                   onClick={() => setActiveId(group.id)}
+                  onKeyDown={(event) => onTabKeyDown(event, index)}
                   className={`relative z-10 shrink-0 rounded-md px-3.5 py-2 text-sm font-medium transition-colors duration-200 ${
                     selected
                       ? "text-zinc-950"
@@ -262,10 +285,7 @@ export default function Skills() {
             aria-labelledby={`tech-tab-${active.id}`}
             className="surface-card mt-4 rounded-lg p-5 sm:mt-5 sm:p-6"
           >
-            <p
-              data-skill-summary
-              className="type-body max-w-2xl text-pretty"
-            >
+            <p data-skill-summary className="type-body max-w-2xl text-pretty">
               {active.summary}
             </p>
             <ul className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-2.5 lg:grid-cols-4">

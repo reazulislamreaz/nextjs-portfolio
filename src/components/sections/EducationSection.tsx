@@ -4,17 +4,16 @@ import Section from "@/app/components/ui/Section";
 import SectionHeader from "@/app/components/ui/SectionHeader";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
-import { BookOpen, Calendar, MapPin } from "lucide-react";
+import { BookOpen, Calendar } from "lucide-react";
 
 const education = {
   degree: "Bachelor of Social Science (Honors)",
   field: "Political Science",
   institution: "National University, Bangladesh",
-  location: "Bangladesh",
-  period: "In progress · Expected graduation 2026",
+  period: "Expected graduation 2026",
   status: "In progress",
   summary:
-    "Honors program covering governance, policy, research methods, and institutional systems — training that transfers to clear API design, permission models, and structured problem-solving.",
+    "Honors program covering governance, policy, research methods, and institutional systems.",
   focusAreas: [
     "Political theory",
     "Public policy",
@@ -56,7 +55,7 @@ export default function Education() {
         <article data-edu className="surface-card rounded-lg p-5 sm:p-6 lg:p-7">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span className="type-eyebrow">{education.status}</span>
-            <span className="inline-flex items-center gap-1.5 type-meta">
+            <span className="type-meta inline-flex items-center gap-1.5">
               <Calendar size={12} aria-hidden />
               {education.period}
             </span>
@@ -67,32 +66,20 @@ export default function Education() {
             {education.field}
           </p>
 
-          <dl className="mt-4 space-y-2 text-sm text-zinc-400">
-            <div className="flex items-start gap-2">
-              <BookOpen
-                className="mt-0.5 shrink-0 text-zinc-500"
-                size={15}
-                aria-hidden
-              />
-              <dd>{education.institution}</dd>
-            </div>
-            <div className="flex items-start gap-2">
-              <MapPin
-                className="mt-0.5 shrink-0 text-zinc-500"
-                size={15}
-                aria-hidden
-              />
-              <dd>{education.location}</dd>
-            </div>
-          </dl>
+          <p className="mt-4 flex items-start gap-2 text-sm text-zinc-400">
+            <BookOpen
+              className="mt-0.5 shrink-0 text-zinc-500"
+              size={15}
+              aria-hidden
+            />
+            <span>{education.institution}</span>
+          </p>
 
           <p className="type-body mt-5 max-w-2xl text-pretty">
             {education.summary}
           </p>
 
-          <p className="type-meta mt-5">
-            {education.focusAreas.join(" · ")}
-          </p>
+          <p className="type-meta mt-5">{education.focusAreas.join(" · ")}</p>
         </article>
       </div>
     </Section>

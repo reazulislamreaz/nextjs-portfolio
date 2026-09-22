@@ -4,6 +4,8 @@ export interface ProjectPresentation {
   kind: string;
   role: string;
   featured: boolean;
+  /** One-line architecture signal for cards */
+  architectureLine: string;
 }
 
 /** Labels taken from the existing project descriptions — not new claims. */
@@ -15,6 +17,7 @@ export function presentProject(project: Project): ProjectPresentation {
       kind: "Commerce",
       role: "Storefront, admin console, and API",
       featured: true,
+      architectureLine: "NestJS · BullMQ · PostgreSQL · RBAC",
     };
   }
 
@@ -23,6 +26,7 @@ export function presentProject(project: Project): ProjectPresentation {
       kind: "Wholesale",
       role: "Customer site, admin dashboard, and API",
       featured: true,
+      architectureLine: "Express · MongoDB · Socket.IO · Stripe",
     };
   }
 
@@ -31,6 +35,7 @@ export function presentProject(project: Project): ProjectPresentation {
       kind: "Events",
       role: "API, organizer tools, and mobile app",
       featured: true,
+      architectureLine: "Express · MongoDB · Socket.IO · JWT",
     };
   }
 
@@ -39,6 +44,7 @@ export function presentProject(project: Project): ProjectPresentation {
       kind: "Realtime",
       role: "Client and realtime API",
       featured: false,
+      architectureLine: "Express · MongoDB · Redis · Socket.IO",
     };
   }
 
@@ -47,6 +53,7 @@ export function presentProject(project: Project): ProjectPresentation {
       kind: "Marketplace",
       role: "Listings client and payments API",
       featured: false,
+      architectureLine: "Express · MongoDB · JWT · Stripe",
     };
   }
 
@@ -54,5 +61,6 @@ export function presentProject(project: Project): ProjectPresentation {
     kind: "Registration",
     role: "Organizer console and public signup",
     featured: false,
+    architectureLine: "Express · MongoDB · Firebase Auth",
   };
 }

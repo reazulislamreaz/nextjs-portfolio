@@ -39,7 +39,7 @@ export default function ExperienceSection() {
       <div ref={containerRef}>
         <SectionHeader
           eyebrow="Experience"
-          title="Roles where I shipped production backends"
+          title="Roles where I build and ship backends"
           subtitle="Client platforms, event systems, and team delivery — with APIs, data models, and realtime features."
         />
 

@@ -11,6 +11,8 @@ interface ProjectCarouselProps {
   showThumbs?: boolean;
   /** Override responsive sizes (e.g. wider modal frames). */
   sizes?: string;
+  /** Disable autoplay (e.g. inside a case-study modal). */
+  autoplay?: boolean;
 }
 
 /** Stable frame — avoids decoding every slide just to measure natural size. */
@@ -26,11 +28,14 @@ export default function ProjectCarousel({
   priority = false,
   showThumbs = true,
   sizes = DEFAULT_SIZES,
+  autoplay = true,
 }: ProjectCarouselProps) {
   const [index, setIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(true);
+  const rootRef = useRef<HTMLElement>(null);
   const touchStartX = useRef<number | null>(null);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -73,7 +78,27 @@ export default function ProjectCarousel({
   }, []);
 
   useEffect(() => {
-    if (images.length <= 1 || reduceMotion || paused) return;
+    const root = rootRef.current;
+    if (!root || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.35 },
+    );
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (
+      !autoplay ||
+      images.length <= 1 ||
+      reduceMotion ||
+      paused ||
+      !inView
+    ) {
+      return;
+    }
     const timer = window.setInterval(() => {
       if (document.visibilityState !== "visible") return;
       setIndex((prev) => {
@@ -83,7 +108,7 @@ export default function ProjectCarousel({
       });
     }, 7000);
     return () => window.clearInterval(timer);
-  }, [images.length, paused, reduceMotion]);
+  }, [autoplay, images.length, inView, paused, reduceMotion]);
 
   if (!images.length) {
     return (
@@ -95,13 +120,13 @@ export default function ProjectCarousel({
 
   const visibleIndexes = new Set<number>([index]);
   if (prevIndex != null && prevIndex !== index) visibleIndexes.add(prevIndex);
-  // Warm the next slide without keeping the whole gallery decoded
   if (images.length > 1) {
     visibleIndexes.add((index + 1) % images.length);
   }
 
   return (
     <figure
+      ref={rootRef}
       className="w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -141,7 +166,7 @@ export default function ProjectCarousel({
               }
               fill
               priority={priority && imageIndex === 0}
-              quality={95}
+              quality={80}
               sizes={sizes}
               className={`object-contain object-center ${
                 reduceMotion ? "" : "transition-opacity duration-300"
@@ -177,6 +202,10 @@ export default function ProjectCarousel({
         ) : null}
       </div>
 
+      <p className="sr-only" aria-live="polite">
+        Screenshot {index + 1} of {images.length}
+      </p>
+
       {showThumbs && images.length > 1 ? (
         <div
           className="flex gap-2 overflow-x-auto px-3 py-3 sm:px-4"
@@ -201,7 +230,7 @@ export default function ProjectCarousel({
                   src={src}
                   alt=""
                   fill
-                  quality={85}
+                  quality={70}
                   sizes="(max-width: 639px) 76px, 88px"
                   loading="lazy"
                   className="object-contain"

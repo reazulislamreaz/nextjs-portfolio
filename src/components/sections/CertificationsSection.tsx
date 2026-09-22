@@ -36,16 +36,10 @@ const items: Certification[] = [
   {
     title: "Next Level Web Development",
     summary:
-      "AI-driven software engineering bootcamp — TypeScript full-stack, production patterns, and cloud.",
+      "TypeScript full-stack bootcamp covering production patterns and cloud delivery.",
     platform: "Programming Hero — Next Level Bootcamp",
     credentialUrl: "https://next.programming-hero.com/",
     credentialLabel: "Bootcamp overview",
-  },
-  {
-    title: "AI & Intelligent Systems",
-    summary:
-      "AI-assisted backends, RAG patterns, and intelligent workflow integrations.",
-    platform: "OpenAI, Claude, Cursor, ChatGPT, Gemini",
   },
 ];
 
@@ -75,20 +69,20 @@ export default function Certifications() {
     <Section id="certifications" tight>
       <div ref={containerRef}>
         <SectionHeader
-          eyebrow="Learning"
+          eyebrow="Credentials"
           title="Certifications & coursework"
-          subtitle="Focused study in full-stack delivery, AWS, and AI-assisted engineering."
+          subtitle="Focused study in full-stack delivery and AWS."
         />
 
         <div
           data-certs
-          className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4"
+          className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4"
         >
           {items.map((item) => (
             <article
               key={item.title}
               data-cert
-              className="surface-card flex min-w-0 flex-col rounded-lg p-5 sm:p-5"
+              className="surface-card flex min-w-0 flex-col rounded-lg p-5"
             >
               <h3 className="text-[0.9375rem] font-medium tracking-tight text-zinc-50 sm:text-base">
                 {item.title}

@@ -1,8 +1,11 @@
 "use client";
 
 import { FormEvent, useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { FiSend, FiX } from "react-icons/fi";
 import { TbMessageChatbot, TbSparkles } from "react-icons/tb";
+import { siteContact } from "@/config/site";
+import { scrollToInPageTarget } from "@/lib/nav-utils";
 
 interface Message {
   id: string;
@@ -39,7 +42,7 @@ const initialMessages: Message[] = [
     id: "welcome",
     role: "assistant",
     content:
-      "Ask about Reaz's projects, skills, education, resume, or contact details.",
+      "Ask about Reaz's projects, skills, education, or resume. For hiring, use the Contact section.",
   },
 ];
 
@@ -86,7 +89,17 @@ function createLeadSummary(lead: ContactLead): string {
   ].join("\n");
 }
 
+function routeToContact() {
+  if (typeof window === "undefined") return;
+  if (window.location.pathname === "/") {
+    scrollToInPageTarget("/#contact", "Contact");
+  } else {
+    window.location.href = "/#contact";
+  }
+}
+
 export default function AiPortfolioAssistant() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -99,12 +112,18 @@ export default function AiPortfolioAssistant() {
     project: "",
     timeline: "",
   });
+  const [nearContact, setNearContact] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const hideFab =
+    nearContact ||
+    pathname === "/contact" ||
+    pathname?.startsWith("/contact/");
+
   const inputPlaceholder =
     contactStep === "idle" || contactStep === "done"
-      ? "Ask about projects or start an inquiry..."
+      ? "Ask about projects, skills, or resume..."
       : contactStep === "confirm"
         ? "Reply yes to send or no to cancel..."
         : "Share the requested detail...";
@@ -129,6 +148,34 @@ export default function AiPortfolioAssistant() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact || typeof IntersectionObserver === "undefined") {
+      setNearContact(false);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setNearContact(entry.isIntersecting),
+      { rootMargin: "0px 0px -20% 0px", threshold: 0.15 },
+    );
+    observer.observe(contact);
+    return () => observer.disconnect();
+  }, [pathname]);
+
+  useEffect(() => {
+    if (hideFab && open) setOpen(false);
+  }, [hideFab, open]);
+
   async function sendMessage(content: string) {
     const trimmed = content.trim();
     if (!trimmed || loading) return;
@@ -139,7 +186,12 @@ export default function AiPortfolioAssistant() {
     }
 
     if (detectContactIntent(trimmed)) {
-      startContactFlow(trimmed);
+      appendExchange(
+        trimmed,
+        `For hiring or project inquiries, use the Contact section — email ${siteContact.email} or WhatsApp ${siteContact.phone}. I can scroll you there now.`,
+      );
+      setOpen(false);
+      window.setTimeout(() => routeToContact(), 120);
       return;
     }
 
@@ -273,7 +325,7 @@ export default function AiPortfolioAssistant() {
         setContactStep("idle");
         appendExchange(
           value,
-          "No problem. I cancelled the inquiry. You can still contact Reaz directly at reazul.dev@gmail.com or WhatsApp: +8801770807782.",
+          `No problem. I cancelled the inquiry. You can still reach Reaz at ${siteContact.email} or WhatsApp: ${siteContact.phone}.`,
         );
         return;
       }
@@ -333,7 +385,7 @@ export default function AiPortfolioAssistant() {
         ...current,
         createMessage(
           "assistant",
-          "I could not send the inquiry from chat right now. You can contact Reaz directly at reazul.dev@gmail.com or WhatsApp: +8801770807782.",
+          `I could not send the inquiry from chat right now. Please use the Contact section — ${siteContact.email} or WhatsApp ${siteContact.phone}.`,
         ),
       ]);
     } finally {
@@ -348,7 +400,6 @@ export default function AiPortfolioAssistant() {
 
   return (
     <>
-      {/* Mobile dark backdrop overlay when chatbot is open */}
       {open ? (
         <div
           className="fixed inset-0 z-[85] bg-black/75 backdrop-blur-xs transition-opacity sm:hidden"
@@ -357,12 +408,15 @@ export default function AiPortfolioAssistant() {
         />
       ) : null}
 
-      <div className="fixed bottom-4 right-4 z-[90] sm:bottom-6 sm:right-6">
-        {open ? (
-          <section
-            className="fixed inset-x-0 bottom-0 top-10 z-[90] flex flex-col overflow-hidden rounded-t-lg border-t border-zinc-700/80 bg-zinc-950/98 shadow-xl backdrop-blur-md sm:absolute sm:bottom-16 sm:right-0 sm:top-auto sm:inset-x-auto sm:h-[min(620px,calc(100dvh-6.5rem))] sm:w-[400px] sm:rounded-lg sm:border sm:border-zinc-700/80"
-            aria-label="AI portfolio assistant"
-          >
+      {!hideFab || open ? (
+        <div className="fixed bottom-4 right-4 z-[90] sm:bottom-6 sm:right-6">
+          {open ? (
+            <section
+              className="fixed inset-x-0 bottom-0 top-10 z-[90] flex flex-col overflow-hidden rounded-t-lg border-t border-zinc-700/80 bg-zinc-950/98 shadow-xl backdrop-blur-md sm:absolute sm:bottom-16 sm:right-0 sm:top-auto sm:inset-x-auto sm:h-[min(620px,calc(100dvh-6.5rem))] sm:w-[400px] sm:rounded-lg sm:border sm:border-zinc-700/80"
+              aria-label="AI portfolio assistant"
+              aria-modal="true"
+              role="dialog"
+            >
             {/* Mobile grab bar indicator */}
             <div className="flex justify-center pt-2.5 pb-1 sm:hidden">
               <div className="h-1 w-10 rounded-full bg-zinc-700/60" />
@@ -378,7 +432,7 @@ export default function AiPortfolioAssistant() {
                     AI Portfolio Assistant
                   </h2>
                   <p className="truncate text-xs text-zinc-500">
-                    Answers questions and sends project inquiries
+                    Answers questions about projects and skills
                   </p>
                 </div>
               </div>
@@ -465,18 +519,19 @@ export default function AiPortfolioAssistant() {
               </form>
             </div>
           </section>
-        ) : (
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-700/80 bg-zinc-900 text-zinc-100 shadow-lg transition hover:border-zinc-500 hover:bg-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 sm:h-13 sm:w-13"
-            aria-label="Open AI portfolio assistant"
-            aria-expanded="false"
-          >
-            <TbMessageChatbot size={22} aria-hidden />
-          </button>
-        )}
-      </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="inline-flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-700/80 bg-zinc-900 text-zinc-100 shadow-lg transition hover:border-zinc-500 hover:bg-zinc-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 sm:h-13 sm:w-13"
+              aria-label="Open AI portfolio assistant"
+              aria-expanded={open}
+            >
+              <TbMessageChatbot size={22} aria-hidden />
+            </button>
+          )}
+        </div>
+      ) : null}
     </>
   );
 }

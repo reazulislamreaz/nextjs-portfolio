@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { resumePath, siteContact, siteSocial } from "@/config/site";
+import { resumePath, siteContact, siteRole, siteSocial } from "@/config/site";
 import SectionLink from "@/app/components/SectionLink";
 import { showcaseTech } from "@/components/ui/tech";
 import { useGsapScroll } from "@/hooks/useGsapScroll";
@@ -98,87 +98,68 @@ export default function HomeHero() {
             data-hero-role
             className="mt-3.5 text-lg font-medium leading-snug text-zinc-200 sm:mt-4 sm:text-xl"
           >
-            Backend-Focused Full-Stack Engineer
+            {siteRole}
           </p>
 
-          <p
-            data-hero-copy
-            className="type-lede mt-3 max-w-lg text-pretty text-zinc-400"
-          >
+          <p data-hero-copy className="type-lede mt-3 max-w-lg text-pretty">
             I design and ship the APIs, data models, auth, and background jobs
             behind production web apps — NestJS, Express, PostgreSQL, MongoDB,
             Redis, and Next.js when the product needs a UI.
           </p>
 
-          <div data-hero-actions className="mt-7 flex flex-col gap-5">
-            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-              <SectionLink href="/#projects" className="btn-primary group">
-                See the work
-                <ArrowRight
-                  size={16}
-                  className="transition-transform group-hover:translate-x-0.5"
-                  aria-hidden
-                />
-              </SectionLink>
-              <a href={resumePath} download className="btn-secondary">
-                <Download size={15} aria-hidden />
-                Resume
+          <div
+            data-hero-actions
+            className="mt-7 flex flex-wrap items-center gap-2.5 sm:gap-3"
+          >
+            <SectionLink href="/#projects" className="btn-primary group">
+              See the work
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-0.5"
+                aria-hidden
+              />
+            </SectionLink>
+            <a href={resumePath} download className="btn-secondary">
+              <Download size={15} aria-hidden />
+              Resume
+            </a>
+            <div className="flex items-center gap-0.5">
+              <a
+                href={siteSocial.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="icon-btn"
+                aria-label="GitHub Profile"
+              >
+                <FiGithub size={18} aria-hidden />
               </a>
-              <div className="flex items-center gap-0.5">
-                <a
-                  href={siteSocial.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="icon-btn"
-                  aria-label="GitHub Profile"
-                >
-                  <FiGithub size={18} />
-                </a>
-                <a
-                  href={siteSocial.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="icon-btn"
-                  aria-label="LinkedIn Profile"
-                >
-                  <FiLinkedin size={18} />
-                </a>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="icon-btn"
-                  aria-label="Copy email address"
-                >
-                  {copiedEmail ? (
-                    <Check size={18} className="text-emerald-400" />
-                  ) : (
-                    <Mail size={18} />
-                  )}
-                </button>
-              </div>
+              <a
+                href={siteSocial.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="icon-btn"
+                aria-label="LinkedIn Profile"
+              >
+                <FiLinkedin size={18} aria-hidden />
+              </a>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="icon-btn"
+                aria-label={
+                  copiedEmail ? "Email copied" : "Copy email address"
+                }
+              >
+                {copiedEmail ? (
+                  <Check size={18} className="text-emerald-400" aria-hidden />
+                ) : (
+                  <Mail size={18} aria-hidden />
+                )}
+              </button>
+              <span className="sr-only" aria-live="polite">
+                {copiedEmail ? "Email address copied to clipboard" : ""}
+              </span>
             </div>
-
-            <ul
-              className="flex flex-wrap gap-x-1 gap-y-2"
-              aria-label="Primary technologies"
-            >
-              {heroTech.map((tech, i) => {
-                const Icon = tech.icon;
-                return (
-                  <li key={tech.name} className="inline-flex items-center">
-                    <span className="inline-flex items-center gap-1.5 px-1.5 text-xs font-medium text-zinc-400 sm:text-[0.8125rem]">
-                      <Icon className="text-sm text-emerald-400" aria-hidden />
-                      {tech.name}
-                    </span>
-                    {i < heroTech.length - 1 ? (
-                      <span className="text-zinc-600" aria-hidden>
-                        ·
-                      </span>
-                    ) : null}
-                  </li>
-                );
-              })}
-            </ul>
           </div>
         </div>
 
@@ -219,6 +200,28 @@ export default function HomeHero() {
             </div>
           ))}
         </dl>
+
+        <ul
+          className="mt-5 flex flex-wrap gap-x-1 gap-y-2"
+          aria-label="Primary technologies"
+        >
+          {heroTech.map((tech, i) => {
+            const Icon = tech.icon;
+            return (
+              <li key={tech.name} className="inline-flex items-center">
+                <span className="inline-flex items-center gap-1.5 px-1.5 text-xs font-medium text-zinc-400 sm:text-[0.8125rem]">
+                  <Icon className="text-sm text-emerald-400" aria-hidden />
+                  {tech.name}
+                </span>
+                {i < heroTech.length - 1 ? (
+                  <span className="text-zinc-600" aria-hidden>
+                    ·
+                  </span>
+                ) : null}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );

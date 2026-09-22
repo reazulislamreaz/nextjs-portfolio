@@ -15,8 +15,11 @@ const ExperienceSection = dynamic(
   () => import("@/components/sections/ExperienceSection"),
   { loading: () => <SectionSkeleton /> },
 );
+const AboutSection = dynamic(() => import("@/components/sections/AboutSection"), {
+  loading: () => <SectionSkeleton />,
+});
 
-/** Lower page — deferred chunks; SSR retained for SEO. */
+/** Credentials after About — keeps Experience → mindset → hire path intact. */
 const EducationSection = dynamic(
   () => import("@/components/sections/EducationSection"),
   { loading: () => <SectionSkeleton /> },
@@ -25,9 +28,6 @@ const CertificationsSection = dynamic(
   () => import("@/components/sections/CertificationsSection"),
   { loading: () => <SectionSkeleton /> },
 );
-const AboutSection = dynamic(() => import("@/components/sections/AboutSection"), {
-  loading: () => <SectionSkeleton />,
-});
 const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
   loading: () => <SectionSkeleton />,
 });
@@ -39,9 +39,9 @@ export default function HomePage() {
       <ProjectsSection />
       <SkillsSection />
       <ExperienceSection />
+      <AboutSection />
       <EducationSection />
       <CertificationsSection />
-      <AboutSection />
       <ContactSection />
     </>
   );

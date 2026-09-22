@@ -17,6 +17,9 @@ export const siteSocial = {
 
 export const resumePath = "/Reazul_Islam_Reaz_Full_Stack_Engineer_Resume.pdf";
 
+/** Canonical role string — keep identical in hero, footer, and metadata. */
+export const siteRole = "Backend-Focused Full-Stack Engineer";
+
 export interface NavLink {
   href: string;
   label: string;

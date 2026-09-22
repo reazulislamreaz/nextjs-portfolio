@@ -618,8 +618,8 @@ html:not(.dark) :is(
     background-color 0.2s ease;
 }
 
-/* Force-hide hamburger on tablet + desktop (beats .icon-btn display) */
-@media (width >= 48rem) {
+/* Force-hide hamburger on desktop (beats .icon-btn display) */
+@media (width >= 64rem) {
   .nav-menu-toggle {
     display: none !important;
   }
@@ -630,7 +630,7 @@ html:not(.dark) :is(
   display: none !important;
 }
 
-@media (width >= 48rem) {
+@media (width >= 64rem) {
   .nav-resume-desktop {
     display: inline-flex !important;
   }

@@ -7,38 +7,26 @@ import { useGsapScroll } from "@/hooks/useGsapScroll";
 import { gsap } from "@/lib/gsap";
 import { ArrowRight } from "lucide-react";
 
-/**
- * Condensed phases covering the full loop:
- * Understand → Plan → Architect → Data flow → Build → Test → Optimize/Scale/Improve
- */
 const workflow = [
   {
-    title: "Understand the problem",
-    body: "I start with the real constraints — who it is for, what must not break, and what “done” means before any code exists.",
+    title: "Understand & plan",
+    body: "Map the real problem, constraints, and outcomes — then break work into features, dependencies, and edge cases before code.",
   },
   {
-    title: "Break the work down",
-    body: "Features, dependencies, priorities, and edge cases get mapped early so implementation does not invent the plan on the fly.",
-  },
-  {
-    title: "Design the architecture",
-    body: "I choose structure for change: boundaries, database shape, APIs, auth, caching, and queues — only when the problem earns them.",
-  },
-  {
-    title: "Trace the data flow",
-    body: "Request → logic → storage → response. I care about consistency and predictable behavior more than clever shortcuts.",
+    title: "Architect & design data flow",
+    body: "Choose structure for change, then trace request → logic → storage → response so behavior stays consistent and predictable.",
   },
   {
     title: "Build the core",
-    body: "Modular code with clear ownership: validation, error contracts, auth, and security treated as part of the product — not afterthoughts.",
+    body: "Modular code with clear ownership: validation, error contracts, auth, and security as part of the product.",
   },
   {
     title: "Prove it under pressure",
-    body: "Happy paths are not enough. I check failures, integrity, API contracts, and the cases users hit when things go wrong.",
+    body: "Happy paths are not enough. Check failures, integrity, API contracts, and the cases users hit when things go wrong.",
   },
   {
-    title: "Optimize, offload, and evolve",
-    body: "Fix what actually hurts, move slow work off the request path, leave room to scale, then watch production and keep refining.",
+    title: "Optimize, scale, and evolve",
+    body: "Fix what hurts, move slow work off the request path, leave room to grow, then watch production and keep refining.",
   },
 ];
 
@@ -94,21 +82,16 @@ export default function About() {
       <div ref={containerRef}>
         <SectionHeader
           eyebrow="About"
-          title="How I think through a system"
-          subtitle="A backend-focused way of working: understand the problem, design the structure and data movement, then build something that holds up in production."
+          title="How I think and build"
+          subtitle="A backend-focused way of working: understand the problem, design the structure and data movement, then ship something that holds up in production."
         />
 
         <div className="grid w-full min-w-0 grid-cols-1 gap-10 lg:grid-cols-12 lg:items-start lg:gap-14">
           <div data-about-block className="min-w-0 lg:col-span-7">
             <p className="type-lede max-w-2xl text-pretty">
-              I&apos;m{" "}
-              <span className="font-medium text-zinc-50">
-                Reazul Islam Reaz
-              </span>
-              . I build full-stack products with a backend bias — the kind of
-              systems where the data has to stay consistent, the API has to stay
-              boringly predictable, and slow work does not live on the request
-              path.
+              I build full-stack products with a backend bias — systems where
+              data stays consistent, APIs stay predictable, and slow work does
+              not live on the request path.
             </p>
 
             <p className="type-label mt-9 mb-4">From idea to production</p>
@@ -144,8 +127,7 @@ export default function About() {
               What I optimize for
             </h3>
             <p className="mt-2 max-w-sm text-sm leading-relaxed text-zinc-500">
-              The checklist behind every architecture decision — not a stack
-              list.
+              The checklist behind architecture decisions — not a stack list.
             </p>
             <ul className="mt-6 space-y-3.5">
               {principles.map((item) => (
