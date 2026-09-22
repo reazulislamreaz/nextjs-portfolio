@@ -18,9 +18,16 @@ interface ProjectCarouselProps {
 /** Stable frame — avoids decoding every slide just to measure natural size. */
 const FRAME_RATIO = "16 / 10";
 
-/** Match card/modal CSS width closely so Retina can pick a sharp srcset candidate. */
+/**
+ * Match card CSS width (Section max-w-7xl × lg:col-span-7) so the browser
+ * picks a sharp Retina candidate without overshooting to full-bleed widths.
+ */
 const DEFAULT_SIZES =
-  "(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) calc(100vw - 3rem), (max-width: 1279px) 58vw, 800px";
+  "(max-width: 639px) calc(100vw - 2rem), (max-width: 1023px) calc(100vw - 3rem), (max-width: 1279px) 560px, 700px";
+
+/** Start decoding before the card enters the viewport (after Hero LCP). */
+const NEAR_VIEW_MARGIN = "560px 0px";
+const NEAR_VIEW_PX = 560;
 
 export default function ProjectCarousel({
   images,
@@ -34,7 +41,8 @@ export default function ProjectCarousel({
   const [prevIndex, setPrevIndex] = useState<number | null>(null);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [paused, setPaused] = useState(false);
-  const [inView, setInView] = useState(true);
+  const [nearView, setNearView] = useState(priority);
+  const [inView, setInView] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
   const touchStartX = useRef<number | null>(null);
   const fadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -79,14 +87,40 @@ export default function ProjectCarousel({
 
   useEffect(() => {
     const root = rootRef.current;
-    if (!root || typeof IntersectionObserver === "undefined") return;
+    if (!root || typeof IntersectionObserver === "undefined") {
+      setNearView(true);
+      setInView(true);
+      return;
+    }
 
-    const observer = new IntersectionObserver(
+    const syncFromRect = () => {
+      const rect = root.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (rect.top < vh + NEAR_VIEW_PX && rect.bottom > -NEAR_VIEW_PX) {
+        setNearView(true);
+      }
+      setInView(rect.top < vh * 0.85 && rect.bottom > vh * 0.15);
+    };
+    syncFromRect();
+
+    const nearObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setNearView(true);
+      },
+      { rootMargin: NEAR_VIEW_MARGIN, threshold: 0 },
+    );
+
+    const viewObserver = new IntersectionObserver(
       ([entry]) => setInView(entry.isIntersecting),
       { threshold: 0.35 },
     );
-    observer.observe(root);
-    return () => observer.disconnect();
+
+    nearObserver.observe(root);
+    viewObserver.observe(root);
+    return () => {
+      nearObserver.disconnect();
+      viewObserver.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -118,11 +152,22 @@ export default function ProjectCarousel({
     );
   }
 
-  const visibleIndexes = new Set<number>([index]);
-  if (prevIndex != null && prevIndex !== index) visibleIndexes.add(prevIndex);
-  if (images.length > 1) {
-    visibleIndexes.add((index + 1) % images.length);
+  const shouldLoad = priority || nearView;
+
+  /** Current (+ fading previous). Prefetch next only while the carousel is on-screen. */
+  const visibleIndexes = new Set<number>();
+  if (shouldLoad) {
+    visibleIndexes.add(index);
+    if (prevIndex != null && prevIndex !== index) {
+      visibleIndexes.add(prevIndex);
+    }
+    if (inView && images.length > 1) {
+      visibleIndexes.add((index + 1) % images.length);
+    }
   }
+
+  /** Thumbs keep layout height; decode only once the carousel is on-screen. */
+  const loadThumbs = showThumbs && images.length > 1 && inView;
 
   return (
     <figure
@@ -155,6 +200,7 @@ export default function ProjectCarousel({
         {[...visibleIndexes].map((imageIndex) => {
           const src = images[imageIndex];
           const active = imageIndex === index;
+          const isLcpCandidate = priority && imageIndex === 0;
           return (
             <Image
               key={src}
@@ -165,9 +211,13 @@ export default function ProjectCarousel({
                   : ""
               }
               fill
-              priority={priority && imageIndex === 0}
-              quality={80}
+              priority={isLcpCandidate}
+              loading={
+                isLcpCandidate ? undefined : active ? "eager" : "lazy"
+              }
+              quality={85}
               sizes={sizes}
+              decoding="async"
               className={`object-contain object-center ${
                 reduceMotion ? "" : "transition-opacity duration-300"
               } ${
@@ -226,15 +276,18 @@ export default function ProjectCarousel({
                     : "border-zinc-700 opacity-70 hover:opacity-100"
                 }`}
               >
-                <Image
-                  src={src}
-                  alt=""
-                  fill
-                  quality={70}
-                  sizes="(max-width: 639px) 76px, 88px"
-                  loading="lazy"
-                  className="object-contain"
-                />
+                {loadThumbs ? (
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    quality={70}
+                    sizes="(max-width: 639px) 76px, 88px"
+                    loading="lazy"
+                    decoding="async"
+                    className="object-contain"
+                  />
+                ) : null}
               </button>
             );
           })}
