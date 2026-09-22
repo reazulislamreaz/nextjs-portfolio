@@ -174,8 +174,8 @@ export default function HomeHero() {
                 alt="Reazul Islam Reaz"
                 fill
                 priority
-                quality={92}
-                sizes="(max-width: 639px) 384px, (max-width: 1023px) 448px, (max-width: 1279px) 352px, 384px"
+                quality={100}
+                sizes="(max-width: 639px) min(28rem, 100vw - 2rem), (max-width: 1023px) 28rem, (max-width: 1279px) 22rem, 24rem"
                 className="object-cover object-[center_18%] transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
               />
             </div>

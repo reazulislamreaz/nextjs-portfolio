@@ -1,6 +1,5 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 export { isReducedMotion } from "./motion";
 
@@ -8,10 +7,10 @@ let registered = false;
 
 export function registerGsap() {
   if (typeof window !== "undefined" && !registered) {
-    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+    gsap.registerPlugin(ScrollTrigger);
     registered = true;
   }
-  return { gsap, ScrollTrigger, ScrollToPlugin };
+  return { gsap, ScrollTrigger };
 }
 
-export { gsap, ScrollTrigger, ScrollToPlugin };
+export { gsap, ScrollTrigger };

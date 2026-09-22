@@ -61,7 +61,6 @@ export default function ProjectsSection() {
             <ProjectCard
               key={project.title}
               project={project}
-              priorityImage={index < 2}
               index={index}
             />
           ))}

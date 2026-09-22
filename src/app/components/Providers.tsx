@@ -12,7 +12,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       defaultTheme="light"
       enableSystem={false}
       storageKey="portfolio-theme"
-      disableTransitionOnChange={false}
+      disableTransitionOnChange
     >
       <SmoothScrollProvider>
         <Navbar />

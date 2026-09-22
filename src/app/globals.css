@@ -207,11 +207,13 @@ body {
 @media (max-width: 639px) {
   /* Lighter paint work on small screens; grain is ambient, not content */
   .site-grain {
-    opacity: 0.18;
+    opacity: 0.14;
+    /* Avoid tiling decode work competing with LCP on small viewports */
+    background-size: 160px 160px;
   }
 
   .dark .site-grain {
-    opacity: 0.12;
+    opacity: 0.1;
   }
 }
 

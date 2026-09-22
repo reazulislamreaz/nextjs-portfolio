@@ -20,10 +20,11 @@ const staticAssetCache = [
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    // Cover hero (~2× 352–448) and project frames (~2× 700–900 CSS px) so Retina stays sharp
+    // Hero portrait needs 2×–3× candidates (display ~352–448 CSS px → ~900–1344 px)
     deviceSizes: [640, 750, 828, 896, 1024, 1080, 1200, 1440, 1600, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 176, 256, 384, 448],
-    qualities: [75, 85, 92, 95],
+    imageSizes: [16, 32, 48, 64, 96, 128, 176, 256, 384, 448, 512, 576, 640],
+    // 100 reserved for hero sharpness; lower values for carousels/thumbs only
+    qualities: [70, 75, 80, 85, 90, 92, 95, 100],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   experimental: {
