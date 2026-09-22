@@ -3,6 +3,7 @@
 import { ThemeProvider } from "next-themes";
 import Navbar from "./Navbar";
 import DeferredAiAssistant from "./DeferredAiAssistant";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -13,9 +14,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
       storageKey="portfolio-theme"
       disableTransitionOnChange
     >
-      <Navbar />
-      {children}
-      <DeferredAiAssistant />
+      <SmoothScrollProvider>
+        <Navbar />
+        {children}
+        <DeferredAiAssistant />
+      </SmoothScrollProvider>
     </ThemeProvider>
   );
 }

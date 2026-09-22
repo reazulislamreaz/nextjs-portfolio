@@ -68,13 +68,33 @@ export function scrollToInPageTarget(href: string, label?: string): void {
     label === "Home" || href === "/" || href === "/#" || href === "#home";
   const id = isHome ? "" : hashFromHref(href).slice(1);
   const target = id ? document.getElementById(id) : null;
-  const behavior: ScrollBehavior = isReducedMotion() ? "auto" : "smooth";
 
   if (isHome) {
-    window.scrollTo({ top: 0, behavior });
+    if (isReducedMotion()) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    } else if (window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 1.0 });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   } else if (target) {
+    const paddingTop = parseFloat(getComputedStyle(target).paddingTop) || 0;
     const top = Math.max(0, getSectionScrollTop(target));
-    window.scrollTo({ top, behavior });
+
+    if (isReducedMotion()) {
+      window.scrollTo({ top, behavior: "auto" });
+    } else if (window.__lenis) {
+      // Lenis already subtracts CSS scroll-margin-top (nav clearance).
+      // A positive offset scrolls further so section top-padding is not left
+      // as empty space under the navbar.
+      window.__lenis.scrollTo(target, {
+        offset: paddingTop,
+        duration: 1.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      window.scrollTo({ top, behavior: "smooth" });
+    }
   }
 
   try {
@@ -85,7 +105,7 @@ export function scrollToInPageTarget(href: string, label?: string): void {
 }
 
 /**
- * Decides whether a nav/CTA click should be handled as in-page scroll.
+ * Decides whether a nav/CTA click should be handled as an in-page scroll.
  */
 export function shouldHandleInPageNav(
   event: NavClickModifiers,

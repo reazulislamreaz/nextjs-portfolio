@@ -59,6 +59,7 @@ export default function Navbar() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    window.__lenis?.stop();
 
     const drawer = drawerRef.current;
     const focusable = drawer
@@ -87,6 +88,7 @@ export default function Navbar() {
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      window.__lenis?.start();
       window.removeEventListener("keydown", onKey);
       menuToggleRef.current?.focus();
     };
@@ -117,6 +119,8 @@ export default function Navbar() {
     let lastScrolled = false;
     let lastActive = "";
     let activationLine = getNavBarOffset();
+    let lenisOff: (() => void) | undefined;
+    let lenisPoll: ReturnType<typeof setInterval> | undefined;
 
     const computeActive = () => {
       ticking = false;
@@ -180,8 +184,32 @@ export default function Navbar() {
       onScroll();
     };
 
+    const attachLenis = () => {
+      const lenis = window.__lenis;
+      if (!lenis || lenisOff) return Boolean(lenis);
+      const onLenisScroll = () => onScroll();
+      lenis.on("scroll", onLenisScroll);
+      lenisOff = () => {
+        lenis.off("scroll", onLenisScroll);
+        lenisOff = undefined;
+      };
+      return true;
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize, { passive: true });
+
+    // Lenis mounts in a sibling provider effect; attach when available.
+    if (!attachLenis()) {
+      let polls = 0;
+      lenisPoll = setInterval(() => {
+        polls += 1;
+        if (attachLenis() || polls > 40) {
+          if (lenisPoll) clearInterval(lenisPoll);
+          lenisPoll = undefined;
+        }
+      }, 50);
+    }
 
     // When deferred sections mount, recompute without waiting for a scroll.
     const mo = new MutationObserver(() => {
@@ -198,6 +226,8 @@ export default function Navbar() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       mo.disconnect();
+      lenisOff?.();
+      if (lenisPoll) clearInterval(lenisPoll);
     };
   }, [pathname]);
 

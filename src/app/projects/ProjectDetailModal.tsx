@@ -54,6 +54,8 @@ export default function ProjectDetailModal({
         ? document.activeElement
         : null;
 
+    window.__lenis?.stop();
+
     const previousBodyOverflow = document.body.style.overflow;
     const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
@@ -99,6 +101,7 @@ export default function ProjectDetailModal({
       cancelAnimationFrame(rafId);
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
+      window.__lenis?.start();
       window.removeEventListener("keydown", onKeyDown);
       previouslyFocused.current?.focus({ preventScroll: true });
     };
@@ -108,6 +111,7 @@ export default function ProjectDetailModal({
 
   const modalContent = (
     <div
+      data-lenis-prevent
       className="fixed inset-0 z-[9999] flex items-end justify-center overscroll-none p-0 sm:items-center sm:p-4"
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose();
@@ -122,6 +126,7 @@ export default function ProjectDetailModal({
 
       <div
         ref={dialogRef}
+        data-lenis-prevent
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -152,6 +157,9 @@ export default function ProjectDetailModal({
 
         <div
           ref={scrollContainerRef}
+          data-lenis-prevent
+          data-lenis-prevent-wheel
+          data-lenis-prevent-touch
           className="min-h-0 flex-1 touch-pan-y overflow-y-auto overscroll-contain px-5 py-5 sm:px-7 sm:py-6"
         >
           <div className="overflow-hidden rounded-lg border border-zinc-700/60 bg-zinc-900">
