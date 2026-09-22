@@ -9,8 +9,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider
       attribute="class"
-      defaultTheme="dark"
+      defaultTheme="light"
       enableSystem={false}
+      storageKey="portfolio-theme"
       disableTransitionOnChange={false}
     >
       <SmoothScrollProvider>

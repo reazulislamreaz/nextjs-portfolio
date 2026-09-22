@@ -20,6 +20,8 @@
   /* Clearance under the fixed navbar when scrolling to in-page anchors */
   --nav-scroll-offset: calc(var(--nav-height) + 0.5rem);
 
+  color-scheme: light;
+
   --zinc-50: #1a1714;
   --zinc-100: #2a241e;
   --zinc-200: #3d342c;
@@ -59,6 +61,8 @@
 }
 
 .dark {
+  color-scheme: dark;
+
   --zinc-50: #f6f1ea;
   --zinc-100: #ebe4da;
   --zinc-200: #d8cec2;
