@@ -5,22 +5,60 @@ import { FiAlertCircle, FiCheck, FiLoader, FiSend } from "react-icons/fi";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
+type FieldKey = "user_name" | "user_email" | "message";
+
+type FieldErrors = Partial<Record<FieldKey, string>>;
+
 const MAX_NAME = 120;
 const MAX_SUBJECT = 160;
 const MAX_MESSAGE = 5000;
 
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const FIELD_LABELS: Record<FieldKey, string> = {
+  user_name: "name",
+  user_email: "email",
+  message: "message",
+};
+
 const fieldClass =
   "w-full rounded-md border border-zinc-700 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-50 placeholder-zinc-500 transition hover:border-zinc-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 disabled:cursor-not-allowed disabled:opacity-60";
+
+const fieldErrorClass =
+  "border-red-600 hover:border-red-600 focus:border-red-600 focus:ring-red-600 dark:border-red-400 dark:hover:border-red-400 dark:focus:border-red-400 dark:focus:ring-red-400";
+
+function formatMissingFieldsMessage(keys: FieldKey[]): string {
+  const labels = keys.map((key) => FIELD_LABELS[key]);
+  if (labels.length === 1) {
+    return `Please enter your ${labels[0]}, then try again.`;
+  }
+  if (labels.length === 2) {
+    return `Please enter your ${labels[0]} and ${labels[1]}, then try again.`;
+  }
+  const last = labels.at(-1);
+  return `Please enter your ${labels.slice(0, -1).join(", ")}, and ${last}, then try again.`;
+}
 
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
 
   const resetForm = () => {
     form.current?.reset();
     setStatus("idle");
     setErrorMessage("");
+    setFieldErrors({});
+  };
+
+  const clearFieldError = (key: FieldKey) => {
+    setFieldErrors((prev) => {
+      if (!prev[key]) return prev;
+      const next = { ...prev };
+      delete next[key];
+      return next;
+    });
   };
 
   const sendEmail = async (e: FormEvent) => {
@@ -36,9 +74,43 @@ export default function ContactForm() {
     // Real bots often fill every input; humans/autofill leave it empty when hidden with display:none.
     const honeypotRaw = String(formData.get("contact_extra_field") ?? "").trim();
 
-    if (!user_name || !user_email || !message) {
-      setErrorMessage("Please fill in all required fields.");
+    const nextFieldErrors: FieldErrors = {};
+    if (!user_name) {
+      nextFieldErrors.user_name = "Enter your name.";
+    }
+    if (!user_email) {
+      nextFieldErrors.user_email = "Enter your email address.";
+    } else if (!EMAIL_PATTERN.test(user_email)) {
+      nextFieldErrors.user_email = "Enter a valid email address.";
+    }
+    if (!message) {
+      nextFieldErrors.message = "Enter your message.";
+    }
+
+    const errorKeys = Object.keys(nextFieldErrors) as FieldKey[];
+
+    if (errorKeys.length > 0) {
+      const emptyRequired = (
+        ["user_name", "user_email", "message"] as const
+      ).filter((key) => {
+        if (key === "user_name") return !user_name;
+        if (key === "user_email") return !user_email;
+        return !message;
+      });
+
+      setFieldErrors(nextFieldErrors);
+      setErrorMessage(
+        emptyRequired.length > 0
+          ? formatMissingFieldsMessage([...emptyRequired])
+          : (nextFieldErrors.user_email ??
+              "Please fix the highlighted fields, then try again."),
+      );
       setStatus("error");
+
+      const firstInvalid = form.current.querySelector<HTMLElement>(
+        `[name="${errorKeys[0]}"]`,
+      );
+      firstInvalid?.focus();
       return;
     }
 
@@ -47,13 +119,17 @@ export default function ContactForm() {
       subject.length > MAX_SUBJECT ||
       message.length > MAX_MESSAGE
     ) {
-      setErrorMessage("One or more fields exceed the allowed length.");
+      setFieldErrors({});
+      setErrorMessage(
+        "One or more fields are too long. Shorten them and try again.",
+      );
       setStatus("error");
       return;
     }
 
     setStatus("loading");
     setErrorMessage("");
+    setFieldErrors({});
 
     try {
       const response = await fetch("/api/contact", {
@@ -142,19 +218,21 @@ export default function ContactForm() {
 
           {status === "error" && errorMessage ? (
             <div
-              className="status-enter mb-5 flex gap-3 rounded-md border border-red-500/30 bg-red-500/10 px-4 py-3"
+              className="status-enter mb-5 flex gap-3 rounded-md border border-red-700/35 bg-red-600/12 px-4 py-3 dark:border-red-400/35 dark:bg-red-500/15"
               role="alert"
             >
               <FiAlertCircle
-                className="mt-0.5 shrink-0 text-red-400"
+                className="mt-0.5 shrink-0 text-red-700 dark:text-red-300"
                 size={18}
                 aria-hidden
               />
               <div>
-                <p className="text-sm font-medium text-red-200">
+                <p className="text-sm font-medium text-red-800 dark:text-red-100">
                   Couldn&apos;t send message
                 </p>
-                <p className="mt-1 text-sm text-red-200/80">{errorMessage}</p>
+                <p className="mt-1 text-sm text-red-700 dark:text-red-200/90">
+                  {errorMessage}
+                </p>
               </div>
             </div>
           ) : null}
@@ -180,19 +258,32 @@ export default function ContactForm() {
                 htmlFor="name"
                 className="mb-1.5 block text-sm font-medium text-zinc-300"
               >
-                Name
+                Name <span className="text-red-700 dark:text-red-400">*</span>
               </label>
               <input
                 type="text"
                 name="user_name"
                 id="name"
                 required
+                aria-invalid={Boolean(fieldErrors.user_name)}
+                aria-describedby={
+                  fieldErrors.user_name ? "name-error" : undefined
+                }
                 maxLength={MAX_NAME}
                 disabled={status === "loading"}
-                className={fieldClass}
+                className={`${fieldClass} ${fieldErrors.user_name ? fieldErrorClass : ""}`}
                 placeholder="Your full name"
                 autoComplete="name"
+                onChange={() => clearFieldError("user_name")}
               />
+              {fieldErrors.user_name ? (
+                <p
+                  id="name-error"
+                  className="mt-1.5 text-sm text-red-700 dark:text-red-300"
+                >
+                  {fieldErrors.user_name}
+                </p>
+              ) : null}
             </div>
 
             <div>
@@ -200,18 +291,31 @@ export default function ContactForm() {
                 htmlFor="email"
                 className="mb-1.5 block text-sm font-medium text-zinc-300"
               >
-                Email
+                Email <span className="text-red-700 dark:text-red-400">*</span>
               </label>
               <input
                 type="email"
                 name="user_email"
                 id="email"
                 required
+                aria-invalid={Boolean(fieldErrors.user_email)}
+                aria-describedby={
+                  fieldErrors.user_email ? "email-error" : undefined
+                }
                 disabled={status === "loading"}
-                className={fieldClass}
+                className={`${fieldClass} ${fieldErrors.user_email ? fieldErrorClass : ""}`}
                 placeholder="your.email@example.com"
                 autoComplete="email"
+                onChange={() => clearFieldError("user_email")}
               />
+              {fieldErrors.user_email ? (
+                <p
+                  id="email-error"
+                  className="mt-1.5 text-sm text-red-700 dark:text-red-300"
+                >
+                  {fieldErrors.user_email}
+                </p>
+              ) : null}
             </div>
 
             <div>
@@ -238,18 +342,31 @@ export default function ContactForm() {
                 htmlFor="message"
                 className="mb-1.5 block text-sm font-medium text-zinc-300"
               >
-                Message
+                Message <span className="text-red-700 dark:text-red-400">*</span>
               </label>
               <textarea
                 name="message"
                 id="message"
                 rows={4}
                 required
+                aria-invalid={Boolean(fieldErrors.message)}
+                aria-describedby={
+                  fieldErrors.message ? "message-error" : undefined
+                }
                 maxLength={MAX_MESSAGE}
                 disabled={status === "loading"}
-                className={`${fieldClass} resize-none`}
+                className={`${fieldClass} resize-none ${fieldErrors.message ? fieldErrorClass : ""}`}
                 placeholder="Role, stack, and whether it’s onsite or remote…"
+                onChange={() => clearFieldError("message")}
               />
+              {fieldErrors.message ? (
+                <p
+                  id="message-error"
+                  className="mt-1.5 text-sm text-red-700 dark:text-red-300"
+                >
+                  {fieldErrors.message}
+                </p>
+              ) : null}
             </div>
 
             <button
