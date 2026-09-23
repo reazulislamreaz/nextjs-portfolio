@@ -208,7 +208,7 @@ export default function ContactForm() {
                 htmlFor="name"
                 className="mb-1.5 block text-sm font-medium text-zinc-300"
               >
-                Name <span className="text-red-700 dark:text-red-400">*</span>
+                Name
               </label>
               <input
                 type="text"
@@ -241,7 +241,7 @@ export default function ContactForm() {
                 htmlFor="email"
                 className="mb-1.5 block text-sm font-medium text-zinc-300"
               >
-                Email <span className="text-red-700 dark:text-red-400">*</span>
+                Email
               </label>
               <input
                 type="email"
@@ -292,7 +292,7 @@ export default function ContactForm() {
                 htmlFor="message"
                 className="mb-1.5 block text-sm font-medium text-zinc-300"
               >
-                Message <span className="text-red-700 dark:text-red-400">*</span>
+                Message
               </label>
               <textarea
                 name="message"
