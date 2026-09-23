@@ -15,29 +15,11 @@ const MAX_MESSAGE = 5000;
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const FIELD_LABELS: Record<FieldKey, string> = {
-  user_name: "name",
-  user_email: "email",
-  message: "message",
-};
-
 const fieldClass =
   "w-full rounded-md border border-zinc-700 bg-zinc-950/40 px-4 py-3 text-sm text-zinc-50 placeholder-zinc-500 transition hover:border-zinc-500 focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-400 disabled:cursor-not-allowed disabled:opacity-60";
 
 const fieldErrorClass =
   "border-red-600 hover:border-red-600 focus:border-red-600 focus:ring-red-600 dark:border-red-400 dark:hover:border-red-400 dark:focus:border-red-400 dark:focus:ring-red-400";
-
-function formatMissingFieldsMessage(keys: FieldKey[]): string {
-  const labels = keys.map((key) => FIELD_LABELS[key]);
-  if (labels.length === 1) {
-    return `Please enter your ${labels[0]}, then try again.`;
-  }
-  if (labels.length === 2) {
-    return `Please enter your ${labels[0]} and ${labels[1]}, then try again.`;
-  }
-  const last = labels.at(-1);
-  return `Please enter your ${labels.slice(0, -1).join(", ")}, and ${last}, then try again.`;
-}
 
 export default function ContactForm() {
   const form = useRef<HTMLFormElement>(null);
@@ -75,42 +57,22 @@ export default function ContactForm() {
     const honeypotRaw = String(formData.get("contact_extra_field") ?? "").trim();
 
     const nextFieldErrors: FieldErrors = {};
-    if (!user_name) {
-      nextFieldErrors.user_name = "Enter your name.";
+    if (!user_name) nextFieldErrors.user_name = "Required";
+    if (!user_email) nextFieldErrors.user_email = "Required";
+    else if (!EMAIL_PATTERN.test(user_email)) {
+      nextFieldErrors.user_email = "Invalid email";
     }
-    if (!user_email) {
-      nextFieldErrors.user_email = "Enter your email address.";
-    } else if (!EMAIL_PATTERN.test(user_email)) {
-      nextFieldErrors.user_email = "Enter a valid email address.";
-    }
-    if (!message) {
-      nextFieldErrors.message = "Enter your message.";
-    }
+    if (!message) nextFieldErrors.message = "Required";
 
     const errorKeys = Object.keys(nextFieldErrors) as FieldKey[];
 
     if (errorKeys.length > 0) {
-      const emptyRequired = (
-        ["user_name", "user_email", "message"] as const
-      ).filter((key) => {
-        if (key === "user_name") return !user_name;
-        if (key === "user_email") return !user_email;
-        return !message;
-      });
-
       setFieldErrors(nextFieldErrors);
-      setErrorMessage(
-        emptyRequired.length > 0
-          ? formatMissingFieldsMessage([...emptyRequired])
-          : (nextFieldErrors.user_email ??
-              "Please fix the highlighted fields, then try again."),
-      );
+      setErrorMessage("");
       setStatus("error");
-
-      const firstInvalid = form.current.querySelector<HTMLElement>(
-        `[name="${errorKeys[0]}"]`,
-      );
-      firstInvalid?.focus();
+      form.current
+        .querySelector<HTMLElement>(`[name="${errorKeys[0]}"]`)
+        ?.focus();
       return;
     }
 
@@ -120,9 +82,7 @@ export default function ContactForm() {
       message.length > MAX_MESSAGE
     ) {
       setFieldErrors({});
-      setErrorMessage(
-        "One or more fields are too long. Shorten them and try again.",
-      );
+      setErrorMessage("Too long — shorten a field and retry.");
       setStatus("error");
       return;
     }
@@ -155,9 +115,7 @@ export default function ContactForm() {
       };
 
       if (!response.ok) {
-        setErrorMessage(
-          data.error ?? "Something went wrong. Please try again in a moment.",
-        );
+        setErrorMessage(data.error ?? "Couldn't send. Try again.");
         setStatus("error");
         return;
       }
@@ -166,8 +124,7 @@ export default function ContactForm() {
       // Never show a hard failure for silent bot filtering.
       if (data.ok === false) {
         setErrorMessage(
-          data.error ??
-            "Your message could not be delivered. Please email Reaz directly or use WhatsApp.",
+          data.error ?? "Couldn't send. Email or WhatsApp me instead.",
         );
         setStatus("error");
         return;
@@ -176,9 +133,7 @@ export default function ContactForm() {
       form.current.reset();
       setStatus("success");
     } catch {
-      setErrorMessage(
-        "Network error. Please check your connection and try again.",
-      );
+      setErrorMessage("No connection. Check the network and retry.");
       setStatus("error");
     }
   };
@@ -218,22 +173,17 @@ export default function ContactForm() {
 
           {status === "error" && errorMessage ? (
             <div
-              className="status-enter mb-5 flex gap-3 rounded-md border border-red-700/35 bg-red-600/12 px-4 py-3 dark:border-red-400/35 dark:bg-red-500/15"
+              className="status-enter mb-5 flex items-start gap-2.5 rounded-md border border-red-700/35 bg-red-600/12 px-3.5 py-2.5 dark:border-red-400/35 dark:bg-red-500/15"
               role="alert"
             >
               <FiAlertCircle
                 className="mt-0.5 shrink-0 text-red-700 dark:text-red-300"
-                size={18}
+                size={16}
                 aria-hidden
               />
-              <div>
-                <p className="text-sm font-medium text-red-800 dark:text-red-100">
-                  Couldn&apos;t send message
-                </p>
-                <p className="mt-1 text-sm text-red-700 dark:text-red-200/90">
-                  {errorMessage}
-                </p>
-              </div>
+              <p className="text-sm text-red-800 dark:text-red-100">
+                {errorMessage}
+              </p>
             </div>
           ) : null}
 
