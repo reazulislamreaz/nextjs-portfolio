@@ -279,7 +279,7 @@ export default function Navbar() {
           <span className="font-display text-[1.3rem] leading-none tracking-tight text-zinc-50 transition-colors group-hover:text-emerald-400">
             Reaz
           </span>
-          <span className="type-label mt-0.5 hidden sm:block">Full-Stack</span>
+          <span className="type-label mt-0.5 hidden sm:block">Backend-Focused</span>
         </Link>
 
         {/* Desktop links */}

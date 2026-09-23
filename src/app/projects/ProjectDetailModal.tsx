@@ -226,6 +226,26 @@ function ModalBody({ project }: { project: Project }) {
         <StoryBlock label="Problem">{project.problem}</StoryBlock>
         <StoryBlock label="Architecture">{project.architecture}</StoryBlock>
 
+        {project.architectureFlow && project.architectureFlow.length > 0 ? (
+          <StoryBlock label="System flow">
+            <ol className="space-y-0" aria-label="Architecture layers">
+              {project.architectureFlow.map((layer, index) => (
+                <li
+                  key={layer}
+                  className="grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-2 border-t border-zinc-700/40 py-2.5 first:border-t-0 first:pt-0 sm:grid-cols-[2rem_minmax(0,1fr)]"
+                >
+                  <span className="type-meta pt-0.5 text-emerald-400/90" aria-hidden>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm leading-snug text-zinc-200">
+                    {layer}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </StoryBlock>
+        ) : null}
+
         <StoryBlock label="Decisions">
           <ul className="space-y-4">
             {project.challengeSolutions.map((item) => (

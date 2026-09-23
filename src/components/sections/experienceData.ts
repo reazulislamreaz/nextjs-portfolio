@@ -27,17 +27,17 @@ export const experienceData: Experience[] = [
     workMode: "On-site",
     isCurrent: true,
     tagline:
-      "Full-stack event platforms — React/Next.js UIs, Node.js APIs, RBAC, and real-time features.",
+      "Event platforms — Node.js APIs, MongoDB models, JWT RBAC, and Socket.IO realtime alongside React/Next.js clients.",
     summary:
-      "Deliver end-to-end web and event app features — React/Next.js frontends integrated with scalable Node.js backends, API design, data modeling, access control, and real-time capabilities alongside frontend and mobile teams.",
+      "Own backend delivery on client event systems: API design, data modeling, access control, and realtime features, integrated with frontend and mobile teams.",
     highlights: [
-      "Full-stack features across React/Next.js frontends and Node.js/Express APIs in TypeScript.",
-      "MongoDB/Mongoose schemas for event-driven workloads.",
-      "RBAC across Admin, Organizer, Volunteer, Attendee, and Exhibitor roles with JWT auth.",
-      "Event modules: registration, check-in, volunteer tasks, exhibitor workflows.",
-      "Socket.IO for chat, polling, and sessions; QR workflows for attendance and leads.",
-      "Layered architecture with Zod validation, centralized errors, and consistent API contracts for UI integration.",
-      "Postman and manual QA for API behavior; focus on performance, UX alignment, and data integrity.",
+      "Designed and shipped Express + TypeScript APIs for registration, check-in, volunteer tasks, and exhibitor workflows.",
+      "Modeled MongoDB/Mongoose schemas for event-driven workloads with indexes on hot read paths.",
+      "Implemented JWT auth and RBAC across Admin, Organizer, Volunteer, Attendee, and Exhibitor personas.",
+      "Built Socket.IO features for chat, polling, and session sync scoped to each event.",
+      "Delivered QR check-in and exhibitor lead flows with server-side validation against duplicate writes.",
+      "Enforced Zod validation, centralized errors, and stable API contracts for React/Next.js and mobile clients.",
+      "Verified API behavior with Postman and manual QA for integrity, performance, and UX alignment.",
     ],
     architecture:
       "React/Next.js clients over Express + TypeScript with MongoDB, JWT-guarded routes per persona, and Socket.IO for event-scoped realtime — presentation, transport, validation, and domain logic separated.",
@@ -67,14 +67,14 @@ export const experienceData: Experience[] = [
     location: "Dhaka, Bangladesh",
     workMode: "On-site",
     tagline:
-      "Backend-focused internship — React frontends, Node.js APIs, and PostgreSQL.",
+      "Internship focused on Node.js APIs, PostgreSQL with Prisma, and React integration against REST contracts.",
     summary:
-      "Built server-side features and integrated React UIs with REST APIs and PostgreSQL in a collaborative team.",
+      "Contributed server-side features and database work on team projects, wiring React UIs to typed REST APIs.",
     highlights: [
-      "Backend features with Node.js and Express in team delivery.",
-      "PostgreSQL modeling, queries, and data integrity.",
-      "React UI integration against REST contracts.",
-      "TypeScript and Git workflows for review and shipping.",
+      "Shipped Node.js/Express endpoints in TypeScript within a reviewed team workflow.",
+      "Modeled PostgreSQL schemas with Prisma and wrote queries with attention to data integrity.",
+      "Integrated React clients against documented REST contracts and JWT-protected routes.",
+      "Used Git-based review cycles to keep API and UI changes shippable together.",
     ],
     techStack: [
       "Node.js",

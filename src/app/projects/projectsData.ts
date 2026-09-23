@@ -8,6 +8,7 @@ export interface Project {
   /** One-line hook for the collapsed card — problem + audience + impact */
   tagline: string;
   description: string;
+  /** Core technology names shown as stack chips */
   features: string[];
   metrics: string[];
   devOps: string[];
@@ -17,6 +18,8 @@ export interface Project {
   sourceNote?: string;
   problem: string;
   architecture: string;
+  /** Optional layered flow for case-study diagrams */
+  architectureFlow?: string[];
   challengeSolutions: ChallengeSolution[];
   futureEnhancements: string;
 }
@@ -25,23 +28,23 @@ export const projectsData: Project[] = [
   {
     title: "Elevate Apparel — E-Commerce Platform",
     tagline:
-      "Apparel commerce for a live merchant — faceted search, variant stock, and a role-gated admin API that keeps checkout and inventory in sync.",
+      "Live apparel commerce — faceted search, variant stock reservations, and a role-gated NestJS admin API that keeps checkout and inventory consistent.",
     description:
-      "Full-stack e-commerce platform built for a premium apparel brand. Features a high-performance Next.js 16 storefront with server-side faceted search, live stock selection, and optimistic Redux cart management, paired with a role-gated NestJS 11 backend, PostgreSQL (Prisma 7), and BullMQ worker queues for background job relay and analytics.",
+      "Production e-commerce system for a live merchant: Next.js storefront with server-side faceted search and optimistic cart UX, NestJS REST API with JWT/RBAC, PostgreSQL via Prisma, and Redis + BullMQ workers for cart recovery, outbox relay, CRM backfills, and export jobs.",
     features: [
-      "Next.js 16",
-      "React 19",
       "NestJS 11",
-      "TypeScript",
-      "Tailwind CSS 4",
       "PostgreSQL 17",
       "Prisma 7",
       "Redis 7",
       "BullMQ",
-      "Redux Toolkit",
-      "TanStack Query",
       "JWT",
       "RBAC",
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Redux Toolkit",
+      "TanStack Query",
+      "Tailwind CSS 4",
       "Class Validator",
       "Pino Logger",
       "Swagger",
@@ -49,8 +52,8 @@ export const projectsData: Project[] = [
     metrics: [
       "Live on elevateapparel.com.bd",
       "BullMQ workers for outbox relay, CRM backfills, and cart recovery",
-      "Faceted server-side search, product variants, real-time stock & COD checkout",
-      "Role-gated /admin console (ADMIN/SUPER_ADMIN) with analytics & CSV/XLSX exports",
+      "Server-side inventory reservations with expiry jobs to prevent double-booking",
+      "Role-gated /admin console (ADMIN/SUPER_ADMIN) with analytics and CSV/XLSX exports",
       "Monorepo workspace for Next.js storefront and NestJS API",
     ],
     devOps: [
@@ -74,31 +77,39 @@ export const projectsData: Project[] = [
     sourceNote:
       "Workspace: ecommerce-platform · Frontend (Next.js 16): https://elevateapparel.com.bd · Backend: NestJS 11 versioned REST API (/api/v1) with Swagger docs, not publicly exposed",
     problem:
-      "A premium apparel brand needed a high-performance storefront with fast faceted search and variant selection, alongside a secure, role-gated admin console for managing orders, stock alerts, CRM, and analytics without cross-component drift.",
+      "A live apparel merchant needed a fast faceted storefront and a secure admin console for orders, variant stock, CRM, and analytics — without checkout and inventory drifting apart under concurrent carts.",
     architecture:
-      "Monorepo npm workspace with Next.js 16 App Router on frontend using Redux Toolkit and TanStack Query. NestJS 11 versioned REST API on backend with PostgreSQL 17 (Prisma 7 ORM), rotating HTTP-only refresh JWT cookies, and Redis 7 + BullMQ for background queues.",
+      "Monorepo: Next.js 16 App Router (Redux Toolkit + TanStack Query) over a NestJS 11 versioned REST API. PostgreSQL 17 with Prisma 7 models the catalog, carts, orders, and RBAC. Rotating HTTP-only refresh JWTs guard customer and admin surfaces. Redis 7 + BullMQ run inventory reservation expiry, outbox relay, CRM backfills, cart recovery, and heavy CSV/XLSX exports off the request path.",
+    architectureFlow: [
+      "Next.js storefront & admin",
+      "NestJS REST API (/api/v1)",
+      "Auth · RBAC · domain services",
+      "PostgreSQL (Prisma)",
+      "Redis + BullMQ workers",
+      "Outbox · CRM · cart recovery · exports",
+    ],
     challengeSolutions: [
       {
         challenge:
-          "Handling high-concurrency cart updates and stock reservation expiry during peak traffic without double-booking items.",
+          "Concurrent cart updates risked double-booking variant stock during peak traffic.",
         solution:
-          "Implemented server-side inventory reservations with automated BullMQ expiry cancellation jobs and optimistic Redux projection on the frontend.",
+          "Server-side inventory reservations with BullMQ expiry/cancellation jobs, plus an optimistic Redux cart projection that reconciles against reservation state.",
       },
       {
         challenge:
-          "Ensuring role-based security across customer operations and admin dashboard reporting without exposing sensitive metrics.",
+          "Customer operations and admin reporting needed strict separation without leaking sensitive metrics.",
         solution:
-          "Designed JWT access authentication with rotating HTTP-only refresh cookies and strict NestJS RBAC guards for ADMIN and SUPER_ADMIN roles.",
+          "JWT access tokens with rotating HTTP-only refresh cookies and NestJS RBAC guards limited to ADMIN and SUPER_ADMIN for privileged routes.",
       },
       {
         challenge:
-          "Preventing API latency bottlenecks during complex analytics rendering and multi-criteria order filters.",
+          "Complex order filters and analytics exports slowed the API when run inline.",
         solution:
-          "Optimized PostgreSQL database queries using Prisma compound indexes, selective projection, and offloaded CSV/XLSX export generation to background BullMQ workers.",
+          "Prisma compound indexes and selective projection on hot queries; CSV/XLSX generation moved to BullMQ workers so the request path stays light.",
       },
     ],
     futureEnhancements:
-      "Multi-tenant store support, payment gateway integrations (SSLCommerz/Stripe), automated push notifications, and real-time inventory sync webhooks.",
+      "Payment gateway integrations (SSLCommerz/Stripe), multi-tenant store support, push notifications, and inventory sync webhooks.",
   },
   {
     title: "J&K Cabinetry CT",
@@ -157,6 +168,14 @@ export const projectsData: Project[] = [
       "A wholesale cabinetry supplier needed a public marketing and ordering site, an admin console to verify dealers and manage inventory, and a secure API tying catalog, orders, uploads, and messaging together.",
     architecture:
       "Next.js 16 customer frontend with RTK Query and Redux Persist cart. React + Vite admin dashboard with Ant Design and role guards. Express + TypeScript API on MongoDB with JWT auth, S3 media, Stripe payments, and Socket.IO for inbox sync.",
+    architectureFlow: [
+      "Storefront & admin dashboard",
+      "Express + TypeScript API",
+      "JWT · roles · validation",
+      "MongoDB",
+      "AWS S3 · Stripe",
+      "Socket.IO inbox",
+    ],
     challengeSolutions: [
       {
         challenge:
@@ -189,25 +208,27 @@ export const projectsData: Project[] = [
   {
     title: "Confaero",
     tagline:
-      "Conference ops — QR check-ins and exhibitor lead capture with duplicate-safe writes.",
+      "Conference ops platform — QR check-ins, exhibitor lead capture, JWT RBAC, and Socket.IO sync with duplicate-safe writes.",
     description:
-      "Conference platform with QR check-ins, exhibitor lead capture, organizer tooling, and real-time attendee interactions.",
+      "Event operations system spanning organizer tooling, attendee/exhibitor workflows, and a Google Play app: Express + TypeScript API on MongoDB, JWT RBAC across personas, Socket.IO for live roster and session sync, WebRTC for low-latency P2P, and QR check-in/lead flows designed for concurrent scans.",
     features: [
       "Node.js",
       "Express",
       "TypeScript",
       "MongoDB",
+      "Mongoose",
       "JWT",
-      "React",
+      "RBAC",
       "Socket.IO",
       "WebRTC",
+      "React",
     ],
     metrics: [
       "Published to Google Play as an organizer/attendee app",
-      "Compound MongoDB indexes on the check-in read paths",
-      "Unique constraints and server-side validation guard against duplicate check-ins on concurrent QR scans",
-      "Real-time roster sync via scoped Socket.IO broadcasts",
-      "Lazy-loaded dashboards and optimized images for faster paint",
+      "Unique constraints and server validation block duplicate check-ins on concurrent QR scans",
+      "Compound MongoDB indexes on check-in and lead read paths",
+      "Role-scoped Socket.IO broadcasts keep rosters and dashboards in sync",
+      "Separated WebRTC signaling from domain writes to protect data integrity",
     ],
     devOps: [
       "Google Play release",
@@ -226,25 +247,39 @@ export const projectsData: Project[] = [
     sourceNote:
       "Dashboard (React / Vite): https://github.com/reazulislamreaz/confaero-dashboard",
     problem:
-      "Large events need reliable check-ins, lead capture, and live dashboards without duplicate records under concurrent writes.",
+      "Large events need reliable registration, QR check-ins, exhibitor lead capture, and live dashboards — without duplicate records when many devices scan at once.",
     architecture:
-      "Node.js + Express + TypeScript API. MongoDB with compound indexes. JWT RBAC. Socket.IO for event sync; WebRTC for low-latency P2P.",
+      "Express + TypeScript API with JWT-authenticated RBAC for Admin, Organizer, Volunteer, Attendee, and Exhibitor. MongoDB schemas use compound indexes on check-in and lead hot paths. Socket.IO rooms are event-scoped for roster and session sync. WebRTC handles P2P media separately from domain mutation APIs so realtime media never races critical writes.",
+    architectureFlow: [
+      "Organizer dashboard & Play app",
+      "Express + TypeScript API",
+      "JWT · RBAC · validation",
+      "MongoDB (indexed check-ins & leads)",
+      "Socket.IO event rooms",
+      "WebRTC P2P (signaling only)",
+    ],
     challengeSolutions: [
       {
-        challenge: "Concurrent QR scans threatened duplicate check-ins.",
-        solution: "Unique constraints, server validation, and compound indexes on hot paths.",
+        challenge:
+          "Concurrent QR scans at doors and booths threatened duplicate check-ins and lead rows.",
+        solution:
+          "Unique constraints, server-side validation, and compound indexes on the write/read paths so duplicate scans fail safely instead of creating extra records.",
       },
       {
-        challenge: "Exhibitor leads and dashboards had to stay consistent under load.",
-        solution: "Role-aware services and scoped Socket.IO broadcasts.",
+        challenge:
+          "Exhibitor leads and organizer dashboards had to stay consistent under bursty event traffic.",
+        solution:
+          "Role-aware service boundaries and scoped Socket.IO broadcasts so each persona only receives the events it is allowed to see.",
       },
       {
-        challenge: "WebRTC signaling had to avoid double-booked connections.",
-        solution: "Separated P2P channels from domain writes with guarded API contracts.",
+        challenge:
+          "WebRTC sessions could interfere with domain integrity if mixed into the same write path.",
+        solution:
+          "Kept signaling and P2P channels separate from check-in/lead mutations, with guarded API contracts for each surface.",
       },
     ],
     futureEnhancements:
-      "Microservices split, Redis caching, rate limits, RAG attendee insights, and WebRTC scaling.",
+      "Redis caching on hot roster reads, API rate limits, and horizontal Socket.IO scaling for larger venues.",
   },
   {
     title: "Connectify",

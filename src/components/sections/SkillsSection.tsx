@@ -10,51 +10,63 @@ interface SkillGroup {
   id: string;
   label: string;
   summary: string;
-  /** Aligned to the resume TECHNICAL SKILLS block + evidenced project stack. */
   tools: string[];
 }
 
 /**
- * Four groups mirror the resume taxonomy.
- * Chip names match resume wording where possible.
+ * Categories prioritize backend production work.
+ * Frontend and tooling support full-stack delivery without stealing focus.
  */
 const skillGroups: SkillGroup[] = [
   {
     id: "backend",
     label: "Backend Engineering",
     summary:
-      "Node APIs, auth, jobs, and contracts — the core of production work on the resume.",
+      "APIs, auth, validation, and service boundaries — the core of how I ship production systems.",
     tools: [
       "Node.js",
-      "Express.js",
-      "NestJS",
       "TypeScript",
+      "NestJS",
+      "Express.js",
       "REST APIs",
-      "Socket.IO",
-      "BullMQ",
       "JWT",
+      "RBAC",
       "Zod",
-      "Go",
       "GraphQL",
+      "Go",
     ],
   },
   {
     id: "databases",
     label: "Databases",
     summary:
-      "Relational and document stores, ORMs, and Redis for hot paths and queues.",
+      "Relational and document modeling, ORMs, indexing, and integrity under concurrent writes.",
     tools: [
       "PostgreSQL",
-      "MySQL",
+      "Prisma",
       "MongoDB",
       "Mongoose",
-      "Prisma",
+      "MySQL",
       "Redis",
     ],
   },
   {
+    id: "async",
+    label: "Distributed / Async Systems",
+    summary:
+      "Background work off the request path — queues, workers, and cache for recovery and heavy jobs.",
+    tools: ["BullMQ", "Redis"],
+  },
+  {
+    id: "realtime",
+    label: "Real-Time Systems",
+    summary:
+      "Event-scoped sync, presence, and low-latency channels without racing domain writes.",
+    tools: ["Socket.IO", "WebRTC"],
+  },
+  {
     id: "frontend",
-    label: "Frontend Engineering",
+    label: "Frontend",
     summary:
       "Storefronts, dashboards, and operator UIs kept thin on business rules.",
     tools: [
@@ -70,22 +82,20 @@ const skillGroups: SkillGroup[] = [
   },
   {
     id: "devops",
-    label: "Tools & DevOps",
+    label: "DevOps / Infrastructure",
     summary:
-      "Delivery, cloud, and supporting systems listed on the resume.",
+      "Containers, cloud delivery, reverse proxies, and the APIs products depend on.",
     tools: [
-      "Postman",
-      "Swagger/OpenAPI",
-      "Git",
-      "GitHub",
       "Docker",
       "AWS",
       "CI/CD",
       "GitHub Actions",
       "Nginx",
       "Linux",
+      "Swagger/OpenAPI",
+      "Postman",
+      "Git",
       "Stripe",
-      "WebRTC",
     ],
   },
 ];
@@ -121,7 +131,7 @@ export default function Skills() {
         <SectionHeader
           eyebrow="Expertise"
           title="What the systems are made of"
-          subtitle="Technical skills from the resume — backend first, then data, interface, and delivery."
+          subtitle="Backend first — then data, async work, realtime, interface, and delivery."
         />
 
         <div className="space-y-0">

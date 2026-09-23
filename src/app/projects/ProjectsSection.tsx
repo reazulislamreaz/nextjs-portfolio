@@ -53,7 +53,7 @@ export default function ProjectsSection() {
         <SectionHeader
           eyebrow="Work"
           title="Products, then the engineering underneath"
-          subtitle="Featured systems in production — open a case study for architecture and decisions."
+          subtitle="Featured production systems — open a case study for problem, architecture, decisions, and how the pieces fit together."
         />
 
         <div data-projects-list id="projects-list">

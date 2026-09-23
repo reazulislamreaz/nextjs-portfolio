@@ -135,6 +135,17 @@ html {
   @apply bg-zinc-950 text-zinc-300;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+html.lenis,
+html.lenis-smooth {
+  scroll-behavior: auto;
+}
+
 @media (min-width: 640px) {
   :root {
     --nav-height: 4.25rem;
@@ -343,39 +354,12 @@ html:not(.dark) :is(
   transform: scaleX(1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  [data-revealed] {
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 0.5s var(--ease-out-expo) var(--reveal-delay, 0ms),
-      transform 0.5s var(--ease-out-expo) var(--reveal-delay, 0ms);
-  }
-
-  [data-revealed="true"] {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  @media (max-width: 639px) {
-    [data-revealed] {
-      transform: translateY(6px);
-    }
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-line-in,
   .nav-slide-down,
   .modal-enter,
   .status-enter {
     animation: none !important;
-  }
-
-  [data-revealed] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
   }
 
   html {

@@ -31,10 +31,12 @@ const workflow = [
 ];
 
 const principles = [
-  "Clarity of ownership over clever abstractions",
-  "Predictable APIs and consistent data",
+  "API reliability and predictable contracts",
+  "Data consistency and sensible indexing",
   "Keep the hot path fast — queues for the rest",
-  "Ship something observable, then improve it",
+  "Auth, RBAC, and validation as product features",
+  "Observability before premature optimization",
+  "Design for change without over-abstracting",
 ];
 
 export default function About() {
@@ -90,8 +92,8 @@ export default function About() {
           <div data-about-block className="min-w-0 lg:col-span-7">
             <p className="type-lede max-w-2xl text-pretty">
               I build full-stack products with a backend bias — systems where
-              data stays consistent, APIs stay predictable, and slow work does
-              not live on the request path.
+              data stays consistent, APIs stay predictable, auth is intentional,
+              and slow work moves to background jobs instead of the request path.
             </p>
 
             <p className="type-label mt-9 mb-4">From idea to production</p>
@@ -150,7 +152,7 @@ export default function About() {
             </p>
 
             <SectionLink href="/#contact" className="btn-primary group mt-8">
-              Get in touch
+              Let&apos;s Work Together
               <ArrowRight
                 size={15}
                 className="transition-transform group-hover:translate-x-0.5"

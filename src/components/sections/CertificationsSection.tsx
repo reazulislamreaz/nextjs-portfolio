@@ -18,7 +18,7 @@ const items: Certification[] = [
   {
     title: "Full Stack Web Development",
     summary:
-      "Modern web stack, distributed API patterns, and full-stack application development.",
+      "React, Next.js, and Node.js — APIs and full-stack application delivery.",
     platform: "Udemy — React, Next.js, Node.js",
     credentialUrl:
       "https://www.udemy.com/certificate/UC-6e1f340a-b9ee-4cda-8cd8-74de0b57ba5a/",
@@ -27,7 +27,7 @@ const items: Certification[] = [
   {
     title: "AWS Cloud Computing",
     summary:
-      "Hands-on AWS infrastructure, VPC networking, and backend deployment patterns.",
+      "AWS fundamentals, VPC networking, and backend deployment patterns.",
     platform: "Udemy — Cloud Computing with AWS",
     credentialUrl:
       "https://www.udemy.com/certificate/UC-737af03a-d89d-4d2f-98e3-5c48dc7d0e8f/",
@@ -36,7 +36,7 @@ const items: Certification[] = [
   {
     title: "Next Level Web Development",
     summary:
-      "TypeScript full-stack bootcamp covering production patterns and cloud delivery.",
+      "TypeScript full-stack bootcamp with production-oriented delivery patterns.",
     platform: "Programming Hero — Next Level Bootcamp",
     credentialUrl: "https://next.programming-hero.com/",
     credentialLabel: "Bootcamp overview",

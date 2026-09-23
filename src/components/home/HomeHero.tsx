@@ -13,9 +13,9 @@ import { FiGithub, FiLinkedin } from "react-icons/fi";
 const heroTech = showcaseTech.slice(0, 6);
 
 const facts = [
-  { label: "Focus", value: "APIs, data, realtime" },
-  { label: "Live products", value: "Elevate · J&K Cabinetry" },
-  { label: "Stack", value: "NestJS · Postgres · Redis" },
+  { label: "Focus", value: "APIs · data · jobs · realtime" },
+  { label: "In production", value: "Elevate · J&K · ConfAero" },
+  { label: "Core stack", value: "NestJS · Postgres · Redis" },
   { label: "Open to", value: "Backend & full-stack roles" },
 ];
 
@@ -28,44 +28,44 @@ export default function HomeHero() {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
     tl.fromTo(
       "[data-hero-eyebrow]",
-      { y: 12, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.45 },
+      { y: 10, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.4 },
     )
       .fromTo(
         "[data-hero-title]",
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 },
-        "-=0.25",
+        { y: 16, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5 },
+        "-=0.2",
       )
       .fromTo(
-        "[data-hero-role]",
+        "[data-hero-headline]",
         { y: 14, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.45 },
-        "-=0.3",
+        "-=0.25",
       )
       .fromTo(
         "[data-hero-copy]",
-        { y: 12, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.45 },
-        "-=0.25",
-      )
-      .fromTo(
-        "[data-hero-actions]",
         { y: 10, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.4 },
         "-=0.2",
       )
       .fromTo(
+        "[data-hero-actions]",
+        { y: 8, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.35 },
+        "-=0.15",
+      )
+      .fromTo(
         "[data-hero-visual]",
-        { y: 16, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.65 },
-        "-=0.5",
+        { y: 12, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.55 },
+        "-=0.4",
       )
       .fromTo(
         "[data-hero-facts] > div",
-        { y: 12, opacity: 0 },
-        { y: 0, opacity: 1, stagger: 0.06, duration: 0.4 },
-        "-=0.35",
+        { y: 10, opacity: 0 },
+        { y: 0, opacity: 1, stagger: 0.05, duration: 0.35 },
+        "-=0.3",
       );
   });
 
@@ -84,7 +84,7 @@ export default function HomeHero() {
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-14 lg:px-8 xl:gap-16 xl:px-12">
         <div className="order-1 flex min-w-0 flex-col justify-center lg:col-span-7">
           <p data-hero-eyebrow className="type-eyebrow mb-4">
-            Dhaka · Onsite & Remote
+            {siteRole}
           </p>
 
           <h1
@@ -95,16 +95,19 @@ export default function HomeHero() {
           </h1>
 
           <p
-            data-hero-role
-            className="mt-3.5 text-lg font-medium leading-snug text-zinc-200 sm:mt-4 sm:text-xl"
+            data-hero-headline
+            className="mt-4 max-w-xl font-display text-[1.375rem] leading-[1.2] tracking-tight text-zinc-200 sm:mt-5 sm:text-2xl lg:text-[1.75rem]"
           >
-            {siteRole}
+            Build reliable systems.
+            <br className="hidden sm:block" />{" "}
+            Ship scalable products.
           </p>
 
-          <p data-hero-copy className="type-lede mt-3 max-w-lg text-pretty">
-            I design and ship the APIs, data models, auth, and background jobs
-            behind production web apps — NestJS, Express, PostgreSQL, MongoDB,
-            Redis, and Next.js when the product needs a UI.
+          <p data-hero-copy className="type-lede mt-4 max-w-lg text-pretty">
+            I design and build APIs, data models, authentication, background
+            jobs, real-time systems, and production-ready web apps — NestJS,
+            Express, PostgreSQL, MongoDB, and Redis, with Next.js when the
+            product needs a UI.
           </p>
 
           <div
@@ -112,7 +115,7 @@ export default function HomeHero() {
             className="mt-7 flex flex-wrap items-center gap-2.5 sm:gap-3"
           >
             <SectionLink href="/#projects" className="btn-primary group">
-              See the work
+              View My Work
               <ArrowRight
                 size={16}
                 className="transition-transform group-hover:translate-x-0.5"
@@ -121,8 +124,11 @@ export default function HomeHero() {
             </SectionLink>
             <a href={resumePath} download className="btn-secondary">
               <Download size={15} aria-hidden />
-              Resume
+              Download Resume
             </a>
+            <SectionLink href="/#contact" className="btn-ghost">
+              Let&apos;s Work Together
+            </SectionLink>
             <div className="flex items-center gap-0.5">
               <a
                 href={siteSocial.github}
@@ -171,10 +177,10 @@ export default function HomeHero() {
             <div className="relative aspect-[4/5] w-full overflow-hidden">
               <Image
                 src="/reaz.jpg"
-                alt="Reazul Islam Reaz"
+                alt="Reazul Islam Reaz, Backend-Focused Full-Stack Engineer"
                 fill
                 priority
-                quality={100}
+                quality={90}
                 sizes="(max-width: 639px) min(28rem, 100vw - 2rem), (max-width: 1023px) 28rem, (max-width: 1279px) 22rem, 24rem"
                 className="object-cover object-[center_18%] transition-transform duration-700 ease-out motion-safe:group-hover:scale-[1.03]"
               />
