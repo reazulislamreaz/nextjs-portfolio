@@ -4,7 +4,7 @@
  *
  *   npx tsx scripts/linkedin-sync-project-media.ts
  *   npx tsx scripts/linkedin-sync-project-media.ts --headed
- *   npx tsx scripts/linkedin-sync-project-media.ts --project Connectify
+ *   npx tsx scripts/linkedin-sync-project-media.ts --project Confaero
  */
 
 import { existsSync } from "node:fs";

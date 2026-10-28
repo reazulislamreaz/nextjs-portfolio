@@ -39,15 +39,6 @@ export function presentProject(project: Project): ProjectPresentation {
     };
   }
 
-  if (title.startsWith("Connectify")) {
-    return {
-      kind: "Realtime",
-      role: "Client and realtime API",
-      featured: false,
-      architectureLine: "Express · MongoDB · Redis · Socket.IO",
-    };
-  }
-
   if (title.startsWith("Haven")) {
     return {
       kind: "Marketplace",

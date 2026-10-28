@@ -16,7 +16,7 @@ SELECTED PROJECTS (portfolio: reazul-islam-reaz.vercel.app)
 • Elevate Apparel — Production e-commerce platform with Next.js 16 storefront, NestJS 11 API, PostgreSQL, Redis & BullMQ. Live: https://elevateapparel.com.bd/
 • Confaero — Conference ops with QR check-ins & exhibitor leads (Node, TypeScript, MongoDB, Socket.IO). App: https://play.google.com/store/apps/details?id=confaero.com.app
 • J&K Cabinetry CT — Wholesale cabinetry platform with customer portal, admin dashboard & REST API (Next.js, Express, MongoDB, Stripe). Live: https://jkcabinetryct.com/
-• Also: Connectify, HavenKeys, Marathon Zone, and portfolio RAG chatbot (Next.js + OpenAI).
+• Also: HavenKeys, Marathon Zone, and portfolio RAG chatbot (Next.js + OpenAI).
 
 HOW I WORK
 Design modular services and clear API boundaries · Model relational & document schemas · Harden auth, payments, and rate-sensitive flows · Deploy with pragmatic CI/CD · Use AI tools responsibly — architecture and review stay human-owned.
@@ -55,17 +55,6 @@ export const SKILLS_TO_ADD = [
  *   npx tsx scripts/linkedin-sync-project-media.ts
  */
 export const PROJECTS = [
-  {
-    name: "Connectify",
-    start: { month: "Jan", year: "2026" },
-    end: null,
-    ongoing: true,
-    url: "https://easy-connectify.vercel.app/",
-    github: "https://github.com/reazulislamreaz/connectify-frontend",
-    description:
-      "Full-featured real-time messaging and social platform — 1:1 chat (text, images, voice), news feed with likes/comments, friend discovery, online presence, typing indicators, and ZEGOCLOUD voice/video calls.\n\nTech: Next.js 15, React 19, TypeScript, Tailwind CSS, TanStack Query, Node.js, Express, MongoDB, Socket.IO, Redis, AWS S3, JWT, Zod.\n\nDeployed on Vercel (frontend) and VPS with nginx + PM2 (API + WebSockets).",
-    skills: ["Next.js", "Node.js", "MongoDB", "Socket.IO", "TypeScript"],
-  },
   {
     name: "Confaero",
     start: { month: "Oct", year: "2025" },
