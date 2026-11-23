@@ -112,6 +112,95 @@ export const projectsData: Project[] = [
       "Payment gateway integrations (SSLCommerz/Stripe), multi-tenant store support, push notifications, and inventory sync webhooks.",
   },
   {
+    title: "Your Academy",
+    tagline:
+      "Bangladesh's largest online MCQ question bank for government job prep — NestJS RBAC, Redis/BullMQ workers, and backend-enforced answer privacy behind subscriptions.",
+    description:
+      "MCQ-based EdTech platform for BCS, Bank, Primary, and NTRCA exam prep: Preli and Written question banks, three-level topic practice, timed Model Tests, bookmarks, news, and an Admin/Moderator dashboard — built as a Turborepo monorepo (Next.js frontend, NestJS API, BullMQ worker, shared types).",
+    features: [
+      "Next.js 15",
+      "NestJS 11",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma 6",
+      "Redis",
+      "BullMQ",
+      "Socket.IO",
+      "TanStack Query",
+      "Tailwind CSS 4",
+      "Cloudinary",
+      "JWT",
+      "Argon2id",
+      "RBAC",
+      "Turborepo",
+    ],
+    metrics: [
+      "38,804+ published MCQs across 445 collections, live on youracademy.com.bd",
+      "Preli, Written, and three-level topic-based question banks plus timed Model Tests",
+      "Answers, correctness, and explanations omitted from the API itself unless Admin or active subscriber — never filtered client-side",
+      "Guest and authenticated timed exams with timer/review tracking, separate from the learner practice bank",
+      "Admin/Moderator RBAC dashboard with homepage CMS, news publishing, and permission-gated routes",
+    ],
+    devOps: [
+      "Live on youracademy.com.bd",
+      "Next.js 15 (App Router) + NestJS 11 REST API (/api/v1)",
+      "PostgreSQL + Prisma 6 (25+ tracked migrations)",
+      "Redis + dedicated BullMQ worker process",
+      "Docker Compose + Nginx, GitHub Actions CI/CD",
+      "pnpm workspaces + Turborepo monorepo",
+    ],
+    images: [
+      "/your-academy-home.webp",
+      "/your-academy-features.webp",
+      "/your-academy-workflow.webp",
+      "/your-academy-faq-footer.webp",
+    ],
+    live: "https://youracademy.com.bd",
+    code: "https://github.com/reazulislamreaz/your-academy",
+    sourceNote:
+      "Monorepo: frontend/ (Next.js), backend/ (NestJS + Prisma), worker/ (BullMQ), shared/ (types) in one repo.",
+    problem:
+      "Job seekers preparing for BCS, Bank, Primary, and NTRCA exams needed one platform combining a huge categorized MCQ/written bank and timed model tests — without leaking correct answers and explanations to non-subscribers.",
+    architecture:
+      "Turborepo monorepo: Next.js 15 App Router frontend, NestJS 11 REST API (/api/v1) with Prisma 6 on PostgreSQL, and a separate BullMQ worker process, sharing types via a `shared` package. JWT access/refresh tokens ride HTTP-only cookies with CSRF double-submit protection and Argon2id hashing; RBAC gates Admin/Moderator dashboard routes. Redis backs BullMQ jobs and Socket.IO scaling, and Cloudinary handles media behind a StorageService abstraction.",
+    architectureFlow: [
+      "Next.js 15 frontend",
+      "NestJS 11 REST API (/api/v1)",
+      "JWT · CSRF · Argon2id · RBAC",
+      "PostgreSQL (Prisma 6)",
+      "Redis + BullMQ worker",
+      "Cloudinary storage",
+    ],
+    challengeSolutions: [
+      {
+        challenge:
+          "Free users browsing the question bank could see correct answers and explanations meant for subscribers only.",
+        solution:
+          "Access control enforced entirely in the API — answers, correctness indicators, and explanations are omitted from the response itself unless the requester is Admin or holds an active subscription, never filtered on the client.",
+      },
+      {
+        challenge:
+          "Guest and authenticated users both needed timed exams without duplicating the core question bank.",
+        solution:
+          "Separate Exam/ExamQuestion/ExamAttempt models for guest timed exams and Model Tests, kept apart from the learner Question + PracticeSet bank, with dedicated timer/review tracking migrations.",
+      },
+      {
+        challenge:
+          "A 38k+ question bank needed fast category, topic, and date-based lookups without slow admin queries.",
+        solution:
+          "A three-level topic hierarchy with targeted list-query and created_at indexes, plus partial unique constraints to keep bulk question-upload batches consistent.",
+      },
+      {
+        challenge:
+          "A compromised session shouldn't keep a learner logged in everywhere, but staff needed more flexibility.",
+        solution:
+          "Single-session enforcement for learners — a new login revokes other sessions with a 401 SESSION_REPLACED — with an opt-in staff flag for multi-session access.",
+      },
+    ],
+    futureEnhancements:
+      "Self-serve subscription payments (subscriptions are currently admin-granted manually), horizontal Socket.IO scaling via the Redis adapter, and expanded analytics on the admin KPI dashboard.",
+  },
+  {
     title: "J&K Cabinetry CT",
     tagline:
       "Wholesale cabinetry for dealers and showrooms — verified accounts, catalog checkout, and realtime admin messaging across three production apps.",

@@ -21,6 +21,15 @@ export function presentProject(project: Project): ProjectPresentation {
     };
   }
 
+  if (title.startsWith("Your Academy")) {
+    return {
+      kind: "EdTech",
+      role: "Frontend, API, and background workers",
+      featured: true,
+      architectureLine: "NestJS · Prisma · Redis/BullMQ · RBAC",
+    };
+  }
+
   if (title.startsWith("J&K")) {
     return {
       kind: "Wholesale",
