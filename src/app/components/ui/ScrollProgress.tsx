@@ -48,7 +48,7 @@ export default function ScrollProgress() {
     >
       <div
         ref={progressBarRef}
-        className="h-full w-full origin-left bg-emerald-400 will-change-transform"
+        className="h-full w-full origin-left bg-gradient-to-r from-emerald-500 via-emerald-400 to-emerald-300 shadow-[0_0_10px_rgba(var(--accent-rgb),0.45)] will-change-transform"
         style={{ transform: "scaleX(0)" }}
       />
     </div>

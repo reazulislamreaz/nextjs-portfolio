@@ -235,7 +235,7 @@ export default function ProjectCarousel({
             <button
               type="button"
               onClick={() => go(index - 1)}
-              className="absolute left-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md bg-zinc-950/70 text-zinc-50 transition hover:bg-zinc-950"
+              className="absolute left-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg border border-zinc-50/10 bg-zinc-950/50 text-zinc-50 backdrop-blur-md transition hover:bg-zinc-950/75"
               aria-label={`Previous screenshot of ${title}`}
             >
               <FiChevronLeft size={18} aria-hidden />
@@ -243,7 +243,7 @@ export default function ProjectCarousel({
             <button
               type="button"
               onClick={() => go(index + 1)}
-              className="absolute right-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-md bg-zinc-950/70 text-zinc-50 transition hover:bg-zinc-950"
+              className="absolute right-3 top-1/2 z-10 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg border border-zinc-50/10 bg-zinc-950/50 text-zinc-50 backdrop-blur-md transition hover:bg-zinc-950/75"
               aria-label={`Next screenshot of ${title}`}
             >
               <FiChevronRight size={18} aria-hidden />
@@ -272,7 +272,7 @@ export default function ProjectCarousel({
                 aria-current={active}
                 className={`relative h-12 w-[4.75rem] shrink-0 overflow-hidden rounded-md border bg-zinc-800 transition sm:h-14 sm:w-[5.5rem] ${
                   active
-                    ? "border-emerald-400"
+                    ? "border-emerald-400 ring-2 ring-emerald-400/25"
                     : "border-zinc-700 opacity-70 hover:opacity-100"
                 }`}
               >

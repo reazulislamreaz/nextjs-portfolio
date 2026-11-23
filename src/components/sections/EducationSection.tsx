@@ -52,7 +52,10 @@ export default function Education() {
           subtitle="Honors program in Political Science at National University, Bangladesh."
         />
 
-        <article data-edu className="surface-card rounded-lg p-5 sm:p-6 lg:p-7">
+        <article
+          data-edu
+          className="surface-card card-interactive rounded-xl p-5 sm:p-6 lg:p-7"
+        >
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
             <span className="type-eyebrow">{education.status}</span>
             <span className="type-meta inline-flex items-center gap-1.5">
@@ -79,7 +82,15 @@ export default function Education() {
             {education.summary}
           </p>
 
-          <p className="type-meta mt-5">{education.focusAreas.join(" · ")}</p>
+          <ul className="mt-5 flex flex-wrap gap-2" aria-label="Focus areas">
+            {education.focusAreas.map((area) => (
+              <li key={area}>
+                <span className="inline-flex items-center rounded-md border border-zinc-700/70 px-2.5 py-1 text-xs font-medium text-zinc-300">
+                  {area}
+                </span>
+              </li>
+            ))}
+          </ul>
         </article>
       </div>
     </Section>

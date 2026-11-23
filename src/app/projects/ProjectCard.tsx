@@ -8,6 +8,7 @@ import ProjectCarousel from "./ProjectCarousel";
 import { ArrowUpRight } from "lucide-react";
 import { FiGithub } from "react-icons/fi";
 import { iconForTech } from "@/components/ui/tech";
+import Magnetic from "@/components/home/Magnetic";
 
 const ProjectDetailModal = dynamic(() => import("./ProjectDetailModal"), {
   ssr: false,
@@ -47,7 +48,7 @@ export default function ProjectCard({
             imageOnRight ? "lg:order-2" : ""
           }`}
         >
-          <div className="overflow-hidden rounded-lg border border-zinc-700/40 bg-zinc-800 transition duration-500 ease-out motion-safe:group-hover/visual:-translate-y-0.5">
+          <div className="relative overflow-hidden rounded-xl border border-zinc-700/50 bg-zinc-800 elevate-raised transition-[transform,box-shadow,border-color] duration-500 ease-out will-change-transform motion-safe:group-hover/visual:-translate-y-1 motion-safe:group-hover/visual:border-emerald-400/30 motion-safe:group-hover/visual:[box-shadow:var(--shadow-float)]">
             {/* No scale() on screenshots — resampling softens UI text and fine detail */}
             <ProjectCarousel
               images={project.images}
@@ -115,13 +116,15 @@ export default function ProjectCard({
           ) : null}
 
           <div className="mt-6 flex flex-wrap items-center gap-1.5 sm:gap-2">
-            <button
-              type="button"
-              onClick={() => setDetailsOpen(true)}
-              className="btn-primary"
-            >
-              Case study
-            </button>
+            <Magnetic strength={0.3}>
+              <button
+                type="button"
+                onClick={() => setDetailsOpen(true)}
+                className="btn-primary"
+              >
+                Case study
+              </button>
+            </Magnetic>
             <a
               href={project.live}
               target="_blank"

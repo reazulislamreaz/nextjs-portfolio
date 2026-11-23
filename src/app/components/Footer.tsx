@@ -10,7 +10,12 @@ export default function Footer() {
   const footerLinks = navLinks.filter((link) => link.sectionId);
 
   return (
-    <footer className="w-full border-t border-zinc-700/70 bg-zinc-950">
+    <footer className="relative w-full border-t border-zinc-700/70 bg-zinc-950">
+      {/* Subtle copper hairline glow across the top edge. */}
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent"
+        aria-hidden
+      />
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>

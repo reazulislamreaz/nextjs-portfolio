@@ -38,7 +38,9 @@ export default function SectionHeader({
   return (
     <div ref={ref} className="mb-8 max-w-2xl sm:mb-10 lg:mb-12">
       {eyebrow ? (
-        <p data-sh-line className="type-eyebrow mb-3">
+        <p data-sh-line className="type-eyebrow mb-3 flex items-center gap-2.5">
+          {/* Copper tick — same editorial accent as the hero eyebrow. */}
+          <span className="h-px w-6 bg-emerald-400/60" aria-hidden />
           {eyebrow}
         </p>
       ) : null}

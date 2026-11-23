@@ -254,7 +254,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300 ${
         scrolled || mobileOpen
-          ? "border-b border-zinc-700/80 bg-zinc-950/95 backdrop-blur-md"
+          ? "border-b border-zinc-700/80 bg-zinc-950/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
       aria-label="Main navigation"

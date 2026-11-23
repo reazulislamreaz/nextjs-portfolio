@@ -82,7 +82,7 @@ export default function Certifications() {
             <article
               key={item.title}
               data-cert
-              className="surface-card flex min-w-0 flex-col rounded-lg p-5"
+              className="surface-card card-interactive flex min-w-0 flex-col rounded-xl p-5"
             >
               <h3 className="text-[0.9375rem] font-medium tracking-tight text-zinc-50 sm:text-base">
                 {item.title}

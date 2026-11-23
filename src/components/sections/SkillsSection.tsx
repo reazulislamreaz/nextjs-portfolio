@@ -140,11 +140,20 @@ export default function Skills() {
               key={group.id}
               data-skill-group
               aria-labelledby={`skill-group-${group.id}`}
-              className="grid grid-cols-1 gap-3.5 border-t border-zinc-700/50 py-6 sm:grid-cols-12 sm:gap-6 sm:py-7 lg:gap-10"
+              className="group relative grid grid-cols-1 gap-3.5 border-t border-zinc-700/50 py-6 transition-colors duration-200 sm:grid-cols-12 sm:gap-6 sm:py-7 lg:gap-10"
             >
+              {/* Thin copper edge that grows from the top on hover — a quiet
+                  "live" accent that ties the rows to the hero's hairline motif. */}
+              <span
+                className="pointer-events-none absolute -left-px top-0 h-full w-px origin-top scale-y-0 bg-emerald-400/50 transition-transform duration-300 ease-out motion-safe:group-hover:scale-y-100"
+                aria-hidden
+              />
               <div className="sm:col-span-5 lg:col-span-4">
                 <div className="flex items-baseline gap-3">
-                  <span className="type-meta text-emerald-400/90" aria-hidden>
+                  <span
+                    className="type-meta text-emerald-400/90 transition-colors group-hover:text-emerald-400"
+                    aria-hidden
+                  >
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <h3
