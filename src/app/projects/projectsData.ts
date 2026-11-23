@@ -371,88 +371,92 @@ export const projectsData: Project[] = [
       "Redis caching on hot roster reads, API rate limits, and horizontal Socket.IO scaling for larger venues.",
   },
   {
-    title: "HavenKeys",
+    title: "AR Leather House",
     tagline:
-      "Real-estate marketplace with RBAC and Stripe premium listings.",
+      "Premium leather goods storefront with Cash-on-Delivery checkout, stock reservations, and a full NestJS admin console behind a Next.js 16 frontend.",
     description:
-      "Real-estate marketplace with RBAC, relational inventory, and Stripe-backed premium listings.",
-    features: ["React", "Node.js", "Express", "MongoDB", "JWT", "Stripe"],
+      "Single-merchant e-commerce platform for a premium leather goods brand: Next.js 16 storefront with server-side facets/search, variants, cart/wishlist, COD checkout, order tracking, returns, and moderated reviews, backed by a NestJS 11 admin console for analytics, inventory, coupons, CRM, and marketing banners.",
+    features: [
+      "Next.js 16",
+      "React 19",
+      "NestJS 11",
+      "TypeScript",
+      "PostgreSQL 17",
+      "Prisma 7",
+      "Redis 7",
+      "BullMQ",
+      "Redux Toolkit",
+      "TanStack Query",
+      "Tailwind CSS 4",
+      "JWT",
+      "RBAC",
+      "Swagger",
+      "Pino",
+    ],
     metrics: [
-      "Indexed role-aware listing queries for search and filtering",
-      "Idempotent Stripe webhooks so payment retries cannot double-charge a premium placement",
-      "RBAC enforced on every protected route, with query paths scoped per persona",
-      "Code-split routes for smaller mobile bundles",
+      "Live single-merchant storefront at arleatherhouse.com with end-to-end Cash-on-Delivery checkout",
+      "Role-gated /admin console (ADMIN/SUPER_ADMIN): analytics with CSV/XLSX exports, orders, returns, review moderation, coupons, marketing banners CMS",
+      "Inventory reservations with expiry-cancellation jobs to prevent overselling limited handcrafted stock",
+      "BullMQ background jobs for abandoned-cart recovery, outbox relay, retention, CRM backfill, and report generation",
+      "Consent-gated Facebook Pixel and transactional email templates for marketing and order updates",
     ],
     devOps: [
-      "Firebase Hosting",
-      "Express API deploy",
-      "MongoDB",
-      "Stripe webhooks",
-      "CI/CD",
-      "Docker (local dev)",
+      "Live on arleatherhouse.com",
+      "Next.js 16 (App Router) + NestJS 11 REST API (/api/v1)",
+      "PostgreSQL 17 (Prisma 7) + Redis 7/BullMQ",
+      "Docker multi-stage builds + docker-compose (local Postgres/Redis)",
+      "GitHub Actions CI (lint, unit + integration tests, builds)",
     ],
-    images: ["/havenkeys-1.webp", "/havenkeys-2.webp", "/havenkeys-3.webp"],
-    live: "https://haven-keys.web.app/",
-    code: "https://github.com/reazulislamreaz/haven-keys-client-side",
-    sourceNote: "Client repo — server API in a separate backend repo.",
+    images: [
+      "/ar-leather-house-home.webp",
+      "/ar-leather-house-featured.webp",
+      "/ar-leather-house-new-arrivals.webp",
+      "/ar-leather-house-shop.webp",
+      "/ar-leather-house-product-detail.webp",
+    ],
+    live: "https://arleatherhouse.com",
+    code: "https://github.com/reazulislamreaz/ar-leather-house",
+    sourceNote:
+      "npm workspaces monorepo: frontend/ (Next.js storefront + admin) and backend/ (NestJS REST API), communicating over a versioned REST API.",
     problem:
-      "Listings need role-based permissions; premium placements must not double-charge on payment retries.",
+      "A premium leather goods merchant needed a single-merchant storefront for Cash-on-Delivery commerce plus a full admin console for orders, inventory, marketing, and CRM — without overselling limited handcrafted stock or silently losing abandoned carts.",
     architecture:
-      "MERN stack with modular Express API. MongoDB for users, roles, listings. JWT RBAC; Stripe webhooks verified before state changes.",
+      "npm workspaces monorepo: Next.js 16 App Router storefront (Redux Toolkit + TanStack Query) talking to a NestJS 11 versioned REST API over cookies and Bearer access tokens. PostgreSQL 17 via Prisma 7 models the catalog, orders, returns, coupons, and CRM segments. Redis 7 + BullMQ run inventory reservation expiry, abandoned-cart recovery, outbox relay, retention, and report generation as replica-safe background jobs. JWT access tokens ride rotating HTTP-only refresh cookies with RBAC guards; Helmet, CORS, and rate limiting harden the API, with Pino and Swagger covering observability and docs.",
+    architectureFlow: [
+      "Next.js 16 storefront & admin",
+      "NestJS REST API (/api/v1)",
+      "JWT · RBAC · rate limiting",
+      "PostgreSQL (Prisma 7)",
+      "Redis + BullMQ workers",
+      "Cart recovery · outbox · CRM · reports",
+    ],
     challengeSolutions: [
       {
-        challenge: "Role-aware filters risked cross-tenant data leaks.",
-        solution: "RBAC on protected routes and scoped query paths per persona.",
-      },
-      {
-        challenge: "Stripe retries could double-charge or leave listings in limbo.",
-        solution: "Idempotent webhooks — premium transitions only after verified payment.",
-      },
-    ],
-    futureEnhancements:
-      "Redis search caching, outbound email queue, and admin audit trails.",
-  },
-
-  {
-    title: "Marathon Zone",
-    tagline:
-      "Marathon registration — organizer console and public signup with validated, indexed writes.",
-    description:
-      "Event ops console for organizers and participant signup — registration flow, Firebase Auth, and validated event data.",
-    features: ["Node.js", "Express", "MongoDB", "Firebase Auth", "React"],
-    metrics: [
-      "Separate organizer and public registration endpoints with indexed hot paths",
-      "MongoDB aggregation pipelines for roster and event listing reads",
-      "Server-side validation rejects conflicting registrations",
-      "Lazy-loaded public flow for mobile performance",
-    ],
-    devOps: [
-      "Netlify (frontend)",
-      "Express API hosting",
-      "MongoDB Atlas",
-      "Firebase Auth",
-      "CI/CD",
-      "Environment-based config",
-    ],
-    images: ["/marathon-1.webp", "/marathon-2.webp", "/marathon-3.webp"],
-    live: "https://marathonzonebyreaz.netlify.app/",
-    code: "https://github.com/reazulislamreaz/marathon-zone",
-    problem:
-      "Sign-ups spike near deadlines; organizers need stable tools without conflicting registrations.",
-    architecture:
-      "Express API with MongoDB event documents. Firebase Auth. React client with separate organizer vs. public endpoints.",
-    challengeSolutions: [
-      {
-        challenge: "Bursty writes threatened roster accuracy.",
-        solution: "Server validation, indexing on hot paths, and separate organizer/participant endpoints.",
-      },
-      {
-        challenge: "Rosters needed to load quickly mid-event.",
+        challenge:
+          "Limited handcrafted stock could be oversold if two Cash-on-Delivery orders reserved the same item at once.",
         solution:
-          "MongoDB aggregation pipelines with projection, replacing per-row lookups on the roster read path.",
+          "Server-side inventory reservations with BullMQ expiry/cancellation jobs keep stock counts accurate across concurrent checkouts, with no payment-gateway confirmation to rely on.",
+      },
+      {
+        challenge:
+          "COD orders have no payment-capture step to confirm intent, so abandoned carts needed active recovery instead of silent loss.",
+        solution:
+          "BullMQ-driven abandoned-cart recovery jobs and transactional email templates bring customers back through checkout.",
+      },
+      {
+        challenge:
+          "A single admin team needed full operational control — orders, returns, reviews, coupons, CRM, and banners — without stitching together separate tools.",
+        solution:
+          "A role-gated /admin console (ADMIN/SUPER_ADMIN) covers analytics with CSV/XLSX exports, review moderation, inventory alerts, marketing banners CMS, and CRM segments behind RBAC guards on every route.",
+      },
+      {
+        challenge:
+          "Background jobs (outbox relay, retention, report generation) needed to run safely across multiple app replicas without duplicate execution.",
+        solution:
+          "Replica-safe BullMQ job design so outbox relay, retention, CRM backfill, and report generation jobs don't double-run as the backend scales horizontally.",
       },
     ],
     futureEnhancements:
-      "Live leaderboards, analytics exports, and rate limits on registration.",
+      "Online payment gateway integration alongside COD, multi-merchant support, and push notifications for order status updates.",
   },
 ];

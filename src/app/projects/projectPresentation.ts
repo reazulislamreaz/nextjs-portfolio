@@ -48,19 +48,19 @@ export function presentProject(project: Project): ProjectPresentation {
     };
   }
 
-  if (title.startsWith("Haven")) {
+  if (title.startsWith("AR Leather House")) {
     return {
-      kind: "Marketplace",
-      role: "Listings client and payments API",
-      featured: false,
-      architectureLine: "Express · MongoDB · JWT · Stripe",
+      kind: "Retail",
+      role: "Storefront, admin console, and API",
+      featured: true,
+      architectureLine: "Next.js · NestJS · Prisma · BullMQ",
     };
   }
 
   return {
-    kind: "Registration",
-    role: "Organizer console and public signup",
+    kind: "Project",
+    role: "Full-stack application",
     featured: false,
-    architectureLine: "Express · MongoDB · Firebase Auth",
+    architectureLine: "",
   };
 }
