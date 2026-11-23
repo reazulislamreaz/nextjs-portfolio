@@ -152,8 +152,8 @@ export const projectsData: Project[] = [
     images: [
       "/your-academy-home.webp",
       "/your-academy-features.webp",
-      "/your-academy-workflow.webp",
-      "/your-academy-faq-footer.webp",
+      "/your-academy-dashboard.webp",
+      "/your-academy-preli-bank.webp",
     ],
     live: "https://youracademy.com.bd",
     code: "https://github.com/reazulislamreaz/your-academy",
